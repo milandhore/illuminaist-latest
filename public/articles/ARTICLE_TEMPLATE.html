@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!--
+    ╔══════════════════════════════════════════════════════════════════╗
+    ║  IlluminAIst — Article Template                                  ║
+    ║  Fill in the fields below then save to the correct topic folder. ║
+    ╚══════════════════════════════════════════════════════════════════╝
+
+    QUICK-START CHECKLIST:
+    1. Fill in <title> and <meta name="description"> below
+    2. Write your article content inside <body> using the sample tags
+    3. Save this file to: public/articles/<topic-folder>/<your-slug>.html
+    4. Add a matching entry to src/data/articles.js  ← see CONTENT_GUIDE.md
+    5. Run: npm run build   (then deploy dist/ to GitHub Pages)
+  -->
+  <title>Your Article Title Here | IlluminAIst</title>
+  <meta name="description" content="One clear sentence describing what the reader will learn. Keep under 155 characters for SEO.">
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     INTRODUCTION
+     The hook. Explain the problem or question this article solves.
+     ══════════════════════════════════════════════════════════════════ -->
+
+<h2>Introduction</h2>
+<p>
+  Start with a compelling hook — a problem, a surprising stat, or a question
+  that your reader wants answered. Tell them exactly what they'll learn by the
+  end of this article.
+</p>
+
+<blockquote>
+  Use a blockquote to highlight a key insight, a memorable quote, or an
+  important callout. It renders with a cyan left border in dark mode.
+</blockquote>
+
+
+<!-- ══════════════════════════════════════════════════════════════════
+     MAIN SECTIONS — duplicate this block as many times as you need
+     ══════════════════════════════════════════════════════════════════ -->
+
+<h2>Section One — Your Heading Here</h2>
+<p>
+  Write your content here. Paragraphs are auto-styled with comfortable
+  line-height and muted slate colour so long reads don't tire the eye.
+</p>
+
+<h3>Sub-section heading</h3>
+<p>
+  Use <code>h3</code> for sub-sections within a section. They render in cyan
+  so the hierarchy is visually clear.
+</p>
+
+<!-- ── Bullet list example ──────────────────────────────────────── -->
+<ul>
+  <li>First bullet point — lists get cyan markers automatically</li>
+  <li>Second bullet point with <strong>bold emphasis</strong></li>
+  <li>Third bullet point with an <a href="https://example.com">inline link</a></li>
+</ul>
+
+<!-- ── Numbered list example ────────────────────────────────────── -->
+<ol>
+  <li>Step one in a sequential process</li>
+  <li>Step two — use ordered lists for anything with a specific order</li>
+  <li>Step three</li>
+</ol>
+
+
+<!-- ══════════════════════════════════════════════════════════════════
+     CODE BLOCKS
+     Wrap code in <pre><code>…</code></pre>
+     ══════════════════════════════════════════════════════════════════ -->
+
+<h2>Section Two — Code Examples</h2>
+<p>
+  Paste code examples inside <code>pre + code</code> blocks.
+  They render with a dark terminal background and a monospace font.
+</p>
+
+<pre><code>// JavaScript / TypeScript example
+import { ChatOpenAI } from '@langchain/openai'
+
+const llm = new ChatOpenAI({ model: 'gpt-4o', temperature: 0 })
+const response = await llm.invoke('Explain RAG in one sentence.')
+console.log(response.content)
+</code></pre>
+
+<pre><code># Python example
+from langchain_openai import ChatOpenAI
+
+llm = ChatOpenAI(model="gpt-4o", temperature=0)
+response = llm.invoke("Explain RAG in one sentence.")
+print(response.content)
+</code></pre>
+
+<p>
+  Use inline <code>code</code> tags for file names, class names, or short
+  values like <code>temperature=0</code> mentioned in a sentence.
+</p>
+
+
+<!-- ══════════════════════════════════════════════════════════════════
+     IMAGES
+     Use full URL for external images, or relative path for images
+     you've added to the public/ folder.
+     ══════════════════════════════════════════════════════════════════ -->
+
+<h2>Section Three — Diagrams &amp; Images</h2>
+<p>
+  Add images using a standard <code>img</code> tag. For best results place
+  your image files in <code>public/articles/&lt;topic&gt;/images/</code>.
+</p>
+
+<!-- Uncomment and fill in when you have an image:
+<img
+  src="/articles/ai-llms/images/your-diagram.png"
+  alt="Descriptive alt text for accessibility and SEO"
+  style="max-width:100%;border-radius:8px;margin:1.5rem 0;"
+/>
+-->
+
+<blockquote>
+  💡 <strong>Pro tip:</strong> Use diagrams to explain complex architectures.
+  Tools like Excalidraw, draw.io, or Mermaid can generate clean SVGs.
+</blockquote>
+
+
+<!-- ══════════════════════════════════════════════════════════════════
+     HORIZONTAL RULE
+     Use <hr> to visually separate major sections of a long article.
+     ══════════════════════════════════════════════════════════════════ -->
+
+<hr>
+
+<h2>Section Four — Another Major Topic</h2>
+<p>
+  Continue the article here. Use <code>&lt;hr&gt;</code> to create a visual
+  break between very different topics within the same piece.
+</p>
+
+
+<!-- ══════════════════════════════════════════════════════════════════
+     CONCLUSION
+     Summarise key takeaways and end with a clear call to action.
+     ══════════════════════════════════════════════════════════════════ -->
+
+<h2>Conclusion</h2>
+<p>
+  Summarise the three or four most important takeaways from this article.
+  Remind the reader what problem was solved and what to do next.
+</p>
+
+<ul>
+  <li><strong>Key takeaway 1</strong> — one sentence</li>
+  <li><strong>Key takeaway 2</strong> — one sentence</li>
+  <li><strong>Key takeaway 3</strong> — one sentence</li>
+</ul>
+
+<p>
+  End with a forward-looking statement or call to action, for example a link
+  to a related article, a tool, or an invitation to subscribe.
+</p>
+
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to IlluminAIst</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Helvetica Neue', Arial, sans-serif; background: #0B0F19; color: #F1F5F9; }
+    .wrapper { max-width: 600px; margin: 0 auto; padding: 32px 16px; }
+
+    /* Header */
+    .header { text-align: center; padding: 40px 32px 32px; background: linear-gradient(135deg, #0B0F19 0%, #111827 100%); border-radius: 16px 16px 0 0; border: 1px solid rgba(255,184,0,0.15); border-bottom: none; }
+    .logo-mark { width: 56px; height: 56px; border-radius: 12px; background: linear-gradient(135deg, #FFB800, #ff8c00); display: inline-flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 16px; box-shadow: 0 0 30px rgba(255,184,0,0.4); }
+    .brand-name { font-size: 28px; font-weight: 800; letter-spacing: -0.5px; }
+    .brand-name .ai { color: #FFB800; }
+    .tagline { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #475569; margin-top: 4px; }
+
+    /* Hero */
+    .hero { background: linear-gradient(160deg, #111827 0%, #0d1117 100%); padding: 40px 36px; border-left: 1px solid rgba(255,184,0,0.15); border-right: 1px solid rgba(255,184,0,0.15); }
+    .hero-badge { display: inline-block; background: rgba(255,184,0,0.1); border: 1px solid rgba(255,184,0,0.3); color: #FFB800; font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; padding: 4px 12px; border-radius: 100px; margin-bottom: 20px; }
+    .hero-title { font-size: 32px; font-weight: 800; line-height: 1.2; margin-bottom: 16px; }
+    .hero-title span { color: #FFB800; }
+    .hero-sub { font-size: 16px; color: #94A3B8; line-height: 1.7; }
+    .user-name { color: #FFB800; font-weight: 600; }
+
+    /* CTA */
+    .cta-block { text-align: center; padding: 32px; background: #0d1117; border-left: 1px solid rgba(255,184,0,0.15); border-right: 1px solid rgba(255,184,0,0.15); }
+    .cta-btn { display: inline-block; background: #FFB800; color: #0B0F19; font-size: 15px; font-weight: 700; padding: 14px 32px; border-radius: 10px; text-decoration: none; letter-spacing: 0.02em; box-shadow: 0 0 24px rgba(255,184,0,0.35); }
+
+    /* Benefits */
+    .benefits { background: #111827; padding: 36px; border-left: 1px solid rgba(255,184,0,0.15); border-right: 1px solid rgba(255,184,0,0.15); }
+    .benefits-title { font-size: 14px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #FFB800; margin-bottom: 24px; }
+    .benefit-item { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 20px; }
+    .benefit-icon { width: 40px; height: 40px; border-radius: 10px; background: rgba(255,184,0,0.1); border: 1px solid rgba(255,184,0,0.2); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+    .benefit-label { font-size: 15px; font-weight: 600; color: #F1F5F9; margin-bottom: 4px; }
+    .benefit-desc { font-size: 13px; color: #64748B; line-height: 1.5; }
+
+    /* First issue preview */
+    .preview { background: #0d1117; padding: 36px; border: 1px solid rgba(255,184,0,0.15); border-top: none; border-bottom: none; }
+    .preview-title { font-size: 14px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #64748B; margin-bottom: 20px; }
+    .article-item { padding: 16px; border: 1px solid rgba(255,255,255,0.04); border-radius: 10px; margin-bottom: 12px; background: #111827; }
+    .article-cat { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #FFB800; margin-bottom: 6px; }
+    .article-title { font-size: 14px; font-weight: 600; color: #E2E8F0; line-height: 1.4; }
+    .article-meta { font-size: 12px; color: #475569; margin-top: 4px; }
+
+    /* Footer */
+    .footer { background: #080B12; padding: 28px 36px; border-radius: 0 0 16px 16px; border: 1px solid rgba(255,184,0,0.1); border-top: 1px solid rgba(255,255,255,0.04); text-align: center; }
+    .footer p { font-size: 12px; color: #334155; line-height: 1.7; }
+    .footer a { color: #475569; text-decoration: underline; }
+    .divider { height: 1px; background: rgba(255,184,0,0.08); margin: 16px 0; }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+
+    <!-- Header -->
+    <div class="header">
+      <div class="logo-mark">💡</div>
+      <div class="brand-name">illumin<span class="ai">AI</span>st</div>
+      <div class="tagline">See Further. See Deeper.</div>
+    </div>
+
+    <!-- Hero -->
+    <div class="hero">
+      <div class="hero-badge">Welcome aboard 🎉</div>
+      <h1 class="hero-title">
+        You're now at the<br/><span>AI frontier.</span>
+      </h1>
+      <p class="hero-sub">
+        Hey <span class="user-name">{{user_name}}</span>, welcome to IlluminAIst — your independent guide to AI,
+        LLMs, RAG, MLOps, and the technology shaping the next decade.
+        <br/><br/>
+        Every week you'll get deep technical deep-dives, breaking AI news, and engineering guides
+        — written by practitioners, for practitioners. No hype. No fluff.
+      </p>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-block">
+      <p style="color:#64748B; font-size:13px; margin-bottom:16px;">Start with our most-read article →</p>
+      <a href="https://illuminaist.com/#/articles/building-production-rag-pipelines" class="cta-btn">
+        Read: Building RAG Pipelines in Production
+      </a>
+    </div>
+
+    <!-- Benefits -->
+    <div class="benefits">
+      <p class="benefits-title">What you get as a subscriber</p>
+
+      <div class="benefit-item">
+        <div class="benefit-icon">📰</div>
+        <div>
+          <div class="benefit-label">Weekly AI Dispatch</div>
+          <div class="benefit-desc">Every Sunday — the week's most important AI developments, curated and explained by engineers.</div>
+        </div>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-icon">📚</div>
+        <div>
+          <div class="benefit-label">Free Engineering eBooks</div>
+          <div class="benefit-desc">Instant access to our RAG Engineering Handbook, MLOps for LLMs guide, and more — free forever.</div>
+        </div>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-icon">🔔</div>
+        <div>
+          <div class="benefit-label">Early Access</div>
+          <div class="benefit-desc">Be the first to know about new deep-dive articles, tools, and resources before anyone else.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Preview articles -->
+    <div class="preview">
+      <p class="preview-title">Hot on IlluminAIst right now</p>
+
+      <div class="article-item">
+        <div class="article-cat">RAG & Agents</div>
+        <div class="article-title">Building Production RAG Pipelines with LangChain & Pinecone</div>
+        <div class="article-meta">12 min read · Advanced</div>
+      </div>
+      <div class="article-item">
+        <div class="article-cat">AI & LLMs</div>
+        <div class="article-title">GPT-4o vs Claude 3.5: Architecture Teardown</div>
+        <div class="article-meta">9 min read · Intermediate</div>
+      </div>
+      <div class="article-item">
+        <div class="article-cat">AI & LLMs</div>
+        <div class="article-title">MCP Protocol: The New Standard for AI Tool Calling</div>
+        <div class="article-meta">8 min read · Intermediate</div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <p>
+        You're receiving this because you subscribed at <strong>illuminaist.com</strong>.<br/>
+        <a href="{{unsubscribe_url}}">Unsubscribe</a> · <a href="https://illuminaist.com/#/privacy">Privacy Policy</a>
+      </p>
+      <div class="divider"></div>
+      <p>© 2026 IlluminAIst · customer@illuminaist.in</p>
+    </div>
+
+  </div>
+</body>
+</html>
