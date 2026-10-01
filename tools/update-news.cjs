@@ -44,7 +44,7 @@ Context: ${originalSnippet}
 `;
 
   try {
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${GEMINI_API_KEY}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -60,17 +60,20 @@ Context: ${originalSnippet}
     if (data.error) throw new Error(data.error.message);
     
     let htmlContent = data.candidates[0].content.parts[0].text.trim();
-    // Clean markdown formatting if the model accidentally included it
     if (htmlContent.startsWith('\`\`\`html')) htmlContent = htmlContent.replace(/^\`\`\`html\n/, '').replace(/\n\`\`\`$/, '');
 
-    // Generate a short excerpt for the UI card
+    // Validate if the generation was substantial enough to be an article
+    if (htmlContent.length < 300) {
+      throw new Error("Generated content too short, skipping publication.");
+    }
+
     const excerptMatch = htmlContent.match(/<p>(.*?)<\/p>/);
     const excerpt = excerptMatch ? excerptMatch[1].replace(/<[^>]+>/g, '').substring(0, 150) + '...' : originalSnippet;
 
     return { html: htmlContent, excerpt };
   } catch (error) {
     console.error("Error calling Gemini API:", error);
-    return { html: `<p>${originalSnippet}</p>`, excerpt: originalSnippet };
+    return null; // Return null on failure to trigger skip
   }
 }
 
@@ -79,13 +82,13 @@ async function updateNews() {
     console.log('Fetching RSS feed...');
     const feed = await parser.parseURL(RSS_URL);
     
-    // We only process the top 2 articles per run to save API costs & time
-    const topItems = feed.items.slice(0, 2);
+    const topItems = feed.items.slice(0, 3); // Try 3 in case 1 fails
     const latestNews = [];
 
     for (let idx = 0; idx < topItems.length; idx++) {
+      if (latestNews.length >= 2) break; // Only publish 2 maximum
+
       const item = topItems[idx];
-      
       let title = item.title || '';
       let source = 'Google News';
       const lastDash = title.lastIndexOf(' - ');
@@ -97,10 +100,15 @@ async function updateNews() {
       console.log(`Rewriting article: ${title}`);
       const rewritten = await rewriteArticle(title, item.contentSnippet || item.content || '', item.link);
       
+      // Skip if generation failed validation
+      if (!rewritten) {
+        console.warn(`Skipping article "${title}" due to generation failure.`);
+        continue;
+      }
+      
       const slug = slugify(title);
       const articleFilePath = path.join(ARTICLES_DIR, `${slug}.html`);
       
-      // Save the generated HTML
       const htmlFull = `
 <!DOCTYPE html>
 <html lang="en">
@@ -116,17 +124,16 @@ async function updateNews() {
       `.trim();
       fs.writeFileSync(articleFilePath, htmlFull, 'utf8');
 
-      // We will link to our own internal path now instead of the external URL
       latestNews.push({
         id: idx + 1,
         title: title,
         excerpt: rewritten.excerpt,
-        source: 'IlluminAIst AI Editor',
+        source: source, // Reverted from 'IlluminAIst AI Editor' to actual publisher
         slug: slug,
         htmlPath: `/articles/news/${slug}.html`,
         publishedAt: item.isoDate ? new Date(item.isoDate).toISOString().split('T')[0] : new Date().toISOString().split('T')[0],
-        badge: idx === 0 ? 'Breaking' : 'Latest',
-        badgeColor: idx === 0 ? 'cyan' : 'amber',
+        badge: latestNews.length === 0 ? 'Breaking' : 'Latest',
+        badgeColor: latestNews.length === 0 ? 'cyan' : 'amber',
         category: 'AI News'
       });
     }
