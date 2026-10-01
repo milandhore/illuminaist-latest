@@ -14,6 +14,8 @@ if (!fs.existsSync(ARTICLES_DIR)) {
 const RSS_URL = 'https://news.google.com/rss/search?q=Artificial+Intelligence+when:1d&hl=en-US&gl=US&ceid=US:en';
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 
+const { GoogleGenerativeAI } = require("@google/generative-ai");
+
 function slugify(text) {
   return text.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '');
 }
@@ -44,22 +46,13 @@ Context: ${originalSnippet}
 `;
 
   try {
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${GEMINI_API_KEY}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        contents: [{
-          parts: [{ text: systemPrompt }]
-        }]
-      })
-    });
-
-    const data = await response.json();
-    if (data.error) throw new Error(data.error.message);
+    const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
     
-    let htmlContent = data.candidates[0].content.parts[0].text.trim();
+    const result = await model.generateContent(systemPrompt);
+    const response = await result.response;
+    let htmlContent = response.text().trim();
+    
     if (htmlContent.startsWith('\`\`\`html')) htmlContent = htmlContent.replace(/^\`\`\`html\n/, '').replace(/\n\`\`\`$/, '');
 
     // Validate if the generation was substantial enough to be an article
