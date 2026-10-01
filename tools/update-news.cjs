@@ -122,7 +122,8 @@ async function updateNews() {
         title: title,
         excerpt: rewritten.excerpt,
         source: 'IlluminAIst AI Editor',
-        externalUrl: `/articles/news/${slug}.html`, // Link to local HTML file!
+        slug: slug,
+        htmlPath: `/articles/news/${slug}.html`,
         publishedAt: item.isoDate ? new Date(item.isoDate).toISOString().split('T')[0] : new Date().toISOString().split('T')[0],
         badge: idx === 0 ? 'Breaking' : 'Latest',
         badgeColor: idx === 0 ? 'cyan' : 'amber',

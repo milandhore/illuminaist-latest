@@ -8,6 +8,7 @@ import { useSubscription } from './hooks/useSubscription'
 const ArticlesPage = lazy(() => import('./pages/ArticlesPage'))
 const ArticleDetailPage = lazy(() => import('./pages/ArticleDetailPage'))
 const NewsPage = lazy(() => import('./pages/NewsPage'))
+const NewsDetailPage = lazy(() => import('./pages/NewsDetailPage'))
 const EBooksPage = lazy(() => import('./pages/EBooksPage'))
 const AboutPage = lazy(() => import('./pages/AboutPage'))
 const SubscribePage = lazy(() => import('./pages/SubscribePage'))
@@ -54,6 +55,7 @@ export default function App() {
             <Route path="/articles" element={<ArticlesPage />} />
             <Route path="/articles/:slug" element={<ArticleDetailPage />} />
             <Route path="/news" element={<NewsPage />} />
+            <Route path="/news/:slug" element={<NewsDetailPage />} />
             <Route path="/ebooks" element={<EBooksPage />} />
             <Route path="/topics" element={<Navigate to="/articles" replace />} />
             <Route path="/about" element={<AboutPage />} />
