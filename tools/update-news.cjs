@@ -47,7 +47,7 @@ Context: ${originalSnippet}
 
   try {
     const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const model = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
     
     const result = await model.generateContent(systemPrompt);
     const response = await result.response;
