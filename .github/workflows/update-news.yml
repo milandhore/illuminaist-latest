@@ -27,7 +27,9 @@ jobs:
       - name: Fetch Latest News
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: node tools/update-news.cjs
+        run: |
+          node tools/list-models.cjs
+          node tools/update-news.cjs
 
       - name: Commit and Push changes
         run: |
