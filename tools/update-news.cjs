@@ -30,16 +30,19 @@ async function rewriteArticle(title, originalSnippet, originalUrl) {
   }
 
   const systemPrompt = `
-Act as an experienced AI engineering expert and SEO copywriter, tasked with writing an enterprise grade news and readable article based on the provided "Google News for Artificial Intelligence Topic". 
-Your primary goal is to craft a Enterprise wide scalable technically compelling solution, informative piece that not only adheres to SEO best practices but also ranks high on search engines for the chosen keywords. 
-The article should be well-researched, engaging to the target audience, and structured in a way that enhances readability (using headings, subheadings, bullet points, etc.). 
-Incorporate relevant keywords naturally throughout the text, without compromising the flow or quality of the content. 
-Ensure that the article answers the questions or solves the problems outlined, providing value to the reader. 
-Additionally, include a strong call-to-action that encourages reader engagement.
+Act as an experienced AI engineering expert and SEO copywriter, tasked with rewriting a "Google News for Artificial Intelligence Topic". 
+
+CRITICAL REQUIREMENT: You must generate a NEW, highly engaging, negatively influencing, and SEO-optimized title. The title should focus on the risks, hidden dangers, or alarming aspects of the topic to maximize click-through rate (CTR).
+
+Your primary goal for the content is to craft an enterprise-wide, scalable, and technically compelling piece that adheres to SEO best practices. The article should be well-researched, structured with headings (<h2>, <h3>), and use bullet points. Incorporate relevant keywords naturally. Include a strong call-to-action.
 
 OUTPUT FORMAT:
-Provide ONLY valid HTML inside a <section> tag. Do not include markdown code blocks (\`\`\`html). Use <h2>, <h3>, <p>, <ul>, etc.
-Do NOT include the main <h1> title, as it will be rendered by the application UI.
+You MUST output ONLY a valid JSON object with exactly two keys: "title" and "html". Do not include markdown code blocks like \`\`\`json.
+Example:
+{
+  "title": "The Hidden Dangers of AI: Why Your Enterprise is at Risk",
+  "html": "<h2>Navigating the Threat...</h2><p>Content goes here...</p>"
+}
 
 Topic: ${title}
 Context: ${originalSnippet}
@@ -51,19 +54,24 @@ Context: ${originalSnippet}
     
     const result = await model.generateContent(systemPrompt);
     const response = await result.response;
-    let htmlContent = response.text().trim();
+    let jsonText = response.text().trim();
     
-    if (htmlContent.startsWith('\`\`\`html')) htmlContent = htmlContent.replace(/^\`\`\`html\n/, '').replace(/\n\`\`\`$/, '');
+    if (jsonText.startsWith('\`\`\`json')) jsonText = jsonText.replace(/^\`\`\`json\n/, '').replace(/\n\`\`\`$/, '');
+    if (jsonText.startsWith('\`\`\`')) jsonText = jsonText.replace(/^\`\`\`\n/, '').replace(/\n\`\`\`$/, '');
+
+    const parsedData = JSON.parse(jsonText);
+    const htmlContent = parsedData.html.trim();
+    const newTitle = parsedData.title.trim();
 
     // Validate if the generation was substantial enough to be an article
-    if (htmlContent.length < 300) {
-      throw new Error("Generated content too short, skipping publication.");
+    if (htmlContent.length < 300 || !newTitle) {
+      throw new Error("Generated content too short or missing title, skipping publication.");
     }
 
     const excerptMatch = htmlContent.match(/<p>(.*?)<\/p>/);
     const excerpt = excerptMatch ? excerptMatch[1].replace(/<[^>]+>/g, '').substring(0, 150) + '...' : originalSnippet;
 
-    return { html: htmlContent, excerpt };
+    return { title: newTitle, html: htmlContent, excerpt };
   } catch (error) {
     console.error("Error calling Gemini API:", error);
     return null; // Return null on failure to trigger skip
@@ -82,24 +90,25 @@ async function updateNews() {
       if (latestNews.length >= 2) break; // Only publish 2 maximum
 
       const item = topItems[idx];
-      let title = item.title || '';
+      let originalTitle = item.title || '';
       let source = 'Google News';
-      const lastDash = title.lastIndexOf(' - ');
+      const lastDash = originalTitle.lastIndexOf(' - ');
       if (lastDash !== -1) {
-        source = title.substring(lastDash + 3).trim();
-        title = title.substring(0, lastDash).trim();
+        source = originalTitle.substring(lastDash + 3).trim();
+        originalTitle = originalTitle.substring(0, lastDash).trim();
       }
 
-      console.log(`Rewriting article: ${title}`);
-      const rewritten = await rewriteArticle(title, item.contentSnippet || item.content || '', item.link);
+      console.log(`Rewriting article: ${originalTitle}`);
+      const rewritten = await rewriteArticle(originalTitle, item.contentSnippet || item.content || '', item.link);
       
       // Skip if generation failed validation
       if (!rewritten) {
-        console.warn(`Skipping article "${title}" due to generation failure.`);
+        console.warn(`Skipping article "${originalTitle}" due to generation failure.`);
         continue;
       }
       
-      const slug = slugify(title);
+      const finalTitle = rewritten.title;
+      const slug = slugify(finalTitle);
       const articleFilePath = path.join(ARTICLES_DIR, `${slug}.html`);
       
       const htmlFull = `
@@ -107,7 +116,7 @@ async function updateNews() {
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>${title} | IlluminAIst</title>
+  <title>${finalTitle} | IlluminAIst</title>
   <meta name="description" content="${rewritten.excerpt}">
 </head>
 <body>
@@ -119,7 +128,7 @@ async function updateNews() {
 
       latestNews.push({
         id: idx + 1,
-        title: title,
+        title: finalTitle,
         excerpt: rewritten.excerpt,
         source: source, // Reverted from 'IlluminAIst AI Editor' to actual publisher
         slug: slug,
