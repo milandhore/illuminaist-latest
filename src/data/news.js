@@ -10,17 +10,5 @@ export const newsItems = [
     "badge": "Breaking",
     "badgeColor": "cyan",
     "category": "AI News"
-  },
-  {
-    "id": 3,
-    "title": "The Untamed Beast: How AI's Unsafe Content for Youth Exposes Enterprises to Unprecedented Legal & Reputational Ruin",
-    "excerpt": "While recent headlines celebrate new safeguards designed to protect young people from unsafe artificial intelligence-generated content, a deeper, far ...",
-    "source": "Clemson News",
-    "slug": "the_untamed_beast_how_ai_s_unsafe_content_for_youth_exposes_enterprises_to_unprecedented_legal_reputational_ruin",
-    "htmlPath": "/articles/news/the_untamed_beast_how_ai_s_unsafe_content_for_youth_exposes_enterprises_to_unprecedented_legal_reputational_ruin.html",
-    "publishedAt": "2026-10-01",
-    "badge": "Latest",
-    "badgeColor": "amber",
-    "category": "AI News"
   }
 ];
