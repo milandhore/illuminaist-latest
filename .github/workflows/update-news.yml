@@ -25,6 +25,8 @@ jobs:
         run: npm install --legacy-peer-deps
 
       - name: Fetch Latest News
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: node tools/update-news.cjs
 
       - name: Commit and Push changes
