@@ -1,5 +1,30 @@
 export const articles = [
   {
+    "slug": "buy_vs_build_the_executive_playbook_for_adopting_agentic_ai",
+    "topicSlug": "ai-llms",
+    "category": "AI & LLMs",
+    "difficulty": "Advanced",
+    "title": "Buy vs Build - The Executive Playbook for Adopting Agentic AI",
+    "excerpt": "The definitive executive playbook for building vs buying AI agents. Analyze the total cost of ownership for AI agents and explore our decision flowchart.",
+    "avatar": "AI",
+    "author": "IlluminAIst",
+    "readingTime": 6,
+    "publishedAt": "2026-10-04",
+    "htmlFile": true,
+    "featured": false,
+    "status": "published",
+    "tags": [
+      "LangGraph",
+      "CrewAI",
+      "AutoGen",
+      "LLM",
+      "GPT-4",
+      "LLaMA",
+      "Vector DB",
+      "Anthropic"
+    ]
+  },
+  {
     "slug": "building_production_rag_pipelines_with_langchain_pinecone",
     "topicSlug": "rag-agents",
     "category": "RAG & Agents",
