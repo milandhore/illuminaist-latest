@@ -1,5 +1,30 @@
 export const articles = [
   {
+    "slug": "mastering_the_model_context_protocol_mcp_connecting_ai_agents_to_enterprise_tools",
+    "topicSlug": "emerging-tech",
+    "category": "Emerging Tech",
+    "difficulty": "Advanced",
+    "title": "Mastering the Model Context Protocol (MCP) - Connecting AI Agents to Enterprise Tools",
+    "excerpt": "Master the Model Context Protocol (MCP). Learn how to build secure agentic tools and transition from brittle custom AI API bindings to universal contextual architecture.",
+    "avatar": "AI",
+    "author": "IlluminAIst",
+    "readingTime": 5,
+    "publishedAt": "2026-10-04",
+    "htmlFile": true,
+    "featured": false,
+    "status": "published",
+    "tags": [
+      "What is the Model Context Protocol?",
+      "The MCP Architecture Diagram",
+      "Custom AI API Bindings vs. MCP",
+      "Access Control and Security in MCP",
+      "LangChain",
+      "LangGraph",
+      "AutoGen",
+      "RAG"
+    ]
+  },
+  {
     "slug": "enterprise_agentic_ai_real_world_use_cases_delivering_measured_roi",
     "topicSlug": "ai-llms",
     "category": "AI & LLMs",
