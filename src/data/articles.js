@@ -1,5 +1,28 @@
 export const articles = [
   {
+    "slug": "agentic_ai_security_threat_vectors_sandboxing_and_governance",
+    "topicSlug": "rag-agents",
+    "category": "RAG & Agents",
+    "difficulty": "Advanced",
+    "title": "Agentic AI Security - Threat Vectors, Sandboxing, and Governance",
+    "excerpt": "A comprehensive guide to mitigating agentic AI security risks. Learn about securing autonomous AI agents, sandboxing, and defending against indirect prompt injection.",
+    "avatar": "AI",
+    "author": "IlluminAIst",
+    "readingTime": 6,
+    "publishedAt": "2026-10-04",
+    "htmlFile": true,
+    "featured": false,
+    "status": "published",
+    "tags": [
+      "The Anatomy of an Indirect Attack",
+      "Execution Sandboxing Strategies",
+      "The Ephemeral Container Approach",
+      "LLM",
+      "Docker",
+      "AWS"
+    ]
+  },
+  {
     "slug": "advanced_memory_systems_for_ai_agents_vector_dbs_graphrag",
     "topicSlug": "rag-agents",
     "category": "RAG & Agents",
