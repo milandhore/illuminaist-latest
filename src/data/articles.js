@@ -1,5 +1,29 @@
 export const articles = [
   {
+    "slug": "designing_reliable_multi_agent_workflows_state_routing_and_error_recovery",
+    "topicSlug": "ai-llms",
+    "category": "AI & LLMs",
+    "difficulty": "Advanced",
+    "title": "Designing Reliable Multi-Agent Workflows - State, Routing, and Error Recovery",
+    "excerpt": "Master multi-agent workflows and agentic AI design patterns. Learn how to manage state, build robust routing topologies, and implement strategies for preventing agent loops.",
+    "avatar": "AI",
+    "author": "IlluminAIst",
+    "readingTime": 4,
+    "publishedAt": "2026-10-04",
+    "htmlFile": true,
+    "featured": false,
+    "status": "published",
+    "tags": [
+      "Core Agentic AI Design Patterns",
+      "Managing Global vs. Local State",
+      "Multi-Agent Routing Topologies",
+      "The Hierarchical Supervisor Pattern",
+      "2. Forced Strategy Rotation",
+      "LangGraph",
+      "LLM"
+    ]
+  },
+  {
     "slug": "ci_cd_for_autonomous_agents_testing_and_llm_evals",
     "topicSlug": "cloud-devops",
     "category": "Cloud & DevOps",
