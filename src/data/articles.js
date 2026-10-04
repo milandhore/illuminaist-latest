@@ -1,5 +1,25 @@
 export const articles = [
   {
+    "slug": "enterprise_agentic_ai_real_world_use_cases_delivering_measured_roi",
+    "topicSlug": "ai-llms",
+    "category": "AI & LLMs",
+    "difficulty": "Advanced",
+    "title": "Enterprise Agentic AI - Real-World Use Cases Delivering Measured ROI",
+    "excerpt": "Discover real-world agentic ai enterprise use cases. Learn how businesses are measuring agentic AI ROI and integrating AI agents into core business operations.",
+    "avatar": "AI",
+    "author": "IlluminAIst",
+    "readingTime": 6,
+    "publishedAt": "2026-10-04",
+    "htmlFile": true,
+    "featured": false,
+    "status": "published",
+    "tags": [
+      "Autonomous Workflow Impact Heatmap",
+      "RAG",
+      "LLM"
+    ]
+  },
+  {
     "slug": "designing_reliable_multi_agent_workflows_state_routing_and_error_recovery",
     "topicSlug": "ai-llms",
     "category": "AI & LLMs",
