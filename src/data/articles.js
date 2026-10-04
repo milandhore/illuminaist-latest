@@ -1,5 +1,26 @@
 export const articles = [
   {
+    "slug": "the_ux_of_agentic_ai_designing_for_trust_and_transparency",
+    "topicSlug": "ai-llms",
+    "category": "AI & LLMs",
+    "difficulty": "Beginner",
+    "title": "The UX of Agentic AI - Designing for Trust and Transparency",
+    "excerpt": "Designing the frontend for AI. How to show Chain of Thought, build human in the loop ux approval gates, and maintain user trust in transparent ai systems.",
+    "avatar": "AI",
+    "author": "IlluminAIst",
+    "readingTime": 2,
+    "publishedAt": "2026-10-04",
+    "htmlFile": true,
+    "featured": false,
+    "status": "published",
+    "tags": [
+      "The Agentic Dashboard Pattern",
+      "Human-in-the-Loop UX (HITL)",
+      "Designing for Asynchronous Work",
+      "AWS"
+    ]
+  },
+  {
     "slug": "mastering_the_model_context_protocol_mcp_connecting_ai_agents_to_enterprise_tools",
     "topicSlug": "emerging-tech",
     "category": "Emerging Tech",
