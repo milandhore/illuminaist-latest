@@ -1,5 +1,30 @@
 export const articles = [
   {
+    "slug": "agentic_ai_vs_generative_ai_strategic_architectural_comparison",
+    "topicSlug": "rag-agents",
+    "category": "RAG & Agents",
+    "difficulty": "Advanced",
+    "title": "Agentic AI vs Generative AI - Strategic Architectural Comparison",
+    "excerpt": "Explore the critical difference between AI agents and LLMs. Our strategic architectural comparison of Agentic AI vs Generative AI guides enterprise adoption in 2026.",
+    "avatar": "AI",
+    "author": "IlluminAIst",
+    "readingTime": 7,
+    "publishedAt": "2026-10-04",
+    "htmlFile": true,
+    "featured": false,
+    "status": "published",
+    "tags": [
+      "Generative AI (The Copilot)",
+      "Agentic AI (The Actor)",
+      "Architectural Selection Matrix",
+      "The Architectural Stack Comparison",
+      "LangGraph",
+      "CrewAI",
+      "RAG",
+      "LLM"
+    ]
+  },
+  {
     "slug": "agentic_ai_security_threat_vectors_sandboxing_and_governance",
     "topicSlug": "rag-agents",
     "category": "RAG & Agents",
