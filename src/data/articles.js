@@ -1,5 +1,30 @@
 export const articles = [
   {
+    "slug": "building_production_rag_pipelines_with_langchain_pinecone",
+    "topicSlug": "rag-agents",
+    "category": "RAG & Agents",
+    "difficulty": "Advanced",
+    "title": "Building Production RAG Pipelines with LangChain & Pinecone",
+    "excerpt": "A deep-dive into constructing retrieval-augmented generation systems that actually hold up in production.",
+    "avatar": "AI",
+    "author": "IlluminAIst",
+    "readingTime": 1,
+    "publishedAt": "2026-10-04",
+    "htmlFile": true,
+    "featured": false,
+    "status": "published",
+    "tags": [
+      "Introduction",
+      "2. Choosing Your Embedding Model",
+      "Cost vs. Quality Trade-off",
+      "3. Pinecone Serverless Setup",
+      "4. Re-ranking for Precision",
+      "5. Evaluating Your Pipeline",
+      "LLM",
+      "Vector DB"
+    ]
+  },
+  {
     "slug": "agentic_ai_vs_generative_ai_strategic_architectural_comparison",
     "topicSlug": "rag-agents",
     "category": "RAG & Agents",
