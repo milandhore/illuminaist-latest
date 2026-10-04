@@ -1,5 +1,30 @@
 export const articles = [
   {
+    "slug": "what_is_agentic_ai_the_definitive_guide_to_autonomous_systems",
+    "topicSlug": "ai-llms",
+    "category": "AI & LLMs",
+    "difficulty": "Advanced",
+    "title": "What Is Agentic AI - The Definitive Guide to Autonomous Systems",
+    "excerpt": "Discover how AI is moving from answering prompts to taking independent action. Explore the architecture, use cases, and future of agentic AI in the enterprise.",
+    "avatar": "AI",
+    "author": "IlluminAIst",
+    "readingTime": 8,
+    "publishedAt": "2026-10-04",
+    "htmlFile": true,
+    "featured": false,
+    "status": "published",
+    "tags": [
+      "Key Characteristics of Agentic AI",
+      "RAG",
+      "LLM",
+      "Gemini",
+      "Vector DB",
+      "Pinecone",
+      "Anthropic",
+      "OpenAI"
+    ]
+  },
+  {
     "slug": "top_agentic_ai_frameworks_compared_langgraph_crewai_autogen_adk",
     "topicSlug": "ai-llms",
     "category": "AI & LLMs",
