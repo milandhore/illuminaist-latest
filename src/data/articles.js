@@ -1,5 +1,30 @@
 export const articles = [
   {
+    "slug": "ci_cd_for_autonomous_agents_testing_and_llm_evals",
+    "topicSlug": "cloud-devops",
+    "category": "Cloud & DevOps",
+    "difficulty": "Advanced",
+    "title": "CI/CD for Autonomous Agents - Testing and LLM Evals",
+    "excerpt": "A guide to building automated evaluation pipelines and testing swarms before deploying them to production. Learn about LLM evals and evaluating agentic AI.",
+    "avatar": "AI",
+    "author": "IlluminAIst",
+    "readingTime": 2,
+    "publishedAt": "2026-10-04",
+    "htmlFile": true,
+    "featured": false,
+    "status": "published",
+    "tags": [
+      "What are LLM Evals?",
+      "Testing the Agentic Loop",
+      "The Agentic CI/CD Pipeline",
+      "Probabilistic CI/CD Gate for Agents",
+      "The LLM-as-a-Judge Pattern",
+      "Shadow Testing in Mock Environments",
+      "GPT-4",
+      "DevOps"
+    ]
+  },
+  {
     "slug": "buy_vs_build_the_executive_playbook_for_adopting_agentic_ai",
     "topicSlug": "ai-llms",
     "category": "AI & LLMs",
