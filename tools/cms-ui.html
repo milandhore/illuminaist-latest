@@ -7,120 +7,225 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#0B0F19;--card:#111827;--surface:#1E293B;--border:rgba(0,240,255,0.08);--cyan:#00F0FF;--amber:#FFB800;--text:#F1F5F9;--muted:#94A3B8;--subtle:#475569}
+:root{
+  --bg:#080C14;--card:#0E1623;--surface:#162033;--border:rgba(0,220,255,0.09);
+  --cyan:#00DCFF;--amber:#FFB800;--red:#FF4D6A;--green:#22D3A0;
+  --text:#F1F5F9;--muted:#94A3B8;--subtle:#475569;
+}
 body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh;font-size:14px}
 h1,h2,h3{font-family:'Outfit',sans-serif}
-.app{display:grid;grid-template-rows:56px 1fr;height:100vh;overflow:hidden}
-.topbar{background:rgba(17,24,39,0.95);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:16px;padding:0 24px;backdrop-filter:blur(12px)}
-.logo{font-family:'Outfit',sans-serif;font-weight:800;font-size:18px;letter-spacing:-.5px}
-.logo span{color:var(--amber)}
-.topbar-sub{color:var(--subtle);font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase}
-.main{display:grid;grid-template-columns:390px 1fr;overflow:hidden}
+.app{display:grid;grid-template-rows:58px 1fr;height:100vh;overflow:hidden}
+
+/* TOPBAR */
+.topbar{background:rgba(14,22,35,0.97);border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:16px;padding:0 24px;backdrop-filter:blur(16px);
+  box-shadow:0 1px 24px rgba(0,220,255,0.04)}
+.logo{font-family:'Outfit',sans-serif;font-weight:800;font-size:19px;letter-spacing:-.5px;
+  background:linear-gradient(90deg,#00DCFF,#7B7FFF);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.topbar-badge{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--subtle);background:var(--surface);padding:3px 9px;border-radius:99px;
+  border:1px solid var(--border)}
+.topbar-actions{margin-left:auto;display:flex;gap:8px;align-items:center}
+.server-status{font-size:11px;display:flex;align-items:center;gap:5px;color:var(--green)}
+.server-dot{width:7px;height:7px;border-radius:50%;background:var(--green);
+  box-shadow:0 0 8px var(--green);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+
+/* LAYOUT */
+.main{display:grid;grid-template-columns:400px 1fr;overflow:hidden}
 .panel-left{overflow-y:auto;border-right:1px solid var(--border);background:var(--card)}
-.panel-left::-webkit-scrollbar{width:4px}
+.panel-left::-webkit-scrollbar{width:3px}
 .panel-left::-webkit-scrollbar-thumb{background:var(--surface);border-radius:2px}
-.section{padding:18px 20px;border-bottom:1px solid var(--border)}
-.section-title{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--subtle);margin-bottom:12px}
+.section{padding:16px 20px;border-bottom:1px solid var(--border)}
+.section-title{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--subtle);margin-bottom:12px;display:flex;align-items:center;gap:6px}
 .panel-right{display:grid;grid-template-rows:46px 1fr;overflow:hidden;background:var(--bg)}
-.tab-bar{display:flex;align-items:center;gap:2px;padding:7px 14px;border-bottom:1px solid var(--border);background:var(--card)}
-.tab{padding:5px 14px;border-radius:7px;font-size:12px;font-weight:500;color:var(--subtle);cursor:pointer;border:none;background:none;transition:all .15s}
-.tab.active{background:rgba(0,240,255,0.1);color:var(--cyan)}
-.tab:hover:not(.active){color:var(--text)}
+.tab-bar{display:flex;align-items:center;gap:2px;padding:7px 14px;
+  border-bottom:1px solid var(--border);background:var(--card)}
+.tab{padding:5px 14px;border-radius:7px;font-size:12px;font-weight:500;color:var(--subtle);
+  cursor:pointer;border:none;background:none;transition:all .15s}
+.tab.active{background:rgba(0,220,255,0.1);color:var(--cyan)}
+.tab:hover:not(.active){color:var(--text);background:rgba(255,255,255,0.03)}
 .view{display:none;height:100%;overflow:hidden}
 .view.active{display:flex;flex-direction:column}
+
+/* FORMS */
 label{display:block;font-size:11px;font-weight:600;color:var(--muted);margin-bottom:5px;letter-spacing:.04em}
-input[type=text],input[type=number],input[type=date],select,textarea{width:100%;background:var(--surface);border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:8px 11px;color:var(--text);font-family:'Inter',sans-serif;font-size:13px;outline:none;transition:border-color .2s}
-input:focus,select:focus,textarea:focus{border-color:rgba(0,240,255,0.4);box-shadow:0 0 0 3px rgba(0,240,255,0.06)}
+input[type=text],input[type=number],input[type=date],select,textarea{
+  width:100%;background:var(--surface);border:1px solid rgba(255,255,255,0.07);
+  border-radius:8px;padding:8px 11px;color:var(--text);font-family:'Inter',sans-serif;
+  font-size:13px;outline:none;transition:border-color .2s,box-shadow .2s}
+input:focus,select:focus,textarea:focus{
+  border-color:rgba(0,220,255,0.4);box-shadow:0 0 0 3px rgba(0,220,255,0.06)}
 select option{background:var(--card)}
-textarea{resize:vertical;min-height:100px;font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.6}
+textarea{resize:vertical;min-height:90px;font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.6}
 .field{margin-bottom:13px}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:11px}
 .toggle-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0}
 .toggle{position:relative;width:38px;height:22px;flex-shrink:0}
 .toggle input{opacity:0;width:0;height:0}
-.slider{position:absolute;inset:0;background:var(--surface);border-radius:11px;transition:.2s;cursor:pointer;border:1px solid rgba(255,255,255,0.08)}
-.slider::before{content:'';position:absolute;width:16px;height:16px;left:2px;top:2px;background:#fff;border-radius:50%;transition:.2s}
+.slider{position:absolute;inset:0;background:var(--surface);border-radius:11px;
+  transition:.2s;cursor:pointer;border:1px solid rgba(255,255,255,0.08)}
+.slider::before{content:'';position:absolute;width:16px;height:16px;left:2px;top:2px;
+  background:#fff;border-radius:50%;transition:.2s}
 .toggle input:checked+.slider{background:var(--cyan)}
 .toggle input:checked+.slider::before{transform:translateX(16px);background:var(--bg)}
-.btn{padding:9px 18px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:none;transition:all .2s;display:inline-flex;align-items:center;gap:7px}
-.btn-primary{background:var(--cyan);color:var(--bg);box-shadow:0 0 20px rgba(0,240,255,0.2)}
-.btn-primary:hover{box-shadow:0 0 30px rgba(0,240,255,0.45);transform:translateY(-1px)}
-.btn-primary:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
+
+/* BUTTONS */
+.btn{padding:9px 18px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;
+  border:none;transition:all .2s;display:inline-flex;align-items:center;gap:7px}
+.btn-primary{background:linear-gradient(135deg,#00DCFF,#7B7FFF);color:#08121e;
+  box-shadow:0 0 24px rgba(0,220,255,0.25)}
+.btn-primary:hover{box-shadow:0 0 40px rgba(0,220,255,0.45);transform:translateY(-1px)}
+.btn-primary:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
 .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.1);color:var(--muted)}
-.btn-ghost:hover{border-color:rgba(255,255,255,0.2);color:var(--text)}
-.btn-danger{background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.25);color:#f87171}
-.btn-danger:hover{background:rgba(239,68,68,0.2)}
+.btn-ghost:hover{border-color:rgba(255,255,255,0.22);color:var(--text);background:rgba(255,255,255,0.03)}
+.btn-danger{background:rgba(255,77,106,0.1);border:1px solid rgba(255,77,106,0.25);color:var(--red)}
+.btn-danger:hover{background:rgba(255,77,106,0.2);border-color:rgba(255,77,106,0.45)}
+.btn-warn{background:rgba(255,184,0,0.1);border:1px solid rgba(255,184,0,0.25);color:var(--amber)}
+.btn-warn:hover{background:rgba(255,184,0,0.2)}
 .btn-sm{padding:5px 11px;font-size:11px}
-.publish-bar{padding:14px 20px;background:rgba(0,240,255,0.03);border-top:1px solid var(--border)}
+.btn-xs{padding:3px 9px;font-size:11px}
+
+/* PUBLISH BAR */
+.publish-bar{padding:14px 20px;background:rgba(0,220,255,0.02);border-top:1px solid var(--border)}
+.publish-hint{text-align:center;margin-top:8px;font-size:11px;color:var(--subtle)}
+
+/* ARTICLE LIST */
 .art-list{padding:0;overflow-y:auto;flex:1}
-.art-item{display:flex;align-items:flex-start;gap:12px;padding:13px 20px;border-bottom:1px solid var(--border);transition:background .15s}
-.art-item:hover{background:rgba(255,255,255,0.02)}
+.art-item{display:flex;align-items:flex-start;gap:12px;padding:13px 20px;
+  border-bottom:1px solid var(--border);transition:background .15s;cursor:default}
+.art-item:hover{background:rgba(255,255,255,0.015)}
 .art-dot{width:8px;height:8px;border-radius:50%;background:var(--cyan);margin-top:5px;flex-shrink:0}
+.art-dot.orphan{background:var(--red)}
 .art-meta{flex:1;min-width:0}
-.art-title{font-weight:600;font-size:13px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.art-sub{font-size:11px;color:var(--subtle);margin-top:3px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-.art-actions{display:flex;gap:6px;flex-shrink:0}
-.badge{display:inline-block;padding:2px 7px;border-radius:99px;font-size:10px;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
-.badge-cyan{background:rgba(0,240,255,0.12);color:var(--cyan);border:1px solid rgba(0,240,255,0.2)}
-.badge-amber{background:rgba(255,184,0,0.12);color:var(--amber);border:1px solid rgba(255,184,0,0.2)}
-.badge-green{background:rgba(34,197,94,0.12);color:#4ade80;border:1px solid rgba(34,197,94,0.2)}
+.art-title{font-weight:600;font-size:13px;color:var(--text);white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis}
+.art-sub{font-size:11px;color:var(--subtle);margin-top:4px;display:flex;
+  align-items:center;gap:6px;flex-wrap:wrap}
+.art-actions{display:flex;gap:5px;flex-shrink:0;align-items:center}
+
+/* BADGES */
+.badge{display:inline-block;padding:2px 7px;border-radius:99px;font-size:10px;
+  font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+.badge-cyan{background:rgba(0,220,255,0.1);color:var(--cyan);border:1px solid rgba(0,220,255,0.2)}
+.badge-amber{background:rgba(255,184,0,0.1);color:var(--amber);border:1px solid rgba(255,184,0,0.2)}
+.badge-green{background:rgba(34,211,160,0.1);color:var(--green);border:1px solid rgba(34,211,160,0.2)}
+.badge-red{background:rgba(255,77,106,0.1);color:var(--red);border:1px solid rgba(255,77,106,0.2)}
 .badge-slate{background:var(--surface);color:var(--muted);border:1px solid rgba(255,255,255,0.07)}
-.toast{position:fixed;bottom:24px;right:24px;padding:12px 18px;border-radius:10px;font-size:13px;font-weight:500;z-index:999;transition:all .3s;opacity:0;transform:translateY(8px);pointer-events:none}
+
+/* TOAST */
+.toast{position:fixed;bottom:24px;right:24px;padding:12px 18px;border-radius:10px;
+  font-size:13px;font-weight:500;z-index:9999;transition:all .3s;opacity:0;
+  transform:translateY(10px);pointer-events:none;max-width:360px}
 .toast.show{opacity:1;transform:translateY(0)}
-.toast.success{background:#0d2f1a;border:1px solid rgba(34,197,94,0.3);color:#4ade80}
-.toast.error{background:#2d0f0f;border:1px solid rgba(239,68,68,0.3);color:#f87171}
-.upload-zone{border:2px dashed rgba(0,240,255,0.2);border-radius:10px;padding:22px;text-align:center;cursor:pointer;transition:all .2s;background:rgba(0,240,255,0.02)}
-.upload-zone:hover,.upload-zone.drag{border-color:rgba(0,240,255,0.5);background:rgba(0,240,255,0.06)}
+.toast.success{background:#0a2a1c;border:1px solid rgba(34,211,160,0.35);color:var(--green)}
+.toast.error{background:#2a0a12;border:1px solid rgba(255,77,106,0.35);color:var(--red)}
+.toast.info{background:#0a1a2a;border:1px solid rgba(0,220,255,0.35);color:var(--cyan)}
+
+/* UPLOAD ZONE */
+.upload-zone{border:2px dashed rgba(0,220,255,0.2);border-radius:10px;padding:20px;
+  text-align:center;cursor:pointer;transition:all .2s;background:rgba(0,220,255,0.02)}
+.upload-zone:hover,.upload-zone.drag{border-color:rgba(0,220,255,0.5);background:rgba(0,220,255,0.06)}
 .upload-zone input{display:none}
-.upload-icon{font-size:26px;margin-bottom:6px}
+.upload-icon{font-size:24px;margin-bottom:6px}
 .upload-lbl{font-size:13px;color:var(--muted)}
 .upload-lbl strong{color:var(--cyan)}
 .upload-sub{font-size:11px;color:var(--subtle);margin-top:3px}
-.preview-frame{flex:1;border:none;background:#0B0F19}
+.file-ok{margin-top:9px;padding:7px 11px;background:rgba(34,211,160,0.08);
+  border:1px solid rgba(34,211,160,0.2);border-radius:7px;font-size:12px;color:var(--green);display:none}
+
+/* PREVIEW */
+.preview-frame{flex:1;border:none;background:#080C14}
+
+/* STATS */
+.stats-bar{display:flex;gap:8px;flex-wrap:wrap;padding:10px 16px;border-bottom:1px solid var(--border)}
+.stat{background:var(--surface);border:1px solid rgba(255,255,255,0.06);border-radius:8px;
+  padding:6px 12px;font-size:11px;font-weight:500;color:var(--muted)}
+.stat strong{color:var(--text);font-size:15px;display:block}
+
+/* ORPHAN BANNER */
+.orphan-banner{margin:10px 20px;padding:10px 14px;background:rgba(255,77,106,0.07);
+  border:1px solid rgba(255,77,106,0.2);border-radius:8px;font-size:12px;color:var(--red);
+  display:flex;align-items:center;gap:10px;justify-content:space-between}
+
+/* GIT STATUS */
+.git-bar{padding:8px 20px;background:rgba(0,0,0,0.2);border-top:1px solid var(--border);
+  display:flex;align-items:center;gap:8px;font-size:11px;color:var(--subtle)}
+.git-ok{color:var(--green)}
+.git-fail{color:var(--red)}
+
+/* CODE PILL */
+code.pill{color:var(--cyan);background:var(--surface);padding:1px 6px;border-radius:4px;
+  font-family:'JetBrains Mono',monospace;font-size:11px}
+
+/* SEARCH */
+.search-wrap{padding:10px 16px;border-bottom:1px solid var(--border)}
+.search-wrap input{background:var(--surface);border:1px solid rgba(255,255,255,0.07);
+  border-radius:8px;padding:7px 11px;color:var(--text);font-size:12px;outline:none;width:100%}
+.search-wrap input:focus{border-color:rgba(0,220,255,0.35)}
+
+/* EMPTY */
 .empty{padding:48px 20px;text-align:center;color:var(--subtle)}
 .empty-icon{font-size:36px;margin-bottom:10px}
-.stats-bar{display:flex;gap:8px;flex-wrap:wrap;padding:10px 16px;border-bottom:1px solid var(--border)}
-.stat{background:var(--surface);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:5px 11px;font-size:11px;font-weight:500;color:var(--muted)}
-.stat strong{color:var(--text);font-size:14px;display:block}
-.file-ok{margin-top:9px;padding:7px 11px;background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.2);border-radius:7px;font-size:12px;color:#4ade80;display:none}
-code.pill{color:var(--cyan);background:var(--surface);padding:1px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:11px}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:1000;
+  display:none;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+.modal-overlay.open{display:flex}
+.modal{background:var(--card);border:1px solid var(--border);border-radius:14px;
+  padding:28px;max-width:440px;width:90%;box-shadow:0 24px 80px rgba(0,0,0,0.6)}
+.modal h3{margin-bottom:12px;font-size:17px}
+.modal p{color:var(--muted);font-size:13px;margin-bottom:20px;line-height:1.6}
+.modal-actions{display:flex;gap:10px;justify-content:flex-end}
 </style>
 </head>
 <body>
 <div class="app">
+
+<!-- TOPBAR -->
 <div class="topbar">
-  <div class="logo">illumin<span>AI</span>st</div>
-  <div class="topbar-sub">Content Studio</div>
-  <div style="margin-left:auto;display:flex;gap:8px;align-items:center">
-    <span id="unsaved" style="display:none" class="badge badge-amber">Unsaved</span>
-    <button class="btn btn-ghost btn-sm" onclick="loadArticles()">↻ Refresh list</button>
+  <div class="logo">illuminAIst</div>
+  <div class="topbar-badge">Content Studio</div>
+  <div class="topbar-actions">
+    <div class="server-status"><div class="server-dot"></div>CMS Active</div>
+    <span id="unsaved" style="display:none" class="badge badge-amber">● Unsaved</span>
+    <button class="btn btn-ghost btn-sm" onclick="loadArticles()">↻ Refresh</button>
+    <button class="btn btn-warn btn-sm" id="gitPushBtn" onclick="manualGitPush()">↑ Git Push</button>
   </div>
 </div>
+
+<!-- MAIN -->
 <div class="main">
-  <!-- LEFT PANEL -->
+
+  <!-- LEFT PANEL: Editor -->
   <div class="panel-left">
+
+    <!-- Upload zone -->
     <div class="section">
-      <div class="section-title">📄 Article HTML Content</div>
+      <div class="section-title">⬆ HTML Article File</div>
       <div class="upload-zone" id="dropzone"
            onclick="document.getElementById('fileInput').click()"
            ondragover="event.preventDefault();this.classList.add('drag')"
            ondrop="dropFile(event)"
            ondragleave="this.classList.remove('drag')">
         <input type="file" id="fileInput" accept=".html,.htm" onchange="loadFile(event)">
-        <div class="upload-icon">⬆</div>
+        <div class="upload-icon">📄</div>
         <div class="upload-lbl"><strong>Click to upload</strong> or drag &amp; drop</div>
         <div class="upload-sub">.html only · body content extracted automatically</div>
       </div>
       <div class="file-ok" id="file-ok"></div>
       <div style="margin-top:10px">
         <label>Or paste / edit HTML body directly</label>
-        <textarea id="htmlContent" rows="9"
+        <textarea id="htmlContent" rows="8"
           placeholder="&lt;h2&gt;Introduction&lt;/h2&gt;&#10;&lt;p&gt;Your article content...&lt;/p&gt;"
           oninput="markUnsaved();schedulePreview()"></textarea>
       </div>
     </div>
+
+    <!-- Metadata -->
     <div class="section">
-      <div class="section-title">📝 Article Metadata</div>
+      <div class="section-title">📝 Metadata</div>
       <div class="field">
         <label>Title *</label>
         <input type="text" id="title" placeholder="e.g. Advanced Memory Systems for AI Agents"
@@ -128,8 +233,8 @@ code.pill{color:var(--cyan);background:var(--surface);padding:1px 6px;border-rad
       </div>
       <div class="field">
         <label>Excerpt / Meta Description *</label>
-        <textarea id="excerpt" rows="3" style="min-height:65px"
-          placeholder="One paragraph summary shown on article cards and used for SEO."
+        <textarea id="excerpt" rows="2" style="min-height:60px"
+          placeholder="One paragraph summary for SEO and article cards."
           oninput="markUnsaved()"></textarea>
       </div>
       <div class="grid2">
@@ -154,18 +259,12 @@ code.pill{color:var(--cyan);background:var(--surface);padding:1px 6px;border-rad
           </select>
         </div>
       </div>
-      <div class="grid2">
-        <div class="field">
-          <label>Publish Date *</label>
-          <input type="date" id="publishedAt" oninput="markUnsaved()">
-        </div>
-        <div class="field">
-          <label>Reading Time (min)</label>
-          <input type="number" id="readingTime" value="8" min="1" max="120" oninput="markUnsaved()">
-        </div>
+      <div class="field">
+        <label>Reading Time (min) — auto-calculated</label>
+        <input type="number" id="readingTime" value="8" min="1" max="120" oninput="markUnsaved()">
       </div>
       <div class="field">
-        <label>URL Slug (auto-filled from title)</label>
+        <label>URL Slug (auto-filled)</label>
         <input type="text" id="slug" placeholder="my_article_slug" oninput="markUnsaved()">
       </div>
       <div class="grid2">
@@ -180,61 +279,107 @@ code.pill{color:var(--cyan);background:var(--surface);padding:1px 6px;border-rad
       </div>
       <div class="field">
         <label>Tags (comma separated)</label>
-        <input type="text" id="tags" placeholder="GPT-4, RAG, LangChain, Agents" oninput="markUnsaved()">
+        <input type="text" id="tags" placeholder="GPT-4, RAG, LangChain" oninput="markUnsaved()">
       </div>
       <div class="toggle-row">
         <div>
           <div style="font-size:13px;font-weight:500">Featured Article</div>
-          <div style="font-size:11px;color:var(--subtle)">Displays in the hero spotlight on the home page</div>
+          <div style="font-size:11px;color:var(--subtle)">Hero spotlight on home page</div>
         </div>
         <label class="toggle">
           <input type="checkbox" id="featured" onchange="markUnsaved()">
           <span class="slider"></span>
         </label>
       </div>
-      <div class="field" style="margin-top:10px;">
-        <label>Status *</label>
+      <div class="field" style="margin-top:10px">
+        <label>Status</label>
         <select id="status" onchange="markUnsaved()">
           <option value="published">Published</option>
           <option value="draft">Draft</option>
         </select>
       </div>
     </div>
+
+    <!-- Publish bar -->
     <div class="publish-bar">
-      <div style="display:flex; gap:8px;">
-        <button class="btn btn-primary" id="publishBtn" onclick="publish()" style="flex:1;justify-content:center;font-size:14px">
-          🚀&nbsp; Save Article
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-primary" id="publishBtn" onclick="publish()" style="flex:1;justify-content:center">
+          🚀&nbsp; Save &amp; Publish
         </button>
-        <button class="btn btn-danger" id="deleteBtn" onclick="deleteCurrent()" style="display:none; justify-content:center;font-size:14px">
+        <button class="btn btn-danger" id="deleteBtn" onclick="confirmDelete()" style="display:none;justify-content:center">
           🗑&nbsp; Delete
         </button>
       </div>
-      <p style="text-align:center;margin-top:8px;font-size:11px;color:var(--subtle)">
-        Saves HTML file + updates articles.js &nbsp;·&nbsp; then run <code class="pill">npm run build</code> to deploy
-      </p>
+      <div class="publish-hint">
+        Saves HTML + updates articles.js &nbsp;·&nbsp; <code class="pill">npm run build</code> to deploy
+      </div>
     </div>
   </div>
+
   <!-- RIGHT PANEL -->
   <div class="panel-right">
     <div class="tab-bar">
       <button class="tab active" id="tab-btn-preview" onclick="showTab('preview',this)">👁&nbsp; Preview</button>
-      <button class="tab" id="tab-btn-articles" onclick="showTab('articles',this)">📚&nbsp; Articles</button>
+      <button class="tab" id="tab-btn-articles" onclick="showTab('articles',this)">📚&nbsp; All Articles</button>
+      <button class="tab" id="tab-btn-files" onclick="showTab('files',this)">🗂&nbsp; HTML Files</button>
     </div>
+
+    <!-- Preview -->
     <div class="view active" id="tab-preview">
       <iframe class="preview-frame" id="previewFrame"
-        srcdoc="&lt;html&gt;&lt;body style='background:#0B0F19;color:#475569;font-family:Inter,sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;font-size:14px;text-align:center'&gt;&lt;div&gt;&lt;div style='font-size:40px;margin-bottom:16px'&gt;✦&lt;/div&gt;Upload or paste HTML to preview your article&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;">
+        srcdoc="<html><body style='background:#080C14;color:#475569;font-family:Inter,sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;font-size:14px;text-align:center'><div><div style='font-size:40px;margin-bottom:16px'>✦</div>Upload or paste HTML to preview</div></body></html>">
       </iframe>
     </div>
+
+    <!-- Articles list -->
     <div class="view" id="tab-articles">
       <div class="stats-bar" id="statsBar"></div>
+      <div id="orphanBanner" style="display:none"></div>
+      <div class="search-wrap">
+        <input type="text" id="searchInput" placeholder="🔍  Search articles..." oninput="filterArticles()">
+      </div>
       <div class="art-list" id="artList">
-        <div class="empty"><div class="empty-icon">📭</div><div>Loading articles...</div></div>
+        <div class="empty"><div class="empty-icon">📭</div><div>Loading articles…</div></div>
+      </div>
+    </div>
+
+    <!-- HTML Files on disk -->
+    <div class="view" id="tab-files">
+      <div class="stats-bar" id="fileStatsBar"></div>
+      <div class="art-list" id="fileList">
+        <div class="empty"><div class="empty-icon">📂</div><div>Loading files…</div></div>
       </div>
     </div>
   </div>
 </div>
 </div>
+
+<!-- DELETE CONFIRM MODAL -->
+<div class="modal-overlay" id="deleteModal">
+  <div class="modal">
+    <h3>🗑 Delete Article</h3>
+    <p id="deleteModalMsg">Are you sure? This removes the entry from articles.js AND deletes the HTML file from disk. This cannot be undone.</p>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-danger" id="deleteConfirmBtn" onclick="executeDelete()">Yes, Delete Permanently</button>
+    </div>
+  </div>
+</div>
+
+<!-- PURGE CONFIRM MODAL -->
+<div class="modal-overlay" id="purgeModal">
+  <div class="modal">
+    <h3>⚠️ Purge Orphan Files</h3>
+    <p id="purgeModalMsg">Delete all HTML files on disk that have no matching entry in articles.js?</p>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closePurgeModal()">Cancel</button>
+      <button class="btn btn-danger" id="purgeConfirmBtn" onclick="executePurge()">Purge All Orphans</button>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
+
 <script>
 const TOPIC_MAP = {
   'ai-llms':'AI & LLMs','rag-agents':'RAG & Agents','cloud-devops':'Cloud & DevOps',
@@ -242,10 +387,12 @@ const TOPIC_MAP = {
 }
 const DIFF_COLOR = {Beginner:'green',Intermediate:'cyan',Advanced:'amber'}
 let unsaved = false, previewTimer = null
+let allArticles = [], allOrphans = [], allHtmlFiles = []
+let pendingDeleteSlug = '', pendingDeleteTopic = '', pendingDeleteTitle = ''
 
-// Set today as default date
-document.getElementById('publishedAt').value = new Date().toISOString().slice(0,10)
+// publishedAt set automatically on publish (today's date)
 
+// ── File upload ──────────────────────────────────────────────────────────────
 function dropFile(e) {
   e.preventDefault()
   document.getElementById('dropzone').classList.remove('drag')
@@ -258,32 +405,167 @@ function processFile(f) {
   const r = new FileReader()
   r.onload = ev => {
     const html = ev.target.result
-    const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i)
-    const body = bodyMatch ? bodyMatch[1].trim() : html
-    document.getElementById('htmlContent').value = body
 
+    // ── Extract body ─────────────────────────────────────────────
+    const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i)
+    const rawBody = bodyMatch ? bodyMatch[1].trim() : html
+    const { clean: body, report } = sanitizeBody(rawBody)
+
+    // ── Title ─────────────────────────────────────────────────────
     const titleMatch = html.match(/<title[^>]*>([^<]+)<\/title>/i)
     if (titleMatch) {
       const t = titleMatch[1].replace(/\s*\|\s*IlluminAIst\s*$/i,'').trim()
-      if (t && !document.getElementById('title').value) {
-        document.getElementById('title').value = t
-        autoSlug()
+      if (t) { document.getElementById('title').value = t; autoSlug() }
+    }
+    // Fallback: first <h1> in body
+    if (!document.getElementById('title').value) {
+      const h1 = body.match(/<h1[^>]*>([^<]+)<\/h1>/i)
+      if (h1) { document.getElementById('title').value = h1[1].trim(); autoSlug() }
+    }
+
+    // ── Excerpt / Description ─────────────────────────────────────
+    const descMatch = html.match(/<meta[^>]+name=["']description["'][^>]+content=["']([^"']+)/i)
+                   || html.match(/<meta[^>]+content=["']([^"']{40,})["'][^>]+name=["']description["']/i)
+    if (descMatch) {
+      document.getElementById('excerpt').value = descMatch[1].trim()
+    } else {
+      // Fallback: first meaningful <p> in body (>60 chars)
+      const pMatch = body.match(/<p[^>]*>([^<]{60,})<\/p>/i)
+      if (pMatch) document.getElementById('excerpt').value = pMatch[1].trim().slice(0, 280)
+    }
+
+    // ── Tags — meta keywords + prominent headings ─────────────────
+    const tagSet = new Set()
+    // 1. meta keywords
+    const kwMatch = html.match(/<meta[^>]+name=["']keywords["'][^>]+content=["']([^"']+)/i)
+                 || html.match(/<meta[^>]+content=["']([^"']+)["'][^>]+name=["']keywords["']/i)
+    if (kwMatch) kwMatch[1].split(',').map(k=>k.trim()).filter(k=>k.length>1&&k.length<30).forEach(k=>tagSet.add(k))
+    // 2. h2 / h3 text — short phrases become tags
+    const headings = [...body.matchAll(/<h[23][^>]*>([^<]+)<\/h[23]>/gi)]
+    headings.slice(0,8).forEach(m => {
+      const txt = m[1].replace(/<[^>]+>/g,'').trim()
+      if (txt.length >= 3 && txt.length <= 35 && !txt.includes(':')) tagSet.add(txt)
+    })
+    // 3. topic keyword scan from full text
+    const plainText = html.replace(/<[^>]+>/g,' ').toLowerCase()
+    const techKw = [
+      'LangChain','LangGraph','CrewAI','AutoGen','RAG','LLM','GPT-4','Claude','Gemini',
+      'LLaMA','Ollama','Vector DB','Pinecone','Weaviate','ChromaDB','MLOps','DevOps',
+      'Kubernetes','Docker','Terraform','AWS','Azure','GCP','Fine-tuning','Embeddings',
+      'Agent','Multi-agent','Prompt engineering','Function calling','Anthropic','OpenAI'
+    ]
+    techKw.forEach(kw => { if (plainText.includes(kw.toLowerCase())) tagSet.add(kw) })
+    // keep max 8 tags, skip if too similar to title
+    const titleLower = (document.getElementById('title').value||'').toLowerCase()
+    const finalTags = [...tagSet].filter(t => !titleLower.includes(t.toLowerCase())).slice(0,8)
+    if (finalTags.length) document.getElementById('tags').value = finalTags.join(', ')
+
+    // ── Auto-detect Topic ─────────────────────────────────────────
+    const topicMap = [
+      { slug:'rag-agents',    words:['rag','retrieval','agent','langgraph','crewai','autogen','adk','memory','tool calling'] },
+      { slug:'mlops',         words:['mlops','ml pipeline','kubeflow','airflow','mlflow','data pipeline','model training'] },
+      { slug:'cloud-devops',  words:['kubernetes','docker','terraform','aws','azure','gcp','cloud','devops','ci/cd','deployment'] },
+      { slug:'emerging-tech', words:['quantum','blockchain','ar ','vr ','xr ','wearable','spatial computing','neuro'] },
+      { slug:'tutorials',     words:['step by step','how to','tutorial','guide','example','code walkthrough','implementation'] },
+      { slug:'opinion',       words:['opinion','perspective','i think','we believe','future of','will change','prediction'] },
+      { slug:'ai-llms',       words:['llm','gpt','claude','gemini','llama','language model','transformer','openai','anthropic','fine-tun'] },
+    ]
+    for (const tp of topicMap) {
+      if (tp.words.some(w => plainText.includes(w))) {
+        document.getElementById('topicSlug').value = tp.slug; break
       }
     }
-    const descMatch = html.match(/<meta[^>]+name=["']description["'][^>]+content=["']([^"']+)/i)
-    if (descMatch && !document.getElementById('excerpt').value)
-      document.getElementById('excerpt').value = descMatch[1]
 
+    // ── Auto-detect Difficulty ────────────────────────────────────
+    const advancedWords = ['architecture','internals','implementation','advanced','deep dive','production','optimization']
+    const beginnerWords = ['introduction','beginner','getting started','basics','what is','overview','simple']
+    if (advancedWords.some(w => plainText.includes(w)))
+      document.getElementById('difficulty').value = 'Advanced'
+    else if (beginnerWords.some(w => plainText.includes(w)))
+      document.getElementById('difficulty').value = 'Beginner'
+    else
+      document.getElementById('difficulty').value = 'Intermediate'
+
+    // ── Author from meta ──────────────────────────────────────────
+    const authorMatch = html.match(/<meta[^>]+name=["']author["'][^>]+content=["']([^"']+)/i)
+    if (authorMatch) document.getElementById('author').value = authorMatch[1].trim()
+
+    document.getElementById('htmlContent').value = body
+
+    // ── Reading time ──────────────────────────────────────────────
     autoReadingTime(body)
+
+    // ── Sanity report in banner ───────────────────────────────────
     const ok = document.getElementById('file-ok')
     ok.style.display = 'block'
-    ok.textContent = '✓ Loaded: ' + f.name + ' (' + Math.round(f.size/1024) + ' KB)'
+    const checks = report.removed.length
+      ? ' · Stripped: ' + report.removed.join(', ')
+      : ' · Body looks clean'
+    ok.innerHTML = '✓ <strong>' + f.name + '</strong> (' + Math.round(f.size/1024) + ' KB) · Fields auto-populated' + checks
     markUnsaved()
     schedulePreview()
   }
   r.readAsText(f)
 }
 
+// ── sanitizeBody ─────────────────────────────────────────────────────────────
+// Strips hero sections, duplicate title h1, leading images, nav/TOC bars,
+// scripts, styles, and empty/whitespace-only tags from raw article body HTML.
+function sanitizeBody(raw) {
+  const removed = []
+  let s = raw
+
+  // 1. Remove <script> and <style> blocks entirely
+  if (/<script/i.test(s))  { s = s.replace(/<script[\s\S]*?<\/script>/gi, ''); removed.push('scripts') }
+  if (/<style/i.test(s))   { s = s.replace(/<style[\s\S]*?<\/style>/gi,  ''); removed.push('inline styles') }
+
+  // 2. Remove hero / header / banner wrapper sections
+  //    Matches divs / sections / headers with class/id containing these keywords
+  const heroPattern = /<(?:div|section|header|figure)[^>]*(?:class|id)=["'][^"']*(?:hero|banner|header|cover|intro-banner|article-header|post-header|featured-image|article-top|article-cover|entry-header|page-header)[^"']*["'][^>]*>[\s\S]*?<\/(?:div|section|header|figure)>/gi
+  const beforeHero = s
+  s = s.replace(heroPattern, '')
+  if (s !== beforeHero) removed.push('hero/header section')
+
+  // 3. Remove the first <h1> (title is already in the Title field)
+  const h1Match = s.match(/<h1[^>]*>[\s\S]*?<\/h1>/i)
+  if (h1Match) { s = s.replace(h1Match[0], ''); removed.push('duplicate <h1>') }
+
+  // 4. Remove leading standalone images / figures / icon containers
+  //    Strip <img>, <figure>, <picture> or <div> wrappers that appear before any real text
+  const textBeforeImg = s.replace(/<[^>]+>/g, '').trim()
+  // If body starts with image-heavy block before text, strip leading img/figure
+  s = s.replace(/^(\s*<(?:figure|picture)[^>]*>[\s\S]*?<\/(?:figure|picture)>)+/i, () => {
+    removed.push('leading figure/image'); return ''
+  })
+  s = s.replace(/^(\s*<div[^>]*>[\s\S]{0,120}<img[^>]+>[\s\S]{0,120}<\/div>)+/i, () => {
+    removed.push('leading image wrapper'); return ''
+  })
+  // Bare leading <img> tags
+  s = s.replace(/^\s*<img[^>]+>/i, () => { removed.push('leading <img>'); return '' })
+
+  // 5. Remove sticky / floating navigation, TOC bars, breadcrumbs
+  const navPattern = /<(?:nav|div|aside)[^>]*(?:class|id)=["'][^"']*(?:toc|table-of-contents|breadcrumb|sticky|sidebar|nav-bar|navigation|in-this|floating)[^"']*["'][^>]*>[\s\S]*?<\/(?:nav|div|aside)>/gi
+  const beforeNav = s
+  s = s.replace(navPattern, '')
+  if (s !== beforeNav) removed.push('nav/TOC/sidebar')
+
+  // 6. Remove social share / author bio blocks
+  const sharePattern = /<(?:div|section|aside)[^>]*(?:class|id)=["'][^"']*(?:share|social|author-bio|related|comment|subscribe|newsletter|cta-box)[^"']*["'][^>]*>[\s\S]*?<\/(?:div|section|aside)>/gi
+  const beforeShare = s
+  s = s.replace(sharePattern, '')
+  if (s !== beforeShare) removed.push('share/social/author-bio')
+
+  // 7. Remove empty tags (tags with only whitespace / &nbsp; / <br>)
+  s = s.replace(/<(p|div|span|h[1-6])[^>]*>\s*<\/\1>/gi, "")
+  s = s.replace(/<(p|div|span|h[1-6])[^>]*>\s*<br[^>]*>\s*<\/\1>/gi, "")
+
+  // 8. Collapse excessive blank lines
+  s = s.replace(/(\n\s*){3,}/g, '\n\n').trim()
+
+  return { clean: s, report: { removed } }
+}
+
+// ── Helpers ──────────────────────────────────────────────────────────────────
 function autoSlug() {
   const t = document.getElementById('title').value
   document.getElementById('slug').value = t.toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/^_|_$/g,'')
@@ -304,7 +586,7 @@ function showTab(name, btn) {
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'))
   btn.classList.add('active')
   document.getElementById('tab-'+name).classList.add('active')
-  if (name === 'articles') loadArticles()
+  if (name === 'articles' || name === 'files') loadArticles()
 }
 
 function schedulePreview() {
@@ -318,31 +600,31 @@ function renderPreview() {
   if (!body) return
   document.getElementById('previewFrame').srcdoc = buildPreview(body, title)
 }
+
 function buildPreview(body, title) {
   const esc = title.replace(/</g,'&lt;').replace(/>/g,'&gt;')
   return '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">'
     + '<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700;800&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">'
     + '<style>'
     + '*{box-sizing:border-box;margin:0;padding:0}'
-    + 'body{background:#0B0F19;color:#CBD5E1;font-family:Inter,sans-serif;padding:32px 40px;max-width:820px;margin:0 auto;font-size:15px;line-height:1.8}'
-    + 'h1{font-family:Outfit,sans-serif;color:#F1F5F9;font-size:2rem;margin-bottom:1.5rem;padding-bottom:.75rem;border-bottom:1px solid rgba(0,240,255,.15)}'
-    + 'h2{font-family:Outfit,sans-serif;color:#F1F5F9;font-size:1.45rem;font-weight:700;margin-top:2em;margin-bottom:.7em;padding-bottom:.4rem;border-bottom:1px solid rgba(0,240,255,.12)}'
-    + 'h3{font-family:Outfit,sans-serif;color:#00F0FF;font-size:1.15rem;font-weight:600;margin-top:1.75em;margin-bottom:.55em}'
+    + 'body{background:#080C14;color:#CBD5E1;font-family:Inter,sans-serif;padding:32px 40px;max-width:820px;margin:0 auto;font-size:15px;line-height:1.8}'
+    + 'h1{font-family:Outfit,sans-serif;color:#F1F5F9;font-size:2rem;margin-bottom:1.5rem;padding-bottom:.75rem;border-bottom:1px solid rgba(0,220,255,.15)}'
+    + 'h2{font-family:Outfit,sans-serif;color:#F1F5F9;font-size:1.45rem;font-weight:700;margin-top:2em;margin-bottom:.7em;padding-bottom:.4rem;border-bottom:1px solid rgba(0,220,255,.12)}'
+    + 'h3{font-family:Outfit,sans-serif;color:#00DCFF;font-size:1.15rem;font-weight:600;margin-top:1.75em;margin-bottom:.55em}'
     + 'h4{font-family:Outfit,sans-serif;color:#F1F5F9;font-size:1rem;font-weight:600;margin-top:1.5em;margin-bottom:.45em}'
     + 'p{margin-bottom:1.2em}'
     + 'ul,ol{margin-bottom:1.2em;padding-left:1.5em}'
-    + 'li{margin-bottom:.45em}'
-    + 'li::marker{color:#00F0FF}'
-    + 'code{background:#1E293B;color:#00F0FF;padding:.1rem .4rem;border-radius:.25rem;font-family:"JetBrains Mono",monospace;font-size:.875em}'
-    + 'pre{background:#0d1117;border:1px solid rgba(0,240,255,.12);border-radius:.75rem;padding:1.2rem;overflow-x:auto;margin-bottom:1.4em}'
+    + 'li{margin-bottom:.45em}li::marker{color:#00DCFF}'
+    + 'code{background:#1E293B;color:#00DCFF;padding:.1rem .4rem;border-radius:.25rem;font-family:"JetBrains Mono",monospace;font-size:.875em}'
+    + 'pre{background:#0d1117;border:1px solid rgba(0,220,255,.12);border-radius:.75rem;padding:1.2rem;overflow-x:auto;margin-bottom:1.4em}'
     + 'pre code{background:transparent;padding:0;color:#94d8ff}'
-    + 'blockquote{border-left:3px solid #00F0FF;padding-left:1.25rem;color:#94A3B8;font-style:italic;margin:1.5em 0}'
-    + 'a{color:#00F0FF;text-underline-offset:3px}'
+    + 'blockquote{border-left:3px solid #00DCFF;padding-left:1.25rem;color:#94A3B8;font-style:italic;margin:1.5em 0}'
+    + 'a{color:#00DCFF;text-underline-offset:3px}'
     + 'strong{color:#F1F5F9;font-weight:600}'
-    + 'hr{border:none;border-top:1px solid rgba(0,240,255,.12);margin:2em 0}'
-    + 'img{max-width:100%;height:auto;border-radius:.75rem;margin:1.5em 0;border:1px solid rgba(0,240,255,.1)}'
+    + 'hr{border:none;border-top:1px solid rgba(0,220,255,.12);margin:2em 0}'
+    + 'img{max-width:100%;height:auto;border-radius:.75rem;margin:1.5em 0;border:1px solid rgba(0,220,255,.1)}'
     + 'table{width:100%;border-collapse:collapse;margin-bottom:1.4em;font-size:.9em}'
-    + 'th{background:#1E293B;color:#00F0FF;padding:.55rem 1rem;text-align:left;font-weight:600;border:1px solid rgba(0,240,255,.12)}'
+    + 'th{background:#1E293B;color:#00DCFF;padding:.55rem 1rem;text-align:left;font-weight:600;border:1px solid rgba(0,220,255,.12)}'
     + 'td{color:#CBD5E1;padding:.55rem 1rem;border:1px solid rgba(255,255,255,.05)}'
     + 'tr:nth-child(even) td{background:rgba(30,41,59,.4)}'
     + '.ad-sim{border:1px dashed rgba(148,163,184,.2);background:rgba(17,24,39,.5);border-radius:.5rem;display:flex;align-items:center;justify-content:center;color:#475569;font-size:11px;letter-spacing:.1em;text-transform:uppercase;margin:2rem 0}'
@@ -354,6 +636,8 @@ function buildPreview(body, title) {
     + '<div class="ad-sim ad-bot">Google AdSense · Billboard (970×250) · Appears on live site</div>'
     + '</body></html>'
 }
+
+// ── Publish ──────────────────────────────────────────────────────────────────
 async function publish() {
   const btn = document.getElementById('publishBtn')
   const f = {
@@ -364,7 +648,7 @@ async function publish() {
     topicSlug:   document.getElementById('topicSlug').value,
     category:    TOPIC_MAP[document.getElementById('topicSlug').value] || '',
     difficulty:  document.getElementById('difficulty').value,
-    publishedAt: document.getElementById('publishedAt').value,
+    publishedAt: new Date().toISOString().split('T')[0],
     readingTime: document.getElementById('readingTime').value,
     author:      document.getElementById('author').value.trim(),
     avatar:      document.getElementById('avatar').value.trim(),
@@ -375,18 +659,17 @@ async function publish() {
   if (!f.htmlContent) return toast('Paste or upload article HTML first', 'error')
   if (!f.title)       return toast('Title is required', 'error')
   if (!f.slug)        { autoSlug(); f.slug = document.getElementById('slug').value }
-  if (!f.publishedAt) return toast('Publish date is required', 'error')
 
   btn.disabled = true
   btn.innerHTML = '⏳&nbsp; Publishing…'
   try {
     const r = await fetch('/api/publish', {
-      method: 'POST', headers: {'Content-Type':'application/json'},
-      body: JSON.stringify(f)
+      method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(f)
     })
     const d = await r.json()
     if (!r.ok) throw new Error(d.error || 'Server error')
-    toast('✓ Published!  ' + d.path, 'success')
+    const gitMsg = d.pushed ? ' · pushed to GitHub ✓' : ' · Git push failed (see console)'
+    toast('✓ Published: ' + d.path + gitMsg, 'success')
     unsaved = false
     document.getElementById('unsaved').style.display = 'none'
     loadArticles()
@@ -394,63 +677,134 @@ async function publish() {
     toast('Error: ' + e.message, 'error')
   } finally {
     btn.disabled = false
-    btn.innerHTML = '🚀&nbsp; Publish Article'
+    btn.innerHTML = '🚀&nbsp; Save &amp; Publish'
   }
 }
 
+// ── Load articles ────────────────────────────────────────────────────────────
 async function loadArticles() {
   try {
     const r   = await fetch('/api/articles')
-    const arr = await r.json()
-    renderList(arr)
+    const res = await r.json()
+    allArticles  = res.articles  || []
+    allOrphans   = res.orphans   || []
+    allHtmlFiles = res.htmlFiles || []
+    renderList(allArticles, allOrphans)
+    renderFileList(allHtmlFiles, allArticles)
+    renderStats(allArticles, allOrphans)
   } catch(e) { console.error(e) }
 }
 
-function renderList(arts) {
-  const list  = document.getElementById('artList')
-  const stats = document.getElementById('statsBar')
+function renderStats(arts, orphans) {
   const by = {}
   arts.forEach(a => { by[a.category] = (by[a.category]||0)+1 })
-  stats.innerHTML = '<div class="stat"><strong>' + arts.length + '</strong>Total</div>'
+  const pub   = arts.filter(a => a.status !== 'draft').length
+  const draft = arts.filter(a => a.status === 'draft').length
+  document.getElementById('statsBar').innerHTML =
+    '<div class="stat"><strong>' + arts.length + '</strong>Total</div>'
+    + '<div class="stat"><strong>' + pub + '</strong>Published</div>'
+    + (draft ? '<div class="stat"><strong>' + draft + '</strong>Drafts</div>' : '')
     + Object.entries(by).map(([k,v]) => '<div class="stat"><strong>' + v + '</strong>' + k + '</div>').join('')
+  
+  const banner = document.getElementById('orphanBanner')
+  if (orphans.length) {
+    banner.style.display = 'block'
+    banner.innerHTML = '<span>⚠️ ' + orphans.length + ' orphan HTML file(s) found on disk with no articles.js entry</span>'
+      + '<button class="btn btn-danger btn-xs" onclick="openPurgeModal()">Purge Orphans</button>'
+  } else {
+    banner.style.display = 'none'
+  }
+}
 
+function filterArticles() {
+  const q = document.getElementById('searchInput').value.toLowerCase()
+  const filtered = allArticles.filter(a =>
+    (a.title||'').toLowerCase().includes(q) ||
+    (a.category||'').toLowerCase().includes(q) ||
+    (a.slug||'').toLowerCase().includes(q) ||
+    (a.tags||[]).join(' ').toLowerCase().includes(q)
+  )
+  renderList(filtered, allOrphans)
+}
+
+function renderList(arts, orphans) {
+  const list = document.getElementById('artList')
   if (!arts.length) {
-    list.innerHTML = '<div class="empty"><div class="empty-icon">📭</div><div>No articles published yet</div></div>'
+    list.innerHTML = '<div class="empty"><div class="empty-icon">📭</div><div>No articles found</div></div>'
     return
   }
   list.innerHTML = arts.map(a => {
     const dc   = DIFF_COLOR[a.difficulty] || 'slate'
     const date = a.publishedAt ? new Date(a.publishedAt).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) : ''
-    const slug = (a.slug || '').replace(/"/g,'')
-    const ts   = (a.topicSlug || '').replace(/"/g,'')
-    const ti   = (a.title || '').replace(/"/g,'&quot;').replace(/'/g,"\\'")
-    const aJson = JSON.stringify(a).replace(/"/g, '&quot;')
-    
+    const slug = (a.slug||'').replace(/"/g,'')
+    const ts   = (a.topicSlug||'').replace(/"/g,'')
+    const aJson = JSON.stringify(a).replace(/"/g,'&quot;')
+    const isOrphanData = orphans.some(o => o.slug === slug) // orphan in data sense not needed here
+
     return '<div class="art-item">'
       + '<div class="art-dot" style="' + (a.featured ? 'background:var(--amber)' : '') + '"></div>'
       + '<div class="art-meta">'
-      + '<div class="art-title">' + (a.title || '(untitled)') + (a.status === 'draft' ? ' <span class="badge badge-amber" style="margin-left:6px">Draft</span>' : ' <span class="badge badge-green" style="margin-left:6px">Published</span>') + '</div>'
+      + '<div class="art-title">' + (a.title||'(untitled)')
+      + (a.status==='draft' ? ' <span class="badge badge-amber" style="margin-left:6px">Draft</span>' : ' <span class="badge badge-green" style="margin-left:6px">Live</span>')
+      + (a.featured ? ' <span class="badge badge-amber" style="margin-left:4px">★ Featured</span>' : '')
+      + '</div>'
       + '<div class="art-sub">'
       + '<span class="badge badge-cyan">' + (a.category||'') + '</span>'
       + '<span class="badge badge-' + dc + '">' + (a.difficulty||'') + '</span>'
       + '<span>' + date + '</span>'
       + '<span>' + (a.readingTime||'?') + 'm read</span>'
-      + (a.featured ? '<span style="color:var(--amber)">★ Featured</span>' : '')
+      + '<code class="pill" style="font-size:10px">' + slug + '</code>'
       + '</div></div>'
       + '<div class="art-actions">'
-      + '<a href="http://localhost:5173/articles/' + slug + '" target="_blank" class="btn btn-ghost btn-sm" style="text-decoration:none">View</a>'
-      + '<button class="btn btn-ghost btn-sm" onclick="editArt(' + aJson + ')">Edit</button>'
+      + '<a href="http://localhost:5173/articles/' + slug + '" target="_blank" class="btn btn-ghost btn-xs" style="text-decoration:none">View</a>'
+      + '<button class="btn btn-ghost btn-xs" onclick=\'editArt(' + aJson + ')\'>Edit</button>'
+      + '<button class="btn btn-danger btn-xs" onclick="openDeleteModal(\'' + slug + '\',\'' + ts + '\',\'' + (a.title||'').replace(/'/g,"\\'") + '\')">Delete</button>'
       + '</div></div>'
   }).join('')
 }
 
+function renderFileList(files, articles) {
+  const slugSet = new Set(articles.map(a => a.slug))
+  const statsEl = document.getElementById('fileStatsBar')
+  const listEl  = document.getElementById('fileList')
+  const orphans = files.filter(f => !slugSet.has(f.slug))
+
+  statsEl.innerHTML = '<div class="stat"><strong>' + files.length + '</strong>HTML Files</div>'
+    + '<div class="stat"><strong>' + (files.length - orphans.length) + '</strong>Tracked</div>'
+    + (orphans.length ? '<div class="stat" style="color:var(--red)"><strong>' + orphans.length + '</strong>Orphans</div>' : '')
+
+  if (!files.length) {
+    listEl.innerHTML = '<div class="empty"><div class="empty-icon">📂</div><div>No HTML files found in public/articles/</div></div>'
+    return
+  }
+
+  listEl.innerHTML = files.map(f => {
+    const isOrphan = !slugSet.has(f.slug)
+    const date = f.mtime ? new Date(f.mtime).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric',hour:'2-digit',minute:'2-digit'}) : ''
+    return '<div class="art-item">'
+      + '<div class="art-dot ' + (isOrphan ? 'orphan' : '') + '"></div>'
+      + '<div class="art-meta">'
+      + '<div class="art-title">' + f.slug + '.html'
+      + (isOrphan ? ' <span class="badge badge-red" style="margin-left:6px">Orphan</span>' : ' <span class="badge badge-green" style="margin-left:6px">Tracked</span>')
+      + '</div>'
+      + '<div class="art-sub">'
+      + '<span class="badge badge-slate">' + f.topicSlug + '</span>'
+      + '<span>' + f.sizeKb + ' KB</span>'
+      + '<span>' + date + '</span>'
+      + '</div></div>'
+      + '<div class="art-actions">'
+      + (isOrphan ? '<button class="btn btn-danger btn-xs" onclick="openDeleteModal(\'' + f.slug + '\',\'' + f.topicSlug + '\',\'' + f.slug + '\')">Delete File</button>' : '')
+      + '</div></div>'
+  }).join('')
+}
+
+// ── Edit ─────────────────────────────────────────────────────────────────────
 function editArt(a) {
   document.getElementById('title').value       = a.title || ''
   document.getElementById('excerpt').value     = a.excerpt || ''
   document.getElementById('slug').value        = a.slug || ''
   document.getElementById('topicSlug').value   = a.topicSlug || 'ai-llms'
   document.getElementById('difficulty').value  = a.difficulty || 'Intermediate'
-  document.getElementById('publishedAt').value = a.publishedAt || ''
   document.getElementById('readingTime').value = a.readingTime || 8
   document.getElementById('author').value      = a.author || 'IlluminAIst'
   document.getElementById('avatar').value      = a.avatar || 'AI'
@@ -458,58 +812,141 @@ function editArt(a) {
   document.getElementById('featured').checked  = !!a.featured
   document.getElementById('status').value      = a.status || 'published'
   document.getElementById('deleteBtn').style.display = 'inline-flex'
+
   fetch('/api/preview?slug=' + encodeURIComponent(a.slug) + '&topicSlug=' + encodeURIComponent(a.topicSlug||''))
     .then(r => r.text()).then(html => {
       const m = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i)
       document.getElementById('htmlContent').value = m ? m[1].trim() : html
+      document.getElementById('file-ok').style.display = 'none'
       schedulePreview()
     }).catch(() => {})
+
   document.getElementById('tab-btn-preview').click()
   markUnsaved()
-  toast('Loaded for editing: ' + a.title, 'success')
+  toast('Loaded for editing: ' + a.title, 'info')
+  window.scrollTo(0,0)
 }
 
-async function deleteArt(slug, topicSlug, title) {
-  if (!confirm('Delete "' + title + '"?\n\nThis removes it from articles.js and deletes the HTML file.')) return
+// ── Delete (modal flow) ───────────────────────────────────────────────────────
+function openDeleteModal(slug, topicSlug, title) {
+  pendingDeleteSlug  = slug
+  pendingDeleteTopic = topicSlug
+  pendingDeleteTitle = title
+  document.getElementById('deleteModalMsg').textContent =
+    'Delete "' + title + '"? This removes it from articles.js AND deletes the HTML file from disk. Cannot be undone.'
+  document.getElementById('deleteModal').classList.add('open')
+}
+
+function closeModal() {
+  document.getElementById('deleteModal').classList.remove('open')
+}
+
+async function executeDelete() {
+  const slug      = pendingDeleteSlug
+  const topicSlug = pendingDeleteTopic
+  const btn       = document.getElementById('deleteConfirmBtn')
+  btn.disabled    = true
+  btn.textContent = 'Deleting…'
+  closeModal()
+
   try {
-    const r = await fetch('/api/article', {
-      method: 'DELETE', headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({slug, topicSlug})
+    const r = await fetch('/api/delete', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ slug, topicSlug })
     })
     const d = await r.json()
-    if (!r.ok) throw new Error(d.error)
-    toast('Deleted: ' + slug, 'success')
+    if (!r.ok) throw new Error(d.error || 'Delete failed')
+
+    let msg = '✓ Deleted: ' + slug
+    if (!d.htmlDeleted)    msg += ' (HTML file not found on disk)'
+    if (!d.removedFromData) msg += ' (was not in articles.js)'
+    if (d.pushed)          msg += ' · pushed to GitHub ✓'
+    toast(msg, 'success')
+
+    // Clear form if it was the active article
+    if (document.getElementById('slug').value === slug) {
+      clearForm()
+    }
+    loadArticles()
+  } catch(e) {
+    toast('Error: ' + e.message, 'error')
+  } finally {
+    btn.disabled    = false
+    btn.textContent = 'Yes, Delete Permanently'
+  }
+}
+
+function confirmDelete() {
+  const slug  = document.getElementById('slug').value
+  const topic = document.getElementById('topicSlug').value
+  const title = document.getElementById('title').value
+  if (!slug) return toast('No article loaded', 'error')
+  openDeleteModal(slug, topic, title)
+}
+
+// ── Purge orphans ─────────────────────────────────────────────────────────────
+function openPurgeModal() {
+  const names = allOrphans.map(o => o.slug).join(', ')
+  document.getElementById('purgeModalMsg').textContent =
+    'Delete ' + allOrphans.length + ' orphan HTML file(s): ' + names + '. This cannot be undone.'
+  document.getElementById('purgeModal').classList.add('open')
+}
+function closePurgeModal() { document.getElementById('purgeModal').classList.remove('open') }
+
+async function executePurge() {
+  const btn = document.getElementById('purgeConfirmBtn')
+  btn.disabled = true; btn.textContent = 'Purging…'
+  closePurgeModal()
+  try {
+    const r = await fetch('/api/purge-orphans', { method:'POST', headers:{'Content-Type':'application/json'}, body:'{}' })
+    const d = await r.json()
+    toast('✓ Purged: ' + (d.purged||[]).join(', ') + (d.pushed ? ' · pushed ✓' : ''), 'success')
     loadArticles()
   } catch(e) { toast('Error: ' + e.message, 'error') }
+  finally { btn.disabled = false; btn.textContent = 'Purge All Orphans' }
 }
 
-function deleteCurrent() {
-  const slug = document.getElementById('slug').value
-  const topicSlug = document.getElementById('topicSlug').value
-  const title = document.getElementById('title').value
-  if (!slug) return
-  deleteArt(slug, topicSlug, title).then(() => {
-    document.getElementById('deleteBtn').style.display = 'none'
-    // Clear form
-    document.getElementById('title').value = ''
-    document.getElementById('slug').value = ''
-    document.getElementById('htmlContent').value = ''
-    document.getElementById('excerpt').value = ''
-    document.getElementById('file-ok').style.display = 'none'
-    renderPreview()
-  })
+// ── Git push ──────────────────────────────────────────────────────────────────
+async function manualGitPush() {
+  const btn = document.getElementById('gitPushBtn')
+  btn.disabled = true; btn.textContent = '⏳ Pushing…'
+  try {
+    const r = await fetch('/api/git-push', { method:'POST', headers:{'Content-Type':'application/json'}, body:'{}' })
+    const d = await r.json()
+    if (d.pushed) toast('✓ Pushed to GitHub successfully', 'success')
+    else toast('Git push result: ' + (d.gitError || 'nothing to push'), 'info')
+  } catch(e) { toast('Error: ' + e.message, 'error') }
+  finally { btn.disabled = false; btn.textContent = '↑ Git Push' }
 }
 
+// ── Clear form ────────────────────────────────────────────────────────────────
+function clearForm() {
+  document.getElementById('title').value = ''
+  document.getElementById('slug').value = ''
+  document.getElementById('htmlContent').value = ''
+  document.getElementById('excerpt').value = ''
+  document.getElementById('tags').value = ''
+  document.getElementById('file-ok').style.display = 'none'
+  document.getElementById('deleteBtn').style.display = 'none'
+  document.getElementById('unsaved').style.display = 'none'
+  unsaved = false
+}
+
+// ── Toast ─────────────────────────────────────────────────────────────────────
 function toast(msg, type) {
   const el = document.getElementById('toast')
   el.textContent = msg
   el.className = 'toast ' + (type||'success') + ' show'
-  setTimeout(() => el.classList.remove('show'), 4500)
+  setTimeout(() => el.classList.remove('show'), 5000)
 }
 
 window.addEventListener('beforeunload', e => {
   if (unsaved) { e.preventDefault(); e.returnValue = '' }
 })
+
+// Close modals on overlay click
+document.getElementById('deleteModal').addEventListener('click', e => { if(e.target===e.currentTarget) closeModal() })
+document.getElementById('purgeModal').addEventListener('click',  e => { if(e.target===e.currentTarget) closePurgeModal() })
 
 loadArticles()
 </script>

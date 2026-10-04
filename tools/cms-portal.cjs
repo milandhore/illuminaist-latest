@@ -264,7 +264,7 @@ app.post('/api/delete', (req, res) => {
       let dataFile = fs.readFileSync(NEWS_JSON_PATH, 'utf8');
       const match = dataFile.match(/export const newsItems = (\[[\s\S]*?^\]);/m);
       let newsItems = JSON.parse(match[1]);
-      newsItems = newsItems.filter(n => n.id !== id);
+      newsItems = newsItems.filter(n => n.id != id && n.slug !== slug);
       dataFile = dataFile.replace(/export const newsItems = \[[\s\S]*?^\];/m, `export const newsItems = ${JSON.stringify(newsItems, null, 2)};`);
       fs.writeFileSync(NEWS_JSON_PATH, dataFile);
       
