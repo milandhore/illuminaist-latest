@@ -1,11 +1,23 @@
 export const ebooks = [
   {
-    id: 1,
-    slug: 'rag-engineering-guide',
-    title: 'The RAG Engineering Handbook',
-    subtitle: 'From Prototype to Production',
-    description: 'A comprehensive 120-page guide covering chunking strategies, embedding models, vector databases, re-ranking, evaluation frameworks, and production deployment patterns for RAG systems.',
-    topics: ['Chunking Strategies', 'Vector Databases', 'Embedding Models', 'Re-ranking', 'RAGAS Evaluation', 'Production Architecture'],
+    "id": 1,
+    "slug": "elasticache_best_practices",
+    "title": "ElastiCache Best Practices",
+    "subtitle": "For Migrating 2020",
+    "description": "Amazon ElastiCache Best Practices for Migrating Redis Clusters from Amazon EC2 to ElastiCache Zach Gardner, Sr. Database Specialist Solutions Architect Teymour Haider, Sr. ElastiCache Specialist Solutions Architect",
+    "topics": [
+      "Database",
+      "AI",
+      "Redis",
+      "ElastiCache"
+    ],
+    "pages": 21,
+    "downloadUrl": "/ebooks/elasticache_best_practices.pdf",
+    "coverGradient": "from-indigo-900 via-purple-800 to-slate-900",
+    "accentColor": "#ffffff",
+    "icon": "⚡"
+  }
+],
     pages: 120,
     downloadUrl: '#subscribe',
     coverGradient: 'from-cyan-900 via-cyan-700 to-slate-900',
