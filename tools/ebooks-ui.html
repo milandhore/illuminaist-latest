@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>IlluminAIst CMS - eBooks</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#080C14;--card:#0E1623;--surface:#162033;--border:rgba(0,220,255,0.09);
+  --cyan:#00DCFF;--amber:#FFB800;--red:#FF4D6A;--green:#22D3A0;
+  --text:#F1F5F9;--muted:#94A3B8;--subtle:#475569;
+}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh;font-size:14px}
+h1,h2,h3{font-family:'Outfit',sans-serif}
+.topbar{background:rgba(14,22,35,0.97);border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:16px;padding:0 24px;height:58px;}
+.logo{font-family:'Outfit',sans-serif;font-weight:800;font-size:19px;letter-spacing:-.5px;
+  background:linear-gradient(90deg,#00DCFF,#7B7FFF);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.topbar-badge{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--subtle);background:var(--surface);padding:3px 9px;border-radius:99px;
+  border:1px solid var(--border)}
+.topbar-actions{margin-left:auto;display:flex;gap:8px;align-items:center}
+.btn{padding:9px 18px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;
+  border:none;transition:all .2s;display:inline-flex;align-items:center;gap:7px}
+.btn-primary{background:linear-gradient(135deg,#00DCFF,#7B7FFF);color:#08121e;}
+.btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.1);color:var(--muted)}
+.btn-ghost:hover{border-color:rgba(255,255,255,0.22);color:var(--text);background:rgba(255,255,255,0.03)}
+.btn-sm{padding:5px 11px;font-size:11px}
+
+.container{max-width:800px;margin:40px auto;padding:30px;background:var(--card);border:1px solid var(--border);border-radius:12px;}
+.upload-zone{border:2px dashed rgba(0,220,255,0.2);border-radius:10px;padding:40px 20px;
+  text-align:center;cursor:pointer;transition:all .2s;background:rgba(0,220,255,0.02);margin-bottom:20px;}
+.upload-zone:hover{border-color:rgba(0,220,255,0.5);background:rgba(0,220,255,0.06)}
+.upload-zone input{display:none}
+label{display:block;font-size:11px;font-weight:600;color:var(--muted);margin-bottom:5px;letter-spacing:.04em; margin-top:15px;}
+input[type=text],input[type=number],textarea{
+  width:100%;background:var(--surface);border:1px solid rgba(255,255,255,0.07);
+  border-radius:8px;padding:10px 11px;color:var(--text);font-family:'Inter',sans-serif;
+  font-size:13px;outline:none;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+
+.toast{position:fixed;bottom:24px;right:24px;padding:12px 18px;border-radius:10px;
+  font-size:13px;font-weight:500;z-index:9999;transition:all .3s;opacity:0;
+  transform:translateY(10px);pointer-events:none;max-width:360px}
+.toast.show{opacity:1;transform:translateY(0)}
+.toast.success{background:#0a2a1c;border:1px solid rgba(34,211,160,0.35);color:var(--green)}
+.toast.error{background:#2a0a12;border:1px solid rgba(255,77,106,0.35);color:var(--red)}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="logo">illuminAIst</div>
+  <div class="topbar-badge">eBook Studio</div>
+  <div class="topbar-actions">
+    <a href="/" class="btn btn-ghost btn-sm" style="text-decoration:none">Back to Articles</a>
+  </div>
+</div>
+
+<div class="container">
+  <h2>Upload New eBook</h2>
+  
+  <div class="upload-zone" onclick="document.getElementById('fileInput').click()">
+    <input type="file" id="fileInput" accept="application/pdf" onchange="handleFile(event)">
+    <div style="font-size:32px; margin-bottom:10px;">📕</div>
+    <div><strong>Click to upload PDF</strong></div>
+    <div id="fileName" style="color:var(--cyan); margin-top:10px;"></div>
+  </div>
+
+  <label>Title *</label>
+  <input type="text" id="title" placeholder="e.g. The RAG Engineering Handbook" oninput="autoSlug()">
+
+  <label>Subtitle</label>
+  <input type="text" id="subtitle" placeholder="e.g. From Prototype to Production">
+
+  <label>Description</label>
+  <textarea id="description" rows="3" placeholder="Brief overview of the eBook..."></textarea>
+
+  <div class="grid2">
+    <div>
+      <label>Topics (comma separated)</label>
+      <input type="text" id="topics" placeholder="RAG, LLMs, Vector Databases">
+    </div>
+    <div>
+      <label>Number of Pages</label>
+      <input type="number" id="pages" value="10">
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div>
+      <label>Cover Gradient (Tailwind classes)</label>
+      <input type="text" id="coverGradient" value="from-cyan-900 via-cyan-700 to-slate-900">
+    </div>
+    <div>
+      <label>Icon (Emoji)</label>
+      <input type="text" id="icon" value="📚">
+    </div>
+  </div>
+
+  <label>URL Slug (auto-filled)</label>
+  <input type="text" id="slug" placeholder="rag-handbook">
+
+  <button class="btn btn-primary" id="publishBtn" onclick="publish()" style="width:100%; justify-content:center; margin-top:25px; padding:12px;">
+    🚀 Publish eBook
+  </button>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+<script>
+pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
+
+let base64File = null;
+
+async function handleFile(e) {
+  const f = e.target.files[0];
+  if (!f) return;
+  document.getElementById('fileName').innerText = "Selected: " + f.name;
+  
+  // Auto-populate Title from filename
+  let baseName = f.name.replace(/\.pdf$/i, '').replace(/[-_]/g, ' ');
+  baseName = baseName.replace(/\b\w/g, l => l.toUpperCase());
+  
+  let title = baseName;
+  let subtitle = "Comprehensive Guide and Best Practices";
+  
+  // Split title if it's too long
+  if (baseName.length > 35 && baseName.includes(' ')) {
+    const parts = baseName.split(' ');
+    const mid = Math.floor(parts.length / 2);
+    title = parts.slice(0, mid).join(' ');
+    subtitle = parts.slice(mid).join(' ');
+  }
+  
+  document.getElementById('title').value = title;
+  document.getElementById('subtitle').value = subtitle;
+  autoSlug();
+
+  const r = new FileReader();
+  r.onload = async ev => { 
+    base64File = ev.target.result; 
+    
+    // Parse PDF for pages and description
+    try {
+      const pdfData = atob(base64File.split(',')[1]);
+      const pdf = await pdfjsLib.getDocument({data: pdfData}).promise;
+      document.getElementById('pages').value = pdf.numPages;
+      
+      // Extract text from the first page
+      const page = await pdf.getPage(1);
+      const textContent = await page.getTextContent();
+      let text = textContent.items.map(s => s.str).join(' ').replace(/\s+/g, ' ').trim();
+      
+      if (text.length > 250) {
+        text = text.substring(0, 247) + '...';
+      } else if (text.length < 20) {
+        text = 'An in-depth technical guide covering ' + baseName + '.';
+      }
+      
+      document.getElementById('description').value = text;
+      
+      // Guess topics
+      const allText = text.toLowerCase() + ' ' + baseName.toLowerCase();
+      const possibleTopics = ['AWS', 'Cloud', 'Migration', 'Database', 'Architecture', 'Security', 'Performance', 'Machine Learning', 'AI', 'RAG', 'LLMs', 'DevOps', 'Caching', 'Redis', 'ElastiCache'];
+      const foundTopics = possibleTopics.filter(t => allText.includes(t.toLowerCase()));
+      if (foundTopics.length === 0) foundTopics.push('Engineering', 'Architecture');
+      
+      document.getElementById('topics').value = foundTopics.join(', ');
+      
+      // Set random icon and gradient
+      const icons = ['📚', '🔍', '⚙️', '🚀', '☁️', '📊', '🛡️', '⚡'];
+      const gradients = [
+        'from-cyan-900 via-cyan-700 to-slate-900',
+        'from-amber-900 via-amber-700 to-slate-900',
+        'from-indigo-900 via-purple-800 to-slate-900',
+        'from-emerald-900 via-teal-800 to-slate-900'
+      ];
+      document.getElementById('icon').value = icons[Math.floor(Math.random() * icons.length)];
+      document.getElementById('coverGradient').value = gradients[Math.floor(Math.random() * gradients.length)];
+      
+    } catch(err) {
+      console.error('Error parsing PDF:', err);
+      document.getElementById('description').value = 'An in-depth technical guide covering ' + baseName + '.';
+    }
+  };
+  r.readAsDataURL(f);
+}
+
+function autoSlug() {
+  const t = document.getElementById('title').value;
+  document.getElementById('slug').value = t.toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/^_|_$/g,'');
+}
+
+function toast(msg, type) {
+  const el = document.getElementById('toast');
+  el.className = 'toast show ' + type;
+  el.innerText = msg;
+  setTimeout(() => el.classList.remove('show'), 3000);
+}
+
+async function publish() {
+  const btn = document.getElementById('publishBtn');
+  const payload = {
+    title: document.getElementById('title').value.trim(),
+    subtitle: document.getElementById('subtitle').value.trim(),
+    description: document.getElementById('description').value.trim(),
+    topics: document.getElementById('topics').value,
+    pages: document.getElementById('pages').value,
+    coverGradient: document.getElementById('coverGradient').value,
+    icon: document.getElementById('icon').value,
+    slug: document.getElementById('slug').value.trim(),
+    base64File
+  };
+
+  if (!payload.title || !base64File) return toast('Title and PDF file are required', 'error');
+  if (!payload.slug) autoSlug(); payload.slug = document.getElementById('slug').value;
+
+  btn.disabled = true;
+  btn.innerHTML = '⏳ Publishing...';
+  try {
+    const r = await fetch('/api/publish-ebook', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const d = await r.json();
+    if (!r.ok) throw new Error(d.error || 'Server error');
+    toast('✓ Published successfully! Path: ' + d.path, 'success');
+    
+    // Clear form
+    document.getElementById('title').value = '';
+    document.getElementById('subtitle').value = '';
+    document.getElementById('description').value = '';
+    document.getElementById('fileName').innerText = '';
+    base64File = null;
+  } catch(e) {
+    toast('Error: ' + e.message, 'error');
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '🚀 Publish eBook';
+  }
+}
+</script>
+</body>
+</html>

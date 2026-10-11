@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 import ThemeToggle from '../ui/ThemeToggle'
+import { motion, AnimatePresence } from 'framer-motion'
 
 const NAV_LINKS = [
   { label: 'Home', to: '/' },
@@ -86,33 +87,41 @@ export default function Header({ onSubscribeClick }) {
       </div>
 
       {/* ── Mobile drawer ────────────────────────────────────────────── */}
-      {mobileOpen && (
-        <div className="md:hidden border-t border-slate-800 bg-card-dark/95 backdrop-blur-xl animate-fade-in">
-          <nav className="px-4 py-3 flex flex-col gap-1">
-            {NAV_LINKS.map(link => (
-              <NavLink
-                key={link.to}
-                to={link.to}
-                end={link.to === '/'}
-                onClick={() => setMobileOpen(false)}
-                className={({ isActive }) =>
-                  `px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${
-                    isActive ? 'text-amber bg-amber/10' : 'text-slate-300 hover:text-white hover:bg-slate-800'
-                  }`
-                }
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div 
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.2, ease: "easeInOut" }}
+            className="md:hidden border-t border-slate-800 bg-card-dark/95 backdrop-blur-xl overflow-hidden"
+          >
+            <nav className="px-4 py-3 flex flex-col gap-1">
+              {NAV_LINKS.map(link => (
+                <NavLink
+                  key={link.to}
+                  to={link.to}
+                  end={link.to === '/'}
+                  onClick={() => setMobileOpen(false)}
+                  className={({ isActive }) =>
+                    `px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${
+                      isActive ? 'text-amber bg-amber/10' : 'text-slate-300 hover:text-white hover:bg-slate-800'
+                    }`
+                  }
+                >
+                  {link.label}
+                </NavLink>
+              ))}
+              <button
+                onClick={() => { setMobileOpen(false); onSubscribeClick?.() }}
+                className="btn-amber mt-2 text-sm w-full"
               >
-                {link.label}
-              </NavLink>
-            ))}
-            <button
-              onClick={() => { setMobileOpen(false); onSubscribeClick?.() }}
-              className="btn-amber mt-2 text-sm w-full"
-            >
-              Get Free Access
-            </button>
-          </nav>
-        </div>
-      )}
+                Get Free Access
+              </button>
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   )
 }

@@ -28,7 +28,6 @@ export default function NewsPage() {
             <div className="flex-1">
               <div className="flex flex-wrap items-center gap-2 mb-3">
                 <Badge color={item.badgeColor}>{item.badge}</Badge>
-                <span className="text-slate-600 text-xs">{item.source}</span>
               </div>
               <h2 className="font-heading text-lg font-bold text-slate-100 mb-2 group-hover:text-cyan transition-colors leading-snug">
                 {item.title}

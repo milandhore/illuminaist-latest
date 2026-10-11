@@ -1,26 +1,9 @@
-import { useState, useEffect, lazy, Suspense } from 'react'
-import { HashRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { HashRouter } from 'react-router-dom'
 import Layout from './components/layout/Layout'
 import SubscribeModal from './components/subscription/SubscribeModal'
-import HomePage from './pages/HomePage'
+import AnimatedRoutes from './components/layout/AnimatedRoutes'
 import { useSubscription } from './hooks/useSubscription'
-
-const ArticlesPage = lazy(() => import('./pages/ArticlesPage'))
-const ArticleDetailPage = lazy(() => import('./pages/ArticleDetailPage'))
-const NewsPage = lazy(() => import('./pages/NewsPage'))
-const NewsDetailPage = lazy(() => import('./pages/NewsDetailPage'))
-const EBooksPage = lazy(() => import('./pages/EBooksPage'))
-const AboutPage = lazy(() => import('./pages/AboutPage'))
-const SubscribePage = lazy(() => import('./pages/SubscribePage'))
-const PrivacyPage = lazy(() => import('./pages/PrivacyPage'))
-const TermsPage = lazy(() => import('./pages/TermsPage'))
-
-// Loading fallback component
-const PageLoader = () => (
-  <div className="flex items-center justify-center min-h-[50vh]">
-    <div className="w-8 h-8 border-2 border-cyan border-t-transparent rounded-full animate-spin"></div>
-  </div>
-)
 
 export default function App() {
   const [modalOpen, setModalOpen] = useState(false)
@@ -49,21 +32,7 @@ export default function App() {
   return (
     <HashRouter>
       <Layout onSubscribeClick={() => setModalOpen(true)}>
-        <Suspense fallback={<PageLoader />}>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/articles" element={<ArticlesPage />} />
-            <Route path="/articles/:slug" element={<ArticleDetailPage />} />
-            <Route path="/news" element={<NewsPage />} />
-            <Route path="/news/:slug" element={<NewsDetailPage />} />
-            <Route path="/ebooks" element={<EBooksPage />} />
-            <Route path="/topics" element={<Navigate to="/articles" replace />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/subscribe" element={<SubscribePage />} />
-            <Route path="/privacy" element={<PrivacyPage />} />
-            <Route path="/terms" element={<TermsPage />} />
-          </Routes>
-        </Suspense>
+        <AnimatedRoutes />
       </Layout>
 
       <SubscribeModal open={modalOpen} onClose={() => setModalOpen(false)} />

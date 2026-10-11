@@ -12,6 +12,8 @@ export default function TermsPage() {
         <p>All content published on IlluminAIst — including articles, graphics, and eBooks — is the intellectual property of IlluminAIst unless otherwise stated. You may share excerpts with attribution, but reproduction of full articles is prohibited without written permission.</p>
         <h2>Limitation of Liability</h2>
         <p>IlluminAIst shall not be liable for any damages arising from your use of this site or reliance on its content.</p>
+        <h2>Data Sharing and Privacy</h2>
+        <p>By using our services, subscribing, or downloading our content, you consent to our data practices. Similar to standard industry practices, we may share your information, including your company email address, with trusted third-party agencies and partners for marketing, analytics, and service improvement purposes. For more information, please review our Privacy Policy.</p>
         <h2>Changes to Terms</h2>
         <p>We reserve the right to update these terms at any time. Continued use of the site constitutes acceptance of any changes.</p>
         <h2>Contact</h2>

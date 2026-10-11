@@ -62,7 +62,6 @@ export default function NewsDetailPage() {
           <>
             <div className="flex items-center gap-3 mb-4">
               <Badge color={newsItem.badgeColor}>{newsItem.badge}</Badge>
-              <span className="text-cyan text-sm font-semibold">{newsItem.source}</span>
             </div>
             <h1 className="font-heading text-3xl md:text-5xl font-bold text-slate-100 mb-6 leading-tight max-w-4xl">
               {newsItem.title}

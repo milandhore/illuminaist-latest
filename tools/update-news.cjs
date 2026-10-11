@@ -145,10 +145,35 @@ async function updateNews() {
       process.exit(1);
     }
 
-    const fileContent = `export const newsItems = ${JSON.stringify(latestNews, null, 2)};\n`;
+    let existingNews = [];
+    if (fs.existsSync(NEWS_FILE_PATH)) {
+      const existingContent = fs.readFileSync(NEWS_FILE_PATH, 'utf8');
+      const match = existingContent.match(/export const newsItems = (\[[\s\S]*\]);/);
+      if (match && match[1]) {
+        try {
+          existingNews = JSON.parse(match[1]);
+        } catch (e) {
+          console.error("Error parsing existing news items, starting fresh.");
+        }
+      }
+    }
+
+    // Filter out duplicates based on slug
+    const newSlugs = new Set(latestNews.map(n => n.slug));
+    existingNews = existingNews.filter(n => !newSlugs.has(n.slug));
+
+    const allNews = [...latestNews, ...existingNews];
+    
+    allNews.forEach((item, index) => {
+      item.id = index + 1;
+      item.badge = index === 0 ? 'Breaking' : 'Latest';
+      item.badgeColor = index === 0 ? 'cyan' : 'amber';
+    });
+
+    const fileContent = `export const newsItems = ${JSON.stringify(allNews, null, 2)};\n`;
     fs.writeFileSync(NEWS_FILE_PATH, fileContent, 'utf8');
     
-    console.log(`Successfully rewritten and updated ${NEWS_FILE_PATH} with ${latestNews.length} original articles.`);
+    console.log(`Successfully updated ${NEWS_FILE_PATH} with ${latestNews.length} new articles. Total: ${allNews.length}`);
   } catch (e) {
     console.error(`Error updating news:`, e);
     process.exit(1);

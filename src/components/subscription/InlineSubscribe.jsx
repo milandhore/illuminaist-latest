@@ -12,6 +12,15 @@ export default function InlineSubscribe({ title = 'Get the weekly AI dispatch â€
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError('')
+    
+    // Validate company email
+    const freeProviders = ['gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com', 'icloud.com', 'aol.com', 'protonmail.com'];
+    const domain = email.split('@')[1]?.toLowerCase();
+    if (freeProviders.includes(domain)) {
+      setError('Please enter your company email address to subscribe.');
+      return;
+    }
+
     setLoading(true)
     const result = await subscribe(email)
     setLoading(false)
@@ -42,7 +51,7 @@ export default function InlineSubscribe({ title = 'Get the weekly AI dispatch â€
         <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
           <input
             type="email"
-            placeholder="your@email.com"
+            placeholder="your@company.com"
             value={email}
             onChange={e => setEmail(e.target.value)}
             className="flex-1 bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-cyan/60 transition-all"

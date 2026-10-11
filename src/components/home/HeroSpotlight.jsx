@@ -1,15 +1,21 @@
 import { Link } from 'react-router-dom'
 import { Clock, ArrowRight, Zap } from 'lucide-react'
 import Badge from '../ui/Badge'
+import { motion } from 'framer-motion'
 
 export default function HeroSpotlight({ article }) {
   if (!article) return null
 
   return (
-    <div className="relative overflow-hidden rounded-2xl glass-card border border-cyan/10 group cursor-pointer">
+    <motion.div 
+      className="relative overflow-hidden rounded-2xl glass-card border border-cyan/10 group cursor-pointer"
+      whileHover={{ scale: 1.01 }}
+      whileTap={{ scale: 0.99 }}
+      transition={{ type: "spring", stiffness: 400, damping: 25 }}
+    >
       {/* Background glow */}
       <div className="absolute inset-0 bg-gradient-to-br from-cyan/5 via-transparent to-amber/5 pointer-events-none" />
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-cyan/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-cyan/5 rounded-full blur-3xl pointer-events-none group-hover:bg-cyan/10 transition-colors duration-500" />
 
       <div className="relative p-8 md:p-12">
         <div className="flex items-center gap-2 mb-6">
@@ -38,7 +44,7 @@ export default function HeroSpotlight({ article }) {
           {/* CTA */}
           <Link
             to={`/articles/${article.slug}`}
-            className="ml-auto flex items-center gap-2 btn-cyan text-sm"
+            className="ml-auto flex items-center gap-2 btn-cyan text-sm relative z-10"
           >
             Read Article <ArrowRight size={16} />
           </Link>
@@ -53,6 +59,9 @@ export default function HeroSpotlight({ article }) {
           ))}
         </div>
       </div>
-    </div>
+      
+      {/* Invisible link overlay for the whole card to make the entire card clickable, while keeping the CTA z-index higher */}
+      <Link to={`/articles/${article.slug}`} className="absolute inset-0 z-0" aria-label={`Read ${article.title}`} />
+    </motion.div>
   )
 }

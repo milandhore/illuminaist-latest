@@ -235,6 +235,62 @@ async function handleGitPush (req, res) {
   } catch (err) { send(res, 500, { error: err.message }) }
 }
 
+function readEbooks () {
+  const EBOOKS_JS = path.join(ROOT, 'src', 'data', 'ebooks.js')
+  if (!fs.existsSync(EBOOKS_JS)) return [];
+  const src = fs.readFileSync(EBOOKS_JS, 'utf8')
+  const match = src.match(/export const ebooks\s*=\s*(\[[\s\S]*\]);?/) // Greedy match
+  if (!match) return []
+  try { return JSON.parse(match[1]) } catch (_) {
+    try { return eval(match[1]) } catch (__) { return [] }
+  }
+}
+
+function writeEbooksJs (arr) {
+  const EBOOKS_JS = path.join(ROOT, 'src', 'data', 'ebooks.js')
+  const content = 'export const ebooks = ' + JSON.stringify(arr, null, 2) + ';\n'
+  fs.writeFileSync(EBOOKS_JS, content, 'utf8')
+}
+
+async function handlePublishEbook (req, res) {
+  try {
+    const body = await bodyJson(req)
+    const { slug: rawSlug, title, subtitle, description, pages, topics, base64File, coverGradient, accentColor, icon } = body
+    if (!rawSlug || !title || !base64File)
+      return send(res, 400, { error: 'slug, title, and file are required' })
+
+    const slug = slugify(rawSlug)
+    const EBOOKS_DIR = path.join(ROOT, 'public', 'ebooks')
+    fs.mkdirSync(EBOOKS_DIR, { recursive: true })
+
+    const fileBuffer = Buffer.from(base64File.split(',')[1], 'base64')
+    const filePath = path.join(EBOOKS_DIR, slug + '.pdf')
+    fs.writeFileSync(filePath, fileBuffer)
+
+    const existing = readEbooks().filter(e => e.slug !== slug)
+    const newId = existing.length > 0 ? Math.max(...existing.map(e => e.id)) + 1 : 1
+    const newEntry = {
+      id: newId,
+      slug, title, subtitle, description,
+      topics: Array.isArray(topics) ? topics : (topics || '').split(',').map(t => t.trim()).filter(Boolean),
+      pages: Number(pages) || 10,
+      downloadUrl: '/ebooks/' + slug + '.pdf',
+      coverGradient: coverGradient || 'from-slate-800 to-slate-900',
+      accentColor: accentColor || '#ffffff',
+      icon: icon || '📚'
+    }
+    
+    writeEbooksJs([newEntry, ...existing])
+
+    const gitResult = gitSync(slug, 'Published eBook')
+    send(res, 200, { ok: true, slug, path: '/ebooks/' + slug + '.pdf', ...gitResult })
+  } catch (err) {
+    console.error(err)
+    send(res, 500, { error: err.message })
+  }
+}
+
+
 // ── server ────────────────────────────────────────────────────────────────────
 const server = http.createServer(async (req, res) => {
   if (req.method === 'OPTIONS') return send(res, 204, '')
@@ -246,11 +302,19 @@ const server = http.createServer(async (req, res) => {
   if (req.method === 'GET'    && pathname === '/api/articles')       return handleGetArticles(res)
   if (req.method === 'GET'    && pathname === '/api/preview')        return handlePreview(req, res)
   if (req.method === 'POST'   && pathname === '/api/purge-orphans')  return handlePurgeOrphans(req, res)
-  if (req.method === 'POST'   && pathname === '/api/git-push')       return handleGitPush(req, res)
+  if (req.method === 'POST'   && pathname === '/api/publish-ebook')  return handlePublishEbook(req, res)
 
   if (req.method === 'GET' && (pathname === '/' || pathname === '/index.html')) {
     try {
       return send(res, 200, fs.readFileSync(UI_HTML, 'utf8'), 'text/html; charset=utf-8')
+    } catch (e) {
+      return send(res, 500, 'UI file not found: ' + e.message, 'text/plain')
+    }
+  }
+  
+  if (req.method === 'GET' && pathname === '/ebooks') {
+    try {
+      return send(res, 200, fs.readFileSync(path.join(__dirname, 'ebooks-ui.html'), 'utf8'), 'text/html; charset=utf-8')
     } catch (e) {
       return send(res, 500, 'UI file not found: ' + e.message, 'text/plain')
     }
