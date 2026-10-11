@@ -1,6 +1,7 @@
 const Parser = require('rss-parser');
 const fs = require('fs');
 const path = require('path');
+const cp = require('child_process');
 
 const parser = new Parser();
 const NEWS_FILE_PATH = path.join(__dirname, '..', 'src', 'data', 'news.js');
@@ -24,7 +25,8 @@ async function rewriteArticle(title, originalSnippet, originalUrl) {
   if (!GEMINI_API_KEY) {
     console.warn("No GEMINI_API_KEY found, returning fallback snippet.");
     return {
-      html: `<p>Original article: <a href="${originalUrl}">${originalUrl}</a></p>`,
+      title: title,
+      html: `<h2>${title}</h2><p>${originalSnippet}</p><p>Original article: <a href="${originalUrl}">${originalUrl}</a></p>`,
       excerpt: originalSnippet
     };
   }
@@ -140,44 +142,102 @@ async function updateNews() {
       });
     }
 
-    if (latestNews.length === 0) {
-      console.error("No news fetched. Aborting update.");
-      process.exit(1);
-    }
-
-    let existingNews = [];
-    if (fs.existsSync(NEWS_FILE_PATH)) {
-      const existingContent = fs.readFileSync(NEWS_FILE_PATH, 'utf8');
-      const match = existingContent.match(/export const newsItems = (\[[\s\S]*\]);/);
-      if (match && match[1]) {
-        try {
-          existingNews = JSON.parse(match[1]);
-        } catch (e) {
-          console.error("Error parsing existing news items, starting fresh.");
-        }
-      }
-    }
-
-    // Filter out duplicates based on slug
-    const newSlugs = new Set(latestNews.map(n => n.slug));
-    existingNews = existingNews.filter(n => !newSlugs.has(n.slug));
-
-    const allNews = [...latestNews, ...existingNews];
-    
-    allNews.forEach((item, index) => {
-      item.id = index + 1;
-      item.badge = index === 0 ? 'Breaking' : 'Latest';
-      item.badgeColor = index === 0 ? 'cyan' : 'amber';
-    });
-
-    const fileContent = `export const newsItems = ${JSON.stringify(allNews, null, 2)};\n`;
-    fs.writeFileSync(NEWS_FILE_PATH, fileContent, 'utf8');
-    
-    console.log(`Successfully updated ${NEWS_FILE_PATH} with ${latestNews.length} new articles. Total: ${allNews.length}`);
+    syncAllNews(latestNews);
   } catch (e) {
     console.error(`Error updating news:`, e);
+    // Still ensure all existing files on disk are synced
+    try { syncAllNews(); } catch (_) {}
     process.exit(1);
   }
 }
 
-updateNews();
+/**
+ * Synchronizes all news articles from public/articles/news into src/data/news.js.
+ * Preserves all metadata, incorporates new items, scans for any unindexed HTML files,
+ * sorts chronologically, and re-indexes IDs.
+ */
+function syncAllNews(newlyAdded = []) {
+  const newsMap = new Map();
+
+  // 1. Load existing news from src/data/news.js
+  if (fs.existsSync(NEWS_FILE_PATH)) {
+    try {
+      const existingContent = fs.readFileSync(NEWS_FILE_PATH, 'utf8');
+      const match = existingContent.match(/export const newsItems = (\[[\s\S]*\]);/);
+      if (match && match[1]) {
+        const arr = JSON.parse(match[1]);
+        arr.forEach(item => {
+          if (item && item.slug) newsMap.set(item.slug, item);
+        });
+      }
+    } catch (e) {
+      console.warn("Could not parse existing newsItems from news.js, scanning disk...", e.message);
+    }
+  }
+
+  // 2. Put newly added items (these take priority with fresh metadata)
+  newlyAdded.forEach(item => {
+    if (item && item.slug) newsMap.set(item.slug, item);
+  });
+
+  // 3. Scan all HTML files in public/articles/news/
+  if (fs.existsSync(ARTICLES_DIR)) {
+    const htmlFiles = fs.readdirSync(ARTICLES_DIR).filter(f => f.endsWith('.html'));
+
+    htmlFiles.forEach(file => {
+      const slug = file.replace(/\.html$/, '');
+      if (!newsMap.has(slug)) {
+        const htmlContent = fs.readFileSync(path.join(ARTICLES_DIR, file), 'utf8');
+        const titleMatch = htmlContent.match(/<title>(.*?) \| IlluminAIst<\/title>/i) || htmlContent.match(/<title>(.*?)<\/title>/i);
+        const excerptMatch = htmlContent.match(/<meta name="description" content="(.*?)">/i);
+
+        let title = titleMatch ? titleMatch[1].trim() : slug.replace(/_/g, ' ');
+        let excerpt = excerptMatch ? excerptMatch[1].trim() : 'Read the full article to learn more about this AI news.';
+
+        let publishedAt = new Date().toISOString().split('T')[0];
+        try {
+          const gitDate = cp.execSync(`git log -1 --format="%as" -- "${path.join(ARTICLES_DIR, file)}"`, { encoding: 'utf8' }).trim();
+          if (gitDate) publishedAt = gitDate;
+        } catch (_) {
+          try {
+            const stat = fs.statSync(path.join(ARTICLES_DIR, file));
+            publishedAt = stat.mtime.toISOString().split('T')[0];
+          } catch (_) {}
+        }
+
+        newsMap.set(slug, {
+          title,
+          excerpt,
+          source: 'Google News',
+          slug,
+          htmlPath: `/articles/news/${file}`,
+          publishedAt,
+          category: 'AI News'
+        });
+      }
+    });
+  }
+
+  // 4. Convert to array and sort descending by publishedAt
+  const allNews = Array.from(newsMap.values());
+  allNews.sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt) || a.title.localeCompare(b.title));
+
+  // 5. Reassign IDs and badges
+  allNews.forEach((item, index) => {
+    item.id = index + 1;
+    item.badge = index === 0 ? 'Breaking' : 'Latest';
+    item.badgeColor = index === 0 ? 'cyan' : 'amber';
+  });
+
+  // 6. Write to NEWS_FILE_PATH
+  const fileContent = `export const newsItems = ${JSON.stringify(allNews, null, 2)};\n`;
+  fs.writeFileSync(NEWS_FILE_PATH, fileContent, 'utf8');
+  console.log(`Successfully synced ${allNews.length} total news items in ${NEWS_FILE_PATH}`);
+  return allNews;
+}
+
+module.exports = { syncAllNews, updateNews };
+
+if (require.main === module) {
+  updateNews();
+}

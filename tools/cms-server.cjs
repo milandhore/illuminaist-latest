@@ -75,6 +75,7 @@ function scanHtmlFiles () {
   const results = []
   if (!fs.existsSync(ART_DIR)) return results
   for (const topic of fs.readdirSync(ART_DIR)) {
+    if (topic === 'news') continue // News articles are managed by automated feed and news.js
     const topicPath = path.join(ART_DIR, topic)
     try { if (!fs.statSync(topicPath).isDirectory()) continue } catch { continue }
     for (const file of fs.readdirSync(topicPath)) {
