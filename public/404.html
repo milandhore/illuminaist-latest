@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>IlluminAIst</title>
+    <script>
+      // Redirect any 404 back to root SPA with hash preserving
+      const pathSegments = window.location.pathname.split('/').filter(Boolean);
+      const repoBase = pathSegments.length > 0 ? '/' + pathSegments[0] + '/' : '/';
+      window.location.replace(window.location.origin + repoBase);
+    </script>
+  </head>
+  <body style="background-color: #0b1329; color: #fff; font-family: sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0;">
+    <p>Redirecting to IlluminAIst...</p>
+  </body>
+</html>
