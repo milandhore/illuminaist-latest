@@ -1,67 +1,45 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Clock, ArrowRight, Zap } from 'lucide-react'
-import Badge from '../ui/Badge'
+import { ArrowUpRight, Clock3 } from 'lucide-react'
 import { motion } from 'framer-motion'
 
+function OrbitalScene() {
+  return (
+    <div className="hero-orbital-scene" aria-hidden="true">
+      <div className="orbital-grid" />
+      <div className="orbital-ring ring-a"><span /></div>
+      <div className="orbital-ring ring-b"><span /></div>
+      <div className="orbital-ring ring-c"><span /></div>
+      <div className="orbital-core"><span>AI</span><i /></div>
+      <div className="orbital-node node-a">RAG</div>
+      <div className="orbital-node node-b">MLOps</div>
+      <div className="orbital-node node-c">LLM</div>
+    </div>
+  )
+}
+
 export default function HeroSpotlight({ article }) {
+  const [tilt, setTilt] = useState({ x: 0, y: 0 })
   if (!article) return null
 
+  const handlePointerMove = (event) => {
+    const rect = event.currentTarget.getBoundingClientRect()
+    const x = ((event.clientX - rect.left) / rect.width - 0.5) * 2
+    const y = ((event.clientY - rect.top) / rect.height - 0.5) * 2
+    setTilt({ x: y * -3, y: x * 4 })
+  }
+
   return (
-    <motion.div 
-      className="relative overflow-hidden rounded-2xl glass-card border border-cyan/10 group cursor-pointer"
-      whileHover={{ scale: 1.01 }}
-      whileTap={{ scale: 0.99 }}
-      transition={{ type: "spring", stiffness: 400, damping: 25 }}
-    >
-      {/* Background glow */}
-      <div className="absolute inset-0 bg-gradient-to-br from-cyan/5 via-transparent to-amber/5 pointer-events-none" />
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-cyan/5 rounded-full blur-3xl pointer-events-none group-hover:bg-cyan/10 transition-colors duration-500" />
-
-      <div className="relative p-8 md:p-12">
-        <div className="flex items-center gap-2 mb-6">
-          <div className="flex items-center gap-1.5 bg-cyan/10 border border-cyan/30 rounded-full px-3 py-1">
-            <Zap size={12} className="text-cyan" fill="currentColor" />
-            <span className="text-cyan text-xs font-semibold tracking-wide uppercase">Featured</span>
-          </div>
-          <Badge color="amber">{article.category}</Badge>
+    <motion.div whileHover={{ y: -3 }} className="hero-story-shell">
+      <article className="hero-story" onMouseMove={handlePointerMove} onMouseLeave={() => setTilt({ x: 0, y: 0 })} style={{ '--tilt-x': `${tilt.x}deg`, '--tilt-y': `${tilt.y}deg` }}>
+        <div className="hero-story-art"><OrbitalScene /><span className="hero-art-label">Featured story</span><span className="hero-art-mark">AI</span></div>
+        <div className="hero-story-body">
+          <div className="card-kicker">{article.category} <span className="kicker-separator">/</span> {article.difficulty}</div>
+          <h2 className="font-heading text-2xl sm:text-3xl font-extrabold text-ink leading-tight mt-2">{article.title}</h2>
+          <p className="text-slate-600 leading-relaxed mt-3 line-clamp-3">{article.excerpt}</p>
+          <div className="flex items-center justify-between gap-4 mt-6 pt-5 border-t border-slate-200"><span className="meta-line"><Clock3 size={13} /> {article.readingTime} min read</span><Link to={`/articles/${article.slug}`} className="story-link">Read story <ArrowUpRight size={16} /></Link></div>
         </div>
-
-        <h1 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-slate-100 mb-5 leading-tight group-hover:text-cyan transition-colors duration-300 max-w-3xl">
-          {article.title}
-        </h1>
-
-        <p className="text-slate-400 text-lg leading-relaxed mb-8 max-w-2xl">
-          {article.excerpt}
-        </p>
-
-        <div className="flex flex-wrap items-center gap-6">
-          {/* Meta */}
-          <div className="flex items-center gap-1.5 text-slate-500 text-sm">
-            <Clock size={14} />
-            <span>{article.readingTime} min read</span>
-          </div>
-
-          {/* CTA */}
-          <Link
-            to={`/articles/${article.slug}`}
-            className="ml-auto flex items-center gap-2 btn-cyan text-sm relative z-10"
-          >
-            Read Article <ArrowRight size={16} />
-          </Link>
-        </div>
-
-        {/* Tags */}
-        <div className="flex flex-wrap gap-2 mt-6 pt-6 border-t border-slate-800/50">
-          {article.tags?.map(tag => (
-            <span key={tag} className="text-xs px-2.5 py-1 rounded-full bg-slate-800 text-slate-400 border border-slate-700">
-              #{tag}
-            </span>
-          ))}
-        </div>
-      </div>
-      
-      {/* Invisible link overlay for the whole card to make the entire card clickable, while keeping the CTA z-index higher */}
-      <Link to={`/articles/${article.slug}`} className="absolute inset-0 z-0" aria-label={`Read ${article.title}`} />
+      </article>
     </motion.div>
   )
 }

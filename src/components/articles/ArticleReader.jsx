@@ -12,6 +12,15 @@ export default function ArticleReader({ article }) {
   const location = useLocation()
 
   useEffect(() => {
+    document.title = `${article.title} | IlluminAIst`
+    const description = document.querySelector('meta[name="description"]')
+    if (description && article.excerpt) description.setAttribute('content', article.excerpt)
+    return () => {
+      document.title = 'IlluminAIst — AI Engineering Articles, News & Practical Guides'
+    }
+  }, [article.title, article.excerpt])
+
+  useEffect(() => {
     // Handle initial hash in URL if present
     if (location.hash) {
       const id = location.hash.substring(1)

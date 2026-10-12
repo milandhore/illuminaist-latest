@@ -1,43 +1,17 @@
 import { Link } from 'react-router-dom'
-import { Zap } from 'lucide-react'
-import Badge from '../components/ui/Badge'
+import { ArrowUpRight, Radio } from 'lucide-react'
 import AdBanner from '../components/ads/AdBanner'
 import { newsItems } from '../data/news'
 
 export default function NewsPage() {
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div className="mb-10">
-        <div className="flex items-center gap-2 mb-2">
-          <Zap size={14} className="text-cyan" fill="currentColor" />
-          <span className="text-cyan text-xs font-semibold uppercase tracking-widest">Live Feed</span>
-        </div>
-        <h1 className="font-heading text-4xl font-bold gradient-text-mixed mb-3">AI News</h1>
-        <p className="text-slate-400 text-lg">Breaking developments from across the AI ecosystem — curated daily.</p>
-      </div>
-
+    <div className="site-shell px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+      <div className="page-intro flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8"><div><div className="eyebrow"><Radio size={13} /> Live feed</div><h1 className="font-heading text-4xl font-extrabold text-ink mt-3">AI news, without the noise.</h1><p className="text-slate-600 text-lg mt-3 max-w-2xl">The launches, research, people, and policy shaping the AI ecosystem — curated and published daily.</p></div><div className="home-status"><span className="status-dot" /> Updated every day</div></div>
       <AdBanner slot="header" className="mb-10" />
-
-      <div className="space-y-4">
-        {newsItems.map(item => (
-          <Link
-            key={item.id}
-            to={`/news/${item.slug || item.id}`}
-            className="glass-card rounded-xl p-6 flex gap-5 items-start group transition-all duration-300 hover:border-cyan/20 block"
-          >
-            <div className="flex-1">
-              <div className="flex flex-wrap items-center gap-2 mb-3">
-                <Badge color={item.badgeColor}>{item.badge}</Badge>
-              </div>
-              <h2 className="font-heading text-lg font-bold text-slate-100 mb-2 group-hover:text-cyan transition-colors leading-snug">
-                {item.title}
-              </h2>
-              <p className="text-slate-400 text-sm leading-relaxed">{item.excerpt}</p>
-            </div>
-          </Link>
-        ))}
+      <div className="content-with-rail">
+        <div className="news-feed">{newsItems.map((item, index) => <Link key={item.id} to={`/news/${item.slug || item.id}`} className="news-story group"><div className="news-index">{String(index + 1).padStart(2, '0')}</div><div className="flex-1"><div className="card-kicker">{item.category} <span className="kicker-separator">/</span> {item.source}</div><h2 className="font-heading text-xl font-extrabold text-ink mt-2 leading-snug group-hover:text-brand transition-colors">{item.title}</h2><p className="text-slate-600 text-sm leading-relaxed mt-2 line-clamp-2">{item.excerpt}</p><div className="meta-line mt-4">Published {item.publishedAt}</div></div><ArrowUpRight size={18} className="news-arrow text-slate-300 group-hover:text-brand transition-colors" /></Link>)}</div>
+        <aside className="side-rail"><AdBanner slot="sidebar" /><div className="side-panel mt-6"><div className="side-panel-title">Why follow our feed?</div><p>Our automated pipeline brings in current AI coverage and turns it into a readable, searchable brief for builders.</p><Link to="/about" className="side-link">How we publish <ArrowUpRight size={14} /></Link></div></aside>
       </div>
-
       <AdBanner slot="bottom-feed" className="mt-12" />
     </div>
   )

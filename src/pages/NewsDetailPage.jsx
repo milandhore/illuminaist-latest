@@ -15,6 +15,16 @@ export default function NewsDetailPage() {
   const [error, setError] = useState(null)
 
   useEffect(() => {
+    if (!newsItem) return
+    document.title = `${newsItem.title} | IlluminAIst News`
+    const description = document.querySelector('meta[name="description"]')
+    if (description && newsItem.excerpt) description.setAttribute('content', newsItem.excerpt)
+    return () => {
+      document.title = 'IlluminAIst — AI Engineering Articles, News & Practical Guides'
+    }
+  }, [newsItem])
+
+  useEffect(() => {
     // If we don't have a slug, we can't fetch anything
     if (!slug) return
 

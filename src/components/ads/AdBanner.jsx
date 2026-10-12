@@ -49,6 +49,29 @@ const SLOT_CONFIG = {
     label: '970×250 Billboard',
     minHeight: '100px',
   },
+  // News detail placements reuse responsive units with separate inventory slots.
+  'news-top': {
+    slotId: '5555555555',
+    format: 'auto',
+    fullWidthResponsive: true,
+    label: 'News leaderboard',
+    minHeight: '90px',
+  },
+  'news-sidebar': {
+    slotId: '6666666666',
+    format: 'auto',
+    fullWidthResponsive: false,
+    label: 'News sidebar',
+    minHeight: '250px',
+    width: '300px',
+  },
+  'news-bottom': {
+    slotId: '7777777777',
+    format: 'auto',
+    fullWidthResponsive: true,
+    label: 'News billboard',
+    minHeight: '100px',
+  },
 }
 
 const IS_PRODUCTION = !window.location.hostname.includes('localhost') &&

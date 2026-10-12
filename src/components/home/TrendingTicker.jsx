@@ -15,18 +15,18 @@ export default function TrendingTicker() {
   const doubled = [...ITEMS, ...ITEMS]
 
   return (
-    <div className="flex items-center gap-0 bg-slate-900/60 border border-slate-800 rounded-xl overflow-hidden">
+    <div className="trending-strip flex items-center gap-0 bg-white border border-slate-200 rounded-md overflow-hidden">
       {/* Label */}
-      <div className="flex-shrink-0 flex items-center gap-2 px-4 py-3 bg-cyan/10 border-r border-slate-800">
-        <TrendingUp size={14} className="text-cyan" />
-        <span className="text-cyan text-xs font-semibold uppercase tracking-widest whitespace-nowrap">Trending</span>
+      <div className="flex-shrink-0 flex items-center gap-2 px-4 py-3 bg-brand-soft border-r border-slate-200">
+        <TrendingUp size={14} className="text-brand" />
+        <span className="text-brand text-xs font-semibold uppercase tracking-widest whitespace-nowrap">Trending</span>
       </div>
 
       {/* Scrolling ticker */}
       <div className="ticker-wrapper flex-1 py-3">
         <div className="ticker-content">
           {doubled.map((item, i) => (
-            <span key={i} className="text-slate-400 text-sm mx-8 hover:text-cyan transition-colors cursor-default">
+            <span key={i} className="text-slate-500 text-sm mx-8 hover:text-brand transition-colors cursor-default">
               {item}
             </span>
           ))}
