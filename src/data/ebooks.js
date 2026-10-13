@@ -1,25 +1,5 @@
 export const ebooks = [
   {
-    "id": 1,
-    "slug": "rag-engineering-guide",
-    "title": "The RAG Engineering Handbook",
-    "subtitle": "From Prototype to Production",
-    "description": "A comprehensive 120-page guide covering chunking strategies, embedding models, vector databases, re-ranking, evaluation frameworks, and production deployment patterns for RAG systems.",
-    "topics": [
-      "Chunking Strategies",
-      "Vector Databases",
-      "Embedding Models",
-      "Re-ranking",
-      "RAGAS Evaluation",
-      "Production Architecture"
-    ],
-    "pages": 120,
-    "downloadUrl": "#subscribe",
-    "coverGradient": "from-cyan-900 via-cyan-700 to-slate-900",
-    "accentColor": "#00F0FF",
-    "icon": "🔍"
-  },
-  {
     "id": 2,
     "slug": "mlops-llm-guide",
     "title": "MLOps for LLMs",

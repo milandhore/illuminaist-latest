@@ -12,6 +12,7 @@ export const articles = [
     "publishedAt": "2026-10-04",
     "htmlFile": true,
     "featured": false,
+    "trending": true,
     "status": "published",
     "tags": [
       "Key Characteristics of Agentic AI",
@@ -37,6 +38,7 @@ export const articles = [
     "publishedAt": "2026-10-04",
     "htmlFile": true,
     "featured": false,
+    "trending": true,
     "status": "published",
     "tags": [
       "LangChain",
@@ -83,6 +85,7 @@ export const articles = [
     "publishedAt": "2026-10-04",
     "htmlFile": true,
     "featured": false,
+    "trending": true,
     "status": "published",
     "tags": [
       "What is the Model Context Protocol?",
@@ -177,6 +180,7 @@ export const articles = [
     "publishedAt": "2026-10-04",
     "htmlFile": true,
     "featured": false,
+    "trending": true,
     "status": "published",
     "tags": [
       "Introduction",
@@ -227,6 +231,7 @@ export const articles = [
     "publishedAt": "2026-10-04",
     "htmlFile": true,
     "featured": false,
+    "trending": true,
     "status": "published",
     "tags": [
       "The Anatomy of an Indirect Attack",
@@ -263,5 +268,11 @@ export const articles = [
 ]
 export const getPublishedArticles = () => articles.filter(a => a.status !== 'draft')
 export const getFeaturedArticle = () => getPublishedArticles().find(a => a.featured) || getPublishedArticles()[0]
+export const getTrendingArticles = () => {
+  const published = getPublishedArticles()
+  const trending = published.filter(a => a.trending)
+  const nonTrending = published.filter(a => !a.trending)
+  return [...trending, ...nonTrending]
+}
 export const getArticleBySlug = (slug) => articles.find(a => a.slug === slug)
 export const getArticlesByCategory = (category) => getPublishedArticles().filter(a => a.category === category)
