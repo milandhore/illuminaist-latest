@@ -7,7 +7,11 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "cms": "node tools/cms-server.cjs"
+    "cms": "node tools/cms-server.cjs",
+    "news:api": "node tools/news-api.cjs",
+    "news:update": "node tools/update-news.cjs",
+    "news:rebuild": "node tools/rebuild-news.cjs",
+    "test": "node --test tests/*.test.cjs"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",

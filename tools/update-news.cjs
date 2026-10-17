@@ -21,22 +21,42 @@ function slugify(text) {
   return text.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '');
 }
 
+function conciseTitle(text) {
+  let title = String(text || '')
+    .replace(/^(warning|grave warning|breaking news|the ai nightmare unfolds|the ai time bomb|the ai black box)\s*[:—-]\s*/i, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+  if (title.length > 72 && title.includes(':')) {
+    const [lead, detail] = title.split(/:\s*/, 2);
+    title = `${lead}: ${detail.slice(0, 27).replace(/\s+\S*$/, '').trim()}…`;
+  }
+  return title.length > 72 ? `${title.slice(0, 68).replace(/\s+\S*$/, '').trim()}…` : title;
+}
+
+function shortExcerpt(text) {
+  const clean = String(text || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+  if (clean.length <= 84) return clean;
+  return `${clean.slice(0, 80).replace(/\s+\S*$/, '').trim()}…`;
+}
+
 async function rewriteArticle(title, originalSnippet, originalUrl) {
   if (!GEMINI_API_KEY) {
     console.warn("No GEMINI_API_KEY found, returning fallback snippet.");
     return {
-      title: title,
+      title: conciseTitle(title),
       html: `<h2>${title}</h2><p>${originalSnippet}</p><p>Original article: <a href="${originalUrl}">${originalUrl}</a></p>`,
-      excerpt: originalSnippet
+      excerpt: shortExcerpt(originalSnippet)
     };
   }
 
   const systemPrompt = `
 Act as an experienced AI engineering expert and SEO copywriter, tasked with rewriting a "Google News for Artificial Intelligence Topic". 
 
-CRITICAL REQUIREMENT: You must generate a NEW, highly engaging, negatively influencing, and SEO-optimized title. The title should focus on the risks, hidden dangers, or alarming aspects of the topic to maximize click-through rate (CTR).
+CRITICAL REQUIREMENT: Generate a concise, credible, highly engaging title that makes the reader want context. Keep it under 72 characters, use normal headline capitalization, and avoid sensational prefixes such as "WARNING", "GRAVE WARNING", or "THE AI TIME BOMB".
 
-Your primary goal for the content is to craft an enterprise-wide, scalable, and technically compelling piece that adheres to SEO best practices. The article should be well-researched, structured with headings (<h2>, <h3>), and use bullet points. Incorporate relevant keywords naturally. Include a strong call-to-action.
+Write the opening summary as a fact-first quick read: 1–2 short sentences, under 140 characters where possible. State what happened, who is affected, and why it matters. Do not use vague promotional language.
+
+Your primary goal for the content is to craft an enterprise-wide, scalable, and technically compelling piece that adheres to SEO best practices. The article should be well-researched, structured with headings (<h2>, <h3>), and use bullet points. Incorporate relevant keywords naturally. Include a strong call-to-action. The title and first summary must be useful before the reader clicks.
 
 OUTPUT FORMAT:
 You MUST output ONLY a valid JSON object with exactly two keys: "title" and "html". Do not include markdown code blocks like \`\`\`json.
@@ -63,7 +83,7 @@ Context: ${originalSnippet}
 
     const parsedData = JSON.parse(jsonText);
     const htmlContent = parsedData.html.trim();
-    const newTitle = parsedData.title.trim();
+    const newTitle = conciseTitle(parsedData.title.trim());
 
     // Validate if the generation was substantial enough to be an article
     if (htmlContent.length < 300 || !newTitle) {
@@ -71,7 +91,7 @@ Context: ${originalSnippet}
     }
 
     const excerptMatch = htmlContent.match(/<p>(.*?)<\/p>/);
-    const excerpt = excerptMatch ? excerptMatch[1].replace(/<[^>]+>/g, '').substring(0, 150) + '...' : originalSnippet;
+    const excerpt = excerptMatch ? shortExcerpt(excerptMatch[1]) : shortExcerpt(originalSnippet);
 
     return { title: newTitle, html: htmlContent, excerpt };
   } catch (error) {
@@ -167,7 +187,13 @@ function syncAllNews(newlyAdded = []) {
       if (match && match[1]) {
         const arr = JSON.parse(match[1]);
         arr.forEach(item => {
-          if (item && item.slug) newsMap.set(item.slug, item);
+          if (item && item.slug) {
+            newsMap.set(item.slug, {
+              ...item,
+              title: conciseTitle(item.title),
+              excerpt: shortExcerpt(item.excerpt)
+            });
+          }
         });
       }
     } catch (e) {
@@ -193,6 +219,8 @@ function syncAllNews(newlyAdded = []) {
 
         let title = titleMatch ? titleMatch[1].trim() : slug.replace(/_/g, ' ');
         let excerpt = excerptMatch ? excerptMatch[1].trim() : 'Read the full article to learn more about this AI news.';
+        title = conciseTitle(title);
+        excerpt = shortExcerpt(excerpt);
 
         let publishedAt = new Date().toISOString().split('T')[0];
         try {

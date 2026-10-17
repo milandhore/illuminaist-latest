@@ -127,14 +127,14 @@ export default function EBooksPage() {
                     onClick={(e) => handleDownloadClick(e, book)}
                     className="flex items-center justify-center gap-2 w-full py-3 rounded-xl font-bold text-sm text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 hover:border-amber-500 dark:hover:border-amber-400 hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-all cursor-pointer"
                   >
-                    <Lock size={15} className="text-amber-500" /> Download PDF (Company Email Required)
+                    <Lock size={15} className="text-amber-500" /> Download PDF
                   </button>
                 )}
-                <p className="text-[11px] text-center text-slate-500 dark:text-slate-500 mt-2">
-                  {isCompanySubscribed
-                    ? 'Instant direct download. PDF ready.'
-                    : 'Personal emails (Gmail, Yahoo, etc.) are excluded.'}
-                </p>
+                {isCompanySubscribed && (
+                  <p className="text-[11px] text-center text-slate-500 dark:text-slate-500 mt-2">
+                    Instant direct download. PDF ready.
+                  </p>
+                )}
               </div>
             </div>
           </div>
