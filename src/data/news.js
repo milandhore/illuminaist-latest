@@ -1,17 +1,5 @@
 export const newsItems = [
   {
-    "title": "Warning: The Escalating AI Risks Your Enterprise Isn't Prepared For",
-    "excerpt": "Artificial Intelligence (AI) promises unprecedented innovation, efficiency, and growth. Yet, beneath the gleaming facade of predictive analytics and a...",
-    "source": "Breaking News, Latest News and Videos",
-    "slug": "warning_the_escalating_ai_risks_your_enterprise_isn_t_prepared_for",
-    "htmlPath": "/articles/news/warning_the_escalating_ai_risks_your_enterprise_isn_t_prepared_for.html",
-    "publishedAt": "2026-10-10",
-    "category": "AI News",
-    "id": 5,
-    "badge": "Latest",
-    "badgeColor": "amber"
-  },
-  {
     "title": "AI's Looming Shadow: Unmasking the Catastrophic Risks Your Enterprise Faces by 2026",
     "excerpt": "The rapid ascent of Artificial Intelligence promises unparalleled innovation and efficiency across industries. Enterprises worldwide are pouring billi...",
     "source": "Florida Hospital News and Healthcare Report",
