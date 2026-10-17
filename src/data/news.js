@@ -1,17 +1,5 @@
 export const newsItems = [
   {
-    "title": "AI's Silent Sabotage: Why Your Enterprise is Blind to the Coming Catastrophe",
-    "excerpt": "While headlines trumpet the transformative power of Artificial Intelligence, propelling enterprises into an era of unprecedented innovation and effici...",
-    "source": "Breaking News, Latest News and Videos",
-    "slug": "ai_s_silent_sabotage_why_your_enterprise_is_blind_to_the_coming_catastrophe",
-    "htmlPath": "/articles/news/ai_s_silent_sabotage_why_your_enterprise_is_blind_to_the_coming_catastrophe.html",
-    "publishedAt": "2026-10-09",
-    "category": "AI News",
-    "id": 7,
-    "badge": "Latest",
-    "badgeColor": "amber"
-  },
-  {
     "title": "Dark Money, Dark AI: The Hidden Perils of Corporate Influence Shaping Healthcare's Artificial Intelligence Future",
     "excerpt": "The rapid integration of Artificial Intelligence (AI) into the healthcare sector promises revolutionary advancements, from precision diagnostics to pe...",
     "source": "Michigan Advance",
