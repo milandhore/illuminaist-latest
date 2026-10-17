@@ -371,9 +371,12 @@ html:not(.dark) footer .text-slate-600 { color: #94A3B8 !important; }
 html:not(.dark) .text-slate-100 { color: var(--text-primary) !important; }
 html:not(.dark) .text-slate-200 { color: #1E293B !important; }
 html:not(.dark) .text-slate-300 { color: #334155 !important; }
-html:not(.dark) .text-slate-400 { color: var(--text-muted) !important; }
-html:not(.dark) .text-slate-500 { color: var(--text-subtle) !important; }
-html:not(.dark) .text-slate-600 { color: #94A3B8 !important; }
+html:not(.dark) .text-slate-400 { color: #475569 !important; }
+html:not(.dark) .text-slate-500 { color: #64748B !important; }
+html:not(.dark) .text-slate-600 { color: #475569 !important; }
+html:not(.dark) .text-slate-700 { color: #334155 !important; }
+html:not(.dark) .text-slate-800 { color: #1E293B !important; }
+html:not(.dark) .text-slate-900 { color: #0F172A !important; }
 
 /* Background helpers */
 html:not(.dark) .bg-obsidian      { background-color: var(--bg-primary) !important; }
@@ -473,15 +476,19 @@ html:not(.dark) .ad-placeholder {
   --line: #e2e8ef;
 }
 
-html:not(.dark), html:not(.dark) body { background: var(--paper) !important; }
-html:not(.dark) body { color: var(--ink) !important; }
+/* Theme base surfaces */
+html.dark, html.dark body {
+  background: #0B0F19 !important;
+  color: #F1F5F9 !important;
+}
+html:not(.dark), html:not(.dark) body {
+  background: #F8FAFC !important;
+  color: #1E293B !important;
+}
 .site-shell { max-width: 1240px; margin-left: auto; margin-right: auto; }
-.text-ink { color: var(--ink) !important; }
+.text-ink { color: var(--text-primary) !important; }
 .text-brand { color: var(--brand) !important; }
-.bg-brand-soft { background: var(--brand-soft) !important; }
-.site-header { background: rgba(255,255,255,.97); box-shadow: 0 1px 0 rgba(16,36,62,.08); }
-.header-utility { background: var(--ink); color: #d8e2ed; }
-.header-main { background: #fff; }
+.bg-brand-soft { background: rgba(230,107,44,0.10) !important; }
 .header-topics { background: #fff; border-top: 1px solid #edf1f5; border-bottom: 1px solid var(--line); }
 .header-search { align-items: center; gap: 7px; border: 1px solid var(--line); border-radius: 5px; color: #617184; padding: 8px 12px; font-size: 12px; font-weight: 600; }
 .header-search:hover { color: var(--brand); border-color: #f1b69a; }
@@ -496,9 +503,9 @@ html:not(.dark) body { color: var(--ink) !important; }
 .eyebrow { display: inline-flex; align-items: center; gap: 6px; }
 .home-status { color: #63758a; font-size: 12px; font-weight: 700; white-space: nowrap; }
 .status-dot { display: inline-block; width: 7px; height: 7px; margin-right: 6px; border-radius: 50%; background: #28a96b; box-shadow: 0 0 0 4px rgba(40,169,107,.12); }
-.home-feature-grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(320px, .65fr); gap: 24px; }
+.home-feature-grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(300px, .65fr); gap: 24px; }
 .hero-story-shell { perspective: 1300px; }
-.hero-story { position: relative; overflow: hidden; display: grid; grid-template-columns: .93fr 1.07fr; min-height: 370px; background: #fff; border: 1px solid var(--line); border-radius: 6px; box-shadow: 0 8px 24px rgba(16,36,62,.05); transform: rotateX(var(--tilt-x)) rotateY(var(--tilt-y)); transform-style: preserve-3d; transition: transform .18s ease-out, box-shadow .25s ease; }
+.hero-story { position: relative; overflow: hidden; display: grid; grid-template-columns: .93fr 1.07fr; min-height: 370px; background: #0e1421; border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.4); transform: rotateX(var(--tilt-x,0)) rotateY(var(--tilt-y,0)); transform-style: preserve-3d; transition: transform .18s ease-out, box-shadow .25s ease; }
 .hero-story-shell:hover .hero-story { box-shadow: 0 18px 40px rgba(16,36,62,.13); }
 .hero-story-art { position: relative; overflow: hidden; min-height: 250px; background: linear-gradient(145deg, #10243e 0%, #1d4262 52%, #e66b2c 160%); }
 .hero-story-art::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,255,255,.08) 25%, transparent 25%, transparent 50%, rgba(255,255,255,.05) 50%, rgba(255,255,255,.05) 75%, transparent 75%); background-size: 44px 44px; opacity: .35; }
@@ -534,8 +541,7 @@ html:not(.dark) body { color: var(--ink) !important; }
 .latest-number { color: #b8c1cb; font: 800 15px/1 Outfit, sans-serif; }
 .latest-item h2 { margin-top: 6px; }
 .latest-item .meta-line { margin-top: 9px; }
-.ticker-wrapper { background: #fff !important; }
-html:not(.dark) .ticker-wrapper { background: #fff !important; }
+.ticker-wrapper { background: #111827 !important; }
 .content-with-rail { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 42px; align-items: start; }
 .section-title { color: var(--ink); font: 800 28px/1.1 Outfit, sans-serif; margin-top: 5px; text-transform: capitalize; }
 .topic-pills { display: flex; flex-wrap: wrap; gap: 7px; }
@@ -580,4 +586,482 @@ html:not(.dark) .ticker-wrapper { background: #fff !important; }
   .side-rail .mt-4 { margin-top: 16px; }
   .home-status { white-space: normal; }
 }
+/* ═══════════════════════════════════════════════════════════════════
+   THEME-AWARE COMPONENT & ARTICLE SYSTEM
+   Guarantees 100% crystal-clear font color contrast and readability
+   in BOTH Dark Mode and Light Mode across all pages and articles.
+   ═══════════════════════════════════════════════════════════════════ */
 
+/* ── 1. Article Card (.article-new-card) ─────────────────────────── */
+.article-new-card {
+  background: #111827;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+}
+.article-new-card:hover {
+  border-color: rgba(0, 240, 255, 0.3);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 240, 255, 0.08);
+}
+.article-new-card__art {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.article-new-card__fade {
+  background: linear-gradient(to top, #111827, transparent);
+}
+.article-new-card__watermark {
+  color: #ffffff;
+}
+.article-new-card__title {
+  color: #F8FAFC !important;
+}
+.article-new-card:hover .article-new-card__title {
+  color: #00F0FF !important;
+}
+.article-new-card__excerpt {
+  color: #94A3B8 !important;
+}
+.article-new-card__tag {
+  background: #1E293B !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  color: #94A3B8 !important;
+}
+.article-new-card__tag-more {
+  color: #64748B !important;
+}
+.article-new-card__footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+.article-new-card__avatar {
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+.article-new-card__meta {
+  color: #94A3B8 !important;
+}
+.article-new-card__cta {
+  color: #00F0FF !important;
+}
+.article-new-card__glow {
+  box-shadow: inset 0 0 0 1px rgba(0, 240, 255, 0.2), 0 0 30px rgba(0, 240, 255, 0.06);
+}
+
+/* Light mode override: Article Card */
+html:not(.dark) .article-new-card {
+  background: #FFFFFF !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04) !important;
+}
+html:not(.dark) .article-new-card:hover {
+  border-color: rgba(230, 107, 44, 0.45) !important;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08), 0 0 20px rgba(230, 107, 44, 0.08) !important;
+}
+html:not(.dark) .article-new-card__art {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
+}
+html:not(.dark) .article-new-card__fade {
+  background: linear-gradient(to top, #FFFFFF, transparent) !important;
+}
+html:not(.dark) .article-new-card__watermark {
+  color: #0F172A !important;
+}
+html:not(.dark) .article-new-card__title {
+  color: #0F172A !important; /* Crystal clear deep navy/slate, 100% readable */
+}
+html:not(.dark) .article-new-card:hover .article-new-card__title {
+  color: #E66B2C !important;
+}
+html:not(.dark) .article-new-card__excerpt {
+  color: #475569 !important; /* High contrast readable slate-600 */
+}
+html:not(.dark) .article-new-card__tag {
+  background: #F1F5F9 !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  color: #475569 !important;
+}
+html:not(.dark) .article-new-card__tag-more {
+  color: #64748B !important;
+}
+html:not(.dark) .article-new-card__footer {
+  border-top: 1px solid rgba(0, 0, 0, 0.08) !important;
+}
+html:not(.dark) .article-new-card__avatar {
+  border: 1px solid rgba(0, 0, 0, 0.12) !important;
+}
+html:not(.dark) .article-new-card__meta {
+  color: #64748B !important;
+}
+html:not(.dark) .article-new-card__cta {
+  color: #E66B2C !important;
+}
+html:not(.dark) .article-new-card__glow {
+  box-shadow: inset 0 0 0 1px rgba(230, 107, 44, 0.25), 0 0 20px rgba(230, 107, 44, 0.05);
+}
+
+/* ── 2. Hero Spotlight (.hero-story) ─────────────────────────────── */
+.hero-story {
+  background: #0e1421 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4) !important;
+}
+.hero-story-body {
+  background: #0e1421 !important;
+}
+.hero-story__title {
+  color: #F8FAFC !important;
+}
+.hero-story__excerpt {
+  color: #94A3B8 !important;
+}
+.hero-story__tag {
+  background: #1E293B !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  color: #94A3B8 !important;
+}
+.hero-story__author {
+  color: #F1F5F9 !important;
+}
+.hero-story__meta {
+  color: #64748B !important;
+}
+.hero-story__fade {
+  background: linear-gradient(to right, transparent, #0e1421) !important;
+}
+.hero-story__footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Light mode override: Hero Spotlight */
+html:not(.dark) .hero-story {
+  background: #FFFFFF !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06) !important;
+}
+html:not(.dark) .hero-story-body {
+  background: #FFFFFF !important;
+}
+html:not(.dark) .hero-story__title {
+  color: #0F172A !important; /* Crystal clear deep slate, 100% readable */
+}
+html:not(.dark) .hero-story__excerpt {
+  color: #475569 !important; /* Clean readable slate-600 */
+}
+html:not(.dark) .hero-story__tag {
+  background: #F1F5F9 !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  color: #475569 !important;
+}
+html:not(.dark) .hero-story__author {
+  color: #0F172A !important;
+}
+html:not(.dark) .hero-story__meta {
+  color: #64748B !important;
+}
+html:not(.dark) .hero-story__fade {
+  background: linear-gradient(to right, transparent, #FFFFFF) !important;
+}
+html:not(.dark) .hero-story__footer {
+  border-top: 1px solid rgba(0, 0, 0, 0.08) !important;
+}
+
+/* ── 3. Trending Ticker (.trending-strip) ─────────────────────────── */
+.trending-strip {
+  background: #111827 !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+.trending-label {
+  background: rgba(230, 107, 44, 0.12) !important;
+  border-right-color: rgba(255, 255, 255, 0.08) !important;
+}
+.ticker-link, .ticker-item-title {
+  color: #CBD5E1 !important;
+}
+.ticker-link:hover, .ticker-item-title:hover {
+  color: #FFB800 !important;
+}
+.ticker-wrapper {
+  background: #111827 !important;
+}
+
+/* Light mode override: Trending Ticker */
+html:not(.dark) .trending-strip {
+  background: #FFFFFF !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+}
+html:not(.dark) .trending-label {
+  background: rgba(230, 107, 44, 0.08) !important;
+  border-right-color: rgba(0, 0, 0, 0.08) !important;
+}
+html:not(.dark) .ticker-link, html:not(.dark) .ticker-item-title {
+  color: #334155 !important;
+}
+html:not(.dark) .ticker-link:hover, html:not(.dark) .ticker-item-title:hover {
+  color: #E66B2C !important;
+}
+html:not(.dark) .ticker-wrapper {
+  background: #FFFFFF !important;
+}
+
+/* ── 4. Subscribe Components ─────────────────────────────────────── */
+.subscribe-inline {
+  background: linear-gradient(135deg, #0f1525 0%, #0B0F19 60%, #130d05 100%) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+.subscribe-modal {
+  background: rgba(15, 21, 37, 0.98) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+html:not(.dark) .subscribe-inline {
+  background: linear-gradient(135deg, #F8FAFC 0%, #F1F5F9 60%, #FFF7ED 100%) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04) !important;
+}
+html:not(.dark) .subscribe-modal {
+  background: rgba(255, 255, 255, 0.99) !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+/* ── 5. Home Aside Panel ─────────────────────────────────────────── */
+.home-aside-panel {
+  background: #111827;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+html:not(.dark) .home-aside-panel {
+  background: #FFFFFF !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04) !important;
+}
+
+/* ── 6. COMPREHENSIVE ARTICLE PROSE READABILITY SYSTEM ────────────── */
+/* Every article reading view is guaranteed high-contrast & accessible */
+
+/* Dark Mode Prose */
+html.dark .article-prose,
+:root .article-prose {
+  color: #CBD5E1;
+}
+html.dark .article-prose h1,
+html.dark .article-prose h2,
+html.dark .article-prose h4,
+html.dark .article-prose h5,
+html.dark .article-prose h6 {
+  color: #F8FAFC !important;
+  font-family: 'Outfit', sans-serif;
+}
+html.dark .article-prose h2 {
+  border-bottom: 1px solid rgba(0, 240, 255, 0.18) !important;
+}
+html.dark .article-prose h3 {
+  color: #00F0FF !important;
+}
+html.dark .article-prose p,
+html.dark .article-prose li {
+  color: #CBD5E1 !important;
+  line-height: 1.85;
+}
+html.dark .article-prose strong,
+html.dark .article-prose b {
+  color: #F8FAFC !important;
+}
+html.dark .article-prose a {
+  color: #00F0FF !important;
+}
+html.dark .article-prose a:hover {
+  color: #38BDF8 !important;
+}
+html.dark .article-prose blockquote {
+  background-color: rgba(0, 240, 255, 0.05) !important;
+  border-left: 3px solid #00F0FF !important;
+  color: #CBD5E1 !important;
+}
+html.dark .article-prose blockquote * {
+  color: #CBD5E1 !important;
+}
+html.dark .article-prose code:not(pre code) {
+  background-color: #1E293B !important;
+  color: #00F0FF !important;
+  border: 1px solid rgba(0, 240, 255, 0.2) !important;
+}
+html.dark .article-prose pre {
+  background-color: #0d1117 !important;
+  border: 1px solid rgba(0, 240, 255, 0.15) !important;
+}
+html.dark .article-prose pre code {
+  color: #94d8ff !important;
+}
+html.dark .article-prose hr {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+html.dark .article-prose th {
+  background-color: #1E293B !important;
+  color: #00F0FF !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+html.dark .article-prose td {
+  color: #CBD5E1 !important;
+  border-color: rgba(255, 255, 255, 0.06) !important;
+}
+html.dark .article-prose tr:nth-child(even) td {
+  background-color: rgba(30, 41, 59, 0.4) !important;
+}
+html.dark .article-prose .lead {
+  color: #E2E8F0 !important;
+}
+/* Article HTML cards in Dark Mode */
+html.dark .article-prose .bg-white {
+  background-color: #111827 !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  color: #CBD5E1 !important;
+}
+html.dark .article-prose .bg-slate-50,
+html.dark .article-prose .bg-slate-100,
+html.dark .article-prose .bg-blue-50 {
+  background-color: #1E293B !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  color: #CBD5E1 !important;
+}
+html.dark .article-prose .text-slate-900,
+html.dark .article-prose .text-slate-800,
+html.dark .article-prose .text-slate-700 {
+  color: #F8FAFC !important;
+}
+html.dark .article-prose .text-slate-600,
+html.dark .article-prose .text-slate-500 {
+  color: #CBD5E1 !important;
+}
+html.dark .article-prose .text-slate-400,
+html.dark .article-prose .text-slate-300 {
+  color: #94A3B8 !important;
+}
+html.dark .article-prose #architecture-diagram {
+  background-color: #111827 !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+html.dark .article-prose #architecture-diagram text[fill="#334155"] {
+  fill: #F1F5F9 !important;
+}
+html.dark .article-prose #architecture-diagram text[fill="#64748b"] {
+  fill: #94A3B8 !important;
+}
+html.dark .article-prose #architecture-diagram rect[fill="#f8fafc"] {
+  fill: #1E293B !important;
+  stroke: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* ── Light Mode Prose (CRITICAL FOR USER REQUIREMENT) ─────────────── */
+html:not(.dark) .article-prose {
+  color: #1E293B !important;
+}
+html:not(.dark) .article-prose h1,
+html:not(.dark) .article-prose h2,
+html:not(.dark) .article-prose h4,
+html:not(.dark) .article-prose h5,
+html:not(.dark) .article-prose h6 {
+  color: #0F172A !important; /* Deep dark charcoal, 100% readable */
+  font-family: 'Outfit', sans-serif;
+}
+html:not(.dark) .article-prose h2 {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+}
+html:not(.dark) .article-prose h3 {
+  color: #0284c7 !important; /* Deep accessible sky blue */
+}
+html:not(.dark) .article-prose p,
+html:not(.dark) .article-prose li {
+  color: #1E293B !important; /* Rich readable dark slate-800, perfectly legible */
+  line-height: 1.85;
+}
+html:not(.dark) .article-prose strong,
+html:not(.dark) .article-prose b {
+  color: #0F172A !important;
+  font-weight: 700;
+}
+html:not(.dark) .article-prose a {
+  color: #0284c7 !important;
+  text-decoration: underline;
+  text-decoration-color: rgba(2, 132, 199, 0.35);
+}
+html:not(.dark) .article-prose a:hover {
+  color: #0369a1 !important;
+}
+html:not(.dark) .article-prose blockquote {
+  background-color: #FFFBEB !important;
+  border-left: 4px solid #F59E0B !important;
+  color: #334155 !important;
+}
+html:not(.dark) .article-prose blockquote * {
+  color: #334155 !important;
+}
+html:not(.dark) .article-prose code:not(pre code) {
+  background-color: #F1F5F9 !important;
+  color: #0369a1 !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+}
+html:not(.dark) .article-prose pre {
+  background-color: #0F172A !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+html:not(.dark) .article-prose pre code {
+  color: #38BDF8 !important;
+}
+html:not(.dark) .article-prose hr {
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+html:not(.dark) .article-prose th {
+  background-color: #F1F5F9 !important;
+  color: #0F172A !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+html:not(.dark) .article-prose td {
+  color: #1E293B !important;
+  border-color: rgba(0, 0, 0, 0.06) !important;
+}
+html:not(.dark) .article-prose tr:nth-child(even) td {
+  background-color: rgba(241, 245, 249, 0.6) !important;
+}
+html:not(.dark) .article-prose .lead {
+  color: #334155 !important;
+}
+/* Article HTML cards in Light Mode */
+html:not(.dark) .article-prose .bg-white {
+  background-color: #FFFFFF !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  color: #1E293B !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+}
+html:not(.dark) .article-prose .bg-slate-50,
+html:not(.dark) .article-prose .bg-slate-100 {
+  background-color: #F8FAFC !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  color: #1E293B !important;
+}
+html:not(.dark) .article-prose .bg-blue-50 {
+  background-color: #F0F9FF !important;
+  border-color: rgba(2, 132, 199, 0.2) !important;
+  color: #0C4A6E !important;
+}
+html:not(.dark) .article-prose .text-slate-900,
+html:not(.dark) .article-prose .text-slate-800,
+html:not(.dark) .article-prose .text-slate-700,
+html:not(.dark) .article-prose .text-slate-600 {
+  color: #1E293B !important;
+}
+html:not(.dark) .article-prose .text-slate-500,
+html:not(.dark) .article-prose .text-slate-400 {
+  color: #475569 !important;
+}
+html:not(.dark) .article-prose #architecture-diagram {
+  background-color: #F8FAFC !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+html:not(.dark) .article-prose #architecture-diagram text[fill="#334155"] {
+  fill: #0F172A !important;
+}
+html:not(.dark) .article-prose #architecture-diagram text[fill="#64748b"] {
+  fill: #475569 !important;
+}
+html:not(.dark) .article-prose #architecture-diagram rect[fill="#f8fafc"] {
+  fill: #FFFFFF !important;
+  stroke: rgba(0, 0, 0, 0.15) !important;
+}

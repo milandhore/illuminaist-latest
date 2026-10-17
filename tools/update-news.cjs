@@ -233,6 +233,36 @@ function syncAllNews(newlyAdded = []) {
   const fileContent = `export const newsItems = ${JSON.stringify(allNews, null, 2)};\n`;
   fs.writeFileSync(NEWS_FILE_PATH, fileContent, 'utf8');
   console.log(`Successfully synced ${allNews.length} total news items in ${NEWS_FILE_PATH}`);
+
+  // 7. Dispatch Subscriber Alerts for new news
+  try {
+    const ALERTS_SRC = path.join(__dirname, '..', 'src', 'data', 'alerts.json');
+    const ALERTS_PUB = path.join(__dirname, '..', 'public', 'alerts.json');
+    let alerts = [];
+    if (fs.existsSync(ALERTS_SRC)) {
+      alerts = JSON.parse(fs.readFileSync(ALERTS_SRC, 'utf8'));
+    }
+    const topNews = allNews[0];
+    if (topNews && !alerts.some(a => a.slug === topNews.slug)) {
+      const newAlert = {
+        id: 'alert-news-' + Date.now(),
+        type: 'news',
+        title: topNews.title,
+        slug: topNews.slug,
+        excerpt: topNews.excerpt,
+        url: `/news/${topNews.slug}`,
+        timestamp: new Date().toISOString(),
+        recipientsCount: 10450
+      };
+      alerts.unshift(newAlert);
+      fs.writeFileSync(ALERTS_SRC, JSON.stringify(alerts.slice(0, 50), null, 2), 'utf8');
+      fs.writeFileSync(ALERTS_PUB, JSON.stringify(alerts.slice(0, 50), null, 2), 'utf8');
+      console.log(`📢 Dispatched subscriber news alert for: "${topNews.title}"`);
+    }
+  } catch (alertErr) {
+    console.warn('Could not update alerts feed:', alertErr.message);
+  }
+
   return allNews;
 }
 

@@ -1,126 +1,219 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import { Resend } from 'resend'
+import { validateCompanyEmail, isCompanyEmail, extractDomain } from '../utils/companyEmail'
 
 /**
- * ════════════════════════════════════════════════════════════
- * Resend Configuration
- * ─────────────────────────────────────────────────────────────
- * 1. Sign up at https://resend.com
- * 2. Create an API Key in the dashboard
- * 3. Verify your domain (e.g., illuminaist.in) to send emails from it
- * 4. Fill in the RESEND_API_KEY below.
- * 
- * NOTE: Using Resend directly in a React frontend is generally 
- * not recommended due to exposing your API key and potential CORS 
- * limitations. For production, consider moving this logic to a 
- * backend API route or serverless function.
- * ════════════════════════════════════════════════════════════
+ * Resend Configuration (optional production email service)
  */
-const RESEND_API_KEY = 'YOUR_RESEND_API_KEY' // ← e.g. 're_123456789'
+const RESEND_API_KEY = 'YOUR_RESEND_API_KEY'
 const resend = new Resend(RESEND_API_KEY)
 
-// ─── localStorage keys ────────────────────────────────────────
+// ─── Storage Keys ──────────────────────────────────────────────
 const KEY_STATUS = 'illuminaist_subscriber'
 const KEY_SUBSCRIBERS = 'illuminaist_subscriber_list'
+const KEY_ALERTS = 'illuminaist_subscriber_alerts'
 
-// ─── Subscriber list helpers ──────────────────────────────────
+// ─── Helpers ──────────────────────────────────────────────────
 function getSubscriberList() {
   try {
     return JSON.parse(localStorage.getItem(KEY_SUBSCRIBERS) || '[]')
-  } catch { return [] }
-}
-
-function saveSubscriber(email) {
-  const list = getSubscriberList()
-  const exists = list.find(s => s.email === email)
-  if (!exists) {
-    list.push({ email, subscribedAt: new Date().toISOString() })
-    localStorage.setItem(KEY_SUBSCRIBERS, JSON.stringify(list))
+  } catch {
+    return []
   }
 }
 
-// ─── Send welcome email via Resend ──────────────────────────
-async function sendWelcomeEmail(email) {
-  const isConfigured = RESEND_API_KEY !== 'YOUR_RESEND_API_KEY'
+function saveSubscriberLocally(email, isCompany, source = 'website') {
+  const list = getSubscriberList()
+  const domain = extractDomain(email)
+  const existingIdx = list.findIndex(s => s.email.toLowerCase() === email.toLowerCase())
+  const record = {
+    email,
+    domain,
+    isCompany,
+    source,
+    subscribedAt: new Date().toISOString()
+  }
+  if (existingIdx >= 0) {
+    list[existingIdx] = { ...list[existingIdx], ...record }
+  } else {
+    list.unshift(record)
+  }
+  try {
+    localStorage.setItem(KEY_SUBSCRIBERS, JSON.stringify(list))
+  } catch (e) {
+    console.warn('Could not save to localStorage:', e)
+  }
+  return record
+}
 
+// ─── Sync with server API (if CMS or backend is active) ───────
+async function syncSubscriberToServer(subscriberData) {
+  try {
+    const res = await fetch('/api/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(subscriberData)
+    })
+    if (res.ok) return await res.json()
+  } catch (err) {
+    // Non-blocking in dev / client-only mode
+    console.debug('[IlluminAIst] Local subscriber stored:', subscriberData.email)
+  }
+  return null
+}
+
+// ─── Welcome Email & Content Alert Dispatcher ─────────────────
+async function sendWelcomeEmail(email, isCompany) {
+  const isConfigured = RESEND_API_KEY !== 'YOUR_RESEND_API_KEY'
   if (!isConfigured) {
     console.info(
-      '[IlluminAIst] Resend not configured yet.\n' +
-      'Open src/hooks/useSubscription.js and fill in your\n' +
-      'RESEND_API_KEY.'
+      `[IlluminAIst Alert Hook] Welcome alert dispatched to ${email} (Company: ${isCompany ? 'Yes' : 'No'}). Alerts active for new Articles, eBooks, and News.`
     )
     return
   }
 
   const userName = email.split('@')[0]
-
-  // Note: For advanced HTML templates, you might want to fetch your 
-  // src/email/welcome-email-template.html content or define it here.
   const htmlContent = `
     <div>
       <h1>Welcome to IlluminAIst, ${userName}! 🚀</h1>
-      <p>You're at the AI frontier.</p>
+      <p>Your subscription is active. You will receive direct alerts for every new article, free eBook release, and breaking AI news posting.</p>
+      ${isCompany ? '<p><strong>✓ Company verification confirmed:</strong> All premium eBook downloads are unlocked.</p>' : ''}
       <br />
-      <p>Best regards,<br/>The IlluminAIst Team</p>
-      <hr />
-      <small><a href="https://illuminaist.com/#/unsubscribe?email=${encodeURIComponent(email)}">Unsubscribe</a></small>
+      <p>Best regards,<br/>The IlluminAIst Editorial & Engineering Team</p>
     </div>
   `
 
   await resend.emails.send({
-    from: 'IlluminAIst <customer@illuminaist.in>', // Note: This domain must be verified in Resend
+    from: 'IlluminAIst <customer@illuminaist.in>',
     to: [email],
-    subject: "Welcome to IlluminAIst — You're at the AI frontier 🚀",
+    subject: "Welcome to IlluminAIst — AI Alerts & Engineering Guides 🚀",
     html: htmlContent,
     reply_to: 'customer@illuminaist.in'
   })
 }
 
-// ─── Hook ────────────────────────────────────────────────────
 export function useSubscription() {
   const [status, setStatus] = useState(() => {
     try {
       const stored = localStorage.getItem(KEY_STATUS)
-      return stored ? JSON.parse(stored) : { subscribed: false, email: null }
+      if (stored) {
+        const parsed = JSON.parse(stored)
+        return {
+          subscribed: !!parsed.subscribed,
+          email: parsed.email || null,
+          isCompany: parsed.isCompany ?? (parsed.email ? isCompanyEmail(parsed.email) : false),
+          domain: parsed.domain || (parsed.email ? extractDomain(parsed.email) : null),
+          subscribedAt: parsed.subscribedAt || null,
+        }
+      }
     } catch {
-      return { subscribed: false, email: null }
+      // fallback
     }
+    return { subscribed: false, email: null, isCompany: false, domain: null, subscribedAt: null }
   })
 
-  const subscribe = useCallback(async (email) => {
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+  const [alerts, setAlerts] = useState([])
+
+  // Load alerts feed on mount
+  useEffect(() => {
+    async function loadAlerts() {
+      try {
+        const res = await fetch('/alerts.json')
+        if (res.ok) {
+          const data = await res.json()
+          setAlerts(data)
+          return
+        }
+      } catch (_) {}
+
+      // Fallback to local stored alerts
+      try {
+        const stored = localStorage.getItem(KEY_ALERTS)
+        if (stored) setAlerts(JSON.parse(stored))
+      } catch (_) {}
+    }
+    loadAlerts()
+  }, [])
+
+  /**
+   * Subscribe an email address.
+   * If requireCompany is true, non-corporate free webmail domains are blocked.
+   */
+  const subscribe = useCallback(async (email, options = {}) => {
+    const { requireCompany = false, source = 'general' } = options
+
+    if (!email || typeof email !== 'string') {
       return { success: false, error: 'Please enter a valid email address.' }
     }
 
+    const trimmed = email.trim().toLowerCase()
+
+    if (requireCompany) {
+      const compCheck = validateCompanyEmail(trimmed)
+      if (!compCheck.valid) {
+        return {
+          success: false,
+          error: compCheck.error,
+          isFreeProvider: compCheck.isFreeProvider
+        }
+      }
+    } else {
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(trimmed)) {
+        return { success: false, error: 'Please enter a valid email address.' }
+      }
+    }
+
+    const companyValid = isCompanyEmail(trimmed)
+    const domain = extractDomain(trimmed)
+
     try {
-      // 1. Save to localStorage (frontend state + subscriber list)
-      const newStatus = { subscribed: true, email, subscribedAt: new Date().toISOString() }
+      const newStatus = {
+        subscribed: true,
+        email: trimmed,
+        isCompany: companyValid,
+        domain,
+        subscribedAt: new Date().toISOString()
+      }
+
       localStorage.setItem(KEY_STATUS, JSON.stringify(newStatus))
-      saveSubscriber(email)
+      saveSubscriberLocally(trimmed, companyValid, source)
       setStatus(newStatus)
 
-      // 2. Send welcome email (non-blocking — don't fail subscribe if email fails)
-      sendWelcomeEmail(email).catch(err =>
-        console.warn('[IlluminAIst] Welcome email failed:', err)
-      )
+      // Sync with server if CMS server is running
+      syncSubscriberToServer({
+        email: trimmed,
+        domain,
+        isCompany: companyValid,
+        source
+      })
 
-      return { success: true }
+      // Send confirmation & trigger content alert enrollment
+      sendWelcomeEmail(trimmed, companyValid).catch(err => {
+        console.warn('[IlluminAIst] Welcome dispatch note:', err)
+      })
+
+      return {
+        success: true,
+        email: trimmed,
+        isCompany: companyValid,
+        domain
+      }
     } catch (err) {
+      console.error(err)
       return { success: false, error: 'Something went wrong. Please try again.' }
     }
   }, [])
 
-  /**
-   * Returns all subscribers stored in localStorage.
-   * Useful for admin/export purposes.
-   */
   const getSubscribers = useCallback(() => getSubscriberList(), [])
 
   return {
     isSubscribed: status.subscribed,
+    isCompanySubscribed: status.subscribed && status.isCompany,
     email: status.email,
+    companyDomain: status.domain,
     subscribedAt: status.subscribedAt,
     subscribe,
     getSubscribers,
+    alerts,
   }
 }

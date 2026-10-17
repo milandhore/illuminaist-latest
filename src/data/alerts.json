@@ -1,0 +1,76 @@
+[
+  {
+    "id": "alert-news-1792082278172",
+    "type": "news",
+    "title": "Breakthrough: Google & Deepmind Announce Gemini 2.5 Flash",
+    "slug": "gemini-2-5-flash-announcement",
+    "excerpt": "Real-time multi-modal reasoning and ultra-low latency inference.",
+    "url": "/news/gemini-2-5-flash-announcement",
+    "author": "IlluminAIst Editorial",
+    "timestamp": "2026-10-15T16:37:58.172Z",
+    "recipientsCount": 10000
+  },
+  {
+    "id": "alert-ebook-1792082278172",
+    "type": "ebook",
+    "title": "The Production RAG Engineering Handbook (2026 Edition)",
+    "slug": "rag-engineering-guide",
+    "excerpt": "120-page enterprise guide for building scalable retrieval pipelines.",
+    "url": "/ebooks",
+    "author": "IlluminAIst Editorial",
+    "timestamp": "2026-10-15T16:37:58.172Z",
+    "recipientsCount": 10000
+  },
+  {
+    "id": "alert-article-1792082278171",
+    "type": "article",
+    "title": "Autonomous Coding Agents with Antigravity and Claude 3.5",
+    "slug": "autonomous-coding-agents",
+    "excerpt": "A deep dive into multi-agent systems and real-time execution pipelines.",
+    "url": "/articles/autonomous-coding-agents",
+    "author": "Dr. Sarah Chen",
+    "timestamp": "2026-10-15T16:37:58.171Z",
+    "recipientsCount": 10000
+  },
+  {
+    "id": "alert-ebook-01",
+    "type": "ebook",
+    "title": "The RAG Engineering Handbook (2026 Edition)",
+    "slug": "rag-engineering-guide",
+    "excerpt": "New 120-page comprehensive guide covering chunking strategies, embedding fine-tuning, vector search, and production deployment patterns.",
+    "url": "/ebooks",
+    "timestamp": "2026-10-15T10:00:00.000Z",
+    "recipientsCount": 10420
+  },
+  {
+    "id": "alert-art-01",
+    "type": "article",
+    "title": "Production RAG Architecture: A Field Guide for AI Engineers",
+    "slug": "production-rag-architecture",
+    "excerpt": "Everything you need to know about building, scaling, and evaluating retrieval-augmented generation systems in production.",
+    "url": "/articles/production-rag-architecture",
+    "author": "Dr. Sarah Chen",
+    "timestamp": "2026-10-14T14:30:00.000Z",
+    "recipientsCount": 10385
+  },
+  {
+    "id": "alert-news-01",
+    "type": "news",
+    "title": "Anthropic Unveils Next-Gen Claude Reasoning Models for Autonomous Coding",
+    "slug": "anthropic-unveils-claude-reasoning",
+    "excerpt": "New benchmark results indicate unprecedented performance on autonomous system synthesis and complex debugging workflows.",
+    "url": "/news",
+    "timestamp": "2026-10-14T09:15:00.000Z",
+    "recipientsCount": 10350
+  },
+  {
+    "id": "alert-ebook-02",
+    "type": "ebook",
+    "title": "MLOps for LLMs: Kubernetes, Monitoring & Cost Control",
+    "slug": "mlops-llm-guide",
+    "excerpt": "96-page practical playbook on vLLM serving, GPU cluster orchestration, Prometheus metrics, and FinOps.",
+    "url": "/ebooks",
+    "timestamp": "2026-10-13T16:00:00.000Z",
+    "recipientsCount": 10290
+  }
+]

@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>IlluminAIst CMS</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+<script>if (window.pdfjsLib) { pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js'; }</script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -178,6 +180,9 @@ code.pill{color:var(--cyan);background:var(--surface);padding:1px 6px;border-rad
 .modal h3{margin-bottom:12px;font-size:17px}
 .modal p{color:var(--muted);font-size:13px;margin-bottom:20px;line-height:1.6}
 .modal-actions{display:flex;gap:10px;justify-content:flex-end}
+.modal-lg{max-width:640px;max-height:88vh;overflow-y:auto}
+.modal-lg::-webkit-scrollbar{width:4px}
+.modal-lg::-webkit-scrollbar-thumb{background:var(--surface);border-radius:2px}
 </style>
 </head>
 <body>
@@ -188,7 +193,7 @@ code.pill{color:var(--cyan);background:var(--surface);padding:1px 6px;border-rad
   <div class="logo">illuminAIst</div>
   <div class="topbar-badge">Content Studio</div>
   <div class="topbar-actions">
-    <a href="/ebooks" class="btn btn-ghost btn-sm" style="text-decoration:none; color:var(--cyan)">📕 Upload eBook</a>
+    <button class="btn btn-ghost btn-sm" onclick="showTab('ebooks',document.getElementById('tab-btn-ebooks'))" style="color:var(--cyan)">📕 Manage eBooks</button>
     <div class="server-status"><div class="server-dot"></div>CMS Active</div>
     <span id="unsaved" style="display:none" class="badge badge-amber">● Unsaved</span>
     <button class="btn btn-ghost btn-sm" onclick="loadArticles()">↻ Refresh</button>
@@ -292,6 +297,16 @@ code.pill{color:var(--cyan);background:var(--surface);padding:1px 6px;border-rad
           <span class="slider"></span>
         </label>
       </div>
+      <div class="toggle-row">
+        <div>
+          <div style="font-size:13px;font-weight:500">Trending Strap</div>
+          <div style="font-size:11px;color:var(--subtle)">Pin to home page trending ticker</div>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="trending" onchange="markUnsaved()">
+          <span class="slider"></span>
+        </label>
+      </div>
       <div class="field" style="margin-top:10px">
         <label>Status</label>
         <select id="status" onchange="markUnsaved()">
@@ -323,6 +338,7 @@ code.pill{color:var(--cyan);background:var(--surface);padding:1px 6px;border-rad
       <button class="tab active" id="tab-btn-preview" onclick="showTab('preview',this)">👁&nbsp; Preview</button>
       <button class="tab" id="tab-btn-articles" onclick="showTab('articles',this)">📚&nbsp; All Articles</button>
       <button class="tab" id="tab-btn-files" onclick="showTab('files',this)">🗂&nbsp; HTML Files</button>
+      <button class="tab" id="tab-btn-ebooks" onclick="showTab('ebooks',this)">📕&nbsp; eBooks</button>
     </div>
 
     <!-- Preview -->
@@ -351,6 +367,22 @@ code.pill{color:var(--cyan);background:var(--surface);padding:1px 6px;border-rad
         <div class="empty"><div class="empty-icon">📂</div><div>Loading files…</div></div>
       </div>
     </div>
+
+    <!-- eBooks list -->
+    <div class="view" id="tab-ebooks">
+      <div class="stats-bar" id="ebookStatsBar">
+        <div class="stat"><strong id="ebookCount">0</strong>Total eBooks</div>
+        <button class="btn btn-primary btn-sm" onclick="openEbookModal()" style="margin-left:auto">
+          ➕&nbsp; Add New eBook
+        </button>
+      </div>
+      <div class="search-wrap">
+        <input type="text" id="ebookSearchInput" placeholder="🔍  Search eBooks by title, topic, or slug..." oninput="filterEbooks()">
+      </div>
+      <div class="art-list" id="ebookList">
+        <div class="empty"><div class="empty-icon">📕</div><div>Loading eBooks…</div></div>
+      </div>
+    </div>
   </div>
 </div>
 </div>
@@ -375,6 +407,84 @@ code.pill{color:var(--cyan);background:var(--surface);padding:1px 6px;border-rad
     <div class="modal-actions">
       <button class="btn btn-ghost" onclick="closePurgeModal()">Cancel</button>
       <button class="btn btn-danger" id="purgeConfirmBtn" onclick="executePurge()">Purge All Orphans</button>
+    </div>
+  </div>
+</div>
+
+<!-- EBOOK EDIT/CREATE MODAL -->
+<div class="modal-overlay" id="ebookModal">
+  <div class="modal modal-lg">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+      <h3 id="ebookModalTitle" style="margin:0">📕 Add New eBook</h3>
+      <button class="btn btn-ghost btn-xs" onclick="closeEbookModal()">✕</button>
+    </div>
+
+    <!-- PDF Upload Zone -->
+    <div class="upload-zone" id="ebookDropzone" onclick="document.getElementById('ebookFileInput').click()" style="margin-bottom:14px;padding:22px 14px">
+      <input type="file" id="ebookFileInput" accept="application/pdf" onchange="handleEbookFile(event)">
+      <div style="font-size:28px;margin-bottom:6px">📕</div>
+      <div class="upload-lbl"><strong>Click to upload PDF</strong> or drag &amp; drop</div>
+      <div class="upload-sub" id="ebookFileSub">Auto-extracts page count, title &amp; description</div>
+      <div id="ebookFileName" style="color:var(--cyan);font-weight:600;margin-top:6px;font-size:12px"></div>
+    </div>
+
+    <div class="field">
+      <label>Title *</label>
+      <input type="text" id="eb_title" placeholder="e.g. The RAG Engineering Handbook" oninput="autoEbookSlug()">
+    </div>
+
+    <div class="field">
+      <label>Subtitle</label>
+      <input type="text" id="eb_subtitle" placeholder="e.g. From Prototype to Production">
+    </div>
+
+    <div class="field">
+      <label>URL Slug *</label>
+      <input type="text" id="eb_slug" placeholder="e.g. rag-engineering-guide">
+    </div>
+
+    <div class="field">
+      <label>Description</label>
+      <textarea id="eb_description" rows="3" style="min-height:70px" placeholder="Brief summary of what this eBook covers..."></textarea>
+    </div>
+
+    <div class="grid2">
+      <div class="field">
+        <label>Topics (comma separated)</label>
+        <input type="text" id="eb_topics" placeholder="RAG, LLMs, Vector DB">
+      </div>
+      <div class="field">
+        <label>Pages Count</label>
+        <input type="number" id="eb_pages" value="10">
+      </div>
+    </div>
+
+    <div class="grid2">
+      <div class="field">
+        <label>Icon (Emoji)</label>
+        <input type="text" id="eb_icon" value="📚">
+      </div>
+      <div class="field">
+        <label>Cover Gradient (Tailwind classes)</label>
+        <input type="text" id="eb_coverGradient" value="from-cyan-900 via-cyan-700 to-slate-900">
+      </div>
+    </div>
+
+    <div class="modal-actions" style="margin-top:16px">
+      <button class="btn btn-ghost" onclick="closeEbookModal()">Cancel</button>
+      <button class="btn btn-primary" id="saveEbookBtn" onclick="saveEbook()">🚀 Save eBook</button>
+    </div>
+  </div>
+</div>
+
+<!-- DELETE EBOOK MODAL -->
+<div class="modal-overlay" id="deleteEbookModal">
+  <div class="modal">
+    <h3>🗑 Delete eBook</h3>
+    <p id="deleteEbookModalMsg">Are you sure? This removes the entry from ebooks.js AND deletes the PDF file from disk.</p>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeDeleteEbookModal()">Cancel</button>
+      <button class="btn btn-danger" id="deleteEbookConfirmBtn" onclick="executeDeleteEbook()">Yes, Delete Permanently</button>
     </div>
   </div>
 </div>
@@ -588,6 +698,7 @@ function showTab(name, btn) {
   btn.classList.add('active')
   document.getElementById('tab-'+name).classList.add('active')
   if (name === 'articles' || name === 'files') loadArticles()
+  if (name === 'ebooks') loadEbooks()
 }
 
 function schedulePreview() {
@@ -655,6 +766,7 @@ async function publish() {
     avatar:      document.getElementById('avatar').value.trim(),
     tags:        document.getElementById('tags').value,
     featured:    document.getElementById('featured').checked,
+    trending:    document.getElementById('trending').checked,
     status:      document.getElementById('status').value,
   }
   if (!f.htmlContent) return toast('Paste or upload article HTML first', 'error')
@@ -748,6 +860,7 @@ function renderList(arts, orphans) {
       + '<div class="art-title">' + (a.title||'(untitled)')
       + (a.status==='draft' ? ' <span class="badge badge-amber" style="margin-left:6px">Draft</span>' : ' <span class="badge badge-green" style="margin-left:6px">Live</span>')
       + (a.featured ? ' <span class="badge badge-amber" style="margin-left:4px">★ Featured</span>' : '')
+      + (a.trending ? ' <span class="badge badge-cyan" style="margin-left:4px">🔥 Trending</span>' : '')
       + '</div>'
       + '<div class="art-sub">'
       + '<span class="badge badge-cyan">' + (a.category||'') + '</span>'
@@ -811,6 +924,7 @@ function editArt(a) {
   document.getElementById('avatar').value      = a.avatar || 'AI'
   document.getElementById('tags').value        = Array.isArray(a.tags) ? a.tags.join(', ') : (a.tags||'')
   document.getElementById('featured').checked  = !!a.featured
+  document.getElementById('trending').checked  = !!a.trending
   document.getElementById('status').value      = a.status || 'published'
   document.getElementById('deleteBtn').style.display = 'inline-flex'
 
@@ -927,6 +1041,8 @@ function clearForm() {
   document.getElementById('htmlContent').value = ''
   document.getElementById('excerpt').value = ''
   document.getElementById('tags').value = ''
+  document.getElementById('featured').checked = false
+  document.getElementById('trending').checked = false
   document.getElementById('file-ok').style.display = 'none'
   document.getElementById('deleteBtn').style.display = 'none'
   document.getElementById('unsaved').style.display = 'none'
@@ -948,6 +1064,250 @@ window.addEventListener('beforeunload', e => {
 // Close modals on overlay click
 document.getElementById('deleteModal').addEventListener('click', e => { if(e.target===e.currentTarget) closeModal() })
 document.getElementById('purgeModal').addEventListener('click',  e => { if(e.target===e.currentTarget) closePurgeModal() })
+document.getElementById('deleteEbookModal').addEventListener('click', e => { if(e.target===e.currentTarget) closeDeleteEbookModal() })
+document.getElementById('ebookModal').addEventListener('click', e => { if(e.target===e.currentTarget) closeEbookModal() })
+
+// ── eBooks Management ────────────────────────────────────────────────────────
+let allEbooks = []
+let base64EbookFile = null
+let editingEbookSlug = null
+let pendingDeleteEbookSlug = '', pendingDeleteEbookTitle = ''
+
+async function loadEbooks() {
+  try {
+    const r = await fetch('/api/ebooks')
+    const d = await r.json()
+    if (!r.ok) throw new Error(d.error || 'Failed to load eBooks')
+    allEbooks = d.ebooks || []
+    document.getElementById('ebookCount').textContent = allEbooks.length
+    renderEbookList(allEbooks)
+  } catch (e) {
+    document.getElementById('ebookList').innerHTML =
+      '<div class="empty"><div class="empty-icon">⚠️</div><div>Error loading eBooks: ' + e.message + '</div></div>'
+  }
+}
+
+function filterEbooks() {
+  const q = (document.getElementById('ebookSearchInput').value || '').toLowerCase()
+  const filtered = allEbooks.filter(b =>
+    (b.title || '').toLowerCase().includes(q) ||
+    (b.subtitle || '').toLowerCase().includes(q) ||
+    (b.slug || '').toLowerCase().includes(q) ||
+    (b.topics || []).join(' ').toLowerCase().includes(q)
+  )
+  renderEbookList(filtered)
+}
+
+function renderEbookList(books) {
+  const listEl = document.getElementById('ebookList')
+  if (!books.length) {
+    listEl.innerHTML = '<div class="empty"><div class="empty-icon">📕</div><div>No eBooks found</div></div>'
+    return
+  }
+  listEl.innerHTML = books.map(b => {
+    const bJson = JSON.stringify(b).replace(/"/g, '&quot;')
+    const topicsHtml = (b.topics || []).map(t => '<span class="badge badge-cyan" style="margin-right:4px">' + t + '</span>').join('')
+    const pdfUrl = b.downloadUrl && b.downloadUrl !== '#subscribe' ? b.downloadUrl : ('/ebooks/' + b.slug + '.pdf')
+
+    return '<div class="art-item" style="align-items:center">'
+      + '<div style="font-size:24px;width:42px;height:42px;border-radius:8px;display:flex;align-items:center;justify-content:center;background:var(--surface);border:1px solid var(--border);flex-shrink:0">'
+      + (b.icon || '📕')
+      + '</div>'
+      + '<div class="art-meta" style="flex:1">'
+      + '<div class="art-title" style="display:flex;align-items:center;gap:6px">'
+      + '<span>' + (b.title || '(untitled)') + '</span>'
+      + '<span class="badge badge-slate" style="font-size:10px">' + (b.pages || 0) + ' Pages</span>'
+      + '</div>'
+      + (b.subtitle ? '<div style="font-size:12px;color:var(--muted);margin-top:2px">' + b.subtitle + '</div>' : '')
+      + '<div class="art-sub" style="margin-top:6px">'
+      + topicsHtml
+      + '<code class="pill" style="font-size:10px">' + b.slug + '</code>'
+      + '</div>'
+      + '</div>'
+      + '<div class="art-actions">'
+      + '<a href="' + pdfUrl + '" target="_blank" class="btn btn-ghost btn-xs" style="text-decoration:none">View PDF</a>'
+      + '<button class="btn btn-ghost btn-xs" onclick=\'openEbookModal(' + bJson + ')\'>Edit</button>'
+      + '<button class="btn btn-danger btn-xs" onclick="openDeleteEbookModal(\'' + b.slug + '\',\'' + (b.title || '').replace(/'/g, "\\'") + '\')">Delete</button>'
+      + '</div>'
+      + '</div>'
+  }).join('')
+}
+
+function openEbookModal(book) {
+  base64EbookFile = null
+  document.getElementById('ebookFileName').innerText = ''
+  document.getElementById('ebookFileInput').value = ''
+
+  if (book) {
+    editingEbookSlug = book.slug
+    document.getElementById('ebookModalTitle').innerText = '✏️ Edit eBook'
+    document.getElementById('eb_title').value = book.title || ''
+    document.getElementById('eb_subtitle').value = book.subtitle || ''
+    document.getElementById('eb_slug').value = book.slug || ''
+    document.getElementById('eb_description').value = book.description || ''
+    document.getElementById('eb_topics').value = Array.isArray(book.topics) ? book.topics.join(', ') : (book.topics || '')
+    document.getElementById('eb_pages').value = book.pages || 10
+    document.getElementById('eb_icon').value = book.icon || '📚'
+    document.getElementById('eb_coverGradient').value = book.coverGradient || 'from-cyan-900 via-cyan-700 to-slate-900'
+    document.getElementById('ebookFileSub').innerText = 'Leave empty to keep existing PDF (' + book.downloadUrl + ')'
+  } else {
+    editingEbookSlug = null
+    document.getElementById('ebookModalTitle').innerText = '📕 Add New eBook'
+    document.getElementById('eb_title').value = ''
+    document.getElementById('eb_subtitle').value = ''
+    document.getElementById('eb_slug').value = ''
+    document.getElementById('eb_description').value = ''
+    document.getElementById('eb_topics').value = ''
+    document.getElementById('eb_pages').value = 10
+    document.getElementById('eb_icon').value = '📚'
+    document.getElementById('eb_coverGradient').value = 'from-cyan-900 via-cyan-700 to-slate-900'
+    document.getElementById('ebookFileSub').innerText = 'Auto-extracts page count, title & description from PDF'
+  }
+  document.getElementById('ebookModal').classList.add('open')
+}
+
+function closeEbookModal() {
+  document.getElementById('ebookModal').classList.remove('open')
+}
+
+function autoEbookSlug() {
+  if (editingEbookSlug) return
+  const t = document.getElementById('eb_title').value
+  document.getElementById('eb_slug').value = t.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '')
+}
+
+async function handleEbookFile(e) {
+  const f = e.target.files[0]
+  if (!f) return
+  document.getElementById('ebookFileName').innerText = 'Selected: ' + f.name
+
+  let baseName = f.name.replace(/\.pdf$/i, '').replace(/[-_]/g, ' ')
+  baseName = baseName.replace(/\b\w/g, l => l.toUpperCase())
+
+  if (!document.getElementById('eb_title').value) {
+    let title = baseName
+    let subtitle = 'Comprehensive Guide and Best Practices'
+    if (baseName.length > 35 && baseName.includes(' ')) {
+      const parts = baseName.split(' ')
+      const mid = Math.floor(parts.length / 2)
+      title = parts.slice(0, mid).join(' ')
+      subtitle = parts.slice(mid).join(' ')
+    }
+    document.getElementById('eb_title').value = title
+    document.getElementById('eb_subtitle').value = subtitle
+    autoEbookSlug()
+  }
+
+  const r = new FileReader()
+  r.onload = async ev => {
+    base64EbookFile = ev.target.result
+    try {
+      if (window.pdfjsLib) {
+        const pdfData = atob(base64EbookFile.split(',')[1])
+        const pdf = await pdfjsLib.getDocument({ data: pdfData }).promise
+        document.getElementById('eb_pages').value = pdf.numPages
+
+        const page = await pdf.getPage(1)
+        const textContent = await page.getTextContent()
+        let text = textContent.items.map(s => s.str).join(' ').replace(/\s+/g, ' ').trim()
+        if (text.length > 250) {
+          text = text.substring(0, 247) + '...'
+        } else if (text.length < 20) {
+          text = 'An in-depth technical guide covering ' + baseName + '.'
+        }
+        if (!document.getElementById('eb_description').value) {
+          document.getElementById('eb_description').value = text
+        }
+      }
+    } catch (err) {
+      console.warn('PDF parse notice:', err)
+    }
+  }
+  r.readAsDataURL(f)
+}
+
+async function saveEbook() {
+  const btn = document.getElementById('saveEbookBtn')
+  const title = document.getElementById('eb_title').value.trim()
+  let slug = document.getElementById('eb_slug').value.trim()
+  if (!slug && title) { autoEbookSlug(); slug = document.getElementById('eb_slug').value.trim() }
+
+  if (!title) return toast('eBook title is required', 'error')
+  if (!slug) return toast('eBook URL slug is required', 'error')
+
+  if (!editingEbookSlug && !base64EbookFile) {
+    return toast('Please select a PDF file to upload', 'error')
+  }
+
+  const payload = {
+    title,
+    subtitle: document.getElementById('eb_subtitle').value.trim(),
+    slug,
+    description: document.getElementById('eb_description').value.trim(),
+    topics: document.getElementById('eb_topics').value,
+    pages: document.getElementById('eb_pages').value,
+    coverGradient: document.getElementById('eb_coverGradient').value.trim(),
+    icon: document.getElementById('eb_icon').value.trim() || '📚',
+    base64File: base64EbookFile
+  }
+
+  btn.disabled = true
+  btn.innerHTML = '⏳ Saving…'
+  try {
+    const r = await fetch('/api/publish-ebook', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+    const d = await r.json()
+    if (!r.ok) throw new Error(d.error || 'Server error')
+
+    toast('✓ eBook saved: ' + d.path, 'success')
+    closeEbookModal()
+    loadEbooks()
+  } catch (e) {
+    toast('Error: ' + e.message, 'error')
+  } finally {
+    btn.disabled = false
+    btn.innerHTML = '🚀 Save eBook'
+  }
+}
+
+function openDeleteEbookModal(slug, title) {
+  pendingDeleteEbookSlug = slug
+  pendingDeleteEbookTitle = title
+  document.getElementById('deleteEbookModalMsg').textContent =
+    'Delete eBook "' + title + '"? This removes it from ebooks.js AND deletes the PDF file from disk.'
+  document.getElementById('deleteEbookModal').classList.add('open')
+}
+
+function closeDeleteEbookModal() {
+  document.getElementById('deleteEbookModal').classList.remove('open')
+}
+
+async function executeDeleteEbook() {
+  const btn = document.getElementById('deleteEbookConfirmBtn')
+  btn.disabled = true
+  btn.textContent = 'Deleting…'
+  closeDeleteEbookModal()
+
+  try {
+    const r = await fetch('/api/delete-ebook', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ slug: pendingDeleteEbookSlug })
+    })
+    const d = await r.json()
+    if (!r.ok) throw new Error(d.error || 'Server error')
+    toast('✓ eBook deleted: ' + pendingDeleteEbookTitle, 'success')
+    loadEbooks()
+  } catch (e) {
+    toast('Error: ' + e.message, 'error')
+  } finally {
+    btn.disabled = false
+    btn.textContent = 'Yes, Delete Permanently'
+  }
+}
 
 loadArticles()
 </script>

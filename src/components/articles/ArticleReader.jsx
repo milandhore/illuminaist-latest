@@ -79,7 +79,7 @@ export default function ArticleReader({ article }) {
 
         <Link
           to="/articles"
-          className="inline-flex items-center gap-2 text-slate-500 hover:text-cyan text-sm mb-8 transition-colors group"
+          className="inline-flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-amber-600 dark:hover:text-cyan text-sm mb-8 font-medium transition-colors group"
         >
           <ArrowLeft size={16} className="group-hover:-translate-x-0.5 transition-transform" />
           Back to Articles
@@ -106,21 +106,21 @@ export default function ArticleReader({ article }) {
                 <Badge color="amber">{article.difficulty}</Badge>
               </div>
 
-              <h1 className="font-heading text-3xl md:text-4xl font-bold text-slate-100 leading-tight mb-6">
+              <h1 className="article-reader__title font-heading text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-slate-100 leading-tight mb-6">
                 {article.title}
               </h1>
 
-              <p className="text-slate-400 text-lg leading-relaxed mb-8">{article.excerpt}</p>
+              <p className="article-reader__excerpt text-slate-600 dark:text-slate-400 text-lg leading-relaxed mb-8">{article.excerpt}</p>
 
               {/* Meta bar */}
-              <div className="flex flex-wrap items-center gap-6 py-5 border-y border-slate-800">
-                <div className="flex items-center gap-1 text-slate-500 text-sm">
+              <div className="flex flex-wrap items-center gap-6 py-5 border-y border-slate-200 dark:border-slate-800">
+                <div className="flex items-center gap-1 text-slate-500 dark:text-slate-400 text-sm font-medium">
                   <Clock size={12} /> {article.readingTime} min read
                 </div>
 
                 {/* Share buttons */}
                 <div className="ml-auto flex items-center gap-2">
-                  <span className="text-slate-600 text-sm flex items-center gap-1.5">
+                  <span className="text-slate-500 dark:text-slate-400 text-sm flex items-center gap-1.5 font-medium">
                     <Share2 size={13} /> Share
                   </span>
                   <a
@@ -129,7 +129,7 @@ export default function ArticleReader({ article }) {
                     rel="noopener noreferrer"
                     aria-label="Share on Twitter"
                     title="Share on Twitter"
-                    className="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-slate-500 hover:text-cyan hover:bg-slate-700 transition-all duration-200"
+                    className="w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700/60 flex items-center justify-center text-slate-600 dark:text-slate-400 hover:text-amber-600 dark:hover:text-cyan hover:bg-slate-200 dark:hover:bg-slate-700 transition-all duration-200"
                   >
                     <Twitter size={14} />
                   </a>
@@ -139,7 +139,7 @@ export default function ArticleReader({ article }) {
                     rel="noopener noreferrer"
                     aria-label="Share on LinkedIn"
                     title="Share on LinkedIn"
-                    className="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-slate-500 hover:text-cyan hover:bg-slate-700 transition-all duration-200"
+                    className="w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700/60 flex items-center justify-center text-slate-600 dark:text-slate-400 hover:text-amber-600 dark:hover:text-cyan hover:bg-slate-200 dark:hover:bg-slate-700 transition-all duration-200"
                   >
                     <Linkedin size={14} />
                   </a>
@@ -147,8 +147,8 @@ export default function ArticleReader({ article }) {
                     onClick={copyLink}
                     aria-label="Copy link"
                     title={copied ? 'Copied!' : 'Copy link'}
-                    className={`w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center transition-all duration-200 ${
-                      copied ? 'text-cyan' : 'text-slate-500 hover:text-cyan hover:bg-slate-700'
+                    className={`w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700/60 flex items-center justify-center transition-all duration-200 ${
+                      copied ? 'text-emerald-500' : 'text-slate-600 dark:text-slate-400 hover:text-amber-600 dark:hover:text-cyan hover:bg-slate-200 dark:hover:bg-slate-700'
                     }`}
                   >
                     {copied ? <CheckCheck size={14} /> : <Link2 size={14} />}
@@ -168,13 +168,13 @@ export default function ArticleReader({ article }) {
 
             {/* Tags */}
             {article.tags?.length > 0 && (
-              <div className="mt-12 pt-8 border-t border-slate-800">
-                <p className="text-slate-500 text-sm mb-3">Filed under:</p>
+              <div className="mt-12 pt-8 border-t border-slate-200 dark:border-slate-800">
+                <p className="text-slate-500 dark:text-slate-400 text-sm mb-3 font-semibold">Filed under:</p>
                 <div className="flex flex-wrap gap-2">
                   {article.tags.map(tag => (
                     <span
                       key={tag}
-                      className="text-xs px-3 py-1 rounded-full bg-slate-800 text-slate-400 border border-slate-700 hover:text-cyan hover:border-cyan/40 transition-colors cursor-pointer"
+                      className="text-xs px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700 hover:text-amber-600 dark:hover:text-cyan hover:border-amber-500/40 dark:hover:border-cyan/40 transition-colors cursor-pointer"
                     >
                       #{tag}
                     </span>
