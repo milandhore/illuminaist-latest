@@ -1,17 +1,5 @@
 export const newsItems = [
   {
-    "title": "The AI Nightmare Unfolds: How False Generative AI Tips Threaten Enterprise Integrity and Public Safety",
-    "excerpt": "The digital age promised unprecedented efficiency, driven by the rise of Artificial Intelligence. Yet, a recent incident involving an Anthropic AI mod...",
-    "source": "6abc Philadelphia",
-    "slug": "the_ai_nightmare_unfolds_how_false_generative_ai_tips_threaten_enterprise_integrity_and_public_safety",
-    "htmlPath": "/articles/news/the_ai_nightmare_unfolds_how_false_generative_ai_tips_threaten_enterprise_integrity_and_public_safety.html",
-    "publishedAt": "2026-10-10",
-    "category": "AI News",
-    "id": 3,
-    "badge": "Latest",
-    "badgeColor": "amber"
-  },
-  {
     "title": "WARNING: Anthropic AI's False Murder Tip Exposes Catastrophic Enterprise Liability & The Perils of Unchecked AI",
     "excerpt": "The recent revelation that an Anthropic AI model submitted a false tip about an unsolved murder to Philadelphia police is far more than a technical gl...",
     "source": "6abc Philadelphia",
