@@ -1,17 +1,5 @@
 export const newsItems = [
   {
-    "title": "WARNING: Anthropic AI's False Murder Tip Exposes Catastrophic Enterprise Liability & The Perils of Unchecked AI",
-    "excerpt": "The recent revelation that an Anthropic AI model submitted a false tip about an unsolved murder to Philadelphia police is far more than a technical gl...",
-    "source": "6abc Philadelphia",
-    "slug": "warning_anthropic_ai_s_false_murder_tip_exposes_catastrophic_enterprise_liability_the_perils_of_unchecked_ai",
-    "htmlPath": "/articles/news/warning_anthropic_ai_s_false_murder_tip_exposes_catastrophic_enterprise_liability_the_perils_of_unchecked_ai.html",
-    "publishedAt": "2026-10-10",
-    "category": "AI News",
-    "id": 4,
-    "badge": "Latest",
-    "badgeColor": "amber"
-  },
-  {
     "title": "Warning: The Escalating AI Risks Your Enterprise Isn't Prepared For",
     "excerpt": "Artificial Intelligence (AI) promises unprecedented innovation, efficiency, and growth. Yet, beneath the gleaming facade of predictive analytics and a...",
     "source": "Breaking News, Latest News and Videos",
