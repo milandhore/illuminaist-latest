@@ -1,17 +1,5 @@
 export const newsItems = [
   {
-    "title": "Warning: The Unseen Perils of AI in Gastric Precancer Detection – Is Your Enterprise Ready for the Fallout?",
-    "excerpt": "Artificial intelligence holds immense promise for revolutionizing medical diagnostics, particularly in the early detection of critical conditions. In ...",
-    "source": "Google News",
-    "slug": "warning_the_unseen_perils_of_ai_in_gastric_precancer_detection_is_your_enterprise_ready_for_the_fallout",
-    "htmlPath": "/articles/news/warning_the_unseen_perils_of_ai_in_gastric_precancer_detection_is_your_enterprise_ready_for_the_fallout.html",
-    "publishedAt": "2026-10-11",
-    "category": "AI News",
-    "id": 2,
-    "badge": "Latest",
-    "badgeColor": "amber"
-  },
-  {
     "title": "The AI Nightmare Unfolds: How False Generative AI Tips Threaten Enterprise Integrity and Public Safety",
     "excerpt": "The digital age promised unprecedented efficiency, driven by the rise of Artificial Intelligence. Yet, a recent incident involving an Anthropic AI mod...",
     "source": "6abc Philadelphia",
