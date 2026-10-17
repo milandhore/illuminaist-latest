@@ -1,17 +1,5 @@
 export const newsItems = [
   {
-    "title": "AI's Looming Shadow: Unmasking the Catastrophic Risks Your Enterprise Faces by 2026",
-    "excerpt": "The rapid ascent of Artificial Intelligence promises unparalleled innovation and efficiency across industries. Enterprises worldwide are pouring billi...",
-    "source": "Florida Hospital News and Healthcare Report",
-    "slug": "ai_s_looming_shadow_unmasking_the_catastrophic_risks_your_enterprise_faces_by_2026",
-    "htmlPath": "/articles/news/ai_s_looming_shadow_unmasking_the_catastrophic_risks_your_enterprise_faces_by_2026.html",
-    "publishedAt": "2026-10-09",
-    "category": "AI News",
-    "id": 6,
-    "badge": "Latest",
-    "badgeColor": "amber"
-  },
-  {
     "title": "AI's Silent Sabotage: Why Your Enterprise is Blind to the Coming Catastrophe",
     "excerpt": "While headlines trumpet the transformative power of Artificial Intelligence, propelling enterprises into an era of unprecedented innovation and effici...",
     "source": "Breaking News, Latest News and Videos",
