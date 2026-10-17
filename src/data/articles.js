@@ -1,31 +1,5 @@
 export const articles = [
   {
-    "slug": "top_agentic_ai_frameworks_compared_langgraph_crewai_autogen_adk",
-    "topicSlug": "ai-llms",
-    "category": "AI & LLMs",
-    "difficulty": "Advanced",
-    "title": "Top Agentic AI Frameworks Compared - LangGraph, CrewAI, AutoGen, ADK",
-    "excerpt": "A comprehensive comparison of the best agentic AI frameworks in 2026. Explore LangGraph vs CrewAI, AutoGen multi-agent setups, and Enterprise ADKs.",
-    "avatar": "AI",
-    "author": "IlluminAIst",
-    "readingTime": 7,
-    "publishedAt": "2026-10-04",
-    "htmlFile": true,
-    "featured": false,
-    "trending": true,
-    "status": "published",
-    "tags": [
-      "LangChain",
-      "RAG",
-      "LLM",
-      "LLaMA",
-      "Docker",
-      "Multi-agent",
-      "Anthropic",
-      "OpenAI"
-    ]
-  },
-  {
     "slug": "the_ux_of_agentic_ai_designing_for_trust_and_transparency",
     "topicSlug": "ai-llms",
     "category": "AI & LLMs",
