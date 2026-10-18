@@ -2,6 +2,7 @@ import { useParams, Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { getArticleBySlug } from '../data/articles'
 import ArticleReader from '../components/articles/ArticleReader'
+import { sitePath } from '../utils/sitePath'
 
 /**
  * Builds the fetch URL for an HTML article.
@@ -12,7 +13,7 @@ function getArticleHtmlPath(article) {
   const base = article.topicSlug
     ? `/articles/${article.topicSlug}/${article.slug}.html`
     : `/articles/${article.slug}.html`
-  return base
+  return sitePath(base)
 }
 
 export default function ArticleDetailPage() {

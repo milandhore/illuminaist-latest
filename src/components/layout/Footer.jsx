@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Twitter, Linkedin, Github, Rss, ArrowUpRight, Zap } from 'lucide-react'
+import { sitePath } from '../../utils/sitePath'
 
 const LINKS = {
   Company: [
@@ -46,7 +47,7 @@ export default function Footer() {
             <div className="flex items-center gap-3 mb-4">
               <div className="relative">
                 <img
-                  src="/logo.jpg"
+                  src={sitePath('logo.jpg')}
                   alt="IlluminAIst logo"
                   className="w-11 h-11 rounded-xl object-cover"
                   style={{ boxShadow: '0 0 20px rgba(230,107,44,0.3)' }}

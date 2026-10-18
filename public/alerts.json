@@ -1,5 +1,15 @@
 [
   {
+    "id": "alert-news-1792237909797",
+    "type": "news",
+    "title": "AI-designed viruses raise new synthetic-biology questions",
+    "slug": "ai_designed_viruses_raise_new_synthetic_biology_questions",
+    "excerpt": "Researchers are using generative AI to draft viral blueprints, opening a new…",
+    "url": "/news/ai_designed_viruses_raise_new_synthetic_biology_questions",
+    "timestamp": "2026-10-17T11:51:49.797Z",
+    "recipientsCount": 10450
+  },
+  {
     "id": "alert-news-1792082278172",
     "type": "news",
     "title": "Breakthrough: Google & Deepmind Announce Gemini 2.5 Flash",

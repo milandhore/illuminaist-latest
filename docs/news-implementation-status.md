@@ -39,11 +39,14 @@ Completed:
 - Existing RSS ingestion and optional Gemini summarization retained.
 - Daily scheduled refresh workflow added.
 - Local editorial image library and deterministic topic mapping retained.
+- The scheduled refresh now validates, builds, commits the refreshed files, and deploys the resulting static artifact to GitHub Pages in the same workflow.
 
 Required deployment configuration:
 
 - Add `GEMINI_API_KEY` to repository secrets if AI rewriting is enabled.
 - Configure the hosting service to run `npm run news:api` only if API-backed reads are desired.
+- In repository Settings → Pages, select GitHub Actions as the publishing source.
+- The workflow runs daily at `03:15 UTC` and can also be started manually with `workflow_dispatch`.
 
 ## Phase 7 — Testing
 

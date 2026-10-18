@@ -14,6 +14,8 @@ const ROOT    = path.resolve(__dirname, '..')
 const ART_DIR = path.join(ROOT, 'public', 'articles')
 const DATA_JS = path.join(ROOT, 'src', 'data', 'articles.js')
 const UI_HTML = path.join(__dirname, 'cms-ui.html')
+const NEWS_DIR = path.join(ROOT, 'public', 'articles', 'news')
+const NEWS_JS = path.join(ROOT, 'src', 'data', 'news.js')
 
 const SUBSCRIBERS_SRC = path.join(ROOT, 'src', 'data', 'subscribers.json')
 const SUBSCRIBERS_PUB = path.join(ROOT, 'public', 'subscribers.json')
@@ -101,6 +103,39 @@ function writeArticlesJs (arr) {
     'export const articles = ' + JSON.stringify(arr, null, 2) + '\n'
   )
   fs.writeFileSync(DATA_JS, updated, 'utf8')
+}
+
+function readNews () {
+  if (!fs.existsSync(NEWS_JS)) return []
+  const src = fs.readFileSync(NEWS_JS, 'utf8')
+  const match = src.match(/export const newsItems\s*=\s*(\[[\s\S]*?\])\s*;?\s*$/)
+  if (!match) return []
+  try { return JSON.parse(match[1]) } catch (_) {
+    try { return eval(match[1]) } catch (__) { return [] }
+  }
+}
+
+function writeNewsJs (arr) {
+  const src = fs.readFileSync(NEWS_JS, 'utf8')
+  const updated = src.replace(
+    /export const newsItems\s*=\s*\[[\s\S]*?\]\s*;?\s*$/,
+    'export const newsItems = ' + JSON.stringify(arr, null, 2) + ';\n'
+  )
+  fs.writeFileSync(NEWS_JS, updated, 'utf8')
+}
+
+function scanNewsFiles () {
+  if (!fs.existsSync(NEWS_DIR)) return []
+  return fs.readdirSync(NEWS_DIR)
+    .filter(file => file.endsWith('.html'))
+    .map(file => {
+      const stat = fs.statSync(path.join(NEWS_DIR, file))
+      return {
+        slug: file.replace(/\.html$/, ''),
+        sizeKb: Math.round(stat.size / 1024),
+        mtime: stat.mtime.toISOString()
+      }
+    })
 }
 
 function slugify (text) {
@@ -286,6 +321,111 @@ function handleGetArticles (res) {
     const orphans   = htmlFiles.filter(f => !slugSet.has(f.slug))
     send(res, 200, { articles, orphans, htmlFiles })
   } catch (err) { send(res, 500, { error: err.message }) }
+}
+
+function handleGetNews (res) {
+  try {
+    const news = readNews()
+    const files = scanNewsFiles()
+    const slugSet = new Set(news.map(item => item.slug))
+    const orphans = files.filter(file => !slugSet.has(file.slug))
+    send(res, 200, { news, files, orphans })
+  } catch (err) { send(res, 500, { error: err.message }) }
+}
+
+function makeNewsHtml (title, excerpt, htmlContent) {
+  const safeTitle = String(title || '').replace(/[<>]/g, '')
+  const safeExcerpt = String(excerpt || '').replace(/"/g, '&quot;').replace(/[<>]/g, '')
+  return [
+    '<!DOCTYPE html>',
+    '<html lang="en">',
+    '<head>',
+    '  <meta charset="UTF-8">',
+    '  <title>' + safeTitle + ' | IlluminAIst</title>',
+    '  <meta name="description" content="' + safeExcerpt + '">',
+    '</head>',
+    '<body>',
+    htmlContent,
+    '</body>',
+    '</html>',
+  ].join('\n')
+}
+
+async function handlePublishNews (req, res) {
+  try {
+    const body = await bodyJson(req)
+    const { slug: rawSlug, originalSlug, title, excerpt, source, publishedAt,
+            badge, badgeColor, category, htmlContent } = body
+    if (!rawSlug || !title || !htmlContent)
+      return send(res, 400, { error: 'slug, title and htmlContent are required' })
+
+    const slug = slugify(rawSlug)
+    if (!slug) return send(res, 400, { error: 'slug must contain letters or numbers' })
+    fs.mkdirSync(NEWS_DIR, { recursive: true })
+
+    const before = readNews()
+    const existing = before.find(item => item.slug === (originalSlug || slug))
+    const oldSlug = existing && existing.slug
+    const previous = oldSlug && oldSlug !== slug ? path.join(NEWS_DIR, oldSlug + '.html') : ''
+    if (previous && fs.existsSync(previous)) fs.unlinkSync(previous)
+    fs.writeFileSync(path.join(NEWS_DIR, slug + '.html'), makeNewsHtml(title, excerpt, htmlContent), 'utf8')
+
+    const newEntry = {
+      ...(existing || {}),
+      id: existing ? existing.id : (before.length ? Math.max(...before.map(item => Number(item.id) || 0)) + 1 : 1),
+      title,
+      excerpt: excerpt || '',
+      source: source || 'IlluminAIst Editorial',
+      slug,
+      htmlPath: '/articles/news/' + slug + '.html',
+      publishedAt: publishedAt || new Date().toISOString().split('T')[0],
+      badge: badge || (existing ? existing.badge : 'Latest'),
+      badgeColor: badgeColor || (existing ? existing.badgeColor : 'amber'),
+      category: category || 'AI News'
+    }
+    const others = before.filter(item => item.slug !== oldSlug && item.slug !== slug)
+    writeNewsJs([newEntry, ...others])
+
+    const gitResult = gitSync(slug, existing ? 'Updated news' : 'Published news')
+    send(res, 200, { ok: true, slug, path: 'public/articles/news/' + slug + '.html', isUpdate: !!existing, ...gitResult })
+  } catch (err) {
+    console.error(err)
+    send(res, 500, { error: err.message })
+  }
+}
+
+async function handleDeleteNews (req, res) {
+  try {
+    const body = await bodyJson(req)
+    const slugs = [...new Set(Array.isArray(body.slugs) ? body.slugs : [body.slug])].filter(Boolean)
+    if (!slugs.length) return send(res, 400, { error: 'slug or slugs is required' })
+
+    const before = readNews()
+    const slugSet = new Set(slugs)
+    const after = before.filter(item => !slugSet.has(item.slug))
+    writeNewsJs(after)
+    let htmlDeleted = 0
+    for (const slug of slugs) {
+      const htmlPath = path.join(NEWS_DIR, slug + '.html')
+      if (fs.existsSync(htmlPath)) {
+        fs.unlinkSync(htmlPath)
+        htmlDeleted += 1
+      }
+    }
+
+    const gitResult = gitSync(slugs.length === 1 ? slugs[0] : 'bulk-news', 'Deleted news')
+    send(res, 200, {
+      ok: true,
+      slugs,
+      deletedSlugs: slugs.filter(slug => before.some(item => item.slug === slug)),
+      htmlDeleted,
+      removedFromData: before.length !== after.length,
+      ...gitResult
+    })
+  } catch (err) {
+    console.error(err)
+    send(res, 500, { error: err.message })
+  }
 }
 
 function handlePreview (req, res) {
@@ -493,9 +633,13 @@ const server = http.createServer(async (req, res) => {
   const { pathname } = url.parse(req.url)
 
   if (req.method === 'POST'   && pathname === '/api/publish')            return handlePublish(req, res)
+  if (req.method === 'POST'   && pathname === '/api/publish-news')        return handlePublishNews(req, res)
   if (req.method === 'DELETE' && pathname === '/api/article')            return handleDelete(req, res)
   if (req.method === 'POST'   && pathname === '/api/delete')             return handleDelete(req, res)
   if (req.method === 'GET'    && pathname === '/api/articles')           return handleGetArticles(res)
+  if (req.method === 'GET'    && pathname === '/api/news')               return handleGetNews(res)
+  if (req.method === 'POST'   && pathname === '/api/delete-news')         return handleDeleteNews(req, res)
+  if (req.method === 'DELETE' && pathname === '/api/news')               return handleDeleteNews(req, res)
   if (req.method === 'GET'    && pathname === '/api/preview')            return handlePreview(req, res)
   if (req.method === 'POST'   && pathname === '/api/purge-orphans')      return handlePurgeOrphans(req, res)
   if (req.method === 'GET'    && pathname === '/api/ebooks')             return handleGetEbooks(res)

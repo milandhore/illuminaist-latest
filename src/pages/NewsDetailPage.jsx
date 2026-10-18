@@ -6,6 +6,7 @@ import NewsStoryCard from '../components/news/NewsStoryCard'
 import { getNewsVisual } from '../data/newsVisuals'
 import { getNewsLabel, getNewsSummary, getNewsTitle } from '../data/newsCopy'
 import { newsItems } from '../data/news'
+import { sitePath } from '../utils/sitePath'
 
 const dateFormatter = new Intl.DateTimeFormat('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })
 
@@ -35,7 +36,7 @@ export default function NewsDetailPage() {
 
     // The script saves HTML in /public/articles/news/{slug}.html
     const articleSlug = newsItem?.slug || slug
-    fetch(`/articles/news/${articleSlug}.html`)
+    fetch(sitePath(`articles/news/${articleSlug}.html`))
       .then(res => {
         if (!res.ok) throw new Error(`Could not load news article (${res.status}).`)
         return res.text()

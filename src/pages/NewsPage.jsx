@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import AdBanner from '../components/ads/AdBanner'
 import NewsStoryCard from '../components/news/NewsStoryCard'
 import NewsVisual from '../components/news/NewsVisual'
+import DeveloperNewsTicker from '../components/news/DeveloperNewsTicker'
 import { getNewsTopics, getNewsVisual } from '../data/newsVisuals'
 import { getNewsLabel, getNewsSummary, getNewsTitle } from '../data/newsCopy'
 import { newsItems } from '../data/news'
@@ -64,6 +65,8 @@ export default function NewsPage() {
           <button type="button" className={topic === 'All' ? 'is-active' : ''} onClick={() => setTopic('All')}>Latest</button>
           {topics.map(itemTopic => <button type="button" key={itemTopic} className={topic === itemTopic ? 'is-active' : ''} onClick={() => setTopic(itemTopic)}>{itemTopic}</button>)}
         </nav>
+
+        <DeveloperNewsTicker items={filteredItems} />
 
         <AdBanner slot="header" className="news-feed-ad news-feed-ad--top" />
 

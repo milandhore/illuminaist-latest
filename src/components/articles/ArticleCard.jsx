@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { ArrowUpRight, Clock3, TrendingUp } from 'lucide-react'
 import { motion } from 'framer-motion'
+import { sitePath } from '../../utils/sitePath'
 
 const CATEGORY_CONFIG = {
   'AI & LLMs':      { emoji: '🤖', gradient: 'from-cyan-500/20 via-blue-500/10 to-transparent',     badge: 'bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border-cyan-500/30',     accent: '#0099a8' },
@@ -112,7 +113,7 @@ export default function ArticleCard({ article, featured = false }) {
           <div className="article-new-card__footer flex items-center justify-between pt-3 mt-auto">
             <div className="flex items-center gap-3">
               <div className="w-6 h-6 rounded-full overflow-hidden article-new-card__avatar flex-shrink-0">
-                <img src="/logo.jpg" alt="IlluminAIst" className="w-full h-full object-cover" />
+                <img src={sitePath('logo.jpg')} alt="IlluminAIst" className="w-full h-full object-cover" />
               </div>
               <span className="article-new-card__meta flex items-center gap-1.5 text-xs font-medium">
                 <Clock3 size={11} /> {article.readingTime} min read

@@ -4,6 +4,7 @@ import { Menu, X, Search, ChevronDown, PenLine, ArrowUpRight, Sparkles, Zap } fr
 import ThemeToggle from '../ui/ThemeToggle'
 import SubscriberAlertsDropdown from '../subscription/SubscriberAlertsDropdown'
 import { motion, AnimatePresence } from 'framer-motion'
+import { sitePath } from '../../utils/sitePath'
 
 const TOPIC_SUBMENU = [
   { label: 'AI & LLMs',     description: 'Foundation models, prompting & architectures', to: '/articles?topic=AI+%26+LLMs',        icon: '🤖' },
@@ -84,7 +85,7 @@ export default function Header({ onSubscribeClick }) {
           <Link to="/" onClick={closeMenus} className="flex items-center gap-3 group flex-shrink-0">
             <div className="relative w-10 h-10 flex-shrink-0">
               <img
-                src="/logo.jpg"
+                src={sitePath('logo.jpg')}
                 alt="IlluminAIst logo"
                 className="w-10 h-10 rounded-xl object-cover object-center transition-all duration-300 group-hover:shadow-[0_0_20px_rgba(230,107,44,0.5)]"
               />

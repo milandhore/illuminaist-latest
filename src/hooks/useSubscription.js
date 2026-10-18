@@ -1,6 +1,7 @@
 import { useState, useCallback, useEffect } from 'react'
 import { Resend } from 'resend'
 import { validateCompanyEmail, isCompanyEmail, extractDomain } from '../utils/companyEmail'
+import { sitePath } from '../utils/sitePath'
 
 /**
  * Resend Configuration (optional production email service)
@@ -118,7 +119,7 @@ export function useSubscription() {
   useEffect(() => {
     async function loadAlerts() {
       try {
-        const res = await fetch('/alerts.json')
+        const res = await fetch(sitePath('alerts.json'))
         if (res.ok) {
           const data = await res.json()
           setAlerts(data)

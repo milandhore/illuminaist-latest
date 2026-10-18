@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowUpRight, Clock3, Zap, TrendingUp, Star } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { sitePath } from '../../utils/sitePath'
 
 function IlluminAIstOrb() {
   return (
@@ -27,7 +28,7 @@ function IlluminAIstOrb() {
         style={{ animation: 'coreFloat 4s ease-in-out infinite' }}>
         <div className="w-20 h-20 rounded-full border-2 border-white/20 overflow-hidden shadow-2xl flex items-center justify-center"
           style={{ background: 'radial-gradient(circle at 35% 28%, #ffb178, #e66b2c 40%, #852f11 100%)', boxShadow: '0 0 40px rgba(230,107,44,0.5), 0 0 80px rgba(0,240,255,0.2)' }}>
-          <img src="/logo.jpg" alt="IlluminAIst" className="w-full h-full object-cover" />
+          <img src={sitePath('logo.jpg')} alt="IlluminAIst" className="w-full h-full object-cover" />
         </div>
       </div>
 
@@ -147,7 +148,7 @@ export default function HeroSpotlight({ article }) {
           <div className="hero-story__footer flex items-center justify-between gap-4 mt-6 pt-5">
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-full overflow-hidden border-2 border-slate-300 dark:border-slate-700">
-                <img src="/logo.jpg" alt="IlluminAIst" className="w-full h-full object-cover" />
+                <img src={sitePath('logo.jpg')} alt="IlluminAIst" className="w-full h-full object-cover" />
               </div>
               <div>
                 <p className="hero-story__author text-xs font-bold">IlluminAIst</p>

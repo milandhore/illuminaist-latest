@@ -337,6 +337,7 @@ code.pill{color:var(--cyan);background:var(--surface);padding:1px 6px;border-rad
     <div class="tab-bar">
       <button class="tab active" id="tab-btn-preview" onclick="showTab('preview',this)">👁&nbsp; Preview</button>
       <button class="tab" id="tab-btn-articles" onclick="showTab('articles',this)">📚&nbsp; All Articles</button>
+      <button class="tab" id="tab-btn-news" onclick="showTab('news',this)">📰&nbsp; News</button>
       <button class="tab" id="tab-btn-files" onclick="showTab('files',this)">🗂&nbsp; HTML Files</button>
       <button class="tab" id="tab-btn-ebooks" onclick="showTab('ebooks',this)">📕&nbsp; eBooks</button>
     </div>
@@ -357,6 +358,24 @@ code.pill{color:var(--cyan);background:var(--surface);padding:1px 6px;border-rad
       </div>
       <div class="art-list" id="artList">
         <div class="empty"><div class="empty-icon">📭</div><div>Loading articles…</div></div>
+      </div>
+    </div>
+
+    <!-- News list -->
+    <div class="view" id="tab-news">
+      <div class="stats-bar" id="newsStatsBar">
+        <div class="stat"><strong id="newsCount">0</strong>News stories</div>
+        <label style="display:flex;align-items:center;gap:6px;margin:0;color:var(--muted);font-size:11px;cursor:pointer">
+          <input type="checkbox" id="newsSelectAll" onchange="toggleAllNews(this)"> Select all
+        </label>
+        <button class="btn btn-danger btn-sm" id="bulkDeleteNewsBtn" onclick="openBulkDeleteNewsModal()" style="display:none">🗑&nbsp; Delete selected</button>
+        <button class="btn btn-primary btn-sm" onclick="openNewsModal()" style="margin-left:auto">➕&nbsp; Add News Story</button>
+      </div>
+      <div class="search-wrap">
+        <input type="text" id="newsSearchInput" placeholder="🔍  Search news by title, source, or slug..." oninput="filterNews()">
+      </div>
+      <div class="art-list" id="newsList">
+        <div class="empty"><div class="empty-icon">📰</div><div>Loading news…</div></div>
       </div>
     </div>
 
@@ -395,6 +414,81 @@ code.pill{color:var(--cyan);background:var(--surface);padding:1px 6px;border-rad
     <div class="modal-actions">
       <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
       <button class="btn btn-danger" id="deleteConfirmBtn" onclick="executeDelete()">Yes, Delete Permanently</button>
+    </div>
+  </div>
+</div>
+
+<!-- NEWS EDIT/CREATE MODAL -->
+<div class="modal-overlay" id="newsModal">
+  <div class="modal modal-lg">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+      <h3 id="newsModalTitle" style="margin:0">📰 Add News Story</h3>
+      <button class="btn btn-ghost btn-xs" onclick="closeNewsModal()">✕</button>
+    </div>
+
+    <div class="upload-zone" id="newsDropzone" onclick="document.getElementById('newsFileInput').click()"
+         ondragover="event.preventDefault();this.classList.add('drag')"
+         ondragleave="this.classList.remove('drag')"
+         ondrop="dropNewsFile(event)" style="margin-bottom:14px;padding:22px 14px">
+      <input type="file" id="newsFileInput" accept=".html,.htm" onchange="processNewsFile(event)">
+      <div style="font-size:28px;margin-bottom:6px">📰</div>
+      <div class="upload-lbl"><strong>Click to upload HTML</strong> or drag &amp; drop</div>
+      <div class="upload-sub">Upload a full article page or paste the story body below</div>
+      <div id="newsFileName" style="color:var(--cyan);font-weight:600;margin-top:6px;font-size:12px"></div>
+    </div>
+
+    <div class="field">
+      <label>Title *</label>
+      <input type="text" id="news_title" placeholder="e.g. OpenAI releases a new reasoning model" oninput="autoNewsSlug()">
+    </div>
+    <div class="field">
+      <label>Excerpt / Meta Description *</label>
+      <textarea id="news_excerpt" rows="2" style="min-height:64px" placeholder="Short summary shown on news cards and search results."></textarea>
+    </div>
+    <div class="grid2">
+      <div class="field">
+        <label>Source</label>
+        <input type="text" id="news_source" value="IlluminAIst Editorial" placeholder="Publisher or source">
+      </div>
+      <div class="field">
+        <label>Published Date</label>
+        <input type="date" id="news_publishedAt">
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="field">
+        <label>Badge</label>
+        <select id="news_badge"><option>Latest</option><option>Breaking</option><option>Analysis</option></select>
+      </div>
+      <div class="field">
+        <label>Category</label>
+        <input type="text" id="news_category" value="AI News">
+      </div>
+    </div>
+    <div class="field">
+      <label>URL Slug *</label>
+      <input type="text" id="news_slug" placeholder="news_story_slug">
+      <input type="hidden" id="news_originalSlug">
+    </div>
+    <div class="field">
+      <label>HTML Body *</label>
+      <textarea id="news_htmlContent" rows="12" placeholder="&lt;h2&gt;What happened&lt;/h2&gt;&#10;&lt;p&gt;Write or paste the news article here...&lt;/p&gt;"></textarea>
+    </div>
+    <div class="modal-actions" style="margin-top:16px">
+      <button class="btn btn-ghost" onclick="closeNewsModal()">Cancel</button>
+      <button class="btn btn-primary" id="saveNewsBtn" onclick="saveNews()">🚀 Save News Story</button>
+    </div>
+  </div>
+</div>
+
+<!-- NEWS DELETE MODAL -->
+<div class="modal-overlay" id="deleteNewsModal">
+  <div class="modal">
+    <h3>🗑 Delete News Story</h3>
+    <p id="deleteNewsModalMsg">Are you sure? This removes the news entry and its HTML file from disk.</p>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeDeleteNewsModal()">Cancel</button>
+      <button class="btn btn-danger" id="deleteNewsConfirmBtn" onclick="executeDeleteNews()">Yes, Delete Permanently</button>
     </div>
   </div>
 </div>
@@ -500,6 +594,7 @@ const DIFF_COLOR = {Beginner:'green',Intermediate:'cyan',Advanced:'amber'}
 let unsaved = false, previewTimer = null
 let allArticles = [], allOrphans = [], allHtmlFiles = []
 let pendingDeleteSlug = '', pendingDeleteTopic = '', pendingDeleteTitle = ''
+let allNews = [], selectedNewsSlugs = new Set(), pendingDeleteNewsSlugs = [], pendingDeleteNewsTitle = ''
 
 // publishedAt set automatically on publish (today's date)
 
@@ -698,6 +793,7 @@ function showTab(name, btn) {
   btn.classList.add('active')
   document.getElementById('tab-'+name).classList.add('active')
   if (name === 'articles' || name === 'files') loadArticles()
+  if (name === 'news') loadNews()
   if (name === 'ebooks') loadEbooks()
 }
 
@@ -912,6 +1008,226 @@ function renderFileList(files, articles) {
   }).join('')
 }
 
+// ── News management ─────────────────────────────────────────────────────────
+function escapeNewsHtml(value) {
+  return String(value == null ? '' : value)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;')
+}
+
+async function loadNews() {
+  try {
+    const r = await fetch('/api/news')
+    const data = await r.json()
+    if (!r.ok) throw new Error(data.error || 'Failed to load news')
+    allNews = data.news || []
+    selectedNewsSlugs = new Set([...selectedNewsSlugs].filter(slug => allNews.some(item => item.slug === slug)))
+    const countEl = document.getElementById('newsCount')
+    if (countEl) countEl.textContent = allNews.length
+    renderNewsList(allNews)
+    syncNewsSelectionUI()
+  } catch (e) {
+    const list = document.getElementById('newsList')
+    if (list) list.innerHTML = '<div class="empty"><div class="empty-icon">⚠️</div><div>Error loading news: ' + escapeNewsHtml(e.message) + '</div></div>'
+  }
+}
+
+function filterNews() {
+  const q = (document.getElementById('newsSearchInput').value || '').toLowerCase()
+  renderNewsList(allNews.filter(item =>
+    (item.title || '').toLowerCase().includes(q) ||
+    (item.source || '').toLowerCase().includes(q) ||
+    (item.slug || '').toLowerCase().includes(q) ||
+    (item.category || '').toLowerCase().includes(q)
+  ))
+}
+
+function renderNewsList(items) {
+  const list = document.getElementById('newsList')
+  if (!list) return
+  if (!items.length) {
+    list.innerHTML = '<div class="empty"><div class="empty-icon">📰</div><div>No news stories found</div></div>'
+    syncNewsSelectionUI()
+    return
+  }
+  list.innerHTML = items.map(item => {
+    const rawSlug = item.slug || ''
+    const slug = escapeNewsHtml(item.slug || '')
+    const title = escapeNewsHtml(item.title || '(untitled)')
+    const source = escapeNewsHtml(item.source || 'Unknown source')
+    const category = escapeNewsHtml(item.category || 'AI News')
+    const badge = escapeNewsHtml(item.badge || 'Latest')
+    const date = item.publishedAt ? new Date(item.publishedAt).toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' }) : ''
+    return '<div class="art-item">'
+      + '<input type="checkbox" class="news-select-checkbox" data-news-slug="' + slug + '" ' + (selectedNewsSlugs.has(rawSlug) ? 'checked' : '') + ' onchange="toggleNewsSelection(this)" aria-label="Select ' + title + '">'
+      + '<div class="art-dot" style="background:var(--amber)"></div>'
+      + '<div class="art-meta"><div class="art-title">' + title + ' <span class="badge badge-amber" style="margin-left:6px">' + badge + '</span></div>'
+      + '<div class="art-sub"><span class="badge badge-cyan">' + category + '</span><span>' + source + '</span><span>' + date + '</span><code class="pill" style="font-size:10px">' + slug + '</code></div></div>'
+      + '<div class="art-actions"><a href="http://localhost:5173/#/news/' + encodeURIComponent(item.slug || '') + '" target="_blank" class="btn btn-ghost btn-xs" style="text-decoration:none">View</a>'
+      + '<button class="btn btn-ghost btn-xs" onclick="editNewsBySlug(\'' + slug.replace(/&#39;/g, '') + '\')">Edit</button>'
+      + '<button class="btn btn-danger btn-xs" onclick="openDeleteNewsModal(\'' + slug.replace(/&#39;/g, '') + '\')">Delete</button></div></div>'
+  }).join('')
+  syncNewsSelectionUI()
+}
+
+function toggleNewsSelection(input) {
+  const slug = input.getAttribute('data-news-slug')
+  if (input.checked) selectedNewsSlugs.add(slug)
+  else selectedNewsSlugs.delete(slug)
+  syncNewsSelectionUI()
+}
+
+function toggleAllNews(input) {
+  document.querySelectorAll('#newsList .news-select-checkbox').forEach(checkbox => {
+    checkbox.checked = input.checked
+    const slug = checkbox.getAttribute('data-news-slug')
+    if (input.checked) selectedNewsSlugs.add(slug)
+    else selectedNewsSlugs.delete(slug)
+  })
+  syncNewsSelectionUI()
+}
+
+function syncNewsSelectionUI() {
+  const bulkButton = document.getElementById('bulkDeleteNewsBtn')
+  if (bulkButton) {
+    bulkButton.style.display = selectedNewsSlugs.size ? 'inline-flex' : 'none'
+    bulkButton.textContent = '🗑  Delete selected (' + selectedNewsSlugs.size + ')'
+  }
+  const visible = [...document.querySelectorAll('#newsList .news-select-checkbox')]
+  const checked = visible.filter(checkbox => checkbox.checked).length
+  const selectAll = document.getElementById('newsSelectAll')
+  if (selectAll) {
+    selectAll.checked = visible.length > 0 && checked === visible.length
+    selectAll.indeterminate = checked > 0 && checked < visible.length
+  }
+}
+
+function todayString() { return new Date().toISOString().split('T')[0] }
+
+function autoNewsSlug() {
+  if (document.getElementById('news_originalSlug').value) return
+  document.getElementById('news_slug').value = document.getElementById('news_title').value.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '')
+}
+
+function processNewsFile(e) {
+  const file = e.target.files[0]
+  if (!file) return
+  const reader = new FileReader()
+  reader.onload = event => {
+    const html = event.target.result
+    const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i)
+    const body = bodyMatch ? bodyMatch[1].trim() : html
+    const titleMatch = html.match(/<title[^>]*>([^<]+)<\/title>/i)
+    const descriptionMatch = html.match(/<meta[^>]+name=["']description["'][^>]+content=["']([^"']+)/i)
+    if (titleMatch && !document.getElementById('news_originalSlug').value) {
+      document.getElementById('news_title').value = titleMatch[1].replace(/\s*\|\s*IlluminAIst\s*$/i, '').trim()
+      autoNewsSlug()
+    }
+    if (descriptionMatch) document.getElementById('news_excerpt').value = descriptionMatch[1].trim()
+    document.getElementById('news_htmlContent').value = body
+    document.getElementById('newsFileName').textContent = '✓ ' + file.name + ' (' + Math.round(file.size / 1024) + ' KB)'
+  }
+  reader.readAsText(file)
+}
+
+function dropNewsFile(e) {
+  e.preventDefault()
+  document.getElementById('newsDropzone').classList.remove('drag')
+  const file = e.dataTransfer.files[0]
+  if (file) processNewsFile({ target: { files: [file] } })
+}
+
+function openNewsModal(item) {
+  const news = item || {}
+  document.getElementById('newsModalTitle').textContent = news.slug ? '📰 Edit News Story' : '📰 Add News Story'
+  document.getElementById('news_title').value = news.title || ''
+  document.getElementById('news_excerpt').value = news.excerpt || ''
+  document.getElementById('news_source').value = news.source || 'IlluminAIst Editorial'
+  document.getElementById('news_publishedAt').value = news.publishedAt || todayString()
+  document.getElementById('news_badge').value = news.badge || 'Latest'
+  document.getElementById('news_category').value = news.category || 'AI News'
+  document.getElementById('news_slug').value = news.slug || ''
+  document.getElementById('news_originalSlug').value = news.slug || ''
+  document.getElementById('news_htmlContent').value = ''
+  document.getElementById('newsFileInput').value = ''
+  document.getElementById('newsFileName').textContent = ''
+  document.getElementById('newsModal').classList.add('open')
+  if (news.slug) {
+    fetch('/api/preview?slug=' + encodeURIComponent(news.slug) + '&topicSlug=news').then(r => r.text()).then(html => {
+      const match = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i)
+      document.getElementById('news_htmlContent').value = match ? match[1].trim() : html
+    }).catch(() => {})
+  }
+}
+
+function editNewsBySlug(slug) {
+  const item = allNews.find(news => news.slug === slug)
+  if (item) openNewsModal(item)
+}
+
+function closeNewsModal() { document.getElementById('newsModal').classList.remove('open') }
+
+async function saveNews() {
+  const btn = document.getElementById('saveNewsBtn')
+  const payload = {
+    title: document.getElementById('news_title').value.trim(),
+    excerpt: document.getElementById('news_excerpt').value.trim(),
+    source: document.getElementById('news_source').value.trim(),
+    publishedAt: document.getElementById('news_publishedAt').value || todayString(),
+    badge: document.getElementById('news_badge').value,
+    badgeColor: document.getElementById('news_badge').value === 'Breaking' ? 'cyan' : 'amber',
+    category: document.getElementById('news_category').value.trim() || 'AI News',
+    slug: document.getElementById('news_slug').value.trim(),
+    originalSlug: document.getElementById('news_originalSlug').value,
+    htmlContent: document.getElementById('news_htmlContent').value.trim()
+  }
+  if (!payload.title) return toast('Title is required', 'error')
+  if (!payload.excerpt) return toast('Excerpt is required', 'error')
+  if (!payload.slug) { autoNewsSlug(); payload.slug = document.getElementById('news_slug').value }
+  if (!payload.htmlContent) return toast('Upload or paste the HTML article body', 'error')
+
+  btn.disabled = true; btn.textContent = '⏳ Saving…'
+  try {
+    const r = await fetch('/api/publish-news', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) })
+    const data = await r.json()
+    if (!r.ok) throw new Error(data.error || 'Save failed')
+    toast('✓ News story ' + (data.isUpdate ? 'updated' : 'published') + (data.pushed ? ' · pushed to GitHub ✓' : ''), 'success')
+    closeNewsModal(); loadNews()
+  } catch (e) { toast('Error: ' + e.message, 'error') }
+  finally { btn.disabled = false; btn.textContent = '🚀 Save News Story' }
+}
+
+function openDeleteNewsModal(slug) {
+  const item = allNews.find(news => news.slug === slug)
+  pendingDeleteNewsSlugs = [slug]
+  pendingDeleteNewsTitle = item ? item.title : slug
+  document.getElementById('deleteNewsModalMsg').textContent = 'Delete "' + pendingDeleteNewsTitle + '"? This removes the news entry and its HTML file from disk. Cannot be undone.'
+  document.getElementById('deleteNewsModal').classList.add('open')
+}
+
+function openBulkDeleteNewsModal() {
+  pendingDeleteNewsSlugs = [...selectedNewsSlugs]
+  if (!pendingDeleteNewsSlugs.length) return toast('Select at least one news story', 'error')
+  document.getElementById('deleteNewsModalMsg').textContent = 'Delete ' + pendingDeleteNewsSlugs.length + ' selected news stories? This removes their entries and HTML files from disk. Cannot be undone.'
+  document.getElementById('deleteNewsModal').classList.add('open')
+}
+
+function closeDeleteNewsModal() { document.getElementById('deleteNewsModal').classList.remove('open') }
+
+async function executeDeleteNews() {
+  const btn = document.getElementById('deleteNewsConfirmBtn')
+  btn.disabled = true; btn.textContent = 'Deleting…'; closeDeleteNewsModal()
+  try {
+    const r = await fetch('/api/delete-news', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ slugs: pendingDeleteNewsSlugs }) })
+    const data = await r.json()
+    if (!r.ok) throw new Error(data.error || 'Delete failed')
+    selectedNewsSlugs = new Set()
+    toast('✓ Deleted ' + pendingDeleteNewsSlugs.length + ' news stor' + (pendingDeleteNewsSlugs.length === 1 ? 'y' : 'ies') + (data.pushed ? ' · pushed to GitHub ✓' : ''), 'success')
+    loadNews()
+  } catch (e) { toast('Error: ' + e.message, 'error') }
+  finally { btn.disabled = false; btn.textContent = 'Yes, Delete Permanently' }
+}
+
 // ── Edit ─────────────────────────────────────────────────────────────────────
 function editArt(a) {
   document.getElementById('title').value       = a.title || ''
@@ -1063,6 +1379,8 @@ window.addEventListener('beforeunload', e => {
 
 // Close modals on overlay click
 document.getElementById('deleteModal').addEventListener('click', e => { if(e.target===e.currentTarget) closeModal() })
+document.getElementById('newsModal').addEventListener('click', e => { if(e.target===e.currentTarget) closeNewsModal() })
+document.getElementById('deleteNewsModal').addEventListener('click', e => { if(e.target===e.currentTarget) closeDeleteNewsModal() })
 document.getElementById('purgeModal').addEventListener('click',  e => { if(e.target===e.currentTarget) closePurgeModal() })
 document.getElementById('deleteEbookModal').addEventListener('click', e => { if(e.target===e.currentTarget) closeDeleteEbookModal() })
 document.getElementById('ebookModal').addEventListener('click', e => { if(e.target===e.currentTarget) closeEbookModal() })

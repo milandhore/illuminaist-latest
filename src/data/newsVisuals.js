@@ -1,9 +1,11 @@
+import { sitePath } from '../utils/sitePath'
+
 const VISUAL_LIBRARY = {
   security: {
     topic: 'AI Safety',
     label: 'AI safety',
     mark: '◎',
-    image: '/news-art/cybersecurity-network.png',
+    image: sitePath('news-art/cybersecurity-network.png'),
     colors: ['#0b1f39', '#0b7890', '#f0a24b'],
     captions: ['Signals worth watching', 'The new security perimeter', 'Where models meet risk'],
   },
@@ -11,7 +13,7 @@ const VISUAL_LIBRARY = {
     topic: 'Healthcare AI',
     label: 'Healthcare AI',
     mark: '+',
-    image: '/news-art/healthcare-ai.png',
+    image: sitePath('news-art/healthcare-ai.png'),
     colors: ['#dceff5', '#4bb8c4', '#f1a15b'],
     captions: ['AI in the care loop', 'Precision has a price', 'The human checkpoint'],
   },
@@ -33,7 +35,7 @@ const VISUAL_LIBRARY = {
     topic: 'Markets',
     label: 'Markets',
     mark: '↗',
-    image: '/news-art/ai-markets.png',
+    image: sitePath('news-art/ai-markets.png'),
     colors: ['#dce6f2', '#4a7092', '#e28b49'],
     captions: ['The signal behind the spend', 'AI meets the balance sheet', 'A market in motion'],
   },
