@@ -23,7 +23,7 @@ export default function RelatedArticles({ currentSlug, category }) {
   if (!related.length) return null
 
   return (
-    <section className="mt-16 pt-10 border-t border-slate-800">
+    <section className="mt-16 pt-10 border-t border-slate-200 dark:border-slate-800">
       <h2 className="section-heading mb-8">Related Articles</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {related.map(article => (
@@ -33,7 +33,7 @@ export default function RelatedArticles({ currentSlug, category }) {
             className="article-card block group"
           >
             {/* Gradient accent top bar */}
-            <div className="h-0.5 w-full bg-gradient-to-r from-cyan via-cyan-700 to-transparent opacity-60 group-hover:opacity-100 transition-opacity" />
+            <div className="h-0.5 w-full bg-gradient-to-r from-amber-500 via-amber-600 to-cyan-500 opacity-70 group-hover:opacity-100 transition-opacity" />
 
             <div className="p-5">
               <div className="flex items-center gap-2 mb-3">
@@ -43,22 +43,22 @@ export default function RelatedArticles({ currentSlug, category }) {
                 </Badge>
               </div>
 
-              <h3 className="font-heading text-sm font-bold text-slate-100 mb-2 leading-snug group-hover:text-cyan transition-colors duration-200 line-clamp-2">
+              <h3 className="font-heading text-sm font-bold text-slate-900 dark:text-slate-100 mb-2 leading-snug group-hover:text-amber-600 dark:group-hover:text-cyan transition-colors duration-200 line-clamp-2">
                 {article.title}
               </h3>
 
-              <p className="text-slate-500 text-xs leading-relaxed line-clamp-2 mb-4">
+              <p className="text-slate-600 dark:text-slate-400 text-xs leading-relaxed line-clamp-2 mb-4">
                 {article.excerpt}
               </p>
 
-              <div className="flex items-center justify-between pt-3 border-t border-slate-800/60">
-                <div className="flex items-center gap-1.5 text-slate-600 text-[10px]">
+              <div className="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-slate-800/60">
+                <div className="flex items-center gap-1.5 text-slate-500 dark:text-slate-400 text-[10px]">
                   <Clock size={10} />
                   <span>{article.readingTime}m read</span>
                 </div>
                 <ArrowRight
                   size={14}
-                  className="text-slate-600 group-hover:text-cyan group-hover:translate-x-0.5 transition-all duration-200"
+                  className="text-slate-400 dark:text-slate-500 group-hover:text-amber-600 dark:group-hover:text-cyan group-hover:translate-x-0.5 transition-all duration-200"
                 />
               </div>
             </div>

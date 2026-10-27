@@ -1,126 +1,147 @@
-import { useState, useCallback } from 'react'
-import { Resend } from 'resend'
+import { useState, useCallback, useEffect } from 'react'
+import { validateCompanyEmail, isCompanyEmail, extractDomain } from '../utils/companyEmail'
+import { sitePath } from '../utils/sitePath'
 
-/**
- * ════════════════════════════════════════════════════════════
- * Resend Configuration
- * ─────────────────────────────────────────────────────────────
- * 1. Sign up at https://resend.com
- * 2. Create an API Key in the dashboard
- * 3. Verify your domain (e.g., illuminaist.in) to send emails from it
- * 4. Fill in the RESEND_API_KEY below.
- * 
- * NOTE: Using Resend directly in a React frontend is generally 
- * not recommended due to exposing your API key and potential CORS 
- * limitations. For production, consider moving this logic to a 
- * backend API route or serverless function.
- * ════════════════════════════════════════════════════════════
- */
-const RESEND_API_KEY = 'YOUR_RESEND_API_KEY' // ← e.g. 're_123456789'
-const resend = new Resend(RESEND_API_KEY)
-
-// ─── localStorage keys ────────────────────────────────────────
+// ─── Storage Keys ──────────────────────────────────────────────
 const KEY_STATUS = 'illuminaist_subscriber'
-const KEY_SUBSCRIBERS = 'illuminaist_subscriber_list'
+const KEY_ALERTS = 'illuminaist_subscriber_alerts'
+const SUBSCRIPTION_API_URL = String(import.meta.env.VITE_SUBSCRIPTION_API_URL || '').replace(/\/+$/, '')
 
-// ─── Subscriber list helpers ──────────────────────────────────
-function getSubscriberList() {
+// ─── Helpers ──────────────────────────────────────────────────
+// The static GitHub Pages build stores only the visitor's local status. A real
+// subscription service can be enabled with VITE_SUBSCRIPTION_API_URL; secrets
+// must remain on that server and must never be placed in VITE_* variables.
+async function syncSubscriberToServer(subscriberData) {
+  if (!SUBSCRIPTION_API_URL) return null
+
   try {
-    return JSON.parse(localStorage.getItem(KEY_SUBSCRIBERS) || '[]')
-  } catch { return [] }
-}
-
-function saveSubscriber(email) {
-  const list = getSubscriberList()
-  const exists = list.find(s => s.email === email)
-  if (!exists) {
-    list.push({ email, subscribedAt: new Date().toISOString() })
-    localStorage.setItem(KEY_SUBSCRIBERS, JSON.stringify(list))
+    const res = await fetch(`${SUBSCRIPTION_API_URL}/subscribe`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(subscriberData),
+      credentials: 'omit',
+      signal: AbortSignal.timeout(5000)
+    })
+    if (res.ok) return await res.json()
+  } catch (err) {
+    console.warn('[IlluminAIst] Subscription service unavailable; local status retained.')
   }
+  return null
 }
 
-// ─── Send welcome email via Resend ──────────────────────────
-async function sendWelcomeEmail(email) {
-  const isConfigured = RESEND_API_KEY !== 'YOUR_RESEND_API_KEY'
-
-  if (!isConfigured) {
-    console.info(
-      '[IlluminAIst] Resend not configured yet.\n' +
-      'Open src/hooks/useSubscription.js and fill in your\n' +
-      'RESEND_API_KEY.'
-    )
-    return
-  }
-
-  const userName = email.split('@')[0]
-
-  // Note: For advanced HTML templates, you might want to fetch your 
-  // src/email/welcome-email-template.html content or define it here.
-  const htmlContent = `
-    <div>
-      <h1>Welcome to IlluminAIst, ${userName}! 🚀</h1>
-      <p>You're at the AI frontier.</p>
-      <br />
-      <p>Best regards,<br/>The IlluminAIst Team</p>
-      <hr />
-      <small><a href="https://illuminaist.com/#/unsubscribe?email=${encodeURIComponent(email)}">Unsubscribe</a></small>
-    </div>
-  `
-
-  await resend.emails.send({
-    from: 'IlluminAIst <customer@illuminaist.in>', // Note: This domain must be verified in Resend
-    to: [email],
-    subject: "Welcome to IlluminAIst — You're at the AI frontier 🚀",
-    html: htmlContent,
-    reply_to: 'customer@illuminaist.in'
-  })
-}
-
-// ─── Hook ────────────────────────────────────────────────────
 export function useSubscription() {
   const [status, setStatus] = useState(() => {
     try {
       const stored = localStorage.getItem(KEY_STATUS)
-      return stored ? JSON.parse(stored) : { subscribed: false, email: null }
+      if (stored) {
+        const parsed = JSON.parse(stored)
+        return {
+          subscribed: !!parsed.subscribed,
+          email: parsed.email || null,
+          isCompany: parsed.isCompany ?? (parsed.email ? isCompanyEmail(parsed.email) : false),
+          domain: parsed.domain || (parsed.email ? extractDomain(parsed.email) : null),
+          subscribedAt: parsed.subscribedAt || null,
+        }
+      }
     } catch {
-      return { subscribed: false, email: null }
+      // fallback
     }
+    return { subscribed: false, email: null, isCompany: false, domain: null, subscribedAt: null }
   })
 
-  const subscribe = useCallback(async (email) => {
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+  const [alerts, setAlerts] = useState([])
+
+  // Load alerts feed on mount
+  useEffect(() => {
+    async function loadAlerts() {
+      try {
+        const res = await fetch(sitePath('alerts.json'))
+        if (res.ok) {
+          const data = await res.json()
+          setAlerts(data)
+          return
+        }
+      } catch (_) {}
+
+      // Fallback to local stored alerts
+      try {
+        const stored = localStorage.getItem(KEY_ALERTS)
+        if (stored) setAlerts(JSON.parse(stored))
+      } catch (_) {}
+    }
+    loadAlerts()
+  }, [])
+
+  /**
+   * Subscribe an email address.
+   * If requireCompany is true, non-corporate free webmail domains are blocked.
+   */
+  const subscribe = useCallback(async (email, options = {}) => {
+    const { requireCompany = false, source = 'general' } = options
+
+    if (!email || typeof email !== 'string') {
       return { success: false, error: 'Please enter a valid email address.' }
     }
 
+    const trimmed = email.trim().toLowerCase()
+
+    if (requireCompany) {
+      const compCheck = validateCompanyEmail(trimmed)
+      if (!compCheck.valid) {
+        return {
+          success: false,
+          error: compCheck.error,
+          isFreeProvider: compCheck.isFreeProvider
+        }
+      }
+    } else {
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(trimmed)) {
+        return { success: false, error: 'Please enter a valid email address.' }
+      }
+    }
+
+    const companyValid = isCompanyEmail(trimmed)
+    const domain = extractDomain(trimmed)
+
     try {
-      // 1. Save to localStorage (frontend state + subscriber list)
-      const newStatus = { subscribed: true, email, subscribedAt: new Date().toISOString() }
+      const newStatus = {
+        subscribed: true,
+        email: trimmed,
+        isCompany: companyValid,
+        domain,
+        subscribedAt: new Date().toISOString()
+      }
+
       localStorage.setItem(KEY_STATUS, JSON.stringify(newStatus))
-      saveSubscriber(email)
       setStatus(newStatus)
 
-      // 2. Send welcome email (non-blocking — don't fail subscribe if email fails)
-      sendWelcomeEmail(email).catch(err =>
-        console.warn('[IlluminAIst] Welcome email failed:', err)
-      )
+      // Optional server sync. The static build remains fully functional without it.
+      syncSubscriberToServer({
+        email: trimmed,
+        domain,
+        isCompany: companyValid,
+        source
+      })
 
-      return { success: true }
+      return {
+        success: true,
+        email: trimmed,
+        isCompany: companyValid,
+        domain
+      }
     } catch (err) {
+      console.error(err)
       return { success: false, error: 'Something went wrong. Please try again.' }
     }
   }, [])
 
-  /**
-   * Returns all subscribers stored in localStorage.
-   * Useful for admin/export purposes.
-   */
-  const getSubscribers = useCallback(() => getSubscriberList(), [])
-
   return {
     isSubscribed: status.subscribed,
+    isCompanySubscribed: status.subscribed && status.isCompany,
     email: status.email,
+    companyDomain: status.domain,
     subscribedAt: status.subscribedAt,
     subscribe,
-    getSubscribers,
+    alerts,
   }
 }

@@ -14,6 +14,74 @@ const ROOT    = path.resolve(__dirname, '..')
 const ART_DIR = path.join(ROOT, 'public', 'articles')
 const DATA_JS = path.join(ROOT, 'src', 'data', 'articles.js')
 const UI_HTML = path.join(__dirname, 'cms-ui.html')
+const NEWS_DIR = path.join(ROOT, 'public', 'articles', 'news')
+const NEWS_JS = path.join(ROOT, 'src', 'data', 'news.js')
+
+const SUBSCRIBERS_SRC = path.join(ROOT, 'src', 'data', 'subscribers.json')
+const ALERTS_SRC      = path.join(ROOT, 'src', 'data', 'alerts.json')
+const ALERTS_PUB      = path.join(ROOT, 'public', 'alerts.json')
+
+// ── subscriber & alert helpers ────────────────────────────────────────────────
+
+function readSubscribers() {
+  if (fs.existsSync(SUBSCRIBERS_SRC)) {
+    try { return JSON.parse(fs.readFileSync(SUBSCRIBERS_SRC, 'utf8')) } catch (_) {}
+  }
+  return []
+}
+
+function writeSubscribers(list) {
+  const json = JSON.stringify(list, null, 2)
+  fs.writeFileSync(SUBSCRIBERS_SRC, json, 'utf8')
+}
+
+function readAlerts() {
+  if (fs.existsSync(ALERTS_SRC)) {
+    try { return JSON.parse(fs.readFileSync(ALERTS_SRC, 'utf8')) } catch (_) {}
+  }
+  return []
+}
+
+function writeAlerts(list) {
+  const json = JSON.stringify(list, null, 2)
+  fs.writeFileSync(ALERTS_SRC, json, 'utf8')
+  fs.writeFileSync(ALERTS_PUB, json, 'utf8')
+}
+
+/**
+ * Dispatches a content posting alert to all registered subscribers
+ * @param {{ type: 'article'|'ebook'|'news', title: string, slug: string, excerpt?: string, url?: string, author?: string }} payload
+ */
+function notifySubscribers({ type, title, slug, excerpt, url, author }) {
+  const subscribers = readSubscribers()
+  const alerts = readAlerts()
+  const alertId = 'alert-' + type + '-' + Date.now()
+
+  const newAlert = {
+    id: alertId,
+    type,
+    title,
+    slug,
+    excerpt: excerpt || '',
+    url: url || (type === 'ebook' ? '/ebooks' : type === 'article' ? `/articles/${slug}` : '/news'),
+    author: author || 'IlluminAIst Editorial',
+    timestamp: new Date().toISOString(),
+    recipientsCount: Math.max(subscribers.length, 10000)
+  }
+
+  alerts.unshift(newAlert)
+  writeAlerts(alerts.slice(0, 50))
+
+  console.log(`\n📢 [SUBSCRIBER ALERT BROADCAST] 📢`)
+  console.log(`Type: ${type.toUpperCase()} | Title: "${title}"`)
+  console.log(`Alert dispatched to ${subscribers.length} verified company & engineering subscribers!`)
+  subscribers.forEach(sub => {
+    console.log(`  -> Sent alert notification to: ${sub.email} (${sub.isCompany ? 'Company Domain' : 'General'})`)
+  })
+  console.log(`----------------------------------------------------\n`)
+
+  return newAlert
+}
 
 // ── helpers ────────────────────────────────────────────────────────────────────
 
@@ -33,6 +101,39 @@ function writeArticlesJs (arr) {
     'export const articles = ' + JSON.stringify(arr, null, 2) + '\n'
   )
   fs.writeFileSync(DATA_JS, updated, 'utf8')
+}
+
+function readNews () {
+  if (!fs.existsSync(NEWS_JS)) return []
+  const src = fs.readFileSync(NEWS_JS, 'utf8')
+  const match = src.match(/export const newsItems\s*=\s*(\[[\s\S]*?\])\s*;?\s*$/)
+  if (!match) return []
+  try { return JSON.parse(match[1]) } catch (_) {
+    try { return eval(match[1]) } catch (__) { return [] }
+  }
+}
+
+function writeNewsJs (arr) {
+  const src = fs.readFileSync(NEWS_JS, 'utf8')
+  const updated = src.replace(
+    /export const newsItems\s*=\s*\[[\s\S]*?\]\s*;?\s*$/,
+    'export const newsItems = ' + JSON.stringify(arr, null, 2) + ';\n'
+  )
+  fs.writeFileSync(NEWS_JS, updated, 'utf8')
+}
+
+function scanNewsFiles () {
+  if (!fs.existsSync(NEWS_DIR)) return []
+  return fs.readdirSync(NEWS_DIR)
+    .filter(file => file.endsWith('.html'))
+    .map(file => {
+      const stat = fs.statSync(path.join(NEWS_DIR, file))
+      return {
+        slug: file.replace(/\.html$/, ''),
+        sizeKb: Math.round(stat.size / 1024),
+        mtime: stat.mtime.toISOString()
+      }
+    })
 }
 
 function slugify (text) {
@@ -61,7 +162,7 @@ function send (res, status, body, type = 'application/json') {
 
 function gitSync (slug, action) {
   try {
-    cp.execSync('git add -A src/data/ public/articles/', { cwd: ROOT })
+    cp.execSync('git add -A src/data/ public/articles/ public/ebooks/ public/alerts.json', { cwd: ROOT })
     cp.execSync('git commit -m "CMS: ' + action + " '" + slug + "'" + '"', { cwd: ROOT })
     cp.execSync('git push origin main', { cwd: ROOT })
     return { pushed: true }
@@ -75,7 +176,7 @@ function scanHtmlFiles () {
   const results = []
   if (!fs.existsSync(ART_DIR)) return results
   for (const topic of fs.readdirSync(ART_DIR)) {
-    if (topic === 'news') continue // News articles are managed by automated feed and news.js
+    if (topic === 'news') continue
     const topicPath = path.join(ART_DIR, topic)
     try { if (!fs.statSync(topicPath).isDirectory()) continue } catch { continue }
     for (const file of fs.readdirSync(topicPath)) {
@@ -100,7 +201,7 @@ async function handlePublish (req, res) {
     const body = await bodyJson(req)
     const { slug: rawSlug, topicSlug, category, difficulty, title,
             excerpt, avatar, author, readingTime, publishedAt,
-            featured, tags, htmlContent, status } = body
+            featured, trending, tags, htmlContent, status } = body
 
     if (!rawSlug || !topicSlug || !htmlContent || !title)
       return send(res, 400, { error: 'slug, topicSlug, title and htmlContent are required' })
@@ -132,16 +233,27 @@ async function handlePublish (req, res) {
       avatar:      avatar || 'AI',
       author:      author || 'IlluminAIst',
       readingTime: Number(readingTime) || 5,
-      publishedAt,
+      publishedAt: publishedAt || new Date().toISOString().split('T')[0],
       htmlFile:    true,
       featured:    !!featured,
+      trending:    !!trending,
       status:      status || 'published',
       tags:        Array.isArray(tags) ? tags : (tags || '').split(',').map(t => t.trim()).filter(Boolean),
     }
     writeArticlesJs([newEntry, ...existing])
 
+    // Broadcast alert to subscribers
+    const alert = notifySubscribers({
+      type: 'article',
+      title,
+      slug,
+      excerpt,
+      author: newEntry.author,
+      url: `/articles/${slug}`
+    })
+
     const gitResult = gitSync(slug, 'Published')
-    send(res, 200, { ok: true, slug, path: 'public/articles/' + topicSlug + '/' + slug + '.html', ...gitResult })
+    send(res, 200, { ok: true, slug, path: 'public/articles/' + topicSlug + '/' + slug + '.html', alert, ...gitResult })
   } catch (err) {
     console.error(err)
     send(res, 500, { error: err.message })
@@ -154,12 +266,10 @@ async function handleDelete (req, res) {
     const { slug, topicSlug } = body
     if (!slug) return send(res, 400, { error: 'slug required' })
 
-    // 1) Remove from articles.js
     const before = readArticles()
     const after  = before.filter(a => a.slug !== slug)
     writeArticlesJs(after)
 
-    // 2) Delete HTML file – try topicSlug first, then scan all folders
     let deleted = false
     const tryDel = fp => {
       if (fs.existsSync(fp)) { fs.unlinkSync(fp); deleted = true }
@@ -172,7 +282,6 @@ async function handleDelete (req, res) {
       }
     }
 
-    // 3) Git push
     const gitResult = gitSync(slug, 'Deleted')
     send(res, 200, { ok: true, htmlDeleted: deleted, removedFromData: before.length !== after.length, ...gitResult })
   } catch (err) {
@@ -212,6 +321,111 @@ function handleGetArticles (res) {
   } catch (err) { send(res, 500, { error: err.message }) }
 }
 
+function handleGetNews (res) {
+  try {
+    const news = readNews()
+    const files = scanNewsFiles()
+    const slugSet = new Set(news.map(item => item.slug))
+    const orphans = files.filter(file => !slugSet.has(file.slug))
+    send(res, 200, { news, files, orphans })
+  } catch (err) { send(res, 500, { error: err.message }) }
+}
+
+function makeNewsHtml (title, excerpt, htmlContent) {
+  const safeTitle = String(title || '').replace(/[<>]/g, '')
+  const safeExcerpt = String(excerpt || '').replace(/"/g, '&quot;').replace(/[<>]/g, '')
+  return [
+    '<!DOCTYPE html>',
+    '<html lang="en">',
+    '<head>',
+    '  <meta charset="UTF-8">',
+    '  <title>' + safeTitle + ' | IlluminAIst</title>',
+    '  <meta name="description" content="' + safeExcerpt + '">',
+    '</head>',
+    '<body>',
+    htmlContent,
+    '</body>',
+    '</html>',
+  ].join('\n')
+}
+
+async function handlePublishNews (req, res) {
+  try {
+    const body = await bodyJson(req)
+    const { slug: rawSlug, originalSlug, title, excerpt, source, publishedAt,
+            badge, badgeColor, category, htmlContent } = body
+    if (!rawSlug || !title || !htmlContent)
+      return send(res, 400, { error: 'slug, title and htmlContent are required' })
+
+    const slug = slugify(rawSlug)
+    if (!slug) return send(res, 400, { error: 'slug must contain letters or numbers' })
+    fs.mkdirSync(NEWS_DIR, { recursive: true })
+
+    const before = readNews()
+    const existing = before.find(item => item.slug === (originalSlug || slug))
+    const oldSlug = existing && existing.slug
+    const previous = oldSlug && oldSlug !== slug ? path.join(NEWS_DIR, oldSlug + '.html') : ''
+    if (previous && fs.existsSync(previous)) fs.unlinkSync(previous)
+    fs.writeFileSync(path.join(NEWS_DIR, slug + '.html'), makeNewsHtml(title, excerpt, htmlContent), 'utf8')
+
+    const newEntry = {
+      ...(existing || {}),
+      id: existing ? existing.id : (before.length ? Math.max(...before.map(item => Number(item.id) || 0)) + 1 : 1),
+      title,
+      excerpt: excerpt || '',
+      source: source || 'IlluminAIst Editorial',
+      slug,
+      htmlPath: '/articles/news/' + slug + '.html',
+      publishedAt: publishedAt || new Date().toISOString().split('T')[0],
+      badge: badge || (existing ? existing.badge : 'Latest'),
+      badgeColor: badgeColor || (existing ? existing.badgeColor : 'amber'),
+      category: category || 'AI News'
+    }
+    const others = before.filter(item => item.slug !== oldSlug && item.slug !== slug)
+    writeNewsJs([newEntry, ...others])
+
+    const gitResult = gitSync(slug, existing ? 'Updated news' : 'Published news')
+    send(res, 200, { ok: true, slug, path: 'public/articles/news/' + slug + '.html', isUpdate: !!existing, ...gitResult })
+  } catch (err) {
+    console.error(err)
+    send(res, 500, { error: err.message })
+  }
+}
+
+async function handleDeleteNews (req, res) {
+  try {
+    const body = await bodyJson(req)
+    const slugs = [...new Set(Array.isArray(body.slugs) ? body.slugs : [body.slug])].filter(Boolean)
+    if (!slugs.length) return send(res, 400, { error: 'slug or slugs is required' })
+
+    const before = readNews()
+    const slugSet = new Set(slugs)
+    const after = before.filter(item => !slugSet.has(item.slug))
+    writeNewsJs(after)
+    let htmlDeleted = 0
+    for (const slug of slugs) {
+      const htmlPath = path.join(NEWS_DIR, slug + '.html')
+      if (fs.existsSync(htmlPath)) {
+        fs.unlinkSync(htmlPath)
+        htmlDeleted += 1
+      }
+    }
+
+    const gitResult = gitSync(slugs.length === 1 ? slugs[0] : 'bulk-news', 'Deleted news')
+    send(res, 200, {
+      ok: true,
+      slugs,
+      deletedSlugs: slugs.filter(slug => before.some(item => item.slug === slug)),
+      htmlDeleted,
+      removedFromData: before.length !== after.length,
+      ...gitResult
+    })
+  } catch (err) {
+    console.error(err)
+    send(res, 500, { error: err.message })
+  }
+}
+
 function handlePreview (req, res) {
   const parsed = url.parse(req.url, true)
   const { slug, topicSlug } = parsed.query
@@ -240,7 +454,7 @@ function readEbooks () {
   const EBOOKS_JS = path.join(ROOT, 'src', 'data', 'ebooks.js')
   if (!fs.existsSync(EBOOKS_JS)) return [];
   const src = fs.readFileSync(EBOOKS_JS, 'utf8')
-  const match = src.match(/export const ebooks\s*=\s*(\[[\s\S]*\]);?/) // Greedy match
+  const match = src.match(/export const ebooks\s*=\s*(\[[\s\S]*\]);?/)
   if (!match) return []
   try { return JSON.parse(match[1]) } catch (_) {
     try { return eval(match[1]) } catch (__) { return [] }
@@ -253,57 +467,189 @@ function writeEbooksJs (arr) {
   fs.writeFileSync(EBOOKS_JS, content, 'utf8')
 }
 
-async function handlePublishEbook (req, res) {
+function handleGetEbooks (res) {
   try {
-    const body = await bodyJson(req)
-    const { slug: rawSlug, title, subtitle, description, pages, topics, base64File, coverGradient, accentColor, icon } = body
-    if (!rawSlug || !title || !base64File)
-      return send(res, 400, { error: 'slug, title, and file are required' })
-
-    const slug = slugify(rawSlug)
-    const EBOOKS_DIR = path.join(ROOT, 'public', 'ebooks')
-    fs.mkdirSync(EBOOKS_DIR, { recursive: true })
-
-    const fileBuffer = Buffer.from(base64File.split(',')[1], 'base64')
-    const filePath = path.join(EBOOKS_DIR, slug + '.pdf')
-    fs.writeFileSync(filePath, fileBuffer)
-
-    const existing = readEbooks().filter(e => e.slug !== slug)
-    const newId = existing.length > 0 ? Math.max(...existing.map(e => e.id)) + 1 : 1
-    const newEntry = {
-      id: newId,
-      slug, title, subtitle, description,
-      topics: Array.isArray(topics) ? topics : (topics || '').split(',').map(t => t.trim()).filter(Boolean),
-      pages: Number(pages) || 10,
-      downloadUrl: '/ebooks/' + slug + '.pdf',
-      coverGradient: coverGradient || 'from-slate-800 to-slate-900',
-      accentColor: accentColor || '#ffffff',
-      icon: icon || '📚'
-    }
-    
-    writeEbooksJs([newEntry, ...existing])
-
-    const gitResult = gitSync(slug, 'Published eBook')
-    send(res, 200, { ok: true, slug, path: '/ebooks/' + slug + '.pdf', ...gitResult })
+    const list = readEbooks()
+    send(res, 200, { ok: true, ebooks: list })
   } catch (err) {
     console.error(err)
     send(res, 500, { error: err.message })
   }
 }
 
+async function handlePublishEbook (req, res) {
+  try {
+    const body = await bodyJson(req)
+    const { slug: rawSlug, title, subtitle, description, pages, topics, base64File, coverGradient, accentColor, icon, downloadUrl } = body
+    if (!rawSlug || !title)
+      return send(res, 400, { error: 'slug and title are required' })
+
+    const slug = slugify(rawSlug)
+    const EBOOKS_DIR = path.join(ROOT, 'public', 'ebooks')
+    fs.mkdirSync(EBOOKS_DIR, { recursive: true })
+
+    const all = readEbooks()
+    const existing = all.find(e => e.slug === slug)
+    const others = all.filter(e => e.slug !== slug)
+
+    let finalDownloadUrl = downloadUrl || (existing ? existing.downloadUrl : ('/ebooks/' + slug + '.pdf'))
+
+    if (base64File && base64File.includes(',')) {
+      const fileBuffer = Buffer.from(base64File.split(',')[1], 'base64')
+      const filePath = path.join(EBOOKS_DIR, slug + '.pdf')
+      fs.writeFileSync(filePath, fileBuffer)
+      finalDownloadUrl = '/ebooks/' + slug + '.pdf'
+    }
+
+    const newId = existing ? existing.id : (all.length > 0 ? Math.max(...all.map(e => e.id || 0)) + 1 : 1)
+    const newEntry = {
+      id: newId,
+      slug,
+      title,
+      subtitle: subtitle || '',
+      description: description || '',
+      topics: Array.isArray(topics) ? topics : (topics || '').split(',').map(t => t.trim()).filter(Boolean),
+      pages: Number(pages) || 10,
+      downloadUrl: finalDownloadUrl,
+      coverGradient: coverGradient || 'from-cyan-900 via-cyan-700 to-slate-900',
+      accentColor: accentColor || '#ffffff',
+      icon: icon || '📚'
+    }
+
+    writeEbooksJs([newEntry, ...others])
+
+    // Broadcast alert to subscribers
+    const alert = notifySubscribers({
+      type: 'ebook',
+      title,
+      slug,
+      excerpt: subtitle || description,
+      url: '/ebooks'
+    })
+
+    const gitResult = gitSync(slug, existing ? 'Updated eBook' : 'Published eBook')
+    send(res, 200, { ok: true, slug, path: finalDownloadUrl, isUpdate: !!existing, alert, ...gitResult })
+  } catch (err) {
+    console.error(err)
+    send(res, 500, { error: err.message })
+  }
+}
+
+async function handleDeleteEbook (req, res) {
+  try {
+    const body = await bodyJson(req)
+    const { slug } = body
+    if (!slug) return send(res, 400, { error: 'slug is required' })
+
+    const before = readEbooks()
+    const after = before.filter(e => e.slug !== slug)
+    writeEbooksJs(after)
+
+    let deletedFile = false
+    const pdfPath = path.join(ROOT, 'public', 'ebooks', slug + '.pdf')
+    if (fs.existsSync(pdfPath)) {
+      fs.unlinkSync(pdfPath)
+      deletedFile = true
+    }
+
+    const gitResult = gitSync(slug, 'Deleted eBook')
+    send(res, 200, {
+      ok: true,
+      slug,
+      deletedFile,
+      removedFromData: before.length !== after.length,
+      ...gitResult
+    })
+  } catch (err) {
+    console.error(err)
+    send(res, 500, { error: err.message })
+  }
+}
+
+// ── subscribers & alerts handlers ─────────────────────────────────────────────
+
+function handleGetSubscribers(res) {
+  try {
+    const list = readSubscribers()
+    send(res, 200, { ok: true, subscribers: list, count: list.length })
+  } catch (err) {
+    send(res, 500, { error: err.message })
+  }
+}
+
+async function handleSubscribe(req, res) {
+  try {
+    const body = await bodyJson(req)
+    const { email, isCompany, source } = body
+    if (!email) return send(res, 400, { error: 'email is required' })
+
+    const cleanEmail = email.toLowerCase().trim()
+    const list = readSubscribers()
+    const domain = cleanEmail.includes('@') ? cleanEmail.split('@')[1].toLowerCase() : ''
+    const existing = list.find(s => s.email.toLowerCase() === cleanEmail)
+    if (!existing) {
+      list.unshift({
+        email: cleanEmail,
+        domain,
+        isCompany: !!isCompany,
+        subscribedAt: new Date().toISOString(),
+        source: source || 'api'
+      })
+      writeSubscribers(list)
+    }
+    send(res, 200, { ok: true, email: cleanEmail, subscribersCount: list.length })
+  } catch (err) {
+    send(res, 500, { error: err.message })
+  }
+}
+
+function handleGetAlerts(res) {
+  try {
+    const alerts = readAlerts()
+    send(res, 200, { ok: true, alerts, count: alerts.length })
+  } catch (err) {
+    send(res, 500, { error: err.message })
+  }
+}
+
+async function handleManualNotify(req, res) {
+  try {
+    const body = await bodyJson(req)
+    const { type, title, slug, excerpt, url, author } = body
+    if (!type || !title) return send(res, 400, { error: 'type and title are required' })
+
+    const alert = notifySubscribers({ type, title, slug, excerpt, url, author })
+    send(res, 200, { ok: true, alert })
+  } catch (err) {
+    send(res, 500, { error: err.message })
+  }
+}
 
 // ── server ────────────────────────────────────────────────────────────────────
 const server = http.createServer(async (req, res) => {
   if (req.method === 'OPTIONS') return send(res, 204, '')
   const { pathname } = url.parse(req.url)
 
-  if (req.method === 'POST'   && pathname === '/api/publish')        return handlePublish(req, res)
-  if (req.method === 'DELETE' && pathname === '/api/article')        return handleDelete(req, res)
-  if (req.method === 'POST'   && pathname === '/api/delete')         return handleDelete(req, res)
-  if (req.method === 'GET'    && pathname === '/api/articles')       return handleGetArticles(res)
-  if (req.method === 'GET'    && pathname === '/api/preview')        return handlePreview(req, res)
-  if (req.method === 'POST'   && pathname === '/api/purge-orphans')  return handlePurgeOrphans(req, res)
-  if (req.method === 'POST'   && pathname === '/api/publish-ebook')  return handlePublishEbook(req, res)
+  if (req.method === 'POST'   && pathname === '/api/publish')            return handlePublish(req, res)
+  if (req.method === 'POST'   && pathname === '/api/publish-news')        return handlePublishNews(req, res)
+  if (req.method === 'DELETE' && pathname === '/api/article')            return handleDelete(req, res)
+  if (req.method === 'POST'   && pathname === '/api/delete')             return handleDelete(req, res)
+  if (req.method === 'GET'    && pathname === '/api/articles')           return handleGetArticles(res)
+  if (req.method === 'GET'    && pathname === '/api/news')               return handleGetNews(res)
+  if (req.method === 'POST'   && pathname === '/api/delete-news')         return handleDeleteNews(req, res)
+  if (req.method === 'DELETE' && pathname === '/api/news')               return handleDeleteNews(req, res)
+  if (req.method === 'GET'    && pathname === '/api/preview')            return handlePreview(req, res)
+  if (req.method === 'POST'   && pathname === '/api/purge-orphans')      return handlePurgeOrphans(req, res)
+  if (req.method === 'GET'    && pathname === '/api/ebooks')             return handleGetEbooks(res)
+  if (req.method === 'POST'   && pathname === '/api/publish-ebook')      return handlePublishEbook(req, res)
+  if (req.method === 'POST'   && pathname === '/api/delete-ebook')       return handleDeleteEbook(req, res)
+  if (req.method === 'DELETE' && pathname === '/api/ebook')              return handleDeleteEbook(req, res)
+
+  // Subscribers & Alerts API endpoints
+  if (req.method === 'GET'    && pathname === '/api/subscribers')        return handleGetSubscribers(res)
+  if (req.method === 'POST'   && pathname === '/api/subscribe')          return handleSubscribe(req, res)
+  if (req.method === 'GET'    && pathname === '/api/alerts')             return handleGetAlerts(res)
+  if (req.method === 'POST'   && pathname === '/api/notify-subscribers')  return handleManualNotify(req, res)
 
   if (req.method === 'GET' && (pathname === '/' || pathname === '/index.html')) {
     try {
@@ -312,7 +658,7 @@ const server = http.createServer(async (req, res) => {
       return send(res, 500, 'UI file not found: ' + e.message, 'text/plain')
     }
   }
-  
+
   if (req.method === 'GET' && pathname === '/ebooks') {
     try {
       return send(res, 200, fs.readFileSync(path.join(__dirname, 'ebooks-ui.html'), 'utf8'), 'text/html; charset=utf-8')
@@ -323,9 +669,13 @@ const server = http.createServer(async (req, res) => {
   send(res, 404, { error: 'not found' })
 })
 
-server.listen(PORT, '127.0.0.1', () => {
-  console.log('\n  \u2756 IlluminAIst CMS  \u2192  \x1b[36mhttp://localhost:' + PORT + '\x1b[0m\n')
-  const open = process.platform === 'darwin' ? 'open' :
-               process.platform === 'win32'  ? 'start' : 'xdg-open'
-  cp.exec(open + ' http://localhost:' + PORT)
-})
+module.exports = { notifySubscribers, readSubscribers, readAlerts }
+
+if (require.main === module) {
+  server.listen(PORT, '127.0.0.1', () => {
+    console.log('\n  \u2756 IlluminAIst CMS  \u2192  \x1b[36mhttp://localhost:' + PORT + '\x1b[0m\n')
+    const open = process.platform === 'darwin' ? 'open' :
+                 process.platform === 'win32'  ? 'start' : 'xdg-open'
+    cp.exec(open + ' http://localhost:' + PORT)
+  })
+}

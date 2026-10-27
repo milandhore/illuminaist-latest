@@ -65,11 +65,11 @@ export default function TableOfContents({ htmlContent }) {
 
   return (
     <nav aria-label="Table of contents" className="text-sm">
-      <div className="flex items-center gap-2 mb-4 text-slate-400">
+      <div className="flex items-center gap-2 mb-4 text-slate-500 dark:text-slate-400">
         <List size={14} />
         <span className="font-semibold text-xs uppercase tracking-widest">Contents</span>
       </div>
-      <ul className="space-y-1.5 border-l-2 border-slate-800">
+      <ul className="space-y-1.5 border-l-2 border-slate-200 dark:border-slate-800">
         {headings.map(({ id, text, level }) => (
           <li key={id} className={level === 3 ? 'pl-6' : 'pl-3'}>
             <a
@@ -80,8 +80,8 @@ export default function TableOfContents({ htmlContent }) {
               }}
               className={`block py-0.5 transition-all duration-200 leading-snug ${
                 activeId === id
-                  ? 'text-cyan font-medium -ml-[2px] border-l-2 border-cyan pl-[9px]'
-                  : 'text-slate-500 hover:text-slate-300'
+                  ? 'text-amber-600 dark:text-cyan font-semibold -ml-[2px] border-l-2 border-amber-500 dark:border-cyan pl-[9px]'
+                  : 'text-slate-600 dark:text-slate-500 hover:text-slate-900 dark:hover:text-slate-200'
               }`}
             >
               {text}

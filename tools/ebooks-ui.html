@@ -15,7 +15,7 @@
 body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh;font-size:14px}
 h1,h2,h3{font-family:'Outfit',sans-serif}
 .topbar{background:rgba(14,22,35,0.97);border-bottom:1px solid var(--border);
-  display:flex;align-items:center;gap:16px;padding:0 24px;height:58px;}
+  display:flex;align-items:center;gap:16px;padding:0 24px;height:58px;position:sticky;top:0;z-index:100;}
 .logo{font-family:'Outfit',sans-serif;font-weight:800;font-size:19px;letter-spacing:-.5px;
   background:linear-gradient(90deg,#00DCFF,#7B7FFF);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .topbar-badge{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
@@ -27,19 +27,41 @@ h1,h2,h3{font-family:'Outfit',sans-serif}
 .btn-primary{background:linear-gradient(135deg,#00DCFF,#7B7FFF);color:#08121e;}
 .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.1);color:var(--muted)}
 .btn-ghost:hover{border-color:rgba(255,255,255,0.22);color:var(--text);background:rgba(255,255,255,0.03)}
-.btn-sm{padding:5px 11px;font-size:11px}
+.btn-danger{background:rgba(255,77,106,0.1);border:1px solid rgba(255,77,106,0.25);color:var(--red)}
+.btn-danger:hover{background:rgba(255,77,106,0.2);border-color:rgba(255,77,106,0.45)}
+.btn-sm{padding:6px 12px;font-size:12px}
+.btn-xs{padding:4px 9px;font-size:11px}
 
-.container{max-width:800px;margin:40px auto;padding:30px;background:var(--card);border:1px solid var(--border);border-radius:12px;}
-.upload-zone{border:2px dashed rgba(0,220,255,0.2);border-radius:10px;padding:40px 20px;
-  text-align:center;cursor:pointer;transition:all .2s;background:rgba(0,220,255,0.02);margin-bottom:20px;}
+.main-layout{display:grid;grid-template-columns:480px 1fr;gap:24px;max-width:1240px;margin:30px auto;padding:0 24px;}
+@media (max-width: 900px) {
+  .main-layout { grid-template-columns: 1fr; }
+}
+
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px;}
+.upload-zone{border:2px dashed rgba(0,220,255,0.2);border-radius:10px;padding:28px 20px;
+  text-align:center;cursor:pointer;transition:all .2s;background:rgba(0,220,255,0.02);margin-bottom:16px;}
 .upload-zone:hover{border-color:rgba(0,220,255,0.5);background:rgba(0,220,255,0.06)}
 .upload-zone input{display:none}
-label{display:block;font-size:11px;font-weight:600;color:var(--muted);margin-bottom:5px;letter-spacing:.04em; margin-top:15px;}
+label{display:block;font-size:11px;font-weight:600;color:var(--muted);margin-bottom:5px;letter-spacing:.04em; margin-top:13px;}
 input[type=text],input[type=number],textarea{
   width:100%;background:var(--surface);border:1px solid rgba(255,255,255,0.07);
-  border-radius:8px;padding:10px 11px;color:var(--text);font-family:'Inter',sans-serif;
+  border-radius:8px;padding:9px 11px;color:var(--text);font-family:'Inter',sans-serif;
   font-size:13px;outline:none;}
+input:focus,textarea:focus{border-color:rgba(0,220,255,0.4);box-shadow:0 0 0 3px rgba(0,220,255,0.06)}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+
+.badge{display:inline-flex;align-items:center;padding:2px 7px;border-radius:99px;font-size:10px;font-weight:600;}
+.badge-cyan{background:rgba(0,220,255,0.1);color:var(--cyan);border:1px solid rgba(0,220,255,0.2)}
+.badge-slate{background:rgba(148,163,184,0.1);color:var(--muted);border:1px solid rgba(148,163,184,0.2)}
+
+.ebook-item{display:flex;align-items:flex-start;gap:14px;padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:10px;margin-bottom:12px;transition:all .15s;}
+.ebook-item:hover{border-color:rgba(0,220,255,0.25);transform:translateY(-1px)}
+.ebook-icon{width:46px;height:46px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:24px;background:var(--card);border:1px solid var(--border);flex-shrink:0}
+.ebook-info{flex:1;min-width:0}
+.ebook-title{font-size:14px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:8px}
+.ebook-subtitle{font-size:12px;color:var(--muted);margin-top:3px}
+.ebook-desc{font-size:12px;color:var(--subtle);margin-top:6px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.ebook-actions{display:flex;gap:6px;align-items:center;margin-top:10px}
 
 .toast{position:fixed;bottom:24px;right:24px;padding:12px 18px;border-radius:10px;
   font-size:13px;font-weight:500;z-index:9999;transition:all .3s;opacity:0;
@@ -47,6 +69,15 @@ input[type=text],input[type=number],textarea{
 .toast.show{opacity:1;transform:translateY(0)}
 .toast.success{background:#0a2a1c;border:1px solid rgba(34,211,160,0.35);color:var(--green)}
 .toast.error{background:#2a0a12;border:1px solid rgba(255,77,106,0.35);color:var(--red)}
+
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:1000;
+  display:none;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+.modal-overlay.open{display:flex}
+.modal{background:var(--card);border:1px solid var(--border);border-radius:14px;
+  padding:24px;max-width:440px;width:90%;box-shadow:0 24px 80px rgba(0,0,0,0.6)}
+.modal h3{margin-bottom:12px;font-size:17px}
+.modal p{color:var(--muted);font-size:13px;margin-bottom:20px;line-height:1.6}
+.modal-actions{display:flex;gap:10px;justify-content:flex-end}
 </style>
 </head>
 <body>
@@ -55,142 +86,186 @@ input[type=text],input[type=number],textarea{
   <div class="logo">illuminAIst</div>
   <div class="topbar-badge">eBook Studio</div>
   <div class="topbar-actions">
-    <a href="/" class="btn btn-ghost btn-sm" style="text-decoration:none">Back to Articles</a>
+    <a href="/" class="btn btn-ghost btn-sm" style="text-decoration:none">Back to CMS</a>
+    <a href="http://localhost:5173/#/ebooks" target="_blank" class="btn btn-ghost btn-sm" style="text-decoration:none;color:var(--cyan)">View Live eBooks Page ↗</a>
   </div>
 </div>
 
-<div class="container">
-  <h2>Upload New eBook</h2>
-  
-  <div class="upload-zone" onclick="document.getElementById('fileInput').click()">
-    <input type="file" id="fileInput" accept="application/pdf" onchange="handleFile(event)">
-    <div style="font-size:32px; margin-bottom:10px;">📕</div>
-    <div><strong>Click to upload PDF</strong></div>
-    <div id="fileName" style="color:var(--cyan); margin-top:10px;"></div>
+<div class="main-layout">
+  <!-- FORM: Add or Edit eBook -->
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+      <h2 id="formTitle">Add New eBook</h2>
+      <button class="btn btn-ghost btn-xs" id="cancelEditBtn" onclick="resetForm()" style="display:none">✕ Cancel Edit</button>
+    </div>
+
+    <div class="upload-zone" onclick="document.getElementById('fileInput').click()">
+      <input type="file" id="fileInput" accept="application/pdf" onchange="handleFile(event)">
+      <div style="font-size:32px; margin-bottom:8px;">📕</div>
+      <div><strong>Click to upload PDF</strong></div>
+      <div id="fileSub" style="color:var(--subtle);font-size:11px;margin-top:4px">Auto-extracts page count &amp; title</div>
+      <div id="fileName" style="color:var(--cyan); margin-top:8px;font-weight:600;font-size:12px"></div>
+    </div>
+
+    <label>Title *</label>
+    <input type="text" id="title" placeholder="e.g. The RAG Engineering Handbook" oninput="autoSlug()">
+
+    <label>Subtitle</label>
+    <input type="text" id="subtitle" placeholder="e.g. From Prototype to Production">
+
+    <label>URL Slug (auto-filled) *</label>
+    <input type="text" id="slug" placeholder="rag-handbook">
+
+    <label>Description</label>
+    <textarea id="description" rows="3" placeholder="Brief overview of the eBook..."></textarea>
+
+    <div class="grid2">
+      <div>
+        <label>Topics (comma separated)</label>
+        <input type="text" id="topics" placeholder="RAG, LLMs, Vector Databases">
+      </div>
+      <div>
+        <label>Number of Pages</label>
+        <input type="number" id="pages" value="10">
+      </div>
+    </div>
+
+    <div class="grid2">
+      <div>
+        <label>Icon (Emoji)</label>
+        <input type="text" id="icon" value="📚">
+      </div>
+      <div>
+        <label>Cover Gradient</label>
+        <input type="text" id="coverGradient" value="from-cyan-900 via-cyan-700 to-slate-900">
+      </div>
+    </div>
+
+    <div style="display:flex;gap:10px;margin-top:22px">
+      <button class="btn btn-primary" id="publishBtn" onclick="publish()" style="flex:1;justify-content:center;padding:11px;">
+        🚀 Save &amp; Publish eBook
+      </button>
+      <button class="btn btn-ghost btn-sm" onclick="resetForm()">Clear</button>
+    </div>
   </div>
 
-  <label>Title *</label>
-  <input type="text" id="title" placeholder="e.g. The RAG Engineering Handbook" oninput="autoSlug()">
-
-  <label>Subtitle</label>
-  <input type="text" id="subtitle" placeholder="e.g. From Prototype to Production">
-
-  <label>Description</label>
-  <textarea id="description" rows="3" placeholder="Brief overview of the eBook..."></textarea>
-
-  <div class="grid2">
-    <div>
-      <label>Topics (comma separated)</label>
-      <input type="text" id="topics" placeholder="RAG, LLMs, Vector Databases">
+  <!-- LIST: Manage eBooks -->
+  <div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+      <h3>Published eBooks (<span id="count">0</span>)</h3>
+      <button class="btn btn-ghost btn-xs" onclick="loadEbooks()">↻ Refresh</button>
     </div>
-    <div>
-      <label>Number of Pages</label>
-      <input type="number" id="pages" value="10">
+
+    <div id="ebooksList">
+      <div style="color:var(--muted);text-align:center;padding:40px 0">Loading eBooks...</div>
     </div>
   </div>
+</div>
 
-  <div class="grid2">
-    <div>
-      <label>Cover Gradient (Tailwind classes)</label>
-      <input type="text" id="coverGradient" value="from-cyan-900 via-cyan-700 to-slate-900">
-    </div>
-    <div>
-      <label>Icon (Emoji)</label>
-      <input type="text" id="icon" value="📚">
+<!-- DELETE MODAL -->
+<div class="modal-overlay" id="deleteModal">
+  <div class="modal">
+    <h3>🗑 Delete eBook</h3>
+    <p id="deleteMsg">Are you sure? This removes the entry from ebooks.js AND deletes the PDF file from disk.</p>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeDeleteModal()">Cancel</button>
+      <button class="btn btn-danger" id="confirmDeleteBtn" onclick="executeDelete()">Yes, Delete Permanently</button>
     </div>
   </div>
-
-  <label>URL Slug (auto-filled)</label>
-  <input type="text" id="slug" placeholder="rag-handbook">
-
-  <button class="btn btn-primary" id="publishBtn" onclick="publish()" style="width:100%; justify-content:center; margin-top:25px; padding:12px;">
-    🚀 Publish eBook
-  </button>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
 <script>
-pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
+if (window.pdfjsLib) {
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
+}
 
+let allEbooks = [];
 let base64File = null;
+let editingSlug = null;
+let pendingDeleteSlug = '', pendingDeleteTitle = '';
 
-async function handleFile(e) {
-  const f = e.target.files[0];
-  if (!f) return;
-  document.getElementById('fileName').innerText = "Selected: " + f.name;
-  
-  // Auto-populate Title from filename
-  let baseName = f.name.replace(/\.pdf$/i, '').replace(/[-_]/g, ' ');
-  baseName = baseName.replace(/\b\w/g, l => l.toUpperCase());
-  
-  let title = baseName;
-  let subtitle = "Comprehensive Guide and Best Practices";
-  
-  // Split title if it's too long
-  if (baseName.length > 35 && baseName.includes(' ')) {
-    const parts = baseName.split(' ');
-    const mid = Math.floor(parts.length / 2);
-    title = parts.slice(0, mid).join(' ');
-    subtitle = parts.slice(mid).join(' ');
+async function loadEbooks() {
+  try {
+    const r = await fetch('/api/ebooks');
+    const d = await r.json();
+    if (!r.ok) throw new Error(d.error || 'Failed to load eBooks');
+    allEbooks = d.ebooks || [];
+    document.getElementById('count').innerText = allEbooks.length;
+    renderList(allEbooks);
+  } catch (e) {
+    document.getElementById('ebooksList').innerHTML = '<div style="color:var(--red);padding:20px;">Error: ' + e.message + '</div>';
   }
-  
-  document.getElementById('title').value = title;
-  document.getElementById('subtitle').value = subtitle;
-  autoSlug();
+}
 
-  const r = new FileReader();
-  r.onload = async ev => { 
-    base64File = ev.target.result; 
-    
-    // Parse PDF for pages and description
-    try {
-      const pdfData = atob(base64File.split(',')[1]);
-      const pdf = await pdfjsLib.getDocument({data: pdfData}).promise;
-      document.getElementById('pages').value = pdf.numPages;
-      
-      // Extract text from the first page
-      const page = await pdf.getPage(1);
-      const textContent = await page.getTextContent();
-      let text = textContent.items.map(s => s.str).join(' ').replace(/\s+/g, ' ').trim();
-      
-      if (text.length > 250) {
-        text = text.substring(0, 247) + '...';
-      } else if (text.length < 20) {
-        text = 'An in-depth technical guide covering ' + baseName + '.';
-      }
-      
-      document.getElementById('description').value = text;
-      
-      // Guess topics
-      const allText = text.toLowerCase() + ' ' + baseName.toLowerCase();
-      const possibleTopics = ['AWS', 'Cloud', 'Migration', 'Database', 'Architecture', 'Security', 'Performance', 'Machine Learning', 'AI', 'RAG', 'LLMs', 'DevOps', 'Caching', 'Redis', 'ElastiCache'];
-      const foundTopics = possibleTopics.filter(t => allText.includes(t.toLowerCase()));
-      if (foundTopics.length === 0) foundTopics.push('Engineering', 'Architecture');
-      
-      document.getElementById('topics').value = foundTopics.join(', ');
-      
-      // Set random icon and gradient
-      const icons = ['📚', '🔍', '⚙️', '🚀', '☁️', '📊', '🛡️', '⚡'];
-      const gradients = [
-        'from-cyan-900 via-cyan-700 to-slate-900',
-        'from-amber-900 via-amber-700 to-slate-900',
-        'from-indigo-900 via-purple-800 to-slate-900',
-        'from-emerald-900 via-teal-800 to-slate-900'
-      ];
-      document.getElementById('icon').value = icons[Math.floor(Math.random() * icons.length)];
-      document.getElementById('coverGradient').value = gradients[Math.floor(Math.random() * gradients.length)];
-      
-    } catch(err) {
-      console.error('Error parsing PDF:', err);
-      document.getElementById('description').value = 'An in-depth technical guide covering ' + baseName + '.';
-    }
-  };
-  r.readAsDataURL(f);
+function renderList(books) {
+  const container = document.getElementById('ebooksList');
+  if (!books.length) {
+    container.innerHTML = '<div style="color:var(--muted);text-align:center;padding:40px 0;">No eBooks published yet.</div>';
+    return;
+  }
+  container.innerHTML = books.map(b => {
+    const bJson = JSON.stringify(b).replace(/"/g, '&quot;');
+    const topicsHtml = (b.topics || []).map(t => '<span class="badge badge-cyan" style="margin-right:4px">' + t + '</span>').join('');
+    const pdfUrl = b.downloadUrl && b.downloadUrl !== '#subscribe' ? b.downloadUrl : ('/ebooks/' + b.slug + '.pdf');
+
+    return '<div class="ebook-item">'
+      + '<div class="ebook-icon">' + (b.icon || '📕') + '</div>'
+      + '<div class="ebook-info">'
+      + '<div class="ebook-title"><span>' + (b.title || '(untitled)') + '</span><span class="badge badge-slate">' + (b.pages || 0) + ' Pages</span></div>'
+      + (b.subtitle ? '<div class="ebook-subtitle">' + b.subtitle + '</div>' : '')
+      + (b.description ? '<div class="ebook-desc">' + b.description + '</div>' : '')
+      + '<div style="margin-top:8px">' + topicsHtml + '</div>'
+      + '<div class="ebook-actions">'
+      + '<a href="' + pdfUrl + '" target="_blank" class="btn btn-ghost btn-xs" style="text-decoration:none">View PDF</a>'
+      + '<button class="btn btn-ghost btn-xs" onclick=\'editEbook(' + bJson + ')\'>Edit</button>'
+      + '<button class="btn btn-danger btn-xs" onclick="openDeleteModal(\'' + b.slug + '\',\'' + (b.title || '').replace(/'/g, "\\'") + '\')">Delete</button>'
+      + '</div>'
+      + '</div>'
+      + '</div>';
+  }).join('');
+}
+
+function editEbook(b) {
+  editingSlug = b.slug;
+  document.getElementById('formTitle').innerText = 'Edit: ' + b.title;
+  document.getElementById('cancelEditBtn').style.display = 'inline-flex';
+  document.getElementById('title').value = b.title || '';
+  document.getElementById('subtitle').value = b.subtitle || '';
+  document.getElementById('slug').value = b.slug || '';
+  document.getElementById('description').value = b.description || '';
+  document.getElementById('topics').value = Array.isArray(b.topics) ? b.topics.join(', ') : (b.topics || '');
+  document.getElementById('pages').value = b.pages || 10;
+  document.getElementById('icon').value = b.icon || '📚';
+  document.getElementById('coverGradient').value = b.coverGradient || 'from-cyan-900 via-cyan-700 to-slate-900';
+  document.getElementById('fileSub').innerText = 'Leave empty to keep existing PDF (' + b.downloadUrl + ')';
+  document.getElementById('fileName').innerText = '';
+  base64File = null;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function resetForm() {
+  editingSlug = null;
+  document.getElementById('formTitle').innerText = 'Add New eBook';
+  document.getElementById('cancelEditBtn').style.display = 'none';
+  document.getElementById('title').value = '';
+  document.getElementById('subtitle').value = '';
+  document.getElementById('slug').value = '';
+  document.getElementById('description').value = '';
+  document.getElementById('topics').value = '';
+  document.getElementById('pages').value = 10;
+  document.getElementById('icon').value = '📚';
+  document.getElementById('coverGradient').value = 'from-cyan-900 via-cyan-700 to-slate-900';
+  document.getElementById('fileSub').innerText = 'Auto-extracts page count & title';
+  document.getElementById('fileName').innerText = '';
+  document.getElementById('fileInput').value = '';
+  base64File = null;
 }
 
 function autoSlug() {
+  if (editingSlug) return;
   const t = document.getElementById('title').value;
   document.getElementById('slug').value = t.toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/^_|_$/g,'');
 }
@@ -199,28 +274,83 @@ function toast(msg, type) {
   const el = document.getElementById('toast');
   el.className = 'toast show ' + type;
   el.innerText = msg;
-  setTimeout(() => el.classList.remove('show'), 3000);
+  setTimeout(() => el.classList.remove('show'), 3500);
+}
+
+async function handleFile(e) {
+  const f = e.target.files[0];
+  if (!f) return;
+  document.getElementById('fileName').innerText = "Selected: " + f.name;
+  
+  let baseName = f.name.replace(/\.pdf$/i, '').replace(/[-_]/g, ' ');
+  baseName = baseName.replace(/\b\w/g, l => l.toUpperCase());
+  
+  if (!document.getElementById('title').value) {
+    let title = baseName;
+    let subtitle = "Comprehensive Guide and Best Practices";
+    if (baseName.length > 35 && baseName.includes(' ')) {
+      const parts = baseName.split(' ');
+      const mid = Math.floor(parts.length / 2);
+      title = parts.slice(0, mid).join(' ');
+      subtitle = parts.slice(mid).join(' ');
+    }
+    document.getElementById('title').value = title;
+    document.getElementById('subtitle').value = subtitle;
+    autoSlug();
+  }
+
+  const r = new FileReader();
+  r.onload = async ev => {
+    base64File = ev.target.result;
+    try {
+      if (window.pdfjsLib) {
+        const pdfData = atob(base64File.split(',')[1]);
+        const pdf = await pdfjsLib.getDocument({data: pdfData}).promise;
+        document.getElementById('pages').value = pdf.numPages;
+
+        const page = await pdf.getPage(1);
+        const textContent = await page.getTextContent();
+        let text = textContent.items.map(s => s.str).join(' ').replace(/\s+/g, ' ').trim();
+        if (text.length > 250) {
+          text = text.substring(0, 247) + '...';
+        } else if (text.length < 20) {
+          text = 'An in-depth technical guide covering ' + baseName + '.';
+        }
+        if (!document.getElementById('description').value) {
+          document.getElementById('description').value = text;
+        }
+      }
+    } catch(err) {
+      console.warn('PDF parse error:', err);
+    }
+  };
+  r.readAsDataURL(f);
 }
 
 async function publish() {
   const btn = document.getElementById('publishBtn');
+  const title = document.getElementById('title').value.trim();
+  let slug = document.getElementById('slug').value.trim();
+  if (!slug && title) { autoSlug(); slug = document.getElementById('slug').value; }
+
+  if (!title) return toast('Title is required', 'error');
+  if (!slug) return toast('Slug is required', 'error');
+  if (!editingSlug && !base64File) return toast('Please select a PDF file', 'error');
+
   const payload = {
-    title: document.getElementById('title').value.trim(),
+    title,
     subtitle: document.getElementById('subtitle').value.trim(),
     description: document.getElementById('description').value.trim(),
     topics: document.getElementById('topics').value,
     pages: document.getElementById('pages').value,
     coverGradient: document.getElementById('coverGradient').value,
     icon: document.getElementById('icon').value,
-    slug: document.getElementById('slug').value.trim(),
+    slug,
     base64File
   };
 
-  if (!payload.title || !base64File) return toast('Title and PDF file are required', 'error');
-  if (!payload.slug) autoSlug(); payload.slug = document.getElementById('slug').value;
-
   btn.disabled = true;
-  btn.innerHTML = '⏳ Publishing...';
+  btn.innerHTML = '⏳ Saving...';
   try {
     const r = await fetch('/api/publish-ebook', {
       method: 'POST',
@@ -229,21 +359,58 @@ async function publish() {
     });
     const d = await r.json();
     if (!r.ok) throw new Error(d.error || 'Server error');
-    toast('✓ Published successfully! Path: ' + d.path, 'success');
-    
-    // Clear form
-    document.getElementById('title').value = '';
-    document.getElementById('subtitle').value = '';
-    document.getElementById('description').value = '';
-    document.getElementById('fileName').innerText = '';
-    base64File = null;
+    toast('✓ Published successfully: ' + d.path, 'success');
+    resetForm();
+    loadEbooks();
   } catch(e) {
     toast('Error: ' + e.message, 'error');
   } finally {
     btn.disabled = false;
-    btn.innerHTML = '🚀 Publish eBook';
+    btn.innerHTML = '🚀 Save &amp; Publish eBook';
   }
 }
+
+function openDeleteModal(slug, title) {
+  pendingDeleteSlug = slug;
+  pendingDeleteTitle = title;
+  document.getElementById('deleteMsg').textContent = 'Delete eBook "' + title + '"? This removes it from ebooks.js AND deletes the PDF file from disk.';
+  document.getElementById('deleteModal').classList.add('open');
+}
+
+function closeDeleteModal() {
+  document.getElementById('deleteModal').classList.remove('open');
+}
+
+async function executeDelete() {
+  const btn = document.getElementById('confirmDeleteBtn');
+  btn.disabled = true;
+  btn.textContent = 'Deleting...';
+  closeDeleteModal();
+
+  try {
+    const r = await fetch('/api/delete-ebook', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ slug: pendingDeleteSlug })
+    });
+    const d = await r.json();
+    if (!r.ok) throw new Error(d.error || 'Server error');
+    toast('✓ Deleted eBook: ' + pendingDeleteTitle, 'success');
+    loadEbooks();
+  } catch(e) {
+    toast('Error: ' + e.message, 'error');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Yes, Delete Permanently';
+  }
+}
+
+// Close modal on overlay click
+document.getElementById('deleteModal').addEventListener('click', e => {
+  if (e.target === e.currentTarget) closeDeleteModal();
+});
+
+loadEbooks();
 </script>
 </body>
 </html>

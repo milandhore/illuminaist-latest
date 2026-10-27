@@ -1,55 +1,5 @@
 export const articles = [
   {
-    "slug": "what_is_agentic_ai_the_definitive_guide_to_autonomous_systems",
-    "topicSlug": "ai-llms",
-    "category": "AI & LLMs",
-    "difficulty": "Advanced",
-    "title": "What Is Agentic AI - The Definitive Guide to Autonomous Systems",
-    "excerpt": "Discover how AI is moving from answering prompts to taking independent action. Explore the architecture, use cases, and future of agentic AI in the enterprise.",
-    "avatar": "AI",
-    "author": "IlluminAIst",
-    "readingTime": 8,
-    "publishedAt": "2026-10-04",
-    "htmlFile": true,
-    "featured": false,
-    "status": "published",
-    "tags": [
-      "Key Characteristics of Agentic AI",
-      "RAG",
-      "LLM",
-      "Gemini",
-      "Vector DB",
-      "Pinecone",
-      "Anthropic",
-      "OpenAI"
-    ]
-  },
-  {
-    "slug": "top_agentic_ai_frameworks_compared_langgraph_crewai_autogen_adk",
-    "topicSlug": "ai-llms",
-    "category": "AI & LLMs",
-    "difficulty": "Advanced",
-    "title": "Top Agentic AI Frameworks Compared - LangGraph, CrewAI, AutoGen, ADK",
-    "excerpt": "A comprehensive comparison of the best agentic AI frameworks in 2026. Explore LangGraph vs CrewAI, AutoGen multi-agent setups, and Enterprise ADKs.",
-    "avatar": "AI",
-    "author": "IlluminAIst",
-    "readingTime": 7,
-    "publishedAt": "2026-10-04",
-    "htmlFile": true,
-    "featured": false,
-    "status": "published",
-    "tags": [
-      "LangChain",
-      "RAG",
-      "LLM",
-      "LLaMA",
-      "Docker",
-      "Multi-agent",
-      "Anthropic",
-      "OpenAI"
-    ]
-  },
-  {
     "slug": "the_ux_of_agentic_ai_designing_for_trust_and_transparency",
     "topicSlug": "ai-llms",
     "category": "AI & LLMs",
@@ -83,6 +33,7 @@ export const articles = [
     "publishedAt": "2026-10-04",
     "htmlFile": true,
     "featured": false,
+    "trending": true,
     "status": "published",
     "tags": [
       "What is the Model Context Protocol?",
@@ -140,31 +91,6 @@ export const articles = [
     ]
   },
   {
-    "slug": "ci_cd_for_autonomous_agents_testing_and_llm_evals",
-    "topicSlug": "cloud-devops",
-    "category": "Cloud & DevOps",
-    "difficulty": "Advanced",
-    "title": "CI/CD for Autonomous Agents - Testing and LLM Evals",
-    "excerpt": "A guide to building automated evaluation pipelines and testing swarms before deploying them to production. Learn about LLM evals and evaluating agentic AI.",
-    "avatar": "AI",
-    "author": "IlluminAIst",
-    "readingTime": 2,
-    "publishedAt": "2026-10-04",
-    "htmlFile": true,
-    "featured": false,
-    "status": "published",
-    "tags": [
-      "What are LLM Evals?",
-      "Testing the Agentic Loop",
-      "The Agentic CI/CD Pipeline",
-      "Probabilistic CI/CD Gate for Agents",
-      "The LLM-as-a-Judge Pattern",
-      "Shadow Testing in Mock Environments",
-      "GPT-4",
-      "DevOps"
-    ]
-  },
-  {
     "slug": "buy_vs_build_the_executive_playbook_for_adopting_agentic_ai",
     "topicSlug": "ai-llms",
     "category": "AI & LLMs",
@@ -202,6 +128,7 @@ export const articles = [
     "publishedAt": "2026-10-04",
     "htmlFile": true,
     "featured": false,
+    "trending": true,
     "status": "published",
     "tags": [
       "Introduction",
@@ -252,6 +179,7 @@ export const articles = [
     "publishedAt": "2026-10-04",
     "htmlFile": true,
     "featured": false,
+    "trending": true,
     "status": "published",
     "tags": [
       "The Anatomy of an Indirect Attack",
@@ -288,5 +216,11 @@ export const articles = [
 ]
 export const getPublishedArticles = () => articles.filter(a => a.status !== 'draft')
 export const getFeaturedArticle = () => getPublishedArticles().find(a => a.featured) || getPublishedArticles()[0]
+export const getTrendingArticles = () => {
+  const published = getPublishedArticles()
+  const trending = published.filter(a => a.trending)
+  const nonTrending = published.filter(a => !a.trending)
+  return [...trending, ...nonTrending]
+}
 export const getArticleBySlug = (slug) => articles.find(a => a.slug === slug)
 export const getArticlesByCategory = (category) => getPublishedArticles().filter(a => a.category === category)

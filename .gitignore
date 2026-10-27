@@ -5,3 +5,6 @@ dist
 *.log
 run_log.txt
 fix-cms.js
+# Subscriber records are local CMS data, never public deployment data.
+src/data/subscribers.json
+public/subscribers.json

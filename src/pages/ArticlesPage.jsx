@@ -80,7 +80,7 @@ export default function ArticlesPage() {
 
       {/* Page header */}
       <div className="mb-8">
-        <h1 className="font-heading text-4xl font-bold gradient-text-mixed mb-3">Articles</h1>
+        <h1 className="font-heading text-4xl font-extrabold mb-3" style={{ background: 'linear-gradient(135deg, #00F0FF, #FFB800)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Articles</h1>
         <p className="text-slate-400 text-lg">
           Deep technical writing on AI, LLMs, MLOps, and emerging technology.
         </p>
@@ -149,33 +149,33 @@ export default function ArticlesPage() {
       </section>
 
       {/* ── SEARCH + DIFFICULTY FILTER BAR ──────────────────────────────────── */}
-      <div className="glass-card rounded-2xl p-4 mb-8 border border-slate-800">
+      <div className="rounded-2xl p-4 mb-8 bg-white dark:bg-[#111827] border border-slate-200 dark:border-white/10 shadow-sm dark:shadow-none">
         <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center">
 
           {/* Search */}
           <div className="relative flex-1 w-full">
-            <Search size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none" />
+            <Search size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500 pointer-events-none" />
             <input
               id="article-search"
               type="search"
               placeholder={`Search ${activeTopic.label === 'All Topics' ? 'all articles' : activeTopic.label}…`}
               value={query}
               onChange={e => setQuery(e.target.value)}
-              className="w-full h-10 pl-10 pr-4 rounded-xl bg-slate-800/70 border border-slate-700 text-slate-200 placeholder-slate-600 text-sm focus:outline-none focus:border-cyan/50 focus:ring-1 focus:ring-cyan/30 transition-all"
+              className="w-full h-10 pl-10 pr-4 rounded-xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-600 text-sm focus:outline-none focus:border-amber-500/50 dark:focus:border-cyan/50 focus:ring-1 focus:ring-amber-500/30 dark:ring-cyan/30 transition-all"
             />
           </div>
 
           {/* Difficulty chips */}
           <div className="flex items-center gap-2 flex-wrap">
-            <span className="text-[10px] uppercase tracking-widest text-slate-600 font-semibold hidden sm:inline">Level</span>
+            <span className="text-[10px] uppercase tracking-widest text-slate-500 dark:text-slate-600 font-semibold hidden sm:inline">Level</span>
             {ALL_DIFFICULTIES.map(diff => (
               <button
                 key={diff}
                 onClick={() => setActiveDifficulty(diff)}
                 className={`px-3 h-8 rounded-lg text-xs font-medium border transition-all duration-200 ${
                   activeDifficulty === diff
-                    ? 'bg-amber/15 border-amber/50 text-amber'
-                    : 'bg-slate-800/50 border-slate-700 text-slate-400 hover:border-slate-500 hover:text-slate-300'
+                    ? 'bg-amber-500/15 border-amber-500/50 text-amber-600 dark:text-amber-400 font-semibold'
+                    : 'bg-white dark:bg-slate-800/50 border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:border-slate-300 dark:hover:border-slate-500 hover:text-slate-900 dark:hover:text-slate-300'
                 }`}
               >
                 {diff}
@@ -187,7 +187,7 @@ export default function ArticlesPage() {
           {hasFilter && (
             <button
               onClick={clearAll}
-              className="flex items-center gap-1.5 px-3 h-8 rounded-lg border border-slate-700 text-slate-400 hover:text-slate-200 text-xs whitespace-nowrap transition-colors"
+              className="flex items-center gap-1.5 px-3 h-8 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 text-xs whitespace-nowrap transition-colors"
             >
               <X size={12} /> Clear
             </button>

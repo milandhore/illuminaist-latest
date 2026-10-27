@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>IlluminAIst</title>
+    <script>
+      // GitHub Pages has no SPA rewrite rule. Preserve the route in the hash
+      // while supporting both /illuminaist-latest/ and a custom domain.
+      const repositoryName = 'illuminaist-latest';
+      const pathname = window.location.pathname;
+      const repositoryPrefix = `/${repositoryName}/`;
+      const basePath = pathname === `/${repositoryName}` || pathname.startsWith(repositoryPrefix)
+        ? repositoryPrefix
+        : '/';
+      const routePath = pathname.slice(basePath.length - 1) || '/';
+      const query = window.location.search || '';
+      window.location.replace(`${window.location.origin}${basePath}#${routePath}${query}`);
+    </script>
+  </head>
+  <body style="background-color: #0b1329; color: #fff; font-family: sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0;">
+    <p>Redirecting to IlluminAIst...</p>
+  </body>
+</html>

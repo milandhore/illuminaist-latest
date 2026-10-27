@@ -1,35 +1,53 @@
+import { Link } from 'react-router-dom'
 import InlineSubscribe from '../components/subscription/InlineSubscribe'
+import PageAdLayout from '../components/ads/PageAdLayout'
 
 export default function AboutPage() {
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <PageAdLayout>
       <header className="mb-12 text-center">
         <h1 className="font-heading text-5xl font-bold gradient-text-mixed mb-5">About IlluminAIst</h1>
         <p className="text-slate-400 text-xl leading-relaxed">
-          An independent AI & emerging technology publication for engineers, researchers, and founders navigating the frontier.
+          Illuminating the Frontier of Intelligent Systems
         </p>
       </header>
 
       <div className="article-prose space-y-8 mb-16">
-        <h2>Our Mission</h2>
-        <p>IlluminAIst exists to cut through the AI hype and deliver <strong>deep, technically accurate content</strong> that actually helps engineers build better systems. We cover LLMs, RAG pipelines, MLOps, agentic AI, and the broader technology landscape — with an emphasis on practical, production-grade knowledge.</p>
+        <p>We are living through the most rapid technological acceleration in human history. Foundation models, autonomous agent networks, multimodal reasoning, and quantum architectures are reshaping industries overnight.</p>
 
-        <h2>What We Publish</h2>
+        <p>Yet, as the pace of development quickens, the signal-to-noise ratio has never been lower.</p>
+
+        <p><strong>IlluminAIst</strong> was founded to cut through the marketing hype and illuminate the engineering realities, architectural paradigms, and strategic impacts of frontier artificial intelligence and emerging technologies.</p>
+
+        <h2>Our Mission</h2>
+        <p>To equip engineers, architects, researchers, and technology leaders with the technical depth and strategic clarity required to build, govern, and scale the next generation of intelligent systems.</p>
+
+        <h2>What We Cover</h2>
         <ul>
-          <li><strong>Deep-dive articles</strong> — 10–20 minute reads with code examples, benchmarks, and architecture teardowns</li>
-          <li><strong>Breaking AI news</strong> — curated from primary sources (research papers, company blogs, regulatory filings)</li>
-          <li><strong>Free engineering guides</strong> — downloadable eBooks covering RAG, MLOps, and more</li>
-          <li><strong>Weekly newsletter</strong> — a curated digest of the week's most important AI developments</li>
+          <li><strong>Autonomous Agents &amp; Orchestration:</strong> Stateful workflows, multi-agent coordination frameworks (LangGraph, AutoGen), tool-use standards, and the Model Context Protocol (MCP).</li>
+          <li><strong>Frontier Models &amp; Efficient Compute:</strong> Reasoning models, dynamic sampling, parameter-efficient fine-tuning (PEFT), alignment methodologies (RLHF, DPO), and inference optimization at the silicon level.</li>
+          <li><strong>Production Data &amp; Knowledge Retrieval:</strong> Advanced Retrieval-Augmented Generation (RAG), vector graph indexing, hybrid search architectures, and automated evaluation frameworks (RAGAS).</li>
+          <li><strong>Emerging &amp; Frontier Tech:</strong> Neuromorphic computing, quantum algorithms, robotics and embodied AI, edge intelligence, and distributed cloud topologies.</li>
+          <li><strong>AI Safety, Governance &amp; Alignment:</strong> Red-teaming protocols, deterministic agent guardrails, data sovereignty, and ethical deployment standards.</li>
         </ul>
 
-        <h2>Editorial Standards</h2>
-        <p>Every article on IlluminAIst is written or reviewed by practitioners with hands-on experience. We do not publish press releases, paid editorial, or affiliate-driven "best of" lists. All opinions are our own.</p>
+        <h2>Our Editorial Philosophy</h2>
+        <ul>
+          <li><strong>Code and Architecture Over Hype:</strong> We analyze systems at the schema, pipeline, and benchmark level—not press release claims.</li>
+          <li><strong>Builder-Centric Insights:</strong> Every analysis is grounded in practical feasibility, deployment trade-offs, and latency/cost economics.</li>
+          <li><strong>Independent &amp; Open:</strong> We foster rigorous debate and champion open standards, transparent benchmarks, and reproducible research.</li>
+        </ul>
 
-        <h2>Advertising</h2>
-        <p>IlluminAIst is supported by display advertising. We use clearly labelled ad placements that do not affect editorial decisions. If you're interested in advertising with us, <a href="mailto:ads@illuminaist.com">get in touch</a>.</p>
+        <h2>Join the Community</h2>
+        <p>Whether you are designing production AI infrastructure, leading an enterprise transformation, or tracking the future of compute, IlluminAIst is your compass.</p>
+        <ul>
+          <li><Link to="/articles">Explore our publications</Link></li>
+          <li>Join our community discussions on LinkedIn and Discord</li>
+          <li><Link to="/subscribe">Subscribe to our weekly dispatch</Link></li>
+        </ul>
       </div>
 
       <InlineSubscribe />
-    </div>
+    </PageAdLayout>
   )
 }
