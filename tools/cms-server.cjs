@@ -18,7 +18,6 @@ const NEWS_DIR = path.join(ROOT, 'public', 'articles', 'news')
 const NEWS_JS = path.join(ROOT, 'src', 'data', 'news.js')
 
 const SUBSCRIBERS_SRC = path.join(ROOT, 'src', 'data', 'subscribers.json')
-const SUBSCRIBERS_PUB = path.join(ROOT, 'public', 'subscribers.json')
 const ALERTS_SRC      = path.join(ROOT, 'src', 'data', 'alerts.json')
 const ALERTS_PUB      = path.join(ROOT, 'public', 'alerts.json')
 
@@ -34,7 +33,6 @@ function readSubscribers() {
 function writeSubscribers(list) {
   const json = JSON.stringify(list, null, 2)
   fs.writeFileSync(SUBSCRIBERS_SRC, json, 'utf8')
-  fs.writeFileSync(SUBSCRIBERS_PUB, json, 'utf8')
 }
 
 function readAlerts() {
@@ -164,7 +162,7 @@ function send (res, status, body, type = 'application/json') {
 
 function gitSync (slug, action) {
   try {
-    cp.execSync('git add -A src/data/ public/articles/ public/ebooks/ public/alerts.json public/subscribers.json', { cwd: ROOT })
+    cp.execSync('git add -A src/data/ public/articles/ public/ebooks/ public/alerts.json', { cwd: ROOT })
     cp.execSync('git commit -m "CMS: ' + action + " '" + slug + "'" + '"', { cwd: ROOT })
     cp.execSync('git push origin main', { cwd: ROOT })
     return { pushed: true }

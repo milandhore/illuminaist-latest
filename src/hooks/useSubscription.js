@@ -1,96 +1,32 @@
 import { useState, useCallback, useEffect } from 'react'
-import { Resend } from 'resend'
 import { validateCompanyEmail, isCompanyEmail, extractDomain } from '../utils/companyEmail'
 import { sitePath } from '../utils/sitePath'
 
-/**
- * Resend Configuration (optional production email service)
- */
-const RESEND_API_KEY = 'YOUR_RESEND_API_KEY'
-const resend = new Resend(RESEND_API_KEY)
-
 // ─── Storage Keys ──────────────────────────────────────────────
 const KEY_STATUS = 'illuminaist_subscriber'
-const KEY_SUBSCRIBERS = 'illuminaist_subscriber_list'
 const KEY_ALERTS = 'illuminaist_subscriber_alerts'
+const SUBSCRIPTION_API_URL = String(import.meta.env.VITE_SUBSCRIPTION_API_URL || '').replace(/\/+$/, '')
 
 // ─── Helpers ──────────────────────────────────────────────────
-function getSubscriberList() {
-  try {
-    return JSON.parse(localStorage.getItem(KEY_SUBSCRIBERS) || '[]')
-  } catch {
-    return []
-  }
-}
-
-function saveSubscriberLocally(email, isCompany, source = 'website') {
-  const list = getSubscriberList()
-  const domain = extractDomain(email)
-  const existingIdx = list.findIndex(s => s.email.toLowerCase() === email.toLowerCase())
-  const record = {
-    email,
-    domain,
-    isCompany,
-    source,
-    subscribedAt: new Date().toISOString()
-  }
-  if (existingIdx >= 0) {
-    list[existingIdx] = { ...list[existingIdx], ...record }
-  } else {
-    list.unshift(record)
-  }
-  try {
-    localStorage.setItem(KEY_SUBSCRIBERS, JSON.stringify(list))
-  } catch (e) {
-    console.warn('Could not save to localStorage:', e)
-  }
-  return record
-}
-
-// ─── Sync with server API (if CMS or backend is active) ───────
+// The static GitHub Pages build stores only the visitor's local status. A real
+// subscription service can be enabled with VITE_SUBSCRIPTION_API_URL; secrets
+// must remain on that server and must never be placed in VITE_* variables.
 async function syncSubscriberToServer(subscriberData) {
+  if (!SUBSCRIPTION_API_URL) return null
+
   try {
-    const res = await fetch('/api/subscribe', {
+    const res = await fetch(`${SUBSCRIPTION_API_URL}/subscribe`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(subscriberData)
+      body: JSON.stringify(subscriberData),
+      credentials: 'omit',
+      signal: AbortSignal.timeout(5000)
     })
     if (res.ok) return await res.json()
   } catch (err) {
-    // Non-blocking in dev / client-only mode
-    console.debug('[IlluminAIst] Local subscriber stored:', subscriberData.email)
+    console.warn('[IlluminAIst] Subscription service unavailable; local status retained.')
   }
   return null
-}
-
-// ─── Welcome Email & Content Alert Dispatcher ─────────────────
-async function sendWelcomeEmail(email, isCompany) {
-  const isConfigured = RESEND_API_KEY !== 'YOUR_RESEND_API_KEY'
-  if (!isConfigured) {
-    console.info(
-      `[IlluminAIst Alert Hook] Welcome alert dispatched to ${email} (Company: ${isCompany ? 'Yes' : 'No'}). Alerts active for new Articles, eBooks, and News.`
-    )
-    return
-  }
-
-  const userName = email.split('@')[0]
-  const htmlContent = `
-    <div>
-      <h1>Welcome to IlluminAIst, ${userName}! 🚀</h1>
-      <p>Your subscription is active. You will receive direct alerts for every new article, free eBook release, and breaking AI news posting.</p>
-      ${isCompany ? '<p><strong>✓ Company verification confirmed:</strong> All premium eBook downloads are unlocked.</p>' : ''}
-      <br />
-      <p>Best regards,<br/>The IlluminAIst Editorial & Engineering Team</p>
-    </div>
-  `
-
-  await resend.emails.send({
-    from: 'IlluminAIst <customer@illuminaist.in>',
-    to: [email],
-    subject: "Welcome to IlluminAIst — AI Alerts & Engineering Guides 🚀",
-    html: htmlContent,
-    reply_to: 'customer@illuminaist.in'
-  })
 }
 
 export function useSubscription() {
@@ -177,20 +113,14 @@ export function useSubscription() {
       }
 
       localStorage.setItem(KEY_STATUS, JSON.stringify(newStatus))
-      saveSubscriberLocally(trimmed, companyValid, source)
       setStatus(newStatus)
 
-      // Sync with server if CMS server is running
+      // Optional server sync. The static build remains fully functional without it.
       syncSubscriberToServer({
         email: trimmed,
         domain,
         isCompany: companyValid,
         source
-      })
-
-      // Send confirmation & trigger content alert enrollment
-      sendWelcomeEmail(trimmed, companyValid).catch(err => {
-        console.warn('[IlluminAIst] Welcome dispatch note:', err)
       })
 
       return {
@@ -205,8 +135,6 @@ export function useSubscription() {
     }
   }, [])
 
-  const getSubscribers = useCallback(() => getSubscriberList(), [])
-
   return {
     isSubscribed: status.subscribed,
     isCompanySubscribed: status.subscribed && status.isCompany,
@@ -214,7 +142,6 @@ export function useSubscription() {
     companyDomain: status.domain,
     subscribedAt: status.subscribedAt,
     subscribe,
-    getSubscribers,
     alerts,
   }
 }

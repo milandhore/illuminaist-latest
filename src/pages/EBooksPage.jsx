@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Download, BookOpen, Lock, CheckCircle2, Building2, Sparkles, ShieldCheck } from 'lucide-react'
+import { Download, Lock, CheckCircle2, Building2 } from 'lucide-react'
 import AdBanner from '../components/ads/AdBanner'
 import InlineSubscribe from '../components/subscription/InlineSubscribe'
 import CompanyEBookModal from '../components/subscription/CompanyEBookModal'
@@ -7,7 +7,7 @@ import { ebooks } from '../data/ebooks'
 import { useSubscription } from '../hooks/useSubscription'
 
 export default function EBooksPage() {
-  const { isCompanySubscribed, email, companyDomain } = useSubscription()
+  const { isCompanySubscribed } = useSubscription()
   const [modalOpen, setModalOpen] = useState(false)
   const [selectedBook, setSelectedBook] = useState(null)
 
@@ -34,18 +34,13 @@ export default function EBooksPage() {
           Free for engineers with a valid company email subscription.
         </p>
 
-        {/* Company verification status badge */}
-        <div className="mt-4 flex justify-center">
-          {isCompanySubscribed ? (
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-bold">
-              <ShieldCheck size={15} /> Company Verified ({companyDomain || email}) • All eBooks Unlocked
-            </div>
-          ) : (
+        {!isCompanySubscribed && (
+          <div className="mt-4 flex justify-center">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-400 text-xs font-semibold">
               <Lock size={13} className="text-amber-500" /> Downloads strictly gated behind valid corporate email IDs
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
 
       <AdBanner slot="header" className="mb-10" />
@@ -120,7 +115,7 @@ export default function EBooksPage() {
                     className="flex items-center justify-center gap-2 w-full py-3 rounded-xl font-bold text-sm text-slate-950 transition-all hover:opacity-95 shadow-md shadow-amber-500/20"
                     style={{ background: 'linear-gradient(135deg, #e66b2c, #FFB800)' }}
                   >
-                    <Download size={16} /> Download Free PDF (Company Verified ✓)
+                    <Download size={16} /> Download Free PDF
                   </a>
                 ) : (
                   <button

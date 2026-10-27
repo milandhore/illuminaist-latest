@@ -99,9 +99,11 @@ export default function SubscriberAlertsDropdown({ onSubscribeClick }) {
                     <span className="font-semibold text-slate-800 dark:text-slate-200">
                       Subscribed as <span className="font-mono text-amber-600 dark:text-amber-400">{email}</span>
                     </span>
-                    <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
-                      {isCompanySubscribed ? '🏢 Company verified • All eBook downloads unlocked' : 'General subscriber • Alerts active'}
-                    </p>
+                    {!isCompanySubscribed && (
+                      <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
+                        General subscriber • Alerts active
+                      </p>
+                    )}
                   </div>
                 </div>
               ) : (

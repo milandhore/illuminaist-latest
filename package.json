@@ -11,28 +11,32 @@
     "news:api": "node tools/news-api.cjs",
     "news:update": "node tools/update-news.cjs",
     "news:rebuild": "node tools/rebuild-news.cjs",
-    "test": "node --test tests/*.test.cjs"
+    "test": "node --test tests/*.test.cjs",
+    "check": "npm test && npm run build"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
     "cors": "^2.8.6",
-    "express": "^5.2.1",
+    "express": "^5.3.0",
     "framer-motion": "^14.0.0",
     "lucide-react": "^0.441.0",
-    "multer": "^2.4.0",
+    "multer": "^2.5.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^7.18.4",
-    "resend": "^6.29.0"
+    "react-router-dom": "^7.18.4"
   },
   "devDependencies": {
     "@types/react": "^18.3.5",
     "@types/react-dom": "^18.3.0",
-    "@vitejs/plugin-react": "^4.3.1",
+    "@vitejs/plugin-react": "^6.1.2",
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.44",
     "rss-parser": "^3.13.0",
     "tailwindcss": "^3.4.11",
-    "vite": "^8.3.1"
+    "vite": "^8.3.5"
+  },
+  "overrides": {
+    "body-parser": "^2.4.0",
+    "postcss-selector-parser": "^6.1.5"
   }
 }
