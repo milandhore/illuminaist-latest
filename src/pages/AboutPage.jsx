@@ -19,6 +19,8 @@ export default function AboutPage() {
 
         <p><strong>IlluminAIst</strong> was founded to cut through the marketing hype and illuminate the engineering realities, architectural paradigms, and strategic impacts of frontier artificial intelligence and emerging technologies.</p>
 
+        <p>It is an independent publication and a hands-on product build, designed and engineered by Milan Dhore. <a href="https://www.milanoutlook.com/" target="_blank" rel="noreferrer">View portfolio →</a></p>
+
         <h2>Our Mission</h2>
         <p>To equip engineers, architects, researchers, and technology leaders with the technical depth and strategic clarity required to build, govern, and scale the next generation of intelligent systems.</p>
 

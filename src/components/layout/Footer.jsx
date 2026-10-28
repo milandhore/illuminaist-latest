@@ -129,9 +129,26 @@ export default function Footer() {
           <p className="text-slate-700 text-xs">
             © {new Date().getFullYear()} IlluminAIst. All rights reserved. Content is for informational purposes only.
           </p>
-          <p className="text-slate-700 text-xs">
-            Built with React + Vite + Tailwind CSS
-          </p>
+          <div className="flex items-center gap-3 text-left sm:justify-end">
+            <div className="hidden sm:block w-px h-10 bg-gradient-to-b from-transparent via-amber-400/70 to-transparent" />
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-600 mb-1">
+                Designed &amp; engineered by
+              </p>
+              <a
+                href="https://www.milanoutlook.com/"
+                target="_blank"
+                rel="noreferrer"
+                className="group inline-flex items-center gap-2 text-sm font-heading font-extrabold text-slate-300 hover:text-amber-400 transition-colors"
+              >
+                Milan Dhore
+                <span className="rounded-full border border-slate-700 px-2 py-0.5 text-[9px] font-bold uppercase tracking-widest text-slate-500 group-hover:border-amber-400/50 group-hover:text-amber-400 transition-colors">
+                  View portfolio
+                </span>
+                <ArrowUpRight size={13} className="text-amber-400" />
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
