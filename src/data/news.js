@@ -14,7 +14,7 @@ export const newsItems = [
   {
     "id": 2,
     "title": "AI Elevates Advisor Cybersecurity Strategies",
-    "excerpt": "In an era of sophisticated cyber threats, financial advisory firms face…",
+    "excerpt": "AI tools are transforming how financial advisors build robust cybersecurity.…",
     "source": "planadviser",
     "slug": "ai_elevates_advisor_cybersecurity_strategies",
     "htmlPath": "/articles/news/ai_elevates_advisor_cybersecurity_strategies.html",
