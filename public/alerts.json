@@ -1,5 +1,115 @@
 [
   {
+    "id": "alert-article-1793849677639",
+    "type": "article",
+    "title": "Why Agentic Business Is the New Competitive Advantage — The Google UCP ?",
+    "slug": "why_agentic_business_is_the_new_competitive_advantage_the_google_ucp",
+    "excerpt": "In the rapidly evolving landscape of 2026, the way businesses interact with customers is undergoing a seismic shift. We are moving beyond the “Search Era” — where users type keywords and sift through links — into the Agentic Economy . At the heart of this revolution lies a ground",
+    "url": "/articles/why_agentic_business_is_the_new_competitive_advantage_the_google_ucp",
+    "author": "IlluminAIst",
+    "timestamp": "2026-11-05T03:34:37.639Z",
+    "recipientsCount": 10000
+  },
+  {
+    "id": "alert-article-1793849668742",
+    "type": "article",
+    "title": "Why Agentic Business Is the New Competitive Advantage — The Google UCP ?",
+    "slug": "why_agentic_business_is_the_new_competitive_advantage_the_google_ucp",
+    "excerpt": "In the rapidly evolving landscape of 2026, the way businesses interact with customers is undergoing a seismic shift. We are moving beyond the “Search Era” — where users type keywords and sift through links — into the Agentic Economy . At the heart of this revolution lies a ground",
+    "url": "/articles/why_agentic_business_is_the_new_competitive_advantage_the_google_ucp",
+    "author": "IlluminAIst",
+    "timestamp": "2026-11-05T03:34:28.742Z",
+    "recipientsCount": 10000
+  },
+  {
+    "id": "alert-article-1793849653924",
+    "type": "article",
+    "title": "Why Agentic Business Is the New Competitive Advantage — The Google UCP ?",
+    "slug": "why_agentic_business_is_the_new_competitive_advantage_the_google_ucp",
+    "excerpt": "In the rapidly evolving landscape of 2026, the way businesses interact with customers is undergoing a seismic shift. We are moving beyond the “Search Era” — where users type keywords and sift through links — into the Agentic Economy . At the heart of this revolution lies a ground",
+    "url": "/articles/why_agentic_business_is_the_new_competitive_advantage_the_google_ucp",
+    "author": "IlluminAIst",
+    "timestamp": "2026-11-05T03:34:13.924Z",
+    "recipientsCount": 10000
+  },
+  {
+    "id": "alert-article-1793849625309",
+    "type": "article",
+    "title": "The Microsoft Agent Framework",
+    "slug": "the_microsoft_agent_framework",
+    "excerpt": "The landscape of Artificial Intelligence is rapidly shifting from simple, reactive prompts to complex, autonomous AI agents . These agents, powered by Large Language Models (LLMs), possess the ability to reason, plan, execute tasks using external tools, and even collaborate with",
+    "url": "/articles/the_microsoft_agent_framework",
+    "author": "IlluminAIst",
+    "timestamp": "2026-11-05T03:33:45.309Z",
+    "recipientsCount": 10000
+  },
+  {
+    "id": "alert-article-1793849614269",
+    "type": "article",
+    "title": "My Personal Finance AI assistant in hour with OpenClaw & MacBook",
+    "slug": "my_personal_finance_ai_assistant_in_hour_with_openclaw_macbook",
+    "excerpt": "This demo provides a secure and practical way to explore OpenClaw Finance using locally hosted Ollama models. It allows users to experiment with finance-related data and workflows in a controlled environment.",
+    "url": "/articles/my_personal_finance_ai_assistant_in_hour_with_openclaw_macbook",
+    "author": "IlluminAIst",
+    "timestamp": "2026-11-05T03:33:34.269Z",
+    "recipientsCount": 10000
+  },
+  {
+    "id": "alert-article-1793849605299",
+    "type": "article",
+    "title": "DeepMind’s New AI Agent Can Control Your Computer and Act Like a Human",
+    "slug": "deepmind_s_new_ai_agent_can_control_your_computer_and_act_like_a_human",
+    "excerpt": "Google DeepMind Built an AI Agent That Uses Your Computer Like a Human",
+    "url": "/articles/deepmind_s_new_ai_agent_can_control_your_computer_and_act_like_a_human",
+    "author": "IlluminAIst",
+    "timestamp": "2026-11-05T03:33:25.299Z",
+    "recipientsCount": 10000
+  },
+  {
+    "id": "alert-article-1793849594743",
+    "type": "article",
+    "title": "Bloom Auto Evals of Agentic AI — Part-3",
+    "slug": "bloom_auto_evals_of_agentic_ai_part_3",
+    "excerpt": "In Part 1 and Part 2, we used Bloom to measure behaviors (like sycophancy) and security (like prompt injection).",
+    "url": "/articles/bloom_auto_evals_of_agentic_ai_part_3",
+    "author": "IlluminAIst",
+    "timestamp": "2026-11-05T03:33:14.744Z",
+    "recipientsCount": 10000
+  },
+  {
+    "id": "alert-article-1793849582822",
+    "type": "article",
+    "title": "Bloom Auto Evals of Agentic AI — Part-2",
+    "slug": "bloom_auto_evals_of_agentic_ai_part_2",
+    "excerpt": "In Part 1, we explored how Anthropic’s Bloom framework automates behavioral evaluations for traits like sycophancy. But for AI engineers...",
+    "url": "/articles/bloom_auto_evals_of_agentic_ai_part_2",
+    "author": "IlluminAIst",
+    "timestamp": "2026-11-05T03:33:02.822Z",
+    "recipientsCount": 10000
+  },
+  {
+    "id": "alert-article-1793849526547",
+    "type": "article",
+    "title": "Bloom Auto Evals of Agentic AI — Part-1",
+    "slug": "bloom_auto_evals_of_agentic_ai_part_1",
+    "excerpt": "As Large Language Models (LLMs) evolve from chatbots to autonomous agents, static benchmarks like MMLU or GSM8K are becoming obsolete. They measure capabilities (can the model add 2+2?), but fail to measure behavior (will the model lie to please the user?).",
+    "url": "/articles/bloom_auto_evals_of_agentic_ai_part_1",
+    "author": "IlluminAIst",
+    "timestamp": "2026-11-05T03:32:06.547Z",
+    "recipientsCount": 10000
+  },
+  {
+    "id": "alert-article-1793849508254",
+    "type": "article",
+    "title": "100x Leap in Agentic AI with Databricks Mooncake",
+    "slug": "100x_leap_in_agentic_ai_with_databricks_mooncake",
+    "excerpt": "Agentic AI — autonomous systems designed to perceive, reason, and act without constant human supervision — is rapidly moving from theoretical concept to core enterprise technology. These agents, whether managing a dynamic supply chain or executing high-speed financial trades, rel",
+    "url": "/articles/100x_leap_in_agentic_ai_with_databricks_mooncake",
+    "author": "IlluminAIst",
+    "timestamp": "2026-11-05T03:31:48.254Z",
+    "recipientsCount": 10000
+  },
+  {
     "id": "alert-news-1792237909797",
     "type": "news",
     "title": "AI-designed viruses raise new synthetic-biology questions",

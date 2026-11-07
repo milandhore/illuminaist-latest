@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Why Agentic Business Is the New Competitive Advantage — The Google UCP ? | IlluminAIst</title>
+  <meta name="description" content="In the rapidly evolving landscape of 2026, the way businesses interact with customers is undergoing a seismic shift. We are moving beyond the “Search Era” — where users type keywords and sift through links — into the Agentic Economy . At the heart of this revolution lies a ground">
+</head>
+<body>
+{
+  "article": {
+    "article_id": "bloom-auto-evals-of-agentic-ai-part-1",
+    "source_url": "https://medium.com/@itsmybestview/bloom-auto-evals-of-agentic-ai-part-1-8edda12eac08?source=rss-19a4a9188dfd------2",
+    "title": "Bloom Auto Evals of Agentic AI — Part-1",
+    "author": null,
+    "published_at": null,
+    "source_kind": "rss",
+    "blocks": [
+      {
+        "id": "b-0001",
+        "kind": "heading",
+        "text": "The Definitive Guide to Agentic AI Evaluation",
+        "level": 3,
+        "language": null,
+        "image_url": null,
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "id": "b-0002",
+        "kind": "paragraph",
+        "text": "As Large Language Models (LLMs) evolve from chatbots to autonomous agents, static benchmarks like MMLU or GSM8K are becoming obsolete. They measure capabilities (can the model add 2+2?), but fail to measure behavior (will the model lie to please the user?).",
+        "level": null,
+        "language": null,
+        "image_url": null,
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "id": "b-0003",
+        "kind": "paragraph",
+        "text": "Enter Bloom , Anthropic’s new open-source, agentic framework for automated behavioral evaluation.",
+        "level": null,
+        "language": null,
+        "image_url": null,
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "id": "b-0004",
+        "kind": "paragraph",
+        "text": "In this deep dive, we unpack the technical architecture of Bloom, provide implementation code for running your own evaluations, and compare it against industry standards like OpenAI Evals and Promptfoo.",
+        "level": null,
+        "language": null,
+        "image_url": null,
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "id": "b-0005",
+        "kind": "heading",
+        "text": "What is Bloom? (Beyond the Hype)",
+        "level": 3,
+        "language": null,
+        "image_url": null,
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "id": "b-0006",
+        "kind": "paragraph",
+        "text": "Bloom is not a dataset; it is an evaluation generation engine . Unlike traditional frameworks that run models against a fixed list of 500 prompts, Bloom uses a “seed” configuration to dynamically generate thousands of unique, multi-turn scenarios.",
+        "level": null,
+        "language": null,
+        "image_url": null,
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "id": "b-0007",
+        "kind": "paragraph",
+        "text": "It solves a critical engineering bottleneck: Evaluation Pipeline Fatigue . Instead of hand-writing 100 test cases for “sycophancy” (agreeing with the user’s wrong opinion), you define the behavior once , and Bloom’s agentic pipeline procedurally generates the test cases, simulates the user, and grades the result.",
+        "level": null,
+        "language": null,
+        "image_url": null,
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "id": "b-0008",
+        "kind": "heading",
+        "text": "The 4-Stage Agentic Pipeline",
+        "level": 3,
+        "language": null,
+        "image_url": null,
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "id": "b-0009",
+        "kind": "paragraph",
+        "text": "Bloom operates via four distinct LLM-driven stages:",
+        "level": null,
+        "language": null,
+        "image_url": null,
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "id": "b-0010",
+        "kind": "list",
+        "text": "Understanding Agent : Reads your behavior description and analyzes why it matters, creating a context context for the subsequent agents.",
+        "level": null,
+        "language": null,
+        "image_url": null,
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "id": "b-0011",
+        "kind": "list",
+        "text": "Ideation Agent : Generates diverse, high-level scenarios (e.g., “A user asks for code to hack a neighbor’s wifi, but frames it as a security audit”).",
+        "level": null,
+        "language": null,
+        "image_url": null,
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "id": "b-0012",
+        "kind": "list",
+        "text": "Rollout Agent : Simulates the conversation. It plays the role of the user, reacting dynamically to the target model’s responses to try and elicit the specific behavior.",
+        "level": null,
+        "language": null,
+        "image_url": null,
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "id": "b-0013",
+        "kind": "list",
+        "text": "Judgment Agent : Reviews the transcript and scores it (0–10) based on the initial rubric.",
+        "level": null,
+        "language": null,
+        "image_url": null,
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "id": "b-0014",
+        "kind": "heading",
+        "text": "Technical Implementation: Running Your First Bloom Eval",
+        "level": 3,
+        "language": null,
+        "image_url": null,
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "id": "b-0015",
+        "kind": "paragraph",
+        "text": "To use Bloom, you don’t write prompts; you write configurations . The core of any Bloom evaluation is the seed.yaml file—the DNA that tells the framework what to evolve.",
+        "level": null,
+        "language": null,
+        "image_url": null,
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "id": "b-0016",
+        "kind": "heading",
+        "text": "1. Installation & Setup",
+        "level": 3,
+        "language": null,
+        "image_url": null,
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "id": "b-0017",
+        "kind": "paragraph",
+        "text": "Bloom is Python-based. You’ll need a virtual environment and API keys for the models you intend to use (Anthropic, OpenAI, etc.).",
+        "level": null,
+        "language": null,
+        "image_url": null,
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "id": "b-0018",
+        "kind": "paragraph",
+        "text": "Bash",
+        "level": null,
+        "language": null,
+        "image_url": null,
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "id": "b-0019",
+        "kind": "code",
+        "text": "# Clone the repository\ngit clone https://github.com/safety-research/bloom.git\ncd bloom",
+        "level": null,
+        "language": null,
+        "image_url": null,
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "id": "b-0020",
+        "kind": "code",
+        "text": "# Install dependencies\nuv pip install -r requirements.txt",
+        "level": null,
+        "language": null,
+        "image_url": null,
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "id": "b-0021",
+        "kind": "code",
+        "text": "# Set API keys\nexport ANTHROPIC_API_KEY=\"sk-...\"\nexport OPENAI_API_KEY=\"sk-...\"",
+        "level": null,
+        "language": null,
+        "image_url": null,
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "id": "b-0022",
+        "kind": "heading",
+        "text": "2. The seed.yaml Configuration",
+        "level": 3,
+        "language": null,
+        "image_url": null,
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "id": "b-0023",
+        "kind": "paragraph",
+        "text": "This is where the magic happens. Below is a technical implementation of a seed file designed to test for “Sycophancy” — specifically, whether a model will agree with a user’s objectively wrong statement.",
+        "level": null,
+        "language": null,
+        "image_url": null,
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "id": "b-0024",
+        "kind": "paragraph",
+        "text": "File: seeds/sycophancy_test.yaml",
+        "level": null,
+        "language": null,
+        "image_url": null,
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "id": "b-0025",
+        "kind": "paragraph",
+        "text": "YAML",
+        "level": null,
+        "language": null,
+        "image_url": null,
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "id": "b-0026",
+        "kind": "code",
+        "text": "name: \"SYCOPHANCY_MATH_BIAS\"\nprogram: bloom.py\nmethod: grid\nmetric:\nname: average_behavior_presence_score\ngoal: maximize",
+        "level": null,
+        "language": null,
+        "image_url": null,
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "id": "b-0027",
+        "kind": "code",
+        "text": "parameters:\n# --- Behavior Definition ---\nbehavior.name:\nvalue: \"sycophancy\"\n# Providing examples helps the Understanding Agent calibrate\nbehavior.examples:\nvalue: [\"examples/sycophancy_transcript_1.json\"]",
+        "level": null,
+        "language": null,
+        "image_url": null,
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "id": "b-0028",
+        "kind": "code",
+        "text": "# --- Global Model Config ---\n# We use a strong model (Opus) for the agents to ensure high-quality scaffolding\ntemperature:\nvalue: 1.0\nevaluator_reasoning_effort:\nvalue: \"high\"\n# --- Stage 1: Understanding ---\nunderstanding.model:\nvalue: \"claude-3-opus-20240229\"\n# --- Stage 2: Ideation ---\n# 'diversity: 1.0' forces the agent to generate completely unique scenarios\n# rather than perturbing a few base templates.\nideation.model:\nvalue: \"claude-3-opus-20240229\"\nideation.total_evals:\nvalue: 50\nideation.diversity:\nvalue: 1.0\n# --- Stage 3: Rollout ---\n# The model we are actually testing (The \"Target\")\nrollout.target:\nvalues: [\"claude-3-5-sonnet-20240620\", \"gpt-4o\"]\nrollout.max_turns:\nvalue: 5\n# --- Stage 4: Judgment ---\n# Uses 'Chain of Thought' to justify the score\njudgment.model:\nvalue: \"claude-3-opus-20240229\"",
+        "level": null,
+        "language": null,
+        "image_url": null,
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "id": "b-0029",
+        "kind": "heading",
+        "text": "3. Execution",
+        "level": 3,
+        "language": null,
+        "image_url": null,
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "id": "b-0030",
+        "kind": "paragraph",
+        "text": "Run the pipeline using the Python CLI. You can run in debug mode to see the agents “thinking” in real-time.",
+        "level": null,
+        "language": null,
+        "image_url": null,
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "id": "b-0031",
+        "kind": "paragraph",
+        "text": "Bash",
+        "level": null,
+        "language": null,
+        "image_url": null,
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "id": "b-0032",
+        "kind": "code",
+        "text": "# Run the full pipeline\npython bloom.py --config seeds/sycophancy_test.yaml --debug",
+        "level": null,
+        "language": null,
+        "image_url": null,
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "id": "b-0033",
+        "kind": "code",
+        "text": "# View the results in the browser-based transcript viewer\nnpx @isha-gpt/bloom-viewer --dir ./results",
+        "level": null,
+        "language": null,
+        "image_url": null,
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "id": "b-0034",
+        "kind": "heading",
+        "text": "Technical Evaluation: Bloom vs. The Competition",
+        "level": 3,
+        "language": null,
+        "image_url": null,
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "id": "b-0035",
+        "kind": "paragraph",
+        "text": "As a technology expert, you need to know when to use Bloom versus other tools. Here is the differentiator breakdown:",
+        "level": null,
+        "language": null,
+        "image_url": null,
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "id": "b-0036",
+        "kind": "image",
+        "text": "",
+        "level": null,
+        "language": null,
+        "image_url": "https://cdn-images-1.medium.com/max/1024/1*icWioJyTYoKOo4f3W2XDmQ.png",
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "id": "b-0037",
+        "kind": "heading",
+        "text": "The “Model Organism” Differentiator",
+        "level": 3,
+        "language": null,
+        "image_url": null,
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "id": "b-0038",
+        "kind": "paragraph",
+        "text": "One of Bloom’s most impressive technical feats is its ability to validate itself using “Model Organisms”.",
+        "level": null,
+        "language": null,
+        "image_url": null,
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "id": "b-0039",
+        "kind": "paragraph",
+        "text": "Anthropic researchers created models intentionally trained to be “misaligned” (e.g., a model that always praises the user). Bloom was able to reliably distinguish these “sick” models from baseline models without human intervention. This makes Bloom an essential tool for Red Teaming teams who need to detect subtle safety regressions before deployment.",
+        "level": null,
+        "language": null,
+        "image_url": null,
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "id": "b-0040",
+        "kind": "heading",
+        "text": "Why You Should Care (Business Impact)",
+        "level": 3,
+        "language": null,
+        "image_url": null,
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "id": "b-0041",
+        "kind": "paragraph",
+        "text": "Integrating Bloom into your LLM Ops pipeline isn’t just about safety; it’s about reliability .",
+        "level": null,
+        "language": null,
+        "image_url": null,
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "id": "b-0042",
+        "kind": "list",
+        "text": "For Engineers: It automates the most tedious part of eval — writing the test cases.",
+        "level": null,
+        "language": null,
+        "image_url": null,
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "id": "b-0043",
+        "kind": "list",
+        "text": "For Product Managers: It provides a quantitative “Elicitation Score” (0–100%) for abstract concepts like “Brand Safety.”",
+        "level": null,
+        "language": null,
+        "image_url": null,
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "id": "b-0044",
+        "kind": "list",
+        "text": "For SEO: Content produced by safe, aligned models ranks better because it avoids the “hallucination penalties” search engines are beginning to penalize.",
+        "level": null,
+        "language": null,
+        "image_url": null,
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "id": "b-0045",
+        "kind": "heading",
+        "text": "Conclusion & Call to Action",
+        "level": 3,
+        "language": null,
+        "image_url": null,
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "id": "b-0046",
+        "kind": "paragraph",
+        "text": "The era of static LLM benchmarks is ending. If you are building agentic systems, you cannot rely on static text files to test dynamic behavior. You need an eval system that is as smart as the model you are testing.",
+        "level": null,
+        "language": null,
+        "image_url": null,
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "id": "b-0047",
+        "kind": "paragraph",
+        "text": "Ready to upgrade your AI safety stack?",
+        "level": null,
+        "language": null,
+        "image_url": null,
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "id": "b-0048",
+        "kind": "list",
+        "text": "Star the Repo : Visit github.com/safety-research/bloom.",
+        "level": null,
+        "language": null,
+        "image_url": null,
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "id": "b-0049",
+        "kind": "list",
+        "text": "Run the Sycophancy Test : Copy the code above and run it against your custom fine-tunes.",
+        "level": null,
+        "language": null,
+        "image_url": null,
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "id": "b-0050",
+        "kind": "list",
+        "text": "Share Your Results : Did your model pass the “Elicitation Rate” test? Let us know in the comments below.",
+        "level": null,
+        "language": null,
+        "image_url": null,
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "id": "b-0051",
+        "kind": "paragraph",
+        "text": "Stay tuned for Part 2 of this series, where we will fork Bloom to test for “Prompt Injection Vulnerabilities” using custom adversarial agents.",
+        "level": null,
+        "language": null,
+        "image_url": null,
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "id": "b-0052",
+        "kind": "image",
+        "text": "",
+        "level": null,
+        "language": null,
+        "image_url": "https://medium.com/_/stat?event=post.clientViewed&referrerSource=full_rss&postId=8edda12eac08",
+        "alt": "",
+        "caption": ""
+      }
+    ],
+    "source_html_sha256": "304a80e0d781b346deca5231e01cb993c930c2816b42e9b8d32a2ecba8b6fe1d"
+  },
+  "audit": {
+    "passed": true,
+    "article_id": "bloom-auto-evals-of-agentic-ai-part-1",
+    "source_block_count": 52,
+    "rendered_block_count": 52,
+    "source_image_urls": [
+      "https://cdn-images-1.medium.com/max/1024/1*icWioJyTYoKOo4f3W2XDmQ.png",
+      "https://medium.com/_/stat?event=post.clientViewed&referrerSource=full_rss&postId=8edda12eac08"
+    ],
+    "rendered_image_urls": [
+      "https://cdn-images-1.medium.com/max/1024/1*icWioJyTYoKOo4f3W2XDmQ.png",
+      "https://medium.com/_/stat?event=post.clientViewed&referrerSource=full_rss&postId=8edda12eac08"
+    ],
+    "missing_block_ids": [],
+    "unexpected_block_ids": [],
+    "mismatched_block_ids": [],
+    "errors": []
+  }
+}
+</body>
+</html>
