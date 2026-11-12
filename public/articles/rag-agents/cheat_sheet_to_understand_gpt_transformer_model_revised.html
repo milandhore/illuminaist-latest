@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cheat Sheet to Understand GPT -Transformer Model (Revised) | IlluminAIst</title>
+  <meta name="description" content="Transformer Models: A Layered Explanation for Layman">
+</head>
+<body>
+<div class="shell">
+    </nav>
+    <main>
+      <div class="toolbar"><button id="theme-toggle" type="button" aria-label="Toggle dark mode">☾ Theme</button></div>
+      <article>
+        <header>
+          <div class="eyebrow">Converted article</div>
+
+</header>
+        <div id="article-content">
+        
+          <div class="reveal" data-source-block-id="b-0001" data-source-kind="paragraph">
+          <p>Transformer Models: A Layered Explanation for Layman</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0002" data-source-kind="paragraph">
+          <p>The transformer is a type of deep learning architecture that was introduced by researchers at Google. It utilizes the multi-head attention mechanism, which was first described in the 2017 paper titled “Attention Is All You Need.”</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0003" data-source-kind="paragraph">
+          <p>Definition : A GPT is a type of large language model ( LLM ) and a prominent framework for generative artificial intelligence.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0004" data-source-kind="paragraph">
+          <p>The transformer architecture has revolutionized the field of natural language processing (NLP) by providing a highly efficient and effective way to process sequential data. Unlike traditional models that rely on sequential processing, transformers use self-attention mechanisms to analyze entire input sequences simultaneously, capturing complex relationships and dependencies between tokens.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0005" data-source-kind="heading">
+          
+            <h3 id="heading-5">Key Components of the Transformer Architecture</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0006" data-source-kind="heading">
+          
+            <h3 id="heading-6">1. Encoder</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0007" data-source-kind="paragraph">
+          <p>The encoder processes the input sequence and generates a continuous representation that captures the contextual information of the input tokens. It consists of multiple identical layers that allow deep learning and complex feature extraction.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0008" data-source-kind="heading">
+          
+            <h3 id="heading-8">2. Decoder</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0009" data-source-kind="paragraph">
+          <p>The decoder takes the encoder’s output and generates the final output sequence by predicting one token at a time. It uses the encoded representations and previously generated tokens.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0010" data-source-kind="heading">
+          
+            <h3 id="heading-10">3. Multi-Head Attention</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0011" data-source-kind="paragraph">
+          <p>Multi-head attention allows the model to focus on different parts of the input sequence simultaneously. It computes attention scores for each token in relation to all other tokens, enabling the model to weigh their importance when making predictions.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0012" data-source-kind="heading">
+          
+            <h3 id="heading-12">4. Feed-Forward Networks</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0013" data-source-kind="paragraph">
+          <p>Each layer of the encoder and decoder contains a feed-forward neural network that processes the output from the attention mechanism. This network enhances the model’s ability to learn complex representations.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0014" data-source-kind="heading">
+          
+            <h3 id="heading-14">5. Positional Encoding</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0015" data-source-kind="paragraph">
+          <p>Positional encodings are added to the input embeddings to provide information about the position of each token within the sequence. This allows the model to consider the order of words.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0016" data-source-kind="heading">
+          
+            <h3 id="heading-16">6. Layer Normalization</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0017" data-source-kind="paragraph">
+          <p>Layer normalization stabilizes the training process by normalizing the inputs to each layer, helping to mitigate issues related to internal covariate shift and improving convergence during training.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0018" data-source-kind="heading">
+          
+            <h3 id="heading-18">7. Residual Connections</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0019" data-source-kind="paragraph">
+          <p>Residual connections facilitate the flow of gradients during training, addressing the vanishing gradient problem. They provide a direct path for gradients to flow through the network, enhancing learning.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0020" data-source-kind="heading">
+          
+            <h3 id="heading-20">Technology</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0021" data-source-kind="quote">
+          <blockquote>It uses an artificial neural network in natural language processing.</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0022" data-source-kind="quote">
+          <blockquote>It is based on the transformer deep learning architecture.</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0023" data-source-kind="quote">
+          <blockquote>It is pre-trained on large datasets of unlabeled text.</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0024" data-source-kind="quote">
+          <blockquote>It generates novel, human-like content.</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0025" data-source-kind="heading">
+          
+            <h3 id="heading-25">GPT History & Development</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0026" data-source-kind="quote">
+          <blockquote>The first GPT was introduced in 2018 by OpenAI.</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0027" data-source-kind="quote">
+          <blockquote>OpenAI has released a series of GPT models (“GPT-n”), each more capable than the last.</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0028" data-source-kind="quote">
+          <blockquote>Improvements are due to increased size (number of trainable parameters) and training.</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0029" data-source-kind="quote">
+          <blockquote>The most recent model, GPT-4o, was released in May 2024.</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0030" data-source-kind="heading">
+          
+            <h3 id="heading-30">Applications</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0031" data-source-kind="quote">
+          <blockquote>GPT models serve as the basis for task-specific GPT systems.</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0032" data-source-kind="quote">
+          <blockquote>Examples include models fine-tuned for instruction following.</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0033" data-source-kind="quote">
+          <blockquote>These models power services like the ChatGPT chatbot.</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0034" data-source-kind="quote">
+          <blockquote>General Usage: As of 2023, many LLMs share characteristics with GPTs, leading to the term “GPT” being used broadly.</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0035" data-source-kind="heading">
+          
+            <h3 id="heading-35">Beginner Level: The High-Level Analogy</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0036" data-source-kind="paragraph">
+          <p>Imagine a transformer model as a team of language experts working together to understand and translate sentences. Each expert focuses on different parts of the sentence, like “who did what” or “how words relate.”</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0037" data-source-kind="paragraph">
+          <p>For example, to translate “The cat didn’t eat because it was full” to French:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0038" data-source-kind="list">
+          <ul><li>Input Embedding: Convert each word into a number (like a unique ID).</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0039" data-source-kind="list">
+          <ul><li>Positional Encoding : Add a “timestamp” to each word so the model knows their order (e.g., “cat” is position 2).</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0040" data-source-kind="list">
+          <ul><li>Self-Attention : Experts discuss which words matter most. For “it,” they link it to “cat.”</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0041" data-source-kind="list">
+          <ul><li>Output : Generate the translated sentence: “Le chat n’a pas mangé parce qu’il était rassasié.”</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0042" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*Ioccdd7yWLNLHMrNO4QtLQ.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0043" data-source-kind="paragraph">
+          <p>Key Components: Encoder and Decoder</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0044" data-source-kind="list">
+          <ul><li>Encoder: Think of the encoder as understanding the input language (English in this case). It analyzes the sentence and creates a rich representation that encapsulates its meaning.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0045" data-source-kind="list">
+          <ul><li>Decoder: The decoder’s job is to generate the output language (French). It uses the information from the encoder and its own knowledge of French grammar and vocabulary to construct the translated sentence.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0046" data-source-kind="paragraph">
+          <p>Simplified Explanation</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0047" data-source-kind="paragraph">
+          <p>In essence, the transformer learns the relationships between words in different languages. During training, it’s exposed to numerous examples of English sentences and their French translations. This allows it to learn the patterns and rules of translation.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0048" data-source-kind="paragraph">
+          <p>Important Note: This is a simplified explanation. Actual transformer models are significantly more complex, involving attention mechanisms, multi-head attention, positional encoding, and more. However, this basic example provides a foundational understanding of the core concepts.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0049" data-source-kind="paragraph">
+          <p>Further Exploration</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0050" data-source-kind="paragraph">
+          <p>If you’re interested in diving deeper, I recommend exploring resources that explain the following concepts:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0051" data-source-kind="list">
+          <ul><li>Attention Mechanism: How the model focuses on different parts of the input sentence when generating the output.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0052" data-source-kind="list">
+          <ul><li>Multi-Head Attention: Using multiple attention mechanisms to capture different aspects of the input.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0053" data-source-kind="list">
+          <ul><li>Positional Encoding: How the model understands the order of words in a sentence.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0054" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*X7WPhCyHWSm17UgxC_1yBw.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0055" data-source-kind="heading">
+          
+            <h3 id="heading-55">Intermediate Level-GPT : Breaking Down Components (Enhanced)</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0056" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/0*PiJ4MKRRrAFwv8dE.png" alt="" loading="lazy" data-lightbox="true"><figcaption>https://en.wikipedia.org/wiki/Generative_pre-trained_transformer</figcaption></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0057" data-source-kind="quote">
+          <blockquote>Let’s use the sentence “She loves reading books” to explain key components, referring to the structure of a Transformer Block as shown in the diagram:</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0058" data-source-kind="heading">
+          
+            <h3 id="heading-58">Input Embedding</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0059" data-source-kind="paragraph">
+          <p>Each word becomes a vector (a list of numbers). For example:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0060" data-source-kind="list">
+          <ul><li>“She” → [0.2, -0.5, 0.7]</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0061" data-source-kind="list">
+          <ul><li>“loves” → [0.6, 0.1, -0.3]</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0062" data-source-kind="heading">
+          
+            <h3 id="heading-62">Positional Encoding</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0063" data-source-kind="paragraph">
+          <p>Add position info using sine/cosine waves. For position 1 (“She”):</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0064" data-source-kind="list">
+          <ul><li>Even indices: sin(1/10000^(2i/512))</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0065" data-source-kind="list">
+          <ul><li>Odd indices: cos(1/10000^(2i/512)) Result: [0.2 + 0.1, -0.5 + 0.8, 0.7 + 0.3]</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0066" data-source-kind="quote">
+          <blockquote>Diagram Connection</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0067" data-source-kind="paragraph">
+          <p>The diagram shows that the Input Embedding and Positional Encoding are added together. This combined information becomes the input to the first Transformer Block.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0068" data-source-kind="list">
+          <ul><li>Self-Attention Mechanism (Multi-Head Attention Explained)</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0069" data-source-kind="paragraph">
+          <p>Compute how much each word relates to others:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0070" data-source-kind="list">
+          <ul><li>Step 1: Create Query (Q), Key (K), and Value (V) vectors for each word.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0071" data-source-kind="list">
+          <ul><li>Step 2 : Calculate attention scores (e.g., “loves” attends to “reading” with score 0.9).</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0072" data-source-kind="list">
+          <ul><li>Step 3: Combine values weighted by scores.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0073" data-source-kind="quote">
+          <blockquote>Diagram Connection</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0074" data-source-kind="paragraph">
+          <p>The diagram shows the Multi-Head Attention mechanism within the Transformer Block. Here’s a breakdown:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0075" data-source-kind="list">
+          <ul><li>Linear (Head 1 ... Head H): The input is linearly transformed into multiple “heads,” each capturing different aspects of the relationships between words. Each “head” processes a different projection of the Q, K, and V matrices.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0076" data-source-kind="list">
+          <ul><li>Matmul : Matrix multiplication is performed to calculate attention scores between the Query and Key vectors.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0077" data-source-kind="list">
+          <ul><li>Mask : A mask is applied to prevent the model from attending to certain positions (e.g., padding tokens or future tokens in sequence generation).</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0078" data-source-kind="list">
+          <ul><li>Softmax : Converts the attention scores into probabilities, indicating the weight each word should have when attending to other words.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0079" data-source-kind="list">
+          <ul><li>Dropout : Applies dropout regularization to prevent overfitting.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0080" data-source-kind="list">
+          <ul><li>Linear : The outputs from all the heads are concatenated and then linearly transformed to produce the final output of the multi-head attention mechanism.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0081" data-source-kind="quote">
+          <blockquote>Feed-Forward Network</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0082" data-source-kind="paragraph">
+          <p>Transform vectors further: Output = ReLU(Input × Weights_1 + Bias_1) × Weights_2 + Bias_2</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0083" data-source-kind="quote">
+          <blockquote>Diagram Connection</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0084" data-source-kind="paragraph">
+          <p>After the multi-head attention, the output is passed through a feed-forward network. The diagram shows:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0085" data-source-kind="list">
+          <ul><li>Linear : The output from the multi-head attention is linearly transformed.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0086" data-source-kind="list">
+          <ul><li>GELU : This applies the GELU (Gaussian Error Linear Unit) activation function. GELU is defined as x * P(X <= x) , where X ~ N(0,1) is a standard normal distribution. It's a smoother alternative to ReLU.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0087" data-source-kind="list">
+          <ul><li>Linear : Another linear transformation.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0088" data-source-kind="paragraph">
+          <p>Residual Connections and Layer Normalization</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0089" data-source-kind="quote">
+          <blockquote>Diagram Connection:</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0090" data-source-kind="paragraph">
+          <p>The diagram clearly indicates residual connections (skip connections) and Layer Normalization:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0091" data-source-kind="list">
+          <ul><li>Residual Connection (Addition “+” symbols): The input of each sub-layer (e.g., multi-head attention, feed-forward network) is added to the output of that sub-layer. This helps with training by allowing gradients to flow more easily through the network.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0092" data-source-kind="list">
+          <ul><li>LayerNorm : Layer normalization is applied to stabilize the activations and speed up training.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0093" data-source-kind="heading">
+          
+            <h3 id="heading-93">Encoder-Decoder Flow</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0094" data-source-kind="list">
+          <ul><li>Encoder : Understands the input sentence.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0095" data-source-kind="list">
+          <ul><li>Decoder : Generates the translation step-by-step (e.g., “Elle aime lire des livres”).</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0096" data-source-kind="heading">
+          
+            <h3 id="heading-96">Advanced Level: Mathematics and Training (Enhanced)</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0097" data-source-kind="paragraph">
+          <p>Let’s dissect self-attention with a 2-word example: [“Cat”, “Mat”]. We’ll also incorporate the specifics from the diagram.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0098" data-source-kind="heading">
+          
+            <h3 id="heading-98">Transformer Block Stacking</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0099" data-source-kind="paragraph">
+          <p>The diagram also highlights that Transformer Blocks are stacked on top of each other ( “Transformer Block Layer 1,” “Transformer Block Layer ...”, “Transformer Block Layer L”). Each block processes the output of the previous block, allowing the model to learn increasingly complex representations of the input data.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0100" data-source-kind="heading">
+          
+            <h3 id="heading-100">Output Stage</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0101" data-source-kind="paragraph">
+          <p>After the final Transformer Block, the diagram shows:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0102" data-source-kind="list">
+          <ul><li>LayerNorm : Normalizes the output from the last transformer block.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0103" data-source-kind="list">
+          <ul><li>Linear : A linear transformation to project the output into the desired output space.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0104" data-source-kind="list">
+          <ul><li>Softmax : Converts the output into a probability distribution over possible output tokens. This is used for tasks like text generation and classification.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0105" data-source-kind="heading">
+          
+            <h3 id="heading-105">Key Takeaways (Updated)</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0106" data-source-kind="list">
+          <ul><li>Beginner : Transformers use teamwork and “timestamps” to understand word relationships.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0107" data-source-kind="list">
+          <ul><li>Intermediate : Components like self-attention, positional encoding, residual connections, and layer normalization break down language into mathematical representations processed within stacked Transformer Blocks.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0108" data-source-kind="list">
+          <ul><li>Advanced : Matrices, multi-head attention, and specific activation functions like GELU enable parallel processing of complex patterns, and training involves minimizing loss using optimization algorithms. The stacking of Transformer Blocks creates deep representations.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0109" data-source-kind="paragraph">
+          <p>By layering these concepts, transformers power tools like Google Translate and ChatGPT, revolutionizing natural language processing tasks. The diagram provides a valuable visual representation of the internal workings of a Transformer Block.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0110" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*tvvFHb5XSrIFEI7N4Y8oNw.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0111" data-source-kind="heading">
+          
+            <h3 id="heading-111">Reference</h3>
+
+</div>
+        
+        </div>
+      </article>
+    </main>
+  </div>
+  <div class="lightbox" id="lightbox" hidden><img alt="Expanded article image"></div>
+</body>
+</html>

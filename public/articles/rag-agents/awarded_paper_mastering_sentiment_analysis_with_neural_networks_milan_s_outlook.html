@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Awarded Paper: Mastering Sentiment Analysis with Neural Networks (Milan’s Outlook) | IlluminAIst</title>
+  <meta name="description" content="Comprehensive guide for Sentiment Analysis">
+</head>
+<body>
+<div class="shell">
+    </nav>
+    <main>
+      <div class="toolbar"><button id="theme-toggle" type="button" aria-label="Toggle dark mode">☾ Theme</button></div>
+      <article>
+        <header>
+          <div class="eyebrow">Converted article</div>
+
+</header>
+        <div id="article-content">
+        
+          <div class="reveal" data-source-block-id="b-0001" data-source-kind="paragraph">
+          <p>Comprehensive guide for Sentiment Analysis</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0002" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*QN7ie0tLTluJes2odL2G_Q.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0003" data-source-kind="paragraph">
+          <p>During my master’s program, I worked on one of the most interesting topics. The university recognized my submitted thesis with an Excellence Award, and it will be accessible in the digital library for reference. I have used only relevant content to write this post.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0004" data-source-kind="paragraph">
+          <p>The evaluator provided the following feedback about my submission.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0005" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*t10dYHZflv0dQy1Q9AJQ-A.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0006" data-source-kind="heading">
+          
+            <h3 id="heading-6">Introduction</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0007" data-source-kind="paragraph">
+          <p>Sentiment analysis is the process of using natural language processing, text analysis, and statistics to analyze customer sentiment. The best businesses understand the sentiment of their customers — what people are saying, how they’re saying it, and what they mean. Customer sentiment can be found in tweets, comments, reviews, or other places where people mention your brand.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0008" data-source-kind="paragraph">
+          <p>As with many other fields, advances in deep learning have brought sentiment analysis into the foreground of cutting-edge algorithms. Today we use natural language processing, statistics, and text analysis to extract, and identify the sentiment of words into positive, negative, or neutral categories.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0009" data-source-kind="paragraph">
+          <p>A technical branch of computer science and engineering dwelling and also a subfield of linguistics, which leverages artificial intelligence, and which simplifies interactions between humans and computer systems, in the context of programming and processing of huge volumes of natural language data, with Python programming language providing robust mechanism to handle natural language data, and implement natural language processing easily, through its various functionalities including various libraries and functions, is termed as NLP (natural language processing) in Python.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0010" data-source-kind="heading">
+          
+            <h3 id="heading-10">A1: Research Question</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0011" data-source-kind="paragraph">
+          <p>Is it possible to use neural networks and, specifically, Natural Language Processing (NLP) to predict the positive or negative sentiment of future customer reviews based on provided labeled datasets?</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0012" data-source-kind="heading">
+          
+            <h3 id="heading-12">A2: Objectives and Goals</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0013" data-source-kind="paragraph">
+          <p>The goal of this sentiment analysis is to create a model that will properly predict the positive or negative sentiment of future customer feedback based on historical, tagged customer reviews using the Python TensorFlow library. To better understand customers and make better marketing decisions, the goals also include being able to assess which products are chosen by customers based on product reviews.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0014" data-source-kind="heading">
+          
+            <h3 id="heading-14">A2: Prescribed Network</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0015" data-source-kind="list">
+          <ul><li>TensorFlow and Keras libraries are the deep learning neural networks that will be used in this Natural Language Processing (NLP) model.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0016" data-source-kind="list">
+          <ul><li>Since our goal is to anticipate whether our customers prefer our items based on sentences they’ve written online as feedback for whatever they’ve bought or seen, sentiment analysis utilizing an NLP model will be up the task.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0017" data-source-kind="heading">
+          
+            <h3 id="heading-17">B1: Data Exploration</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0018" data-source-kind="paragraph">
+          <p>For analysis of opinion mining, we will be going to merge all three provided datasets from Amazon, IMDB, and Yelp into one DataFrame.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0019" data-source-kind="heading">
+          
+            <h3 id="heading-19">B2: Tokenization</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0020" data-source-kind="list">
+          <ul><li>The tokenization process breaks down raw text into sentences or words called tokens, which helps us comprehend the context in which we’re working. “Tokenization helps in determining the meaning of the text using sequence of words</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0021" data-source-kind="list">
+          <ul><li>We will encode the words into numbers and convert the text to a numerical representation. Scikit-learn, TensorFlow, and Keras are among the programs and tools used to normalize text throughout the tokenization process. These packages and functions are listed below in programming cells.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0022" data-source-kind="paragraph">
+          <p>Please find a summary of parameters in the Tokenization process:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0023" data-source-kind="list">
+          <ul><li>embedding dim: individual words to be embedded into 16 dimensions</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0024" data-source-kind="list">
+          <ul><li>num words or vocab size: maximum number of unique words utilized in our model</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0025" data-source-kind="list">
+          <ul><li>max length: Each review can only be 100 words long.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0026" data-source-kind="list">
+          <ul><li>trunc type: reviews with more than 100 words are “post”-truncated (cut off at the end of the review)</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0027" data-source-kind="list">
+          <ul><li>oov tok:” Out-of-Vocabulary” (OOV) refers to the substitution of the ‘oov’ token for any unfamiliar terms.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0028" data-source-kind="list">
+          <ul><li>padding type: short reviews will be “post”-padded (padding applied at the end of the review).</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0029" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*TMpUhZzeTpNb2lrEn7g3ZQ.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0030" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*UZClWfW-eBEnRSEuEFx_kg.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0031" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*JS2RGDdDdBFub7zvdQ_aaw.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0032" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*KgQXFP6WG3IVORqZxlpwVw.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0033" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*UsPqRxoYH1YHlUHAuDUszQ.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0034" data-source-kind="heading">
+          
+            <h3 id="heading-34">B3. Padding Process</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0035" data-source-kind="paragraph">
+          <p>We need a consistent sentence length for our deep learning model. The Keras padding procedure normalizes a dataset of reviews of various lengths. “Pre” and “post” padding are two options for padding. When we have a sentence length of fewer than 100 words, we have opted to pad sentences at the end, the “post” argument.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0036" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*K186iOgDMw70XGu6ICQjEw.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0037" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*AyxEW5zr6sk7RZjGTs_U8Q.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0038" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*dcTkO-WykYKKMR_YF6nsOQ.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0039" data-source-kind="heading">
+          
+            <h3 id="heading-39">B4. Categories of Sentiment</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0040" data-source-kind="paragraph">
+          <p>There were just two types of sentiment identified: 0 for negative and 1 for positive. “Softmax” was the activation function for the network’s final dense layer. To convert the numbers into probabilities, we applied the “softmax function. The activation function “softmax” gave us a vector as well as the probability of various outcomes.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0041" data-source-kind="heading">
+          
+            <h3 id="heading-41">B5. Steps to Prepare the Data</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0042" data-source-kind="list">
+          <ul><li>Loaded all 3 (Amazon, IMDB, and Yelp) labeled dataset reviews text files into Pandas DataFrames.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0043" data-source-kind="list">
+          <ul><li>On their labels, combine the three distinct DataFrames.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0044" data-source-kind="list">
+          <ul><li>Only 0 (for negative sentiment) and 1 (for positive sentiment) confirmed reviews (for positive sentiment)</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0045" data-source-kind="list">
+          <ul><li>Individual dataset heads and combined DataFrame heads were reviewed.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0046" data-source-kind="list">
+          <ul><li>DataFrame characteristics such as shape, descriptive statistics, data types, and potential missing data points were examined.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0047" data-source-kind="list">
+          <ul><li>URLs were removed.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0048" data-source-kind="list">
+          <ul><li>Characters that were no longer needed were removed.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0049" data-source-kind="list">
+          <ul><li>Converted into lower case</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0050" data-source-kind="list">
+          <ul><li>Stop words were eliminated, and rare words also were eliminated.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0051" data-source-kind="list">
+          <ul><li>Spelling corrected</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0052" data-source-kind="list">
+          <ul><li>Word bases that have been stemmed and lemmatized</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0053" data-source-kind="list">
+          <ul><li>Split the DataFrame into training and testing sets.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0054" data-source-kind="list">
+          <ul><li>Later I tokenized the sentences</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0055" data-source-kind="list">
+          <ul><li>Dataset extracted for preparation (below)</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0056" data-source-kind="heading">
+          
+            <h3 id="heading-56">B6. Prepared Dataset</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0057" data-source-kind="paragraph">
+          <p>Public Link for prepared dataset</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0058" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*RpniH69tuQdoJKwT19YHiA.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0059" data-source-kind="heading">
+          
+            <h3 id="heading-59">C1. Model Summary</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0060" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*LKmrsYmlBV8HVOZ--JVwmw.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0061" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*V99Vsx5xkx1LXz-Zewr7Gw.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0062" data-source-kind="heading">
+          
+            <h3 id="heading-62">C2. Network Architecture</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0063" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*9pBMHNz3KyTlIXf9NWmakA.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0064" data-source-kind="heading">
+          
+            <h3 id="heading-64">C3. Hyperparameters</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0065" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*QgT_ZNoGi2AB8PZSohQpvQ.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0066" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*iNWH2GPd7x9hgK9AwsG8Cg.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0067" data-source-kind="heading">
+          
+            <h3 id="heading-67">D1. Stopping Criteria</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0068" data-source-kind="paragraph">
+          <p>Using the EarlyStopping stopping criteria, we can see that the model is trained to an accuracy of 0.5168 in the first epoch and does not improve thereafter. We also see that loss degrades after the second epoch. As a result, there is no need for the model to go through all 20 epochs because it will not improve accuracy.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0069" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*HUOHn1uVhVMMn-L6TqYFYw.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0070" data-source-kind="heading">
+          
+            <h3 id="heading-70">D2. Training Process</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0071" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*xln2roIpSZ-W_bMdqYxWvA.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0072" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*j970iOJ8pGtyj69bwka3rg.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0073" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*97ZXnDLDWl5Ay3GfF73nhw.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0074" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*B2z_Q7ULaqCuiFyknjjgQg.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0075" data-source-kind="heading">
+          
+            <h3 id="heading-75">D3. Fit</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0076" data-source-kind="paragraph">
+          <p>The visualizations suggest that we may have overfitted our model. We tried EarlyStopping , but it only produced the model trained in the first epoch. Overfitting can occur when there are many epochs, or the data is incredibly complicated. Perhaps because our vocabulary is so large (2,000 words), we have caused the model to overfit, even though the labels are so simple (only 0 and 1) Hyperparameters, and activation functions may be tweaked in the future with similar datasets to improve accuracy.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0077" data-source-kind="heading">
+          
+            <h3 id="heading-77">D4. Predictive Accuracy</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0078" data-source-kind="paragraph">
+          <p>Given the current training and test set splits, accuracy resulted in a low percentage of 51.68 % . Given the time spent cleaning and preparing this data, this is disappointing. The accuracy of validation is also 51.68 percent. As a result, we will be able to accurately predict the sentiment of new reviews at roughly the same rate as a coin flip. This isn’t appealing.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0079" data-source-kind="heading">
+          
+            <h3 id="heading-79">E. Functionality</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0080" data-source-kind="paragraph">
+          <p>Our initial goal is to find out whether can we predict positive or negative labels based on the words our customers use in their reviews?</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0081" data-source-kind="paragraph">
+          <p>For these predictions, our NLP neural network was built with supervised learning in mind. Following the preparation and cleaning of this data, we constructed a four-layer Sequential model. Based on the size of this training dataset and the activation functions that we used, it appears that we cannot predict positive or negative outcomes very well after training and testing.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0082" data-source-kind="heading">
+          
+            <h3 id="heading-82">F. Recommendations</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0083" data-source-kind="paragraph">
+          <p>Again, the model’s accuracy is low, at 51.68 percent . This is disappointing and appears to send us back to the data collection phase as well as retuning our hyperparameters. We don’t believe that this NLP sentiment analysis model can be used to make meaningful recommendations. Perhaps more data from a larger customer base and a broader range of customers will provide a better understanding of customers’ mindsets or sentiments toward products and services.</p>
+          
+          </div>
+        
+        </div>
+      </article>
+    </main>
+  </div>
+  <div class="lightbox" id="lightbox" hidden><img alt="Expanded article image"></div>
+</body>
+</html>

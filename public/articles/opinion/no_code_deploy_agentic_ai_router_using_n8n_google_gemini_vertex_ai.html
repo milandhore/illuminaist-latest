@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>No-Code-Deploy Agentic AI Router using n8n ,Google Gemini, Vertex AI | IlluminAIst</title>
+  <meta name="description" content="Citizen Developer Approach-Without Coding Publish Cloud Architecture Integration pattern">
+</head>
+<body>
+<div class="shell">
+    </nav>
+    <main>
+      <div class="toolbar"><button id="theme-toggle" type="button" aria-label="Toggle dark mode">☾ Theme</button></div>
+      <article>
+        <header>
+          <div class="eyebrow">Converted article</div>
+
+</header>
+        <div id="article-content">
+        
+          <div class="reveal" data-source-block-id="b-0001" data-source-kind="heading">
+          
+            <h3 id="heading-1">Agentic AI Router with No-Code n8n platform: Streamlining Solution Design Documentation Publishing</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0002" data-source-kind="paragraph">
+          <p>Citizen Developer Approach-Without Coding Publish Cloud Architecture Integration pattern</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0003" data-source-kind="paragraph">
+          <p>T he goal of this article is to demonstrate how to achieve automated and autonomous publishing of integration architecture documentation. In this solution, users simply upload architecture diagrams (PDFs or images), and the rest of the process — text extraction, conversion, storage, and contextual analysis — is handled seamlessly by an Agentic AI-powered workflow.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0004" data-source-kind="paragraph">
+          <p>To implement this solution, I have containerized the n8n platform locally using Docker. This setup enables efficient development and deployment of workflows while leveraging the capabilities of Google Cloud’s Vertex AI and Gemini Chat Model for text extraction and analysis.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0005" data-source-kind="heading">
+          
+            <h3 id="heading-5">Introduction to n8n</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0006" data-source-kind="paragraph">
+          <p>n8n is a powerful open-source workflow automation tool that enables users to create custom workflows without extensive coding knowledge. It provides a visual interface where users can connect different nodes, representing actions or triggers, to automate tasks across apps and systems. With over 1,250 pre-built templates and integrations for platforms like Google Vertex AI, AWS, and more, n8n is a versatile solution for businesses seeking efficient automation.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0007" data-source-kind="heading">
+          
+            <h3 id="heading-7">Docker Integration: Building the Framework</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0008" data-source-kind="paragraph">
+          <p>To deploy n8n effectively, Docker was utilized to create a containerized environment. This approach ensures scalability, portability, and ease of management. Here’s how the framework was built:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0009" data-source-kind="paragraph">
+          <p>Installing Docker and Docker-Compose :</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0010" data-source-kind="list">
+          <ul><li>Docker was installed on a Linux-based server following standard installation guidelines.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0011" data-source-kind="list">
+          <ul><li>Docker-Compose was configured to manage multi-container applications seamlessly.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0012" data-source-kind="paragraph">
+          <p>Creating the Docker Environment :</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0013" data-source-kind="list">
+          <ul><li>A docker-compose.yml file was created to define services like n8n and Traefik (for reverse proxy).</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0014" data-source-kind="list">
+          <ul><li>An .env file was set up to manage environment variables securely.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0015" data-source-kind="paragraph">
+          <p>Launching the Container :</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0016" data-source-kind="list">
+          <ul><li>The docker-compose up command initialized the n8n instance.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0017" data-source-kind="list">
+          <ul><li>Authentication and HTTPS were configured for secure access</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0018" data-source-kind="paragraph">
+          <p>This setup allowed n8n to run in an isolated container, simplifying deployment and ensuring consistent performance across environments.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0019" data-source-kind="heading">
+          
+            <h3 id="heading-19">Core Features of n8n</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0020" data-source-kind="paragraph">
+          <p>n8n stands out due to its flexibility and extensive capabilities:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0021" data-source-kind="list">
+          <ul><li>Visual Workflow Builder : A drag-and-drop interface lets users design workflows intuitively without writing code</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0022" data-source-kind="list">
+          <ul><li>Nodes for Actions and Triggers : Nodes represent specific tasks like sending HTTP requests, storing data in databases, or interacting with APIs</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0023" data-source-kind="list">
+          <ul><li>Integration Library : Over 1,000 integrations with platforms such as Google Vertex AI, AWS services, Slack, and more.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0024" data-source-kind="list">
+          <ul><li>Custom Logic : Advanced users can incorporate custom Python or JavaScript code for tailored solutions.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0025" data-source-kind="list">
+          <ul><li>Self-hosting Options : Users can host n8n on their servers using Docker or opt for cloud hosting for convenience.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0026" data-source-kind="heading">
+          
+            <h3 id="heading-26">Use Case: Integration Architecture Analysis using Agentic AI router design</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0027" data-source-kind="heading">
+          
+            <h3 id="heading-27">Scenario Overview</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0028" data-source-kind="paragraph">
+          <p>The use case involved analyzing an integration architecture diagram provided as an image or PDF. Using n8n’s workflow automation capabilities combined with Google Vertex AI, the diagram was interpreted and explained.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0029" data-source-kind="heading">
+          
+            <h3 id="heading-29">Workflow Steps</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0030" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*I9nF7-zDteQvUF79_vHguw.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0031" data-source-kind="heading">
+          
+            <h3 id="heading-31">Understanding the Attached Workflow</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0032" data-source-kind="paragraph">
+          <p>The provided n8n workflow automates the process of extracting text from uploaded PDF or image files using Google Cloud’s Vertex AI and then storing the output in Google Drive. Here’s a detailed breakdown of the workflow:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0033" data-source-kind="heading">
+          
+            <h3 id="heading-33">1. Input: Uploading Files</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0034" data-source-kind="list">
+          <ul><li>Trigger Node: “Upload Architecture Pattern” The process begins when a user uploads a file (either a PDF or an image) to a designated folder in Google Drive. This node monitors the folder for updates (e.g., new files uploaded) and triggers the workflow.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0035" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*TqnwmWqtAZEEay8yo_1Ufw.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0036" data-source-kind="heading">
+          
+            <h3 id="heading-36">2. Routing Based on File Type</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0037" data-source-kind="list">
+          <ul><li>Router Node: “Router Based Agent” This node evaluates whether the uploaded file is a PDF or an image. Based on the file type, it routes the workflow to the appropriate path for further processing.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0038" data-source-kind="heading">
+          
+            <h3 id="heading-38">3. Processing PDFs</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0039" data-source-kind="paragraph">
+          <p>For PDF files:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0040" data-source-kind="quote">
+          <blockquote>Download Node: “Download PDF” Downloads the PDF file from Google Drive.</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0041" data-source-kind="quote">
+          <blockquote>Vertex AI Node: “Vertex AI Extract” Sends the PDF to Google’s Vertex AI for text extraction. Vertex AI uses machine learning to analyze and extract text from documents.</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0042" data-source-kind="quote">
+          <blockquote>Convert Node: “Convert to Text File” Converts the extracted data into a plain text file format.</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0043" data-source-kind="quote">
+          <blockquote>Upload Node: “Upload to Google Drive” Saves the processed text file back into Google Drive for easy access</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0044" data-source-kind="heading">
+          
+            <h3 id="heading-44">4. Processing Images</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0045" data-source-kind="paragraph">
+          <p>For image files:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0046" data-source-kind="quote">
+          <blockquote>Download Node: “Download Image” Downloads the image file from Google Drive.</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0047" data-source-kind="quote">
+          <blockquote>Vertex AI Node: “Vertex AI Extract Text” Processes the image using Vertex AI’s OCR (Optical Character Recognition) capabilities to extract text.</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0048" data-source-kind="quote">
+          <blockquote>Convert Node: “Convert to Text File” Converts extracted text into a plain text file.</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0049" data-source-kind="quote">
+          <blockquote>Upload Node: “Upload to Google Drive” Uploads the processed text file back into Google Drive.</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0050" data-source-kind="heading">
+          
+            <h3 id="heading-50">5. Integration with Google Gemini Chat Model</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0051" data-source-kind="paragraph">
+          <p>In both paths (PDF and image), there is an optional integration with Google Gemini Chat Model, which could be used for further analysis, summarization, or contextual understanding of the extracted text.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0052" data-source-kind="heading">
+          
+            <h3 id="heading-52">Publish Document Output</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0053" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*ZWhFfrvdouztqxxSyPsZLA.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0054" data-source-kind="heading">
+          
+            <h3 id="heading-54">Key Features of n8n Highlighted in This Workflow</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0055" data-source-kind="paragraph">
+          <p>Low-Code/No-Code Development</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0056" data-source-kind="list">
+          <ul><li>The drag-and-drop interface allows users to build workflows visually without writing extensive code.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0057" data-source-kind="list">
+          <ul><li>Conditional routing (via the Router node) enables branching logic based on input parameters like file type.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0058" data-source-kind="paragraph">
+          <p>Integration with Third-Party Services</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0059" data-source-kind="list">
+          <ul><li>The workflow integrates seamlessly with Google Cloud services such as Vertex AI and Google Drive, showcasing n8n’s ability to connect diverse platforms.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0060" data-source-kind="paragraph">
+          <p>Flexibility and Extensibility</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0061" data-source-kind="list">
+          <ul><li>Users can customize workflows by adding additional nodes, such as error handling or notifications (e.g., sending alerts when processing is complete).</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0062" data-source-kind="list">
+          <ul><li>Advanced users can incorporate custom code if needed, making n8n suitable for both technical and non-technical users.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0063" data-source-kind="paragraph">
+          <p>Automation of Repetitive Tasks</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0064" data-source-kind="list">
+          <ul><li>Automates tedious processes such as downloading files, extracting text, converting formats, and re-uploading results — saving time and reducing human error.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0065" data-source-kind="paragraph">
+          <p>Scalability</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0066" data-source-kind="list">
+          <ul><li>The modular design of workflows allows for easy scaling. For example, additional branches could be added for other file types or more sophisticated processing steps like natural language understanding.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0067" data-source-kind="heading">
+          
+            <h3 id="heading-67">Advantages of Using n8n for Workflow Automation</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0068" data-source-kind="list">
+          <ul><li>Open Source: Users have full control over their workflows and data since n8n can be self-hosted.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0069" data-source-kind="list">
+          <ul><li>Extensive Integrations: With over 400 integrations available, including APIs and webhooks, n8n supports a wide range of use cases.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0070" data-source-kind="list">
+          <ul><li>Error Handling: Built-in nodes allow users to handle errors gracefully, ensuring workflows remain robust even when issues arise.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0071" data-source-kind="list">
+          <ul><li>Community Support: A vibrant open-source community contributes templates and extensions, enabling faster development cycles.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0072" data-source-kind="heading">
+          
+            <h3 id="heading-72">Real-World Applications</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0073" data-source-kind="paragraph">
+          <p>This workflow can be adapted for various real-world scenarios:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0074" data-source-kind="list">
+          <ul><li>Automating document digitization in enterprises by extracting data from scanned contracts or invoices.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0075" data-source-kind="list">
+          <ul><li>Processing images in e-commerce platforms to extract product details from uploaded photos.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0076" data-source-kind="list">
+          <ul><li>Enhancing customer service by integrating extracted data into chatbots or CRM systems.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0077" data-source-kind="heading">
+          
+            <h3 id="heading-77">Low-Code/No-Code Development Approach</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0078" data-source-kind="paragraph">
+          <p>The entire use case leveraged n8n’s low-code/no-code capabilities:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0079" data-source-kind="paragraph">
+          <p>Ease of Use :</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0080" data-source-kind="list">
+          <ul><li>The visual interface allowed rapid development without programming expertise.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0081" data-source-kind="paragraph">
+          <p>Open Source Flexibility :</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0082" data-source-kind="list">
+          <ul><li>Being open-source ensured cost-effectiveness and customization opportunities.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0083" data-source-kind="paragraph">
+          <p>Scalability :</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0084" data-source-kind="list">
+          <ul><li>Workflows could be expanded by adding nodes or integrating additional services like AWS or Google Cloud tools.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0085" data-source-kind="paragraph">
+          <p>This approach exemplified how businesses can adopt automation without investing heavily in technical resources.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0086" data-source-kind="heading">
+          
+            <h3 id="heading-86">Conclusion</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0087" data-source-kind="paragraph">
+          <p>By combining Docker integration, n8n’s core features, AI tools like Google Vertex AI, and AWS expertise, automated workflows were developed efficiently using a low-code/no-code platform. This process showcases how organizations can streamline operations, enhance productivity, and reduce reliance on manual processes through innovative automation solutions.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0088" data-source-kind="heading">
+          
+            <h3 id="heading-88">Citations:</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0089" data-source-kind="list">
+          <ul><li>https://docs.n8n.io/hosting/installation/server-setups/docker-compose/</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0090" data-source-kind="list">
+          <ul><li>https://n8n.io/integrations/google-vertex-ai/</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0091" data-source-kind="list">
+          <ul><li>https://docs.n8n.io</li></ul>
+          
+          </div>
+        
+        </div>
+      </article>
+    </main>
+  </div>
+  <div class="lightbox" id="lightbox" hidden><img alt="Expanded article image"></div>
+</body>
+</html>

@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Unbridling the Power of LangChain framework with LCEL | IlluminAIst</title>
+  <meta name="description" content="L angChain Expression Language (LCEL) is a declarative way to easily compose chains together. It was designed from day one to support putting prototypes into production, with no code changes. It’s a key part of the LangChain toolkit and provides a fresh perspective on LLM-based a">
+</head>
+<body>
+<div class="shell">
+    </nav>
+    <main>
+      <div class="toolbar"><button id="theme-toggle" type="button" aria-label="Toggle dark mode">☾ Theme</button></div>
+      <article>
+        <header>
+          <div class="eyebrow">Converted article</div>
+
+</header>
+        <div id="article-content">
+        
+          <div class="reveal" data-source-block-id="b-0001" data-source-kind="paragraph">
+          <p>L angChain Expression Language (LCEL) is a declarative way to easily compose chains together. It was designed from day one to support putting prototypes into production, with no code changes. It’s a key part of the LangChain toolkit and provides a fresh perspective on LLM-based application development.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0002" data-source-kind="paragraph">
+          <p>Pre-requisites: Reader of this article must have basic understanding of LangChain framework and how it's used in GenAI application development.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0003" data-source-kind="heading">
+          
+            <h3 id="heading-3">Capabilities of LCEL</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0004" data-source-kind="list">
+          <ul><li>First-class streaming support: LCEL provides the best possible time-to-first token.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0005" data-source-kind="list">
+          <ul><li>Async support: Any chain built with LCEL can be called both with the synchronous API and with the asynchronous API.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0006" data-source-kind="list">
+          <ul><li>Optimized parallel execution: LCEL chains have steps that can be executed in parallel.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0007" data-source-kind="list">
+          <ul><li>Retries and fallbacks: Configure retries and fallbacks for any part of your LCEL chain.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0008" data-source-kind="list">
+          <ul><li>Access intermediate results: For more complex chains, it’s often very useful to access the results of intermediate steps even before the final output is produced.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0009" data-source-kind="list">
+          <ul><li>Input and output schemas: Input and output schemas give every LCEL chain Pydantic and JSONSchema schemas inferred from the structure of your chain.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0010" data-source-kind="list">
+          <ul><li>Seamless LangSmith tracing: As your chains get more and more complex, it becomes increasingly important to understand what exactly is happening at every step.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0011" data-source-kind="list">
+          <ul><li>Seamless LangServe deployment: Any chain created with LCEL can be easily deployed using LangServe.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0012" data-source-kind="heading">
+          
+            <h3 id="heading-12">Advantages of LCEL</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0013" data-source-kind="list">
+          <ul><li>Faster POC to prod: LCEL supports putting prototypes into production, with no code change.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0014" data-source-kind="list">
+          <ul><li>Custom chain creation: LCEL simplifies the process of creating custom chains with a new syntax.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0015" data-source-kind="list">
+          <ul><li>Out of the box streaming and batch: LCEL gives you batch, streaming, and async capabilities for free.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0016" data-source-kind="list">
+          <ul><li>Unified interface: It offers automatic parallelization, typing capabilities, and any future feature LangChain might develop.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0017" data-source-kind="heading">
+          
+            <h3 id="heading-17">Here is an example of how to use LCEL to implement an LLM solution</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0018" data-source-kind="paragraph">
+          <p>To truly grasp the significance of LCEL, it’s beneficial to observe its operation and contemplate how we could replicate comparable features without its presence. In this step-by-step guide, we’ll do exactly that, using our elementary example from the introductory section. We’ll examine our straightforward prompt and model sequence, which inherently encompasses a wide range of functions, and explore the requirements to reproduce all of its components.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0019" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*GyOzRPbaMNklg6bSXjeVfg.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0020" data-source-kind="heading">
+          
+            <h3 id="heading-20">Basic Components of LCEL</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0021" data-source-kind="paragraph">
+          <p>LCEL simplifies the construction of intricate chains using fundamental components and provides built-in features like streaming, parallelism, and logging.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0022" data-source-kind="paragraph">
+          <p>In this process, the user input flows through a sequence of components: first to the prompt template, then to the model, and finally to the output parser. Let’s examine each component individually to gain a deeper understanding.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0023" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*AadZ4ZCbqKsdE6meHqS7FQ.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0024" data-source-kind="code">
+          <pre><code>pip install --upgrade --quiet  langchain-core langchain-community langchain-openai
+pip install -qU langchain-openai
+import
+getpass
+import
+os
+from
+langchain_openai
+import
+ChatOpenAI
+from
+langchain_core.output_parsers
+import
+StrOutputParser
+from
+langchain_core.prompts
+import
+ChatPromptTemplate
+os.environ[
+"OPENAI_API_KEY"
+] = getpass.getpass()
+model = ChatOpenAI(model=
+"gpt-4"
+)
+prompt = ChatPromptTemplate.from_template(
+"Hey Milan Explain me {topic}"
+)
+output_parser = StrOutputParser()
+chain = prompt | model | output_parser
+chain.invoke({
+"topic"
+:
+"Langchain LCEL"
+})</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0025" data-source-kind="heading">
+          
+            <h4 id="heading-25">Pipe Operator ( Remember my Unix days :) )</h4>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0026" data-source-kind="paragraph">
+          <p>The pipe symbol (|) functions similarly to a Unix pipe operator, connecting various components in a chain. It passes the output from one component as input to the next</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0027" data-source-kind="heading">
+          
+            <h3 id="heading-27">Prompt</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0028" data-source-kind="paragraph">
+          <p>The prompt serves as a foundational blueprint, a BasePromptTemplate , that ingeniously transforms a dictionary of template variables into a PromptValue . This PromptValue elegantly encapsulates a fully formed prompt, ready to be utilized by either an LLM or a ChatModel . The LLM accepts a string as input, while the ChatModel operates on a sequence of messages. The versatility of the prompt lies in its ability to seamlessly interface with either type of language model, thanks to its inherent logic for generating BaseMessages and strings alike. This adaptability ensures a smooth and efficient operation, regardless of the language model type in use.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0029" data-source-kind="heading">
+          
+            <h3 id="heading-29">Model ​</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0030" data-source-kind="paragraph">
+          <p>The PromptValue is then passed to model . In this case our model is a ChatModel , meaning it will output a BaseMessage .</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0031" data-source-kind="heading">
+          
+            <h3 id="heading-31">Output Parser</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0032" data-source-kind="paragraph">
+          <p>In the final stage of the process, we channel the output from our model into the output_parser . This output_parser is a BaseOutputParser , designed to accept either a string or a BaseMessage as input. The specialized StrOutputParser then steps in, effortlessly transforming any form of input into a string, showcasing its simplicity and efficiency.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0033" data-source-kind="heading">
+          
+            <h3 id="heading-33">Few Capabilities of LCEL</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0034" data-source-kind="paragraph">
+          <p>First-class streaming support : LCEL provides optimal time-to-first token, ensuring you receive parsed, incremental chunks of output at the same rate as the LLM provider outputs the raw tokens.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0035" data-source-kind="code">
+          <pre><code># Example of first-class streaming support
+from
+langchain
+import
+LCEL, LLM
+llm = LLM(
+"gpt-4"
+)
+chain = LCEL(llm.generate(
+"Milan-Outlook"
+))
+# Execute the chain with streaming support
+for
+result
+in
+chain.execute_stream():
+print
+(result)</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0036" data-source-kind="paragraph">
+          <p>Async support : Any chain built with LCEL can be invoked using both synchronous and asynchronous APIs.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0037" data-source-kind="code">
+          <pre><code># Example of async support
+import
+asyncio
+from
+langchain
+import
+LCEL, LLM
+llm = LLM(
+"gpt-4"
+)
+chain = LCEL(llm.generate(
+"Milan-Outlook"
+))
+# Execute the chain asynchronously
+async
+def
+main
+():
+result =
+await
+chain.execute_async()
+print
+(result)
+asyncio.run(main())</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0038" data-source-kind="paragraph">
+          <p>Optimized parallel execution : LCEL automatically executes steps that can be performed in parallel, optimizing the overall execution time.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0039" data-source-kind="code">
+          <pre><code># Example of optimized parallel execution
+from
+langchain
+import
+LCEL, LLM
+llm = LLM(
+"gpt-3"
+)
+chain1 = LCEL(llm.generate(
+"Milan-Outlook"
+))
+chain2 = LCEL(llm.generate(
+"Goodbye, Milan-Outlook!"
+))
+# Execute the chains in parallel
+results = LCEL.parallel(chain1, chain2).execute()
+print
+(results)</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0040" data-source-kind="paragraph">
+          <p>Retries and fallbacks : LCEL allows you to configure retries and fallbacks for any part of your chain, ensuring robustness in your applications.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0041" data-source-kind="code">
+          <pre><code># Example of retries and fallbacks
+from
+langchain
+import
+LCEL, LLM, Fallback
+llm = LLM(
+"gpt-4"
+)
+chain = LCEL(llm.generate(
+"Milan-Outlook"
+))
+# Configure retries and fallbacks
+chain = chain.retry(
+3
+).fallback(Fallback(
+"Sorry, something went wrong."
+))
+# Execute the chain
+result = chain.execute()
+print
+(result)</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0042" data-source-kind="paragraph">
+          <p>Input and output schemas : Every LCEL chain has Pydantic and JSONSchema schemas inferred from the structure of your chain, ensuring type safety and data integrity.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0043" data-source-kind="code">
+          <pre><code># Example of input and output schemas
+from
+langchain
+import
+LCEL, LLM
+llm = LLM(
+"gpt-4"
+)
+chain = LCEL(llm.generate(
+"Milan-Outlook"
+))
+# Print the input and output schemas
+print
+(chain.input_schema)
+print
+(chain.output_schema)</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0044" data-source-kind="paragraph">
+          <p>Seamless LangSmith tracing : All steps are automatically logged to LangSmith for maximum observability and debuggability.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0045" data-source-kind="code">
+          <pre><code># Example of LangSmith tracing
+from langchain import LCEL, LLM
+llm = LLM(
+"gpt-4"
+)
+chain = LCEL(llm.generate(
+"Milan-Outlook"
+))
+# Execute the chain
+result = chain.execute()
+# The execution steps are automatically logged to LangSmith</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0046" data-source-kind="paragraph">
+          <p>Seamless LangServe deployment : Any chain created with LCEL can be easily deployed using LangServe, ensuring a smooth transition from development to production.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0047" data-source-kind="code">
+          <pre><code># Example of LangServe deployment
+from langchain import LCEL, LLM
+llm = LLM(
+"gpt-4"
+)
+chain = LCEL(llm.generate(
+"Milan-Outlook"
+))
+# Deploy the chain to LangServe
+chain.deploy(
+"my_chain"
+)</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0048" data-source-kind="heading">
+          
+            <h3 id="heading-48">Conclusion</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0049" data-source-kind="paragraph">
+          <p>LCEL is a powerful tool for building applications that leverage Large Language Models. With its robust set of features and ease of use, it is an excellent choice for developers looking to implement LLM solutions with agility and efficiency. Whether you’re building a simple text generation application or a complex multi-step pipeline, LCEL has you covered.</p>
+          
+          </div>
+        
+        </div>
+      </article>
+    </main>
+  </div>
+  <div class="lightbox" id="lightbox" hidden><img alt="Expanded article image"></div>
+</body>
+</html>

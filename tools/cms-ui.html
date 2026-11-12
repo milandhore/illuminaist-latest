@@ -136,6 +136,19 @@ textarea{resize:vertical;min-height:90px;font-family:'JetBrains Mono',monospace;
 .upload-sub{font-size:11px;color:var(--subtle);margin-top:3px}
 .file-ok{margin-top:9px;padding:7px 11px;background:rgba(34,211,160,0.08);
   border:1px solid rgba(34,211,160,0.2);border-radius:7px;font-size:12px;color:var(--green);display:none}
+.bulk-summary{margin-top:10px;padding:10px;background:rgba(0,220,255,0.04);
+  border:1px solid rgba(0,220,255,0.15);border-radius:8px;display:none}
+.bulk-summary-head{display:flex;align-items:center;justify-content:space-between;gap:8px;
+  font-size:12px;color:var(--muted);margin-bottom:8px}
+.bulk-file-list{display:flex;flex-direction:column;gap:5px;max-height:210px;overflow-y:auto}
+.bulk-file{display:flex;align-items:flex-start;gap:7px;padding:6px 7px;border-radius:6px;
+  background:rgba(255,255,255,0.025);font-size:11px;line-height:1.4}
+.bulk-file strong{font-size:11px;color:var(--text);font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bulk-file small{display:block;color:var(--subtle);margin-top:2px}
+.bulk-file.valid{border-left:2px solid var(--green)}
+.bulk-file.warning{border-left:2px solid var(--amber)}
+.bulk-file.invalid{border-left:2px solid var(--red)}
+.bulk-file-icon{flex-shrink:0;font-size:13px}
 
 /* PREVIEW */
 .preview-frame{flex:1;border:none;background:#080C14}
@@ -145,6 +158,13 @@ textarea{resize:vertical;min-height:90px;font-family:'JetBrains Mono',monospace;
 .stat{background:var(--surface);border:1px solid rgba(255,255,255,0.06);border-radius:8px;
   padding:6px 12px;font-size:11px;font-weight:500;color:var(--muted)}
 .stat strong{color:var(--text);font-size:15px;display:block}
+
+/* AI EBOOK STUDIO */
+.ai-studio-scroll{overflow-y:auto;padding:30px;min-height:100%;background:radial-gradient(circle at 85% 0%,rgba(0,220,255,.07),transparent 34%),var(--bg)}
+.ai-hero{max-width:1080px;margin:0 auto 22px;padding:26px 28px;border:1px solid rgba(0,220,255,.18);border-radius:16px;background:linear-gradient(120deg,rgba(14,22,35,.98),rgba(18,32,51,.82));display:flex;align-items:center;justify-content:space-between;gap:20px;box-shadow:0 18px 55px rgba(0,0,0,.18)}
+.ai-hero h2{font-size:27px;line-height:1.15;margin:10px 0 8px;max-width:720px}.ai-hero p{color:var(--muted);line-height:1.65;max-width:780px;font-size:13px}.ai-hero-mark{width:68px;height:68px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:34px;color:#08121e;background:linear-gradient(135deg,var(--cyan),#7B7FFF);box-shadow:0 0 38px rgba(0,220,255,.25);flex-shrink:0}
+.ai-grid{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:minmax(280px,380px) 1fr;gap:18px}.ai-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px;min-height:290px}.ai-card .section-title{margin-bottom:20px}.ai-note{font-size:11px;line-height:1.55;color:var(--subtle);background:rgba(0,220,255,.04);border:1px solid rgba(0,220,255,.11);border-radius:9px;padding:11px;margin:14px 0 18px}.ai-note strong{color:var(--cyan)}.ai-status{min-height:205px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:var(--muted);gap:8px}.ai-status strong{color:var(--text);font-size:15px}.ai-status span{font-size:12px;line-height:1.5;max-width:300px}.ai-status-icon{font-size:40px;color:var(--cyan);opacity:.75}.ai-progress-head{display:flex;align-items:center;justify-content:space-between;font-size:13px}.ai-progress-head span{color:var(--cyan);font-family:'JetBrains Mono',monospace}.progress-track{height:9px;border-radius:99px;background:var(--surface);overflow:hidden;margin:12px 0 10px}.progress-bar{height:100%;width:0;background:linear-gradient(90deg,var(--cyan),#7B7FFF);border-radius:99px;transition:width .35s ease;box-shadow:0 0 18px rgba(0,220,255,.45)}.ai-progress-message{color:var(--muted);font-size:12px;line-height:1.5;min-height:38px}.ai-stage-list{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:13px}.ai-stage-list span{font-size:10px;color:var(--subtle);padding:8px 9px;border:1px solid rgba(255,255,255,.06);border-radius:7px}.ai-stage-list span.active{color:var(--cyan);border-color:rgba(0,220,255,.25);background:rgba(0,220,255,.06)}.ai-stage-list span.done{color:var(--green);border-color:rgba(34,211,160,.2)}.ai-result{margin-top:18px;padding-top:18px;border-top:1px solid var(--border)}.ai-result h3{font-size:18px;margin-bottom:6px}.ai-result-meta{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}.ai-result-meta span{font-size:10px;color:var(--muted);border:1px solid rgba(255,255,255,.08);background:var(--surface);border-radius:99px;padding:4px 8px}.ai-result-copy{font-size:12px;color:var(--muted);line-height:1.55}.ai-result-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}
+@media (max-width: 900px){.ai-grid{grid-template-columns:1fr}.ai-hero{align-items:flex-start}.ai-hero-mark{display:none}}
 
 /* ORPHAN BANNER */
 .orphan-banner{margin:10px 20px;padding:10px 14px;background:rgba(255,77,106,0.07);
@@ -215,12 +235,16 @@ code.pill{color:var(--cyan);background:var(--surface);padding:1px 6px;border-rad
            ondragover="event.preventDefault();this.classList.add('drag')"
            ondrop="dropFile(event)"
            ondragleave="this.classList.remove('drag')">
-        <input type="file" id="fileInput" accept=".html,.htm" onchange="loadFile(event)">
+        <input type="file" id="fileInput" accept=".html,.htm" multiple onchange="loadFile(event)">
         <div class="upload-icon">📄</div>
         <div class="upload-lbl"><strong>Click to upload</strong> or drag &amp; drop</div>
-        <div class="upload-sub">.html only · body content extracted automatically</div>
+        <div class="upload-sub">.html only · select one or many · details auto-detected</div>
       </div>
       <div class="file-ok" id="file-ok"></div>
+      <div class="bulk-summary" id="bulk-summary">
+        <div class="bulk-summary-head"><strong id="bulk-summary-text">Batch ready</strong><span class="badge badge-cyan">pre-flight validation</span></div>
+        <div class="bulk-file-list" id="bulk-file-list"></div>
+      </div>
       <div style="margin-top:10px">
         <label>Or paste / edit HTML body directly</label>
         <textarea id="htmlContent" rows="8"
@@ -340,6 +364,7 @@ code.pill{color:var(--cyan);background:var(--surface);padding:1px 6px;border-rad
       <button class="tab" id="tab-btn-news" onclick="showTab('news',this)">📰&nbsp; News</button>
       <button class="tab" id="tab-btn-files" onclick="showTab('files',this)">🗂&nbsp; HTML Files</button>
       <button class="tab" id="tab-btn-ebooks" onclick="showTab('ebooks',this)">📕&nbsp; eBooks</button>
+      <button class="tab" id="tab-btn-ai-studio" onclick="showTab('ai-studio',this)">✨&nbsp; AI Studio</button>
     </div>
 
     <!-- Preview -->
@@ -400,6 +425,64 @@ code.pill{color:var(--cyan);background:var(--surface);padding:1px 6px;border-rad
       </div>
       <div class="art-list" id="ebookList">
         <div class="empty"><div class="empty-icon">📕</div><div>Loading eBooks…</div></div>
+      </div>
+    </div>
+
+    <!-- AI eBook Studio -->
+    <div class="view" id="tab-ai-studio">
+      <div class="ai-studio-scroll">
+        <div class="ai-hero">
+          <div>
+            <span class="badge badge-cyan">Enterprise eBook Agent</span>
+            <h2>Turn a title into a publication-ready research draft.</h2>
+            <p>Give the agent a title and audience. It will build a research brief, position the book, write 10–12 chapters, run an editorial review, and assemble a 60–100 page manuscript package.</p>
+          </div>
+          <div class="ai-hero-mark">✦</div>
+        </div>
+
+        <div class="ai-grid">
+          <section class="ai-card">
+            <div class="section-title">1 · Define the book</div>
+            <div class="field">
+              <label for="ai_ebook_title">Book title *</label>
+              <input type="text" id="ai_ebook_title" placeholder="e.g. The Enterprise AI Operating Model" maxlength="180">
+            </div>
+            <div class="field">
+              <label for="ai_ebook_audience">Target audience *</label>
+              <select id="ai_ebook_audience">
+                <option value="Enterprise executives and business leaders">Enterprise executives and business leaders</option>
+                <option value="Enterprise architects and technology strategists">Enterprise architects and technology strategists</option>
+                <option value="Engineering leaders and platform teams">Engineering leaders and platform teams</option>
+                <option value="Developers and technical practitioners">Developers and technical practitioners</option>
+                <option value="Data, ML and AI practitioners">Data, ML and AI practitioners</option>
+                <option value="Professionals new to the subject">Professionals new to the subject</option>
+              </select>
+            </div>
+            <div class="ai-note"><strong>Research guardrail:</strong> The agent cites working URLs, labels hypothetical examples, and leaves unverified claims visible for editorial validation.</div>
+            <button class="btn btn-primary" id="generateEbookBtn" onclick="startEbookGeneration()" style="width:100%;justify-content:center;padding:12px">✨ Generate enterprise eBook</button>
+          </section>
+
+          <section class="ai-card" id="ai-progress-card">
+            <div class="section-title">2 · Generation pipeline</div>
+            <div class="ai-status" id="aiStatusEmpty">
+              <div class="ai-status-icon">◎</div>
+              <strong>Your draft will appear here</strong>
+              <span>Generation runs in stages so the CMS can show progress and preserve quality checks.</span>
+            </div>
+            <div id="aiProgress" style="display:none">
+              <div class="ai-progress-head"><strong id="aiProgressStage">Queued</strong><span id="aiProgressPercent">0%</span></div>
+              <div class="progress-track"><div id="aiProgressBar" class="progress-bar"></div></div>
+              <p id="aiProgressMessage" class="ai-progress-message"></p>
+              <div class="ai-stage-list">
+                <span data-ai-stage="research">Research &amp; positioning</span>
+                <span data-ai-stage="manuscript">Chapter manuscript</span>
+                <span data-ai-stage="editorial-review">Editorial review</span>
+                <span data-ai-stage="complete">Publishing package</span>
+              </div>
+            </div>
+            <div id="aiResult" style="display:none"></div>
+          </section>
+        </div>
       </div>
     </div>
   </div>
@@ -595,6 +678,7 @@ let unsaved = false, previewTimer = null
 let allArticles = [], allOrphans = [], allHtmlFiles = []
 let pendingDeleteSlug = '', pendingDeleteTopic = '', pendingDeleteTitle = ''
 let allNews = [], selectedNewsSlugs = new Set(), pendingDeleteNewsSlugs = [], pendingDeleteNewsTitle = ''
+let bulkFiles = []
 
 // publishedAt set automatically on publish (today's date)
 
@@ -602,10 +686,9 @@ let allNews = [], selectedNewsSlugs = new Set(), pendingDeleteNewsSlugs = [], pe
 function dropFile(e) {
   e.preventDefault()
   document.getElementById('dropzone').classList.remove('drag')
-  const f = e.dataTransfer.files[0]
-  if (f) processFile(f)
+  processFiles([...e.dataTransfer.files])
 }
-function loadFile(e) { if (e.target.files[0]) processFile(e.target.files[0]) }
+function loadFile(e) { processFiles([...e.target.files]) }
 
 function processFile(f) {
   const r = new FileReader()
@@ -707,11 +790,142 @@ function processFile(f) {
     const checks = report.removed.length
       ? ' · Stripped: ' + report.removed.join(', ')
       : ' · Body looks clean'
-    ok.innerHTML = '✓ <strong>' + f.name + '</strong> (' + Math.round(f.size/1024) + ' KB) · Fields auto-populated' + checks
+    ok.innerHTML = '✓ <strong>' + escapeHtml(f.name) + '</strong> (' + Math.round(f.size/1024) + ' KB) · Fields auto-populated' + checks
     markUnsaved()
     schedulePreview()
   }
   r.readAsText(f)
+}
+
+// ── Bulk upload analysis ─────────────────────────────────────────────────────
+function escapeHtml(value) {
+  return String(value || '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]))
+}
+
+function bulkSlugify(value) {
+  return String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '')
+}
+
+function readFileText(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader()
+    reader.onload = () => resolve(String(reader.result || ''))
+    reader.onerror = () => reject(new Error('Could not read ' + file.name))
+    reader.readAsText(file)
+  })
+}
+
+function htmlText(html) {
+  const holder = document.createElement('div')
+  holder.innerHTML = html
+  return (holder.textContent || '').replace(/\s+/g, ' ').trim()
+}
+
+function metaValue(html, name) {
+  const first = new RegExp("<meta[^>]+name=[\\\"']" + name + "[\\\"'][^>]+content=[\\\"']([^\\\"']+)", 'i')
+  const second = new RegExp("<meta[^>]+content=[\\\"']([^\\\"']+)[\\\"'][^>]+name=[\\\"']" + name + "[\\\"']", 'i')
+  const match = html.match(first) || html.match(second)
+  return match ? match[1].trim() : ''
+}
+
+function analyzeBulkFile(html, file) {
+  const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i)
+  const rawBody = (bodyMatch ? bodyMatch[1] : html).trim()
+  const { clean: body, report } = sanitizeBody(rawBody)
+  const titleMatch = html.match(/<title[^>]*>([^<]+)<\/title>/i)
+  const h1Match = body.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i)
+  const title = (titleMatch ? titleMatch[1] : (h1Match ? htmlText(h1Match[1]) : ''))
+    .replace(/\s*\|\s*IlluminAIst\s*$/i, '').trim()
+  const plainText = htmlText(body)
+  const paragraph = body.match(/<p[^>]*>([\s\S]*?)<\/p>/i)
+  const excerpt = (metaValue(html, 'description') || (paragraph ? htmlText(paragraph[1]) : '') || plainText).slice(0, 280).trim()
+  const lowerText = (html + ' ' + plainText).toLowerCase()
+  const tagSet = new Set()
+  const keywords = metaValue(html, 'keywords')
+  if (keywords) keywords.split(',').map(k => k.trim()).filter(k => k.length > 1 && k.length < 30).forEach(k => tagSet.add(k))
+  ;[...body.matchAll(/<h[23][^>]*>([\s\S]*?)<\/h[23]>/gi)].slice(0, 8).forEach(match => {
+    const heading = htmlText(match[1])
+    if (heading.length >= 3 && heading.length <= 35 && !heading.includes(':')) tagSet.add(heading)
+  })
+  ;['LangChain','LangGraph','CrewAI','AutoGen','RAG','LLM','GPT-4','Claude','Gemini','LLaMA','Ollama','Vector DB','Pinecone','Weaviate','ChromaDB','MLOps','DevOps','Kubernetes','Docker','Terraform','AWS','Azure','GCP','Fine-tuning','Embeddings','Agent','Multi-agent','Prompt engineering','Function calling','Anthropic','OpenAI']
+    .forEach(keyword => { if (lowerText.includes(keyword.toLowerCase())) tagSet.add(keyword) })
+  const finalTags = [...tagSet].filter(tag => !title.toLowerCase().includes(tag.toLowerCase())).slice(0, 8)
+  const topicRules = [
+    ['rag-agents',['rag','retrieval','agent','langgraph','crewai','autogen','adk','memory','tool calling']],
+    ['mlops',['mlops','ml pipeline','kubeflow','airflow','mlflow','data pipeline','model training']],
+    ['cloud-devops',['kubernetes','docker','terraform','aws','azure','gcp','cloud','devops','ci/cd','deployment']],
+    ['emerging-tech',['quantum','blockchain','ar ','vr ','xr ','wearable','spatial computing','neuro']],
+    ['tutorials',['step by step','how to','tutorial','guide','example','code walkthrough','implementation']],
+    ['opinion',['opinion','perspective','i think','we believe','future of','will change','prediction']],
+    ['ai-llms',['llm','gpt','claude','gemini','llama','language model','transformer','openai','anthropic','fine-tun']]
+  ]
+  const topicSlug = (topicRules.find(([, words]) => words.some(word => lowerText.includes(word))) || ['ai-llms'])[0]
+  const advancedWords = ['architecture','internals','implementation','advanced','deep dive','production','optimization']
+  const beginnerWords = ['introduction','beginner','getting started','basics','what is','overview','simple']
+  const difficulty = advancedWords.some(word => lowerText.includes(word)) ? 'Advanced' : beginnerWords.some(word => lowerText.includes(word)) ? 'Beginner' : 'Intermediate'
+  const words = plainText.split(/\s+/).filter(word => word.length > 2).length
+  const errors = []
+  const warnings = []
+  if (!/\.html?$/i.test(file.name)) errors.push('file must be .html or .htm')
+  if (file.size > 5 * 1024 * 1024) errors.push('file is larger than 5 MB')
+  if (/<(?:iframe|object|embed|form)\b/i.test(body)) errors.push('unsupported embedded element')
+  if (!title) errors.push('missing <title> and <h1>')
+  else if (title.length < 5 || title.length > 180) errors.push('title must be 5–180 characters')
+  if (!body || words < 20) errors.push('content must contain at least 20 words')
+  if (!excerpt || excerpt.length < 20) errors.push('missing usable excerpt/meta description')
+  if (report.removed.length) warnings.push('cleaned ' + report.removed.join(', '))
+  if (!/<h[2-6]\b/i.test(body)) warnings.push('no section headings found')
+  return {
+    fileName: file.name, size: file.size, title, slug: bulkSlugify(title || file.name.replace(/\.html?$/i, '')),
+    excerpt, topicSlug, category: TOPIC_MAP[topicSlug] || '', difficulty,
+    author: metaValue(html, 'author') || 'IlluminAIst', avatar: 'AI', tags: finalTags.join(', '),
+    readingTime: Math.max(1, Math.round(words / 200)), publishedAt: new Date().toISOString().split('T')[0],
+    status: 'published', featured: false, trending: false, htmlContent: body,
+    errors, warnings, wordCount: words
+  }
+}
+
+async function processFiles(files) {
+  const selected = files.filter(Boolean)
+  if (!selected.length) return
+  if (selected.length === 1) return processFile(selected[0])
+  const totalSize = selected.reduce((sum, file) => sum + file.size, 0)
+  if (totalSize > 25 * 1024 * 1024) return toast('Select files totaling 25 MB or less per batch', 'error')
+  try {
+    bulkFiles = await Promise.all(selected.map(async file => analyzeBulkFile(await readFileText(file), file)))
+    const slugCounts = {}
+    bulkFiles.forEach(record => { slugCounts[record.slug] = (slugCounts[record.slug] || 0) + 1 })
+    bulkFiles.forEach(record => { if (slugCounts[record.slug] > 1) record.errors.push('duplicate title creates the same URL slug') })
+    const firstValid = bulkFiles.find(record => !record.errors.length)
+    if (firstValid) {
+      document.getElementById('title').value = firstValid.title
+      document.getElementById('slug').value = firstValid.slug
+      document.getElementById('htmlContent').value = firstValid.htmlContent
+      document.getElementById('excerpt').value = firstValid.excerpt
+      document.getElementById('topicSlug').value = firstValid.topicSlug
+      document.getElementById('difficulty').value = firstValid.difficulty
+      document.getElementById('readingTime').value = firstValid.readingTime
+      document.getElementById('author').value = firstValid.author
+      document.getElementById('tags').value = firstValid.tags
+      schedulePreview()
+    }
+    renderBulkQueue()
+    document.getElementById('file-ok').style.display = 'none'
+    markUnsaved()
+  } catch (error) { toast(error.message, 'error') }
+}
+
+function renderBulkQueue() {
+  const valid = bulkFiles.filter(record => !record.errors.length).length
+  document.getElementById('bulk-summary').style.display = 'block'
+  document.getElementById('bulk-summary-text').textContent = valid + ' of ' + bulkFiles.length + ' files ready to publish'
+  document.getElementById('bulk-file-list').innerHTML = bulkFiles.map(record => {
+    const state = record.errors.length ? 'invalid' : (record.warnings.length ? 'warning' : 'valid')
+    const icon = record.errors.length ? '✕' : (record.warnings.length ? '⚠' : '✓')
+    const detail = record.errors.length ? record.errors.join(' · ') : (record.warnings.join(' · ') || record.topicSlug + ' · ' + record.wordCount + ' words')
+    return '<div class="bulk-file ' + state + '"><span class="bulk-file-icon">' + icon + '</span><div style="min-width:0"><strong title="' + escapeHtml(record.fileName) + '">' + escapeHtml(record.fileName) + '</strong><small>' + escapeHtml(detail) + '</small></div></div>'
+  }).join('')
+  document.getElementById('publishBtn').innerHTML = '🚀&nbsp; Publish ' + valid + ' Valid File' + (valid === 1 ? '' : 's')
 }
 
 // ── sanitizeBody ─────────────────────────────────────────────────────────────
@@ -724,6 +938,11 @@ function sanitizeBody(raw) {
   // 1. Remove <script> and <style> blocks entirely
   if (/<script/i.test(s))  { s = s.replace(/<script[\s\S]*?<\/script>/gi, ''); removed.push('scripts') }
   if (/<style/i.test(s))   { s = s.replace(/<style[\s\S]*?<\/style>/gi,  ''); removed.push('inline styles') }
+  if (/\son[a-z]+\s*=|javascript:/i.test(s)) {
+    s = s.replace(/\s+on[a-z]+\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]+)/gi, '')
+      .replace(/\s+(?:href|src)\s*=\s*(["'])\s*javascript:[\s\S]*?\1/gi, '')
+    removed.push('unsafe attributes')
+  }
 
   // 2. Remove hero / header / banner wrapper sections
   //    Matches divs / sections / headers with class/id containing these keywords
@@ -846,7 +1065,40 @@ function buildPreview(body, title) {
 }
 
 // ── Publish ──────────────────────────────────────────────────────────────────
+async function publishBulk() {
+  const ready = bulkFiles.filter(record => !record.errors.length)
+  if (!ready.length) return toast('Fix the validation errors before publishing', 'error')
+  const btn = document.getElementById('publishBtn')
+  btn.disabled = true
+  btn.innerHTML = '⏳&nbsp; Publishing ' + ready.length + ' files…'
+  try {
+    const r = await fetch('/api/publish-bulk', {
+      method: 'POST', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ articles: ready })
+    })
+    const data = await r.json()
+    if (!r.ok) {
+      const details = data.validationErrors ? ' · ' + data.validationErrors.map(item => item.fileName + ': ' + item.errors.join(', ')).join(' | ') : ''
+      throw new Error((data.error || 'Bulk publish failed') + details)
+    }
+    toast('✓ Published ' + data.count + ' articles' + (data.pushed ? ' · pushed to GitHub ✓' : ''), 'success')
+    bulkFiles = []
+    document.getElementById('bulk-summary').style.display = 'none'
+    document.getElementById('publishBtn').innerHTML = '🚀&nbsp; Save &amp; Publish'
+    unsaved = false
+    document.getElementById('unsaved').style.display = 'none'
+    loadArticles()
+  } catch (error) {
+    toast('Error: ' + error.message, 'error')
+  } finally {
+    btn.disabled = false
+    if (!bulkFiles.length) btn.innerHTML = '🚀&nbsp; Save &amp; Publish'
+    else renderBulkQueue()
+  }
+}
+
 async function publish() {
+  if (bulkFiles.length > 1) return publishBulk()
   const btn = document.getElementById('publishBtn')
   const f = {
     htmlContent: document.getElementById('htmlContent').value.trim(),
@@ -1352,6 +1604,7 @@ async function manualGitPush() {
 
 // ── Clear form ────────────────────────────────────────────────────────────────
 function clearForm() {
+  bulkFiles = []
   document.getElementById('title').value = ''
   document.getElementById('slug').value = ''
   document.getElementById('htmlContent').value = ''
@@ -1360,6 +1613,8 @@ function clearForm() {
   document.getElementById('featured').checked = false
   document.getElementById('trending').checked = false
   document.getElementById('file-ok').style.display = 'none'
+  document.getElementById('bulk-summary').style.display = 'none'
+  document.getElementById('publishBtn').innerHTML = '🚀&nbsp; Save &amp; Publish'
   document.getElementById('deleteBtn').style.display = 'none'
   document.getElementById('unsaved').style.display = 'none'
   unsaved = false
@@ -1625,6 +1880,117 @@ async function executeDeleteEbook() {
     btn.disabled = false
     btn.textContent = 'Yes, Delete Permanently'
   }
+}
+
+// ── AI eBook Studio ─────────────────────────────────────────────────────────
+let activeEbookGenerationJob = null
+let lastGeneratedEbook = null
+
+function updateAiProgress(job) {
+  document.getElementById('aiStatusEmpty').style.display = 'none'
+  document.getElementById('aiProgress').style.display = 'block'
+  document.getElementById('aiProgressStage').textContent = job.stage === 'editorial-review' ? 'Editorial review' : (job.stage || 'Working')
+  document.getElementById('aiProgressPercent').textContent = (job.progress || 0) + '%'
+  document.getElementById('aiProgressBar').style.width = Math.max(0, Math.min(100, job.progress || 0)) + '%'
+  document.getElementById('aiProgressMessage').textContent = job.message || ''
+
+  const order = ['research', 'manuscript', 'editorial-review', 'complete']
+  const currentIndex = order.indexOf(job.stage)
+  document.querySelectorAll('[data-ai-stage]').forEach(el => {
+    const stageIndex = order.indexOf(el.dataset.aiStage)
+    el.classList.toggle('active', stageIndex === currentIndex && job.status !== 'complete')
+    el.classList.toggle('done', stageIndex >= 0 && stageIndex < currentIndex || job.status === 'complete' && stageIndex < order.length - 1)
+  })
+}
+
+async function startEbookGeneration() {
+  const title = document.getElementById('ai_ebook_title').value.trim()
+  const audience = document.getElementById('ai_ebook_audience').value.trim()
+  if (!title) return toast('Enter a book title first', 'error')
+  const btn = document.getElementById('generateEbookBtn')
+  btn.disabled = true
+  btn.textContent = '⏳ Starting agent…'
+  document.getElementById('aiResult').style.display = 'none'
+  try {
+    const response = await fetch('/api/generate-ebook', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title, audience })
+    })
+    const data = await response.json()
+    if (!response.ok) throw new Error(data.error || 'Could not start generation')
+    activeEbookGenerationJob = data.job.id
+    updateAiProgress(data.job)
+    pollEbookGeneration(activeEbookGenerationJob)
+  } catch (error) {
+    toast('Error: ' + error.message, 'error')
+    btn.disabled = false
+    btn.textContent = '✨ Generate enterprise eBook'
+  }
+}
+
+async function pollEbookGeneration(jobId) {
+  try {
+    const response = await fetch('/api/ebook-generation/' + encodeURIComponent(jobId))
+    const data = await response.json()
+    if (!response.ok) throw new Error(data.error || 'Could not read generation status')
+    const job = data.job
+    updateAiProgress(job)
+    if (job.status === 'complete') {
+      lastGeneratedEbook = job.result
+      renderAiResult(job.result, jobId)
+      const btn = document.getElementById('generateEbookBtn')
+      btn.disabled = false
+      btn.textContent = '✨ Generate another eBook'
+      toast('✓ Enterprise eBook draft is ready', 'success')
+      return
+    }
+    if (job.status === 'failed') {
+      const btn = document.getElementById('generateEbookBtn')
+      btn.disabled = false
+      btn.textContent = '↻ Try generation again'
+      document.getElementById('aiProgressMessage').textContent = job.error || 'Generation failed'
+      toast('Generation failed: ' + (job.error || 'Unknown error'), 'error')
+      return
+    }
+    window.setTimeout(() => pollEbookGeneration(jobId), 1600)
+  } catch (error) {
+    document.getElementById('aiProgressMessage').textContent = error.message
+    const btn = document.getElementById('generateEbookBtn')
+    btn.disabled = false
+    btn.textContent = '↻ Try generation again'
+    toast('Error: ' + error.message, 'error')
+  }
+}
+
+function renderAiResult(book, jobId) {
+  const result = document.getElementById('aiResult')
+  const review = book.package?.editorialReview || {}
+  const warning = book.pages < 60 || book.pages > 100
+    ? '<div class="ai-note"><strong>Editorial check:</strong> The generated word count estimates ' + book.pages + ' pages. Adjust layout or continue editing before publication to meet the 60–100 page target.</div>'
+    : ''
+  result.innerHTML = '<div class="ai-result">'
+    + '<h3>' + escapeHtml(book.title || 'Generated eBook') + '</h3>'
+    + '<p class="ai-result-copy">' + escapeHtml(book.subtitle || '') + '</p>'
+    + '<div class="ai-result-meta"><span>' + (book.pages || 0) + ' estimated pages</span><span>' + (book.package?.totalWordCount || 0).toLocaleString() + ' words</span><span>' + (book.numberOfChapters || 0) + ' chapters</span><span>Research sources: ' + (book.researchBrief || []).length + '</span></div>'
+    + warning
+    + '<p class="ai-result-copy">' + escapeHtml(book.description || '') + '</p>'
+    + '<p class="ai-result-copy" style="margin-top:8px"><strong style="color:var(--text)">Editorial review:</strong> ' + escapeHtml((review.issuesFound || []).length ? review.issuesFound.join(' · ') : 'No issues were returned in the automated review; complete human fact-checking before release.') + '</p>'
+    + '<div class="ai-result-actions"><a class="btn btn-primary btn-sm" href="/api/ebook-generation/' + encodeURIComponent(jobId) + '/export" download>↓ Export manuscript HTML</a><button class="btn btn-ghost btn-sm" onclick="useGeneratedEbook()">Open eBook publisher</button></div>'
+    + '</div>'
+  result.style.display = 'block'
+}
+
+function useGeneratedEbook() {
+  if (!lastGeneratedEbook) return toast('Generate a draft first', 'error')
+  openEbookModal()
+  document.getElementById('eb_title').value = lastGeneratedEbook.title || ''
+  document.getElementById('eb_subtitle').value = lastGeneratedEbook.subtitle || ''
+  document.getElementById('eb_slug').value = lastGeneratedEbook.slug || ''
+  document.getElementById('eb_description').value = lastGeneratedEbook.description || ''
+  document.getElementById('eb_topics').value = (lastGeneratedEbook.topics || []).join(', ')
+  document.getElementById('eb_pages').value = lastGeneratedEbook.pages || 60
+  document.getElementById('ebookFileSub').innerText = 'Upload the final reviewed PDF to publish this generated manuscript.'
+  toast('Metadata copied into the eBook publisher', 'info')
 }
 
 loadArticles()

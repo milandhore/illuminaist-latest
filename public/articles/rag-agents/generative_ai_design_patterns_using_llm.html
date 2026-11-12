@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Generative AI Design Patterns using LLM. | IlluminAIst</title>
+  <meta name="description" content="Solving Common Challenges: Design patterns represent general solutions to common AI and software design problems. Guiding Principles and Blueprints.">
+</head>
+<body>
+<div class="shell">
+    </nav>
+    <main>
+      <div class="toolbar"><button id="theme-toggle" type="button" aria-label="Toggle dark mode">☾ Theme</button></div>
+      <article>
+        <header>
+          <div class="eyebrow">Converted article</div>
+
+</header>
+        <div id="article-content">
+        
+          <div class="reveal" data-source-block-id="b-0001" data-source-kind="heading">
+          
+            <h3 id="heading-1">The Art of Design Patterns</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0002" data-source-kind="paragraph">
+          <p>Solving Common Challenges: Design patterns represent general solutions to common AI and software design problems. Guiding Principles and Blueprints.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0003" data-source-kind="paragraph">
+          <p>Guiding Principles and Blueprints: Design patterns provide repeatable approaches, principles and architectural blueprints.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0004" data-source-kind="paragraph">
+          <p>Versatile and Proven Solutions: Design patterns are not specific to a particular use case, but rather provide a set of proven solutions that can be applied in a variety of use cases.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0005" data-source-kind="paragraph">
+          <p>Enduring and Adaptable: Design patterns consist of extensible reference patterns that are stable to underlying technology changes.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0006" data-source-kind="heading">
+          
+            <h3 id="heading-6">Reason to Apply Design Patterns to large language models (LLMs)</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0007" data-source-kind="heading">
+          
+            <h4 id="heading-7">Versatile and Adaptable</h4>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0008" data-source-kind="paragraph">
+          <p>Large Language Models (LLMs) are an evolving AI technology with a broad set of use cases it can apply to. As a result, this powerful tool opens up a number of design patterns — from simple to complex — that can be leveraged to integrate LLMs seamlessly into existing architectures, broadening their applications and impact.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0009" data-source-kind="heading">
+          
+            <h4 id="heading-9">High Demand for LLM Expertise</h4>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0010" data-source-kind="paragraph">
+          <p>Given the growing prominence of LLMs, there is a high demand for knowledge on how to effectively design and implement LLM use cases. This deck aims to empower readers by showcasing the vast potential of LLMs and the diverse range of approaches that can be used to harness their capabilities.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0011" data-source-kind="heading">
+          
+            <h4 id="heading-11">Unlocking Endless Possibilities</h4>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0012" data-source-kind="paragraph">
+          <p>By recognizing the myriad of possibilities offered by LLMs, and understanding the design patterns that can be used to achieve them, readers will be equipped to push the boundaries of what is possible with this transformative technology. This knowledge can unlock new frontiers of innovation and problem-solving, transforming the way we approach a wide array of challenges.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0013" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*ELN3fx3Q1Mb_bwECwv7v_w.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0014" data-source-kind="heading">
+          
+            <h3 id="heading-14">Design Patterns for “Simple Difficult” Use cases.</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0015" data-source-kind="heading">
+          
+            <h3 id="heading-15">Use LLM Endpoint with Zero or Few Shot Learning</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0016" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/1200/1*xuyxfJApxl6tj5Bu-ODGMA.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0017" data-source-kind="heading">
+          
+            <h4 id="heading-17">Use Cases</h4>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0018" data-source-kind="paragraph">
+          <p>Code generation, Idea generation/brainstorming, Copywriting/content creation, General knowledge discovery/search, Basic translation/NLP tasks.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0019" data-source-kind="heading">
+          
+            <h4 id="heading-19">Descriptions</h4>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0020" data-source-kind="list">
+          <ul><li>Empowering users with AI: Large language models (LLMs) can be used to improve productivity by allowing users to interact with them directly through prompts. These prompts can include text, code snippets, and other examples.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0021" data-source-kind="list">
+          <ul><li>Without IT investment to implement use case, use this pattern to generate and transform language artefacts (code, text)</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0022" data-source-kind="list">
+          <ul><li>The simplicity and versatility of this design pattern — a general purpose natural language generation tool — makes it high value in complementing workflows of language and software production.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0023" data-source-kind="heading">
+          
+            <h4 id="heading-23">Challenges or Risk</h4>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0024" data-source-kind="list">
+          <ul><li>There’s a risk that the content produced by LLMs may be inaccurate or biased.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0025" data-source-kind="list">
+          <ul><li>To mitigate this, human experts should review the AI-generated content before it’s used.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0026" data-source-kind="list">
+          <ul><li>Be mindful of the privacy risks associated with sharing confidential information or intellectual property (IP) with LLMs</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0027" data-source-kind="heading">
+          
+            <h3 id="heading-27">LLM Endpoint Integration with Application</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0028" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*gom-BwFByTh4JLHRy4hD3Q.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0029" data-source-kind="heading">
+          
+            <h4 id="heading-29">Use Cases</h4>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0030" data-source-kind="paragraph">
+          <p>Empower your workforce with a secure LLM ecosystem. This fosters innovation through controlled access to code generation, idea brainstorming, content creation, knowledge discovery, and basic NLP tasks — all the benefits of as-is LLM utilization, delivered in a safe and managed environment.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0031" data-source-kind="heading">
+          
+            <h4 id="heading-31">Descriptions</h4>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0032" data-source-kind="list">
+          <ul><li>Unleash the power of AI for content creation. This reframes the idea of using an LLM as a tool to boost creative output, rather than just a content generation tool. Easier to monitor compliance by recording usage via the proprietary user interface.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0033" data-source-kind="list">
+          <ul><li>Secure your AI advantage. This sounds more intriguing than just mentioning control and security. It implies that using a well-managed LLM can provide a competitive advantage. Service called via API and results presented in UI frame inside host application. Takes advantage of the better privacy and security protections included in API offerings (as compared to the end-user applications).</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0034" data-source-kind="list">
+          <ul><li>APIs give more flexibility for creating complex workflows (for example, adding automated controls before sending data to the API)</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0035" data-source-kind="heading">
+          
+            <h4 id="heading-35">Challenges or Risk</h4>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0036" data-source-kind="paragraph">
+          <p>API costs require strategic oversight for optimal value. The emergence of vendor-provided private LLM instances may disrupt current cost-benefit models, necessitating a reevaluation of in-house user interface development.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0037" data-source-kind="heading">
+          
+            <h3 id="heading-37">Design Patterns for “Medium Difficult” Use cases.</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0038" data-source-kind="heading">
+          
+            <h3 id="heading-38">Embed LLM Into an Application Workflow</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0039" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*fylyTmDqN73P40w7aFt7dw.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0040" data-source-kind="heading">
+          
+            <h4 id="heading-40">Use Cases</h4>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0041" data-source-kind="list">
+          <ul><li>LLMs Supercharge Productivity Tools: Imagine embedding LLMs into productivity software or collaboration tools. This empowers users with real-time insights, enhanced automation, and smarter workflows.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0042" data-source-kind="list">
+          <ul><li>AI-Powered Search: LLMs can revolutionize search experiences by presenting relevant LLM outputs alongside existing search results, providing users with a richer tapestry of information.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0043" data-source-kind="list">
+          <ul><li>Content Creation Revolution: Integrate LLMs seamlessly into content management systems. This opens doors for streamlined content creation, intelligent editing, and personalized recommendations.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0044" data-source-kind="list">
+          <ul><li>Evolving Virtual Assistants: Chatbot applications can leverage LLMs to expand virtual assistant networks. This fosters natural language interactions and unlocks a new level of user support.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0045" data-source-kind="heading">
+          
+            <h4 id="heading-45">Descriptions</h4>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0046" data-source-kind="paragraph">
+          <p>Integrating Large Language Models (LLMs) into Applications</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0047" data-source-kind="list">
+          <ul><li>This approach goes beyond simply exposing LLM APIs (like the Application Frame pattern) by embedding the LLM directly into a broader application workflow. This allows for deeper integration and leverages the LLM’s capabilities within the application itself.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0048" data-source-kind="list">
+          <ul><li>The application calls the LLM through an API, then processes the results for use within the application.Enhances the functionality of an application.The application proactively queries the LLM for supplementary content to present to the user.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0049" data-source-kind="list">
+          <ul><li>The LLM output directly influences another process within the application, potentially without displaying results in the user interface.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0050" data-source-kind="heading">
+          
+            <h4 id="heading-50">Challenges or Risk</h4>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0051" data-source-kind="paragraph">
+          <p>Cost Optimization: To ensure fiscal responsibility, robust usage controls must be implemented to effectively manage LLM API costs. This ensures optimal resource allocation and long-term value.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0052" data-source-kind="paragraph">
+          <p>Risk Mitigation: For certain use cases, direct integration of an LLM might pose potential risks. To address this, the development of comprehensive safeguards becomes crucial. This proactive approach ensures a controlled and secure environment for LLM implementation.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0053" data-source-kind="heading">
+          
+            <h3 id="heading-53">LLM used as Secondary Conversational Interface or Chatbot</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0054" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*kutfe7wdxFZhaJ3Wc8luZA.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0055" data-source-kind="heading">
+          
+            <h4 id="heading-55">Use Cases</h4>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0056" data-source-kind="list">
+          <ul><li>Improving customer service chatbots</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0057" data-source-kind="list">
+          <ul><li>Augmenting nonplayable characters in video games</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0058" data-source-kind="heading">
+          
+            <h4 id="heading-58">Descriptions</h4>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0059" data-source-kind="paragraph">
+          <p>Hybrid Chat System: Seamlessly route user queries between chatbots and LLMs for broader knowledge and open-ended conversations.Existing chatbots integrate LLM access, either through orchestration or by intelligently handing off queries. This design brings unmatched Conversational Power via LLM.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0060" data-source-kind="paragraph">
+          <p>Two Smart Handovers:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0061" data-source-kind="list">
+          <ul><li>Orchestrator: A central system directs inquiries to the best resource, chatbot or LLM.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0062" data-source-kind="list">
+          <ul><li>Low Confidence Fallback: Existing chatbots hand off complex questions to the LLM when unsure.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0063" data-source-kind="heading">
+          
+            <h4 id="heading-63">Challenges or Risk</h4>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0064" data-source-kind="list">
+          <ul><li>Inconsistent Tone: LLM responses might clash with existing chatbot’s personality.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0065" data-source-kind="list">
+          <ul><li>Accuracy Concerns: Potential for LLM errors or misleading information.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0066" data-source-kind="list">
+          <ul><li>Privacy Risk: Sharing user data with external LLMs could be a privacy concern.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0067" data-source-kind="heading">
+          
+            <h3 id="heading-67">Design Patterns for “Complex” Use cases.</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0068" data-source-kind="heading">
+          
+            <h3 id="heading-68">Document Retrieval or Search using LLM endpoint and Vector Databases</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0069" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*m6Y6oy8TBlhF6oyAR5UV7Q.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0070" data-source-kind="heading">
+          
+            <h4 id="heading-70">Use Cases</h4>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0071" data-source-kind="list">
+          <ul><li>Using LLMs for Internal Document Databases: Leveraging LLMs to answer questions related to internal, private document databases.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0072" data-source-kind="list">
+          <ul><li>Augmenting LLMs with Web Search Results: Enhancing LLMs by incorporating web search results.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0073" data-source-kind="heading">
+          
+            <h4 id="heading-73">Description</h4>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0074" data-source-kind="paragraph">
+          <p>A search or retrieval model integrates relevant documents into the context of an LLM prompt. It relies on a search engine or retrieval system. this enhances the LLM response by incorporating specific, previously unseen documents, including recent knowledge and internal data.It provide solution architecture with an additional retrieval or search model, which must be obtained or developed separately. The retrieval/search model can utilize vector databases or other indexed knowledge bases. Its implementation combines two established models — large language models and search — allowing for their joint use.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0075" data-source-kind="paragraph">
+          <p>Potential : By integrating LLMs with internal document databases, we can unlock insights from internal data using LLM capabilities.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0076" data-source-kind="list">
+          <ul><li>Access to more accurate and recent information.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0077" data-source-kind="list">
+          <ul><li>Possibility of including references or citations to the original source documents in the generated responses.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0078" data-source-kind="heading">
+          
+            <h4 id="heading-78">Challenges or Risk</h4>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0079" data-source-kind="list">
+          <ul><li>LLM retrieval models may still be inaccurate and prone to hallucinations, although typically less so than when using LLMs without retrieval.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0080" data-source-kind="list">
+          <ul><li>Requires robust information classification to address privacy risks.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0081" data-source-kind="list">
+          <ul><li>Data leakage risk if LLM and search components are not part of the same infrastructure.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0082" data-source-kind="heading">
+          
+            <h3 id="heading-82">Next Generation LLM Agents</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0083" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*QEc0ULjO1ReGJGB6gDFkOg.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0084" data-source-kind="heading">
+          
+            <h4 id="heading-84">Use Cases</h4>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0085" data-source-kind="paragraph">
+          <p>Personal Assistants Based on LLM Technologies:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0086" data-source-kind="list">
+          <ul><li>These assistants leverage large language models (LLMs) to enhance their capabilities.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0087" data-source-kind="list">
+          <ul><li>They can handle a wide range of tasks, from answering questions to providing recommendations.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0088" data-source-kind="paragraph">
+          <p>Sophisticated Chatbots with LLMs:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0089" data-source-kind="list">
+          <ul><li>Chatbots are evolving beyond simple rule-based systems.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0090" data-source-kind="list">
+          <ul><li>Incorporating LLMs allows chatbots to understand context, generate more natural responses, and adapt to user input.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0091" data-source-kind="paragraph">
+          <p>Task-Specific Enterprise Assistants: These specialized assistants cater to specific business functions:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0092" data-source-kind="list">
+          <ul><li>CRM : Managing customer relationships and interactions.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0093" data-source-kind="list">
+          <ul><li>Procurement : Streamlining purchasing processes.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0094" data-source-kind="list">
+          <ul><li>HR : Handling employee-related tasks.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0095" data-source-kind="list">
+          <ul><li>Banking : Assisting with financial transactions and inquiries.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0096" data-source-kind="heading">
+          
+            <h4 id="heading-96">Description</h4>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0097" data-source-kind="list">
+          <ul><li>Description : An agent performs iterative and autonomous calls to the LLM API and other models/tools to achieve user tasks.Some tasks demand flexibility beyond fixed workflows, adapting to user input. Recursive access to LLMs and other tools enables this adaptability. A central “task planning and model selection” model recursively calls various APIs, retains interaction history, and generates responses. This model could be an LLM or have a distinct architecture.Open-source models facilitate building such agents. LLM agents are emerging, each with varying degrees of success.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0098" data-source-kind="list">
+          <ul><li>The system has the potential to perform tasks on behalf of users.This capability streamlines user interactions and automates processes.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0099" data-source-kind="list">
+          <ul><li>Beyond simple actions, the system can tackle complex user requests. It adapts to various scenarios, enhancing user experience.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0100" data-source-kind="list">
+          <ul><li>Due to its recurring nature, the system can self-correct.It learns from past interactions and improves over time.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0101" data-source-kind="heading">
+          
+            <h4 id="heading-101">Challenges or Risk</h4>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0102" data-source-kind="list">
+          <ul><li>The combined system’s ability to execute actions introduces security risks.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0103" data-source-kind="list">
+          <ul><li>However, implementing this capability is currently technically challenging and unfeasible for most use cases.</li></ul>
+          
+          </div>
+        
+        </div>
+      </article>
+    </main>
+  </div>
+  <div class="lightbox" id="lightbox" hidden><img alt="Expanded article image"></div>
+</body>
+</html>

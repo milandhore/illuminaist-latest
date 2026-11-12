@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Become a Pro at Multiple Linear Regression with Scikit-learn: The Essential Practical Guide | IlluminAIst</title>
+  <meta name="description" content="Working code to Mastering Multiple Linear Regression using Scikit-learn : A Practical Guide">
+</head>
+<body>
+<div class="shell">
+    </nav>
+    <main>
+      <div class="toolbar"><button id="theme-toggle" type="button" aria-label="Toggle dark mode">☾ Theme</button></div>
+      <article>
+        <header>
+          <div class="eyebrow">Converted article</div>
+
+</header>
+        <div id="article-content">
+        
+          <div class="reveal" data-source-block-id="b-0001" data-source-kind="heading">
+          
+            <h3 id="heading-1">Become a Pro at Multiple Linear Regression with Scikit-learn : The Essential Practical Guide</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0002" data-source-kind="paragraph">
+          <p>Working code to Mastering Multiple Linear Regression using Scikit-learn : A Practical Guide</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0003" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/0*H8YdF6Xg65_RGFfh" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0004" data-source-kind="heading">
+          
+            <h3 id="heading-4">Introduction</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0005" data-source-kind="paragraph">
+          <p>In the realm of data science, multiple linear regression stands as a powerful tool for predicting outcomes based on multiple input variables. This blog post will walk you through the process of implementing multiple linear regression using Python’s scikit-learn library, with a focus on a practical example involving fuel consumption and CO2 emissions.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0006" data-source-kind="paragraph">
+          <p>We will focus on below quick steps</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0007" data-source-kind="list">
+          <ul><li>Understanding the Data</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0008" data-source-kind="list">
+          <ul><li>Reading the Data in</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0009" data-source-kind="list">
+          <ul><li>Multiple Regression Model</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0010" data-source-kind="list">
+          <ul><li>Prediction</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0011" data-source-kind="list">
+          <ul><li>Practice</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0012" data-source-kind="paragraph">
+          <p>Our Objective to learn about</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0013" data-source-kind="quote">
+          <blockquote>Use scikit-learn to implement Multiple Linear Regression</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0014" data-source-kind="quote">
+          <blockquote>Create a model, train it, test it and use the model</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0015" data-source-kind="heading">
+          
+            <h3 id="heading-15">Understanding the Data</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0016" data-source-kind="paragraph">
+          <p>Our dataset, FuelConsumption.csv , contains model-specific fuel consumption ratings and estimated carbon dioxide emissions for new light-duty vehicles for retail sale in Canada. Key features include engine size, number of cylinders, and fuel consumption in various driving conditions.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0017" data-source-kind="list">
+          <ul><li>MODELYEAR e.g. 2014</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0018" data-source-kind="list">
+          <ul><li>MAKE e.g. Acura</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0019" data-source-kind="list">
+          <ul><li>MODEL e.g. ILX</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0020" data-source-kind="list">
+          <ul><li>VEHICLE CLASS e.g. SUV</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0021" data-source-kind="list">
+          <ul><li>ENGINE SIZE e.g. 4.7</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0022" data-source-kind="list">
+          <ul><li>CYLINDERS e.g 6</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0023" data-source-kind="list">
+          <ul><li>TRANSMISSION e.g. A6</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0024" data-source-kind="list">
+          <ul><li>FUELTYPE e.g. z</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0025" data-source-kind="list">
+          <ul><li>FUEL CONSUMPTION in CITY(L/100 km) e.g. 9.9</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0026" data-source-kind="list">
+          <ul><li>FUEL CONSUMPTION in HWY (L/100 km) e.g. 8.9</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0027" data-source-kind="list">
+          <ul><li>FUEL CONSUMPTION COMB (L/100 km) e.g. 9.2</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0028" data-source-kind="list">
+          <ul><li>CO2 EMISSIONS (g/km) e.g. 182 → low → 0</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0029" data-source-kind="heading">
+          
+            <h3 id="heading-29">Importing Necessary Packages</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0030" data-source-kind="paragraph">
+          <p>First, let’s import the necessary packages: python</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0031" data-source-kind="code">
+          <pre><code>!pip install scikit-learn
+!pip install matplotlib
+!pip install pandas
+!pip install numpy
+%matplotlib inline</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0032" data-source-kind="code">
+          <pre><code>import
+matplotlib.pyplot
+as
+plt
+import
+pandas
+as
+pd
+import
+numpy
+as
+np</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0033" data-source-kind="heading">
+          
+            <h3 id="heading-33">Downloading Data</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0034" data-source-kind="paragraph">
+          <p>To download the data, we will use !wget to download it from IBM Object Storage.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0035" data-source-kind="code">
+          <pre><code>!wget -O FuelConsumption.csv https://cf-courses-data.s3.us.cloud-
+object
+-storage.appdomain.cloud/IBMDeveloperSkillsNetwork-ML0101EN-SkillsNetwork/labs/Module%
+202
+/data/FuelConsumptionCo2.csv</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0036" data-source-kind="heading">
+          
+            <h3 id="heading-36">Reading the Data</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0037" data-source-kind="paragraph">
+          <p>Next, we read the data into a pandas DataFrame and take a quick look at the first few rows:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0038" data-source-kind="code">
+          <pre><code>df = pd.read_csv(
+"FuelConsumption.csv"
+)
+# take a look at the dataset
+df.head()</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0039" data-source-kind="heading">
+          
+            <h3 id="heading-39">Selecting Features</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0040" data-source-kind="paragraph">
+          <p>We select the features that we want to use for our regression model</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0041" data-source-kind="code">
+          <pre><code>cdf = df[[
+'ENGINESIZE'
+,
+'CYLINDERS'
+,
+'FUELCONSUMPTION_CITY'
+,
+'FUELCONSUMPTION_HWY'
+,
+'FUELCONSUMPTION_COMB'
+,
+'CO2EMISSIONS'
+]]
+cdf.head(
+9
+)</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0042" data-source-kind="heading">
+          
+            <h3 id="heading-42">Visualizing the Data</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0043" data-source-kind="paragraph">
+          <p>Let’s plot the CO2 emissions against engine size to get a sense of the relationship:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0044" data-source-kind="code">
+          <pre><code>plt.scatter(cdf.ENGINESIZE, cdf.CO2EMISSIONS, color=
+'blue'
+)
+plt.xlabel(
+"Engine size"
+)
+plt.ylabel(
+"Emission"
+)
+plt.show()</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0045" data-source-kind="heading">
+          
+            <h3 id="heading-45">Splitting the Data</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0046" data-source-kind="paragraph">
+          <p>Train/Test Split is a crucial technique in machine learning that involves dividing the dataset into two distinct subsets: a training set and a testing set. These sets are mutually exclusive, meaning no data point appears in both sets simultaneously.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0047" data-source-kind="list">
+          <ul><li>The model is then trained using the training set and evaluated using the testing set. This approach provides a more accurate assessment of the model’s out-of-sample performance, as the testing data has not been used during the training process.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0048" data-source-kind="list">
+          <ul><li>Consequently, this method offers valuable insights into how well the model generalizes to new, unseen data. The testing dataset is particularly valuable because we know the true outcomes for each data point within it. Since this data has been kept separate from the training process, the model has no prior knowledge of these outcomes.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0049" data-source-kind="list">
+          <ul><li>This makes the testing phase a genuine out-of-sample evaluation, closely mimicking real-world scenarios where the model encounters completely new data.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0050" data-source-kind="list">
+          <ul><li>To implement the Train/Test Split, we’ll divide our dataset into two portions. Typically, about 80% of the entire dataset is allocated for training, while the remaining 20% is reserved for testing.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0051" data-source-kind="list">
+          <ul><li>To achieve this split, we’ll create a mask that randomly selects rows from the dataset. This can be accomplished using the np.random.rand() function, which generates random numbers that we’ll use to determine which data points belong to each set.We split the dataset into training and testing sets to evaluate our model’s performance:</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0052" data-source-kind="code">
+          <pre><code>msk = np.random.rand(
+len
+(df)) <
+0.8
+train = cdf[msk]
+test = cdf[~msk]</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0053" data-source-kind="heading">
+          
+            <h4 id="heading-53">Train data distribution</h4>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0054" data-source-kind="code">
+          <pre><code>plt.scatter(train.ENGINESIZE, train.CO2EMISSIONS,  color=
+'blue'
+)
+plt.xlabel(
+"Engine size"
+)
+plt.ylabel(
+"Emission"
+)
+plt.show()</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0055" data-source-kind="heading">
+          
+            <h3 id="heading-55">Multiple Regression Model</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0056" data-source-kind="quote">
+          <blockquote>In practice, numerous factors influence CO2 emissions. When analyzing scenarios with more than one independent variable, we employ a technique known as multiple linear regression.</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0057" data-source-kind="quote">
+          <blockquote>A practical application of this method is forecasting CO2 emissions by considering various car characteristics such as combined fuel consumption, engine size, and the number of cylinders. It’s worth noting that multiple linear regression is essentially an expanded version of the simple linear regression model, allowing for a more comprehensive analysis of complex relationships between variables.</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0058" data-source-kind="paragraph">
+          <p>In this example of multiple linear regression we are predicting co2emission using the features like FUELCONSUMPTION_COMB, EngineSize and Cylinders of cars. Multiple linear regression model is the extension of the simple linear regression model where we use one independent variable/feature to predict dependent variable.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0059" data-source-kind="code">
+          <pre><code>from
+sklearn
+import
+linear_model
+regr = linear_model.LinearRegression()
+x = np.asanyarray(train[[
+'ENGINESIZE'
+,
+'CYLINDERS'
+,
+'FUELCONSUMPTION_COMB'
+]])
+y = np.asanyarray(train[[
+'CO2EMISSIONS'
+]])
+regr.fit (x, y)
+# The coefficients
+print
+(
+'Coefficients: '
+, regr.coef_)</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0060" data-source-kind="paragraph">
+          <p>As previously stated, the Coefficient and Intercept represent the parameters of the fitted line. In the case of a multiple linear regression model with 3 parameters, where these parameters constitute the intercept and coefficients of the hyperplane, sklearn has the capability to estimate them from our dataset. To address this problem, Scikit-learn employs the standard Ordinary Least Squares method.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0061" data-source-kind="heading">
+          
+            <h3 id="heading-61">Technical Deep Dive</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0062" data-source-kind="heading">
+          
+            <h4 id="heading-62">Ordinary Least Squares (OLS)</h4>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0063" data-source-kind="paragraph">
+          <p>The multiple linear regression model is built using the Ordinary Least Squares (OLS) method. OLS is a method for estimating the unknown parameters in a linear regression model. It minimizes the sum of the squares of the differences between the observed dependent variable and those predicted by the linear function.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0064" data-source-kind="heading">
+          
+            <h4 id="heading-64">Mathematical Formulation</h4>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0065" data-source-kind="paragraph">
+          <p>The multiple linear regression equation can be expressed as:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0066" data-source-kind="paragraph">
+          <p>Y=β0+β1X1+β2X2+...+βnXn+ε</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0067" data-source-kind="paragraph">
+          <p>Where:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0068" data-source-kind="code">
+          <pre><code>Y is the dependent variable (CO2 emissions in our case).
+𝛽0 is the intercept.
+𝛽1,𝛽2,...𝛽𝑛 are the coefficients for the independent variables.
+𝑋1,𝑋2,…,𝑋𝑛 are the independent variables (engine size, cylinders, fuel consumption).
+𝜖 is the error term.</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0069" data-source-kind="heading">
+          
+            <h4 id="heading-69">Model Evaluation Metrics</h4>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0070" data-source-kind="paragraph">
+          <p>To evaluate the performance of our regression model, we use the following metrics:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0071" data-source-kind="list">
+          <ul><li>Mean Squared Error (MSE) : Measures the average of the squares of the errors, i.e., the average squared difference between the estimated values and the actual value.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0072" data-source-kind="list">
+          <ul><li>Variance Score : Also known as the coefficient of determination (R2R2), it indicates how well the independent variables explain the variability of the dependent variable. A score of 1 indicates perfect prediction, while a score closer to 0 indicates poor prediction.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0073" data-source-kind="heading">
+          
+            <h3 id="heading-73">Conclusion</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0074" data-source-kind="paragraph">
+          <p>Multiple linear regression is a robust method for predicting outcomes based on several input variables. By following the steps outlined in this blog, you can implement your own multiple linear regression models to uncover insights and make data-driven decisions.</p>
+          
+          </div>
+        
+        </div>
+      </article>
+    </main>
+  </div>
+  <div class="lightbox" id="lightbox" hidden><img alt="Expanded article image"></div>
+</body>
+</html>

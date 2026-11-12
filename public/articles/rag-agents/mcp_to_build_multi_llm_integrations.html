@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MCP to Build Multi-LLM Integrations | IlluminAIst</title>
+  <meta name="description" content="Model Context Protocol (MCP) -Revolutionizing AI Integration">
+</head>
+<body>
+<div class="shell">
+    </nav>
+    <main>
+      <div class="toolbar"><button id="theme-toggle" type="button" aria-label="Toggle dark mode">☾ Theme</button></div>
+      <article>
+        <header>
+          <div class="eyebrow">Converted article</div>
+
+</header>
+        <div id="article-content">
+        
+          <div class="reveal" data-source-block-id="b-0001" data-source-kind="paragraph">
+          <p>Model Context Protocol (MCP) -Revolutionizing AI Integration</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0002" data-source-kind="paragraph">
+          <p>Imagine a world where AI applications seamlessly connect to any data source or tool, just like plugging a device into a USB-C port. This is the promise of the Model Context Protocol (MCP) , an innovative open standard that’s transforming how we interact with Large Language Models (LLMs) .MCP serves as a universal connector for AI, standardizing the way applications provide context to LLMs. This groundbreaking protocol is paving the way for more sophisticated AI integrations, enabling developers to build complex agents and workflows with unprecedented ease.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0003" data-source-kind="heading">
+          
+            <h3 id="heading-3">Why MCP Matters</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0004" data-source-kind="list">
+          <ul><li>Pre-built Integrations: MCP offers a growing ecosystem of ready-to-use connections, allowing your LLM to instantly tap into various data sources and tools.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0005" data-source-kind="list">
+          <ul><li>Vendor Flexibility : With MCP, you’re not locked into a single AI provider. Switch between different LLM vendors effortlessly, ensuring you always have access to the best AI capabilities.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0006" data-source-kind="list">
+          <ul><li>Enhanced Security: MCP implements best practices for data protection, keeping your sensitive information secure within your own infrastructure.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0007" data-source-kind="paragraph">
+          <p>By simplifying the integration process, MCP is set to accelerate AI adoption across industries, making powerful AI applications more accessible and versatile than ever before.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0008" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*YP8zmj7zyTgEjGeaRHkvwg.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0009" data-source-kind="list">
+          <ul><li>Host with MCP Client (Claude, IDEs, Tools): This represents the user’s machine or environment where applications like OpenAI or Claude (likely a large language model or similar AI), Integrated Development Environments (IDEs), and other tools reside. These applications use the MCP Client to communicate with the MCP Servers.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0010" data-source-kind="list">
+          <ul><li>MCP Protocol: This is the communication protocol used for interaction between the host and the servers. It acts as a standardized language or set of rules that allow the different components to exchange data and commands. The diagram emphasizes that this protocol is used for all communication between the host and the various servers.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0011" data-source-kind="list">
+          <ul><li>MCP Server A, MCP Server B, MCP Server C: These are server components that act as intermediaries between the host and the data sources. They receive requests from the MCP Client (on the host), process them, and retrieve or manipulate data accordingly. Each server can potentially handle different types of requests or connect to different types of data sources.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0012" data-source-kind="list">
+          <ul><li>Local Data Source A, Local Data Source B: These represent data storage locations accessible directly within the local environment (e.g., on the same machine or local network). These could be databases, filesystems, or other local storage mechanisms. MCP Server A and MCP Server B are responsible for interacting with these local data sources.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0013" data-source-kind="list">
+          <ul><li>Web APIs: This indicates that MCP Server C interacts with external services through web APIs (Application Programming Interfaces). APIs allow software applications to communicate with each other over the internet.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0014" data-source-kind="list">
+          <ul><li>Internet: This represents the global network connecting the local environment to external resources.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0015" data-source-kind="list">
+          <ul><li>Remote Service C: This represents a data source or service located on a remote server accessible through the internet. MCP Server C uses web APIs to interact with this remote service.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0016" data-source-kind="paragraph">
+          <p>The Model Context Protocol (MCP) revolutionizes how applications interact with Large Language Models (LLMs) by offering a standardized method for context provision. This innovative approach decouples the context-providing mechanism from direct LLM interaction, streamlining the entire process. Our Python SDK fully implements the MCP specification, empowering developers to:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0017" data-source-kind="list">
+          <ul><li>Construct versatile MCP clients capable of connecting to any MCP-compliant server</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0018" data-source-kind="list">
+          <ul><li>Develop robust MCP servers that expose a wide array of resources, prompts, and tools</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0019" data-source-kind="list">
+          <ul><li>Utilize industry-standard transports such as stdio and Server-Sent Events (SSE)</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0020" data-source-kind="list">
+          <ul><li>Efficiently manage all MCP protocol messages and navigate complex lifecycle events</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0021" data-source-kind="paragraph">
+          <p>By leveraging this SDK, developers can harness the full potential of MCP, enabling more sophisticated, context-aware AI applications while simplifying the integration process.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0022" data-source-kind="code">
+          <pre><code>pip install mcp</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0023" data-source-kind="heading">
+          
+            <h3 id="heading-23">Quickstart</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0024" data-source-kind="paragraph">
+          <p>Let's create a simple MCP server that exposes a calculator tool and some data:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0025" data-source-kind="code">
+          <pre><code># server.py
+from
+mcp.server.fastmcp import FastMCP
+# Create an MCP server
+mcp =
+FastMCP
+(
+"Demo"
+)
+# Add an addition tool
+@mcp.
+tool
+()
+def
+add
+(
+a
+:
+int
+,
+b
+:
+int
+) ->
+int
+:
+""
+"Add two numbers"
+""
+return
+a + b
+# Add a dynamic greeting resource
+@mcp.
+resource
+(
+"greeting://{name}"
+)
+def
+get_greeting
+(
+name
+: str) -> str:
+""
+"Get a personalized greeting"
+""
+return
+f
+"Hello, {name}!"</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0026" data-source-kind="paragraph">
+          <p>You can install this server in Claude Desktop and interact with it right away by running:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0027" data-source-kind="code">
+          <pre><code>mcp install server.
+py</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0028" data-source-kind="paragraph">
+          <p>Alternatively, you can test it with the MCP Inspector:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0029" data-source-kind="code">
+          <pre><code>mcp dev server.
+py</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0030" data-source-kind="heading">
+          
+            <h3 id="heading-30">Server</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0031" data-source-kind="paragraph">
+          <p>The FastMCP server is your core interface to the MCP protocol. It handles connection management, protocol compliance, and message routing:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0032" data-source-kind="code">
+          <pre><code>from mcp.server.fastmcp import FastMCP
+# Create a named server
+mcp = FastMCP(
+"My App"
+)
+# Specify dependencies for deployment and development
+mcp = FastMCP(
+"My App"
+, dependencies=[
+"pandas"
+,
+"numpy"
+])</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0033" data-source-kind="heading">
+          
+            <h3 id="heading-33">Resources</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0034" data-source-kind="paragraph">
+          <p>Resources are how you expose data to LLMs. They’re similar to GET endpoints in a REST API — they provide data but shouldn’t perform significant computation or have side effects:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0035" data-source-kind="code">
+          <pre><code>@mcp
+.
+resource
+(
+"config://app"
+)
+def
+get_config
+() ->
+str
+:
+""
+"Static configuration data"
+""
+return
+"App configuration here"
+@mcp
+.
+resource
+(
+"users://{user_id}/profile"
+)
+def
+get_user_profile
+(
+user_id
+: str) ->
+str
+:
+""
+"Dynamic user data"
+""
+return f
+"Profile data for user {user_id}"</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0036" data-source-kind="heading">
+          
+            <h3 id="heading-36">Tools</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0037" data-source-kind="paragraph">
+          <p>Tools let LLMs take actions through your server. Unlike resources, tools are expected to perform computation and have side effects:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0038" data-source-kind="code">
+          <pre><code>@mcp
+.
+tool
+()
+def
+calculate_bmi
+(
+weight_kg
+: float,
+height_m
+: float) ->
+float
+:
+""
+"Calculate BMI given weight in kg and height in meters"
+""
+return weight_kg / (
+height
+_m **
+2
+)
+@mcp
+.
+tool
+()
+async def
+fetch_weather
+(
+city
+: str) ->
+str
+:
+""
+"Fetch current weather for a city"
+""
+async with httpx.
+AsyncClient
+() as
+client
+:
+response = await client.
+get
+(f
+"https://api.weather.com/{city}"
+)
+return response.text</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0039" data-source-kind="heading">
+          
+            <h3 id="heading-39">Prompts</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0040" data-source-kind="paragraph">
+          <p>Prompts are reusable templates that help LLMs interact with your server effectively:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0041" data-source-kind="code">
+          <pre><code>@mcp
+.
+prompt
+()
+def
+review_code
+(
+code
+: str) ->
+str
+:
+return f
+"Please review this code:\n\n{code}"
+@mcp
+.
+prompt
+()
+def
+debug_error
+(
+error
+: str) -> list[Message]:
+return [
+UserMessage
+(
+"I'm seeing this error:"
+),
+UserMessage
+(error),
+AssistantMessage
+(
+"I'll help debug that. What have you tried so far?"
+)
+]</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0042" data-source-kind="heading">
+          
+            <h3 id="heading-42">Images</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0043" data-source-kind="paragraph">
+          <p>FastMCP provides an Image class that automatically handles image data:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0044" data-source-kind="code">
+          <pre><code>from
+mcp.
+server
+.
+fastmcp
+import
+FastMCP
+,
+Image
+from
+PIL
+import
+Image
+as
+PILImage
+@mcp
+.
+tool
+()
+def
+create_thumbnail
+(
+image_path
+: str) ->
+Image
+:
+""
+"Create a thumbnail from an image"
+""
+img =
+PILImage
+.
+open
+(image_path)
+img.
+thumbnail
+((
+100
+,
+100
+))
+return
+Image
+(data=img.
+tobytes
+(), format=
+"png"
+)</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0045" data-source-kind="heading">
+          
+            <h3 id="heading-45">Context</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0046" data-source-kind="paragraph">
+          <p>The Context object gives your tools and resources access to MCP capabilities:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0047" data-source-kind="code">
+          <pre><code>from mcp.server.fastmcp import FastMCP, Context
+@mcp.
+tool
+()
+async
+def
+long_task
+(files: list[
+str
+], ctx: Context)
+->
+str
+:
+""
+"Process multiple files with progress tracking"
+""
+for
+i
+, file
+in
+enumerate
+(files):
+ctx.
+info
+(f
+"Processing {file}"
+)
+await
+ctx.
+report_progress
+(i,
+len
+(files))
+data =
+await
+ctx.
+read_resource
+(f
+"file://{file}"
+)
+return
+"Processing complete"</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0048" data-source-kind="heading">
+          
+            <h3 id="heading-48">MCP Primitives</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0049" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*sfSNGdoNO_p8pnsXsOT4Og.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0050" data-source-kind="heading">
+          
+            <h3 id="heading-50">Server Capabilities</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0051" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*84QFDtCvGlVgq7STz0gHxg.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0052" data-source-kind="paragraph">
+          <p>Official integrations are maintained by companies building production ready MCP servers for their platforms.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0053" data-source-kind="list">
+          <ul><li>Axiom — Query and analyze logs, traces, and event data using natural language</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0054" data-source-kind="list">
+          <ul><li>Browserbase — Automate browser interactions in the cloud</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0055" data-source-kind="list">
+          <ul><li>Cloudflare — Deploy and manage resources on the Cloudflare developer platform</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0056" data-source-kind="list">
+          <ul><li>E2B — Execute code in secure cloud sandboxes</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0057" data-source-kind="list">
+          <ul><li>Neon — Interact with the Neon serverless Postgres platform</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0058" data-source-kind="list">
+          <ul><li>Obsidian Markdown Notes — Read and search through Markdown notes in Obsidian vaults</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0059" data-source-kind="list">
+          <ul><li>Qdrant — Implement semantic memory using the Qdrant vector search engine</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0060" data-source-kind="list">
+          <ul><li>Raygun — Access crash reporting and monitoring data</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0061" data-source-kind="list">
+          <ul><li>Search1API — Unified API for search, crawling, and sitemaps</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0062" data-source-kind="list">
+          <ul><li>Tinybird — Interface with the Tinybird serverless ClickHouse platform</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0063" data-source-kind="heading">
+          
+            <h3 id="heading-63">Community highlights</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0064" data-source-kind="paragraph">
+          <p>A growing ecosystem of community-developed servers extends MCP’s capabilities:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0065" data-source-kind="list">
+          <ul><li>Docker — Manage containers, images, volumes, and networks</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0066" data-source-kind="list">
+          <ul><li>Kubernetes — Manage pods, deployments, and services</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0067" data-source-kind="list">
+          <ul><li>Linear — Project management and issue tracking</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0068" data-source-kind="list">
+          <ul><li>Snowflake — Interact with Snowflake databases</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0069" data-source-kind="list">
+          <ul><li>Spotify — Control Spotify playback and manage playlists</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0070" data-source-kind="list">
+          <ul><li>Todoist — Task management integration</li></ul>
+          
+          </div>
+        
+        </div>
+      </article>
+    </main>
+  </div>
+  <div class="lightbox" id="lightbox" hidden><img alt="Expanded article image"></div>
+</body>
+</html>

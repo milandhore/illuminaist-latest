@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Personal Finance AI assistant in hour with OpenClaw &amp; MacBook | IlluminAIst</title>
+  <meta name="description" content="This demo provides a secure and practical way to explore OpenClaw Finance using locally hosted Ollama models. It allows users to experiment with finance-related data and workflows in a controlled environment.">
+</head>
+<body>
+<div class="shell">
+    </nav>
+    <main>
+      <div class="toolbar"><button id="theme-toggle" type="button" aria-label="Toggle dark mode">☾ Theme</button></div>
+      <article>
+        <header>
+          <div class="eyebrow">Converted article</div>
+
+</header>
+        <div id="article-content">
+        
+          <div class="reveal" data-source-block-id="b-0001" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*n6mhFCouK17qGyFGrV-6Iw.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0002" data-source-kind="paragraph">
+          <p>This demo provides a secure and practical way to explore OpenClaw Finance using locally hosted Ollama models. It allows users to experiment with finance-related data and workflows in a controlled environment.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0003" data-source-kind="paragraph">
+          <p>By working with simulated, finance-style datasets, you can understand how OpenClaw operates without any risk to real banking systems or sensitive information. This makes it an ideal starting point for beginners, developers, and anyone looking to safely test and learn before moving to real-world financial applications.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0004" data-source-kind="heading">
+          
+            <h3 id="heading-4">Getting Started with OpenClaw Finance Using Ollama</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0005" data-source-kind="heading">
+          
+            <h4 id="heading-5">What This Demo Includes</h4>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0006" data-source-kind="list">
+          <ul><li>transactions.csv : sample bank-like transaction data</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0007" data-source-kind="list">
+          <ul><li>prompts.md : prompts to run in the OpenClaw dashboard</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0008" data-source-kind="list">
+          <ul><li>finance-demo-skill/SKILL.md : a minimal skill for local finance analysis</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0009" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*DV3ToKtAbuTWXmSFuge7pg.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0010" data-source-kind="heading">
+          
+            <h3 id="heading-10">What You Will Build</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0011" data-source-kind="paragraph">
+          <p>You will run:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0012" data-source-kind="list">
+          <ul><li>Ollama as the local model runtime</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0013" data-source-kind="list">
+          <ul><li>OpenClaw as the agent and dashboard</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0014" data-source-kind="list">
+          <ul><li>a local finance demo using a sample CSV instead of a real bank connection</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0015" data-source-kind="paragraph">
+          <p>This is the right first step for banking and finance experiments because it lets you verify:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0016" data-source-kind="list">
+          <ul><li>model quality</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0017" data-source-kind="list">
+          <ul><li>tool behavior</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0018" data-source-kind="list">
+          <ul><li>prompt structure</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0019" data-source-kind="list">
+          <ul><li>file handling</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0020" data-source-kind="list">
+          <ul><li>report generation</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0021" data-source-kind="paragraph">
+          <p>without giving the agent real credentials or live money movement capability.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0022" data-source-kind="heading">
+          
+            <h3 id="heading-22">Recommended Setup</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0023" data-source-kind="list">
+          <ul><li>Use Ollama for the model provider</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0024" data-source-kind="list">
+          <ul><li>Use OpenClaw with a local gateway</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0025" data-source-kind="list">
+          <ul><li>Start in the browser dashboard, not a messaging channel</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0026" data-source-kind="list">
+          <ul><li>Use fake or sanitized transaction data first</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0027" data-source-kind="heading">
+          
+            <h3 id="heading-27">Step 0: Check Prerequisites</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0028" data-source-kind="paragraph">
+          <p>OpenClaw currently requires Node 22+ .</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0029" data-source-kind="paragraph">
+          <p>Check Node:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0030" data-source-kind="code">
+          <pre><code>node
+--version</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0031" data-source-kind="paragraph">
+          <p>If you do not have Node installed, the OpenClaw installer can install it for you.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0032" data-source-kind="heading">
+          
+            <h3 id="heading-32">Step 1: Install Ollama</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0033" data-source-kind="paragraph">
+          <p>Official Ollama install options:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0034" data-source-kind="list">
+          <ul><li>macOS: download the app from https://ollama.com/download</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0035" data-source-kind="list">
+          <ul><li>Windows: use the installer from https://ollama.com/download/windows</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0036" data-source-kind="list">
+          <ul><li>Linux: use the install script below</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0037" data-source-kind="paragraph">
+          <p>Linux install command:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0038" data-source-kind="code">
+          <pre><code>curl -fsSL https://ollama.com/install.sh | sh</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0039" data-source-kind="paragraph">
+          <p>Verify the CLI:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0040" data-source-kind="code">
+          <pre><code>ollama
+--version</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0041" data-source-kind="heading">
+          
+            <h3 id="heading-41">Step 2: Start Ollama and Pull a Model</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0042" data-source-kind="paragraph">
+          <p>If you are on macOS or Windows and installed the app, Ollama usually starts its local server automatically.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0043" data-source-kind="paragraph">
+          <p>On Linux, or if you want to run the server manually:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0044" data-source-kind="code">
+          <pre><code>ollama serve</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0045" data-source-kind="paragraph">
+          <p>OpenClaw’s official Ollama provider docs recommend tool-capable models such as:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0046" data-source-kind="list">
+          <ul><li>gpt-oss:20b</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0047" data-source-kind="list">
+          <ul><li>llama3.3</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0048" data-source-kind="list">
+          <ul><li>qwen2.5-coder:32b</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0049" data-source-kind="list">
+          <ul><li>deepseek-r1:32b</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0050" data-source-kind="paragraph">
+          <p>For a first finance demo, start with one of these:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0051" data-source-kind="code">
+          <pre><code>ollama
+pull
+gpt-oss:20b</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0052" data-source-kind="code">
+          <pre><code>ollama pull llama3
+.3</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0053" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/1200/1*Jfxql1xyP3cxMJMvS4UDdw.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0054" data-source-kind="paragraph">
+          <p>Verify the model is installed:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0055" data-source-kind="code">
+          <pre><code>ollama list</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0056" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*fD-qdaexBfKlcT6WWjz3vQ.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0057" data-source-kind="paragraph">
+          <p>Verify the local API is reachable:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0058" data-source-kind="code">
+          <pre><code>curl http://localhost:11434/api/tags</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0059" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*x_122EjNAButUsaZoBIPqw.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0060" data-source-kind="heading">
+          
+            <h3 id="heading-60">Step 3: Install OpenClaw</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0061" data-source-kind="paragraph">
+          <p>Install the CLI with the official installer:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0062" data-source-kind="code">
+          <pre><code>curl -fsSL https://openclaw.ai/install.sh | bash</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0063" data-source-kind="paragraph">
+          <p>Verify the CLI:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0064" data-source-kind="code">
+          <pre><code>openclaw --
+help</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0065" data-source-kind="heading">
+          
+            <h3 id="heading-65">Step 4: Enable Ollama for OpenClaw</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0066" data-source-kind="paragraph">
+          <p>OpenClaw’s Ollama docs say the simplest path is implicit discovery.You do not “get” OLLAMA_API_KEY from anywhere. For OpenClaw’s Ollama integration, you just set it yourself to the literal value ollama-local.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0067" data-source-kind="paragraph">
+          <p>Set this environment variable:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0068" data-source-kind="code">
+          <pre><code>export
+OLLAMA_API_KEY=
+"ollama-local"</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0069" data-source-kind="paragraph">
+          <p>This is not a real secret. It is just the opt-in switch OpenClaw uses to enable local Ollama model discovery.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0070" data-source-kind="paragraph">
+          <p>If you want it to persist in zsh , add it to your shell profile:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0071" data-source-kind="code">
+          <pre><code>echo
+'export OLLAMA_API_KEY="ollama-local"'
+>> ~/.zshrc
+source
+~/.zshrc</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0072" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*5SgK8i3qNTfqZpIApV4oVQ.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0073" data-source-kind="heading">
+          
+            <h3 id="heading-73">Step 5: Run OpenClaw Onboarding</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0074" data-source-kind="paragraph">
+          <p>Run:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0075" data-source-kind="code">
+          <pre><code>openclaw onboard
+--install-daemon</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0076" data-source-kind="paragraph">
+          <p>Use these choices:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0077" data-source-kind="list">
+          <ul><li>Setup: QuickStart</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0078" data-source-kind="list">
+          <ul><li>Gateway mode: Local gateway</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0079" data-source-kind="list">
+          <ul><li>Workspace: default is fine unless you want a dedicated finance workspace</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0080" data-source-kind="list">
+          <ul><li>Channels: skip them for now</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0081" data-source-kind="list">
+          <ul><li>Daemon install: yes</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0082" data-source-kind="paragraph">
+          <p>If the wizard asks you to choose a model and your Ollama models are already discovered, pick one like:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0083" data-source-kind="list">
+          <ul><li>ollama/gpt-oss:20b</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0084" data-source-kind="list">
+          <ul><li>ollama/llama3.3</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0085" data-source-kind="paragraph">
+          <p>If the wizard does not show your Ollama model, finish onboarding first, then use the checks in Step 6.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0086" data-source-kind="heading">
+          
+            <h3 id="heading-86">Step 6: Verify OpenClaw Sees Ollama</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0087" data-source-kind="paragraph">
+          <p>Run these checks:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0088" data-source-kind="code">
+          <pre><code>openclaw gateway
+status
+openclaw models list
+openclaw models
+status</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0089" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*h2u6qfXjhYsBc55fbCSDRg.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0090" data-source-kind="paragraph">
+          <p>You should see an ollama/... model in the output.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0091" data-source-kind="paragraph">
+          <p>If you do not, check:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0092" data-source-kind="list">
+          <ul><li>OLLAMA_API_KEY is set in the same shell session</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0093" data-source-kind="list">
+          <ul><li>ollama serve is running or the app is active</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0094" data-source-kind="list">
+          <ul><li>the model is installed in ollama list</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0095" data-source-kind="heading">
+          
+            <h3 id="heading-95">Step 7: Open the Dashboard</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0096" data-source-kind="paragraph">
+          <p>Run:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0097" data-source-kind="code">
+          <pre><code>openclaw dashboard</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0098" data-source-kind="paragraph">
+          <p>This is the fastest first chat path and avoids unnecessary channel setup.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0099" data-source-kind="heading">
+          
+            <h3 id="heading-99">Step 8: Copy the Sample Finance Data Into the OpenClaw Workspace</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0100" data-source-kind="paragraph">
+          <p>Please feel free to use any data .Its not tied with data .Find your workspace:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0101" data-source-kind="code">
+          <pre><code>openclaw config
+get
+agents.defaults.workspace</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0102" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*nSiHe60YBJEgXbkfoqcMXw.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0103" data-source-kind="paragraph">
+          <p>Copy the sample CSV:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0104" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*iNqE53DtbPAWLB5NyZ219g.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0105" data-source-kind="code">
+          <pre><code>cp
+examples/openclaw-finance-demo/transactions.csv
+"
+$(openclaw config get workspace)
+/transactions.csv"</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0106" data-source-kind="heading">
+          
+            <h3 id="heading-106">Step 9: Add the Finance Demo Skill</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0107" data-source-kind="paragraph">
+          <p>Create the skill directory and copy the skill file:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0108" data-source-kind="code">
+          <pre><code>mkdir
+-p
+"
+$(openclaw config get workspace)
+/skills/finance-demo"
+cp
+examples/openclaw-finance-demo/finance-demo-skill/SKILL.md
+"
+$(openclaw config get workspace)
+/skills/finance-demo/SKILL.md"</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0109" data-source-kind="paragraph">
+          <p>Start a new dashboard session after copying the skill so the agent picks it up cleanly.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0110" data-source-kind="heading">
+          
+            <h3 id="heading-110">Step 10: Run the Banking and Finance Demo</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0111" data-source-kind="paragraph">
+          <p>Open prompts.md and paste the prompts into the OpenClaw dashboard one by one.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0112" data-source-kind="paragraph">
+          <p>Start with:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0113" data-source-kind="code">
+          <pre><code>Analyze transactions
+.csv
+and summarize total income, total expenses, and net cash
+flow
+for March
+2026
+.</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0114" data-source-kind="paragraph">
+          <p>Then continue with:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0115" data-source-kind="list">
+          <ul><li>category analysis</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0116" data-source-kind="list">
+          <ul><li>subscription detection</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0117" data-source-kind="list">
+          <ul><li>anomaly detection</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0118" data-source-kind="list">
+          <ul><li>budget planning</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0119" data-source-kind="list">
+          <ul><li>report creation</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0120" data-source-kind="heading">
+          
+            <h3 id="heading-120">Step 11: Ask OpenClaw to Produce Files</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0121" data-source-kind="paragraph">
+          <p>Once the CSV analysis works, use a file-producing prompt such as:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0122" data-source-kind="code">
+          <pre><code>Create
+a file named budget
+-
+report.md
+with
+total income, total expenses, net savings, largest spending categories,
+and
+3
+practical budget recommendations.</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0123" data-source-kind="paragraph">
+          <p>This is useful because it confirms the agent can:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0124" data-source-kind="list">
+          <ul><li>read local files</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0125" data-source-kind="list">
+          <ul><li>reason over structured finance data</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0126" data-source-kind="list">
+          <ul><li>produce a reusable report in the workspace</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0127" data-source-kind="heading">
+          
+            <h3 id="heading-127">Optional: Set the Default Model Explicitly</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0128" data-source-kind="paragraph">
+          <p>If you want to force a specific Ollama model as the OpenClaw default, set it in config or use the model command in chat.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0129" data-source-kind="paragraph">
+          <p>Example config snippet:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0130" data-source-kind="code">
+          <pre><code>{
+"agents"
+:
+{
+"defaults"
+:
+{
+"model"
+:
+{
+"primary"
+:
+"ollama/gpt-oss:20b"
+,
+"fallbacks"
+:
+[
+"ollama/llama3.3"
+]
+}
+}
+}
+}</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0131" data-source-kind="paragraph">
+          <p>If you manually define models.providers.ollama , use the native Ollama base URL without /v1 .</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0132" data-source-kind="paragraph">
+          <p>Use:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0133" data-source-kind="code">
+          <pre><code>http://host:11434</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0134" data-source-kind="paragraph">
+          <p>Do not use:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0135" data-source-kind="code">
+          <pre><code>http://host:11434/v1</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0136" data-source-kind="paragraph">
+          <p>The OpenClaw Ollama provider docs explicitly warn that /v1 can break tool calling.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0137" data-source-kind="heading">
+          
+            <h3 id="heading-137">Optional: Fast Shortcut from Ollama</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0138" data-source-kind="paragraph">
+          <p>Ollama’s own quickstart docs also list:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0139" data-source-kind="code">
+          <pre><code>ollama launch openclaw</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0140" data-source-kind="paragraph">
+          <p>Use that if you want a shortcut entry point from Ollama itself. For learning and troubleshooting, the manual OpenClaw setup in this guide is better because you can verify each layer separately.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0141" data-source-kind="heading">
+          
+            <h3 id="heading-141">Common Problems</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0142" data-source-kind="heading">
+          
+            <h3 id="heading-142">OpenClaw shows no Ollama models</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0143" data-source-kind="paragraph">
+          <p>Check:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0144" data-source-kind="code">
+          <pre><code>echo
+"
+$OLLAMA_API_KEY
+"
+ollama list
+curl http://localhost:11434/api/tags
+openclaw models list</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0145" data-source-kind="paragraph">
+          <p>If ollama list works but openclaw models list does not show anything, your model may not be auto-discovered as tool-capable. In that case, pull one of the officially suggested models such as gpt-oss:20b or llama3.3 .</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0146" data-source-kind="heading">
+          
+            <h3 id="heading-146">The model is too slow</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0147" data-source-kind="paragraph">
+          <p>Try a smaller Ollama model that still supports tools, or move to a machine with more RAM or GPU capacity. OpenClaw’s FAQ warns that weaker local models are more vulnerable to prompt injection, so keep tool access narrow if you use a smaller model.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0148" data-source-kind="heading">
+          
+            <h3 id="heading-148">The dashboard opens but answers are poor</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0149" data-source-kind="paragraph">
+          <p>This is usually a model-quality issue, not an OpenClaw issue. Switch to a stronger model first, then re-test the same prompt.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0150" data-source-kind="heading">
+          
+            <h3 id="heading-150">I want to connect a real bank</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0151" data-source-kind="paragraph">
+          <p>Do not start there. First prove that:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0152" data-source-kind="list">
+          <ul><li>the model can read and analyze CSV exports accurately</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0153" data-source-kind="list">
+          <ul><li>the skill instructions work</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0154" data-source-kind="list">
+          <ul><li>the model behaves safely around finance prompts</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0155" data-source-kind="paragraph">
+          <p>Then move to read-only APIs or sanitized exports. Avoid giving OpenClaw payment or transfer permissions during early experiments.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0156" data-source-kind="heading">
+          
+            <h3 id="heading-156">Suggested Learning Path After This Demo</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0157" data-source-kind="list">
+          <ul><li>Replace transactions.csv with your own sanitized export</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0158" data-source-kind="list">
+          <ul><li>Add a second month and ask for trend analysis</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0159" data-source-kind="list">
+          <ul><li>Create prompts for fraud-like anomaly review</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0160" data-source-kind="list">
+          <ul><li>Add a read-only integration later if you still need live data</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0161" data-source-kind="heading">
+          
+            <h3 id="heading-161">Safety Notes</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0162" data-source-kind="list">
+          <ul><li>Use fake or sanitized data first.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0163" data-source-kind="list">
+          <ul><li>Do not give the agent real bank credentials in chat.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0164" data-source-kind="list">
+          <ul><li>Prefer CSV import or read-only APIs over direct transaction execution.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0165" data-source-kind="list">
+          <ul><li>Keep finance work in a separate OpenClaw workspace from your normal experiments.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0166" data-source-kind="list">
+          <ul><li>If you use a smaller local model, restrict tools and treat results as less trustworthy.</li></ul>
+          
+          </div>
+        
+        </div>
+      </article>
+    </main>
+  </div>
+  <div class="lightbox" id="lightbox" hidden><img alt="Expanded article image"></div>
+</body>
+</html>

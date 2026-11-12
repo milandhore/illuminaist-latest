@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>How LLMs are Transforming Software Development | IlluminAIst</title>
+  <meta name="description" content="I nstead of starting from scratch, today developers can make API calls to a hosted version of an LLM, with the option of customizing it for their specific needs. This shift allows teams to incorporate the power of AI more easily and efficiently into their applications, similar to">
+</head>
+<body>
+<div class="shell">
+    </nav>
+    <main>
+      <div class="toolbar"><button id="theme-toggle" type="button" aria-label="Toggle dark mode">☾ Theme</button></div>
+      <article>
+        <header>
+          <div class="eyebrow">Converted article</div>
+
+</header>
+        <div id="article-content">
+        
+          <div class="reveal" data-source-block-id="b-0001" data-source-kind="paragraph">
+          <p>I nstead of starting from scratch, today developers can make API calls to a hosted version of an LLM, with the option of customizing it for their specific needs. This shift allows teams to incorporate the power of AI more easily and efficiently into their applications, similar to the transition from single-purpose computing to time-sharing in the past.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0002" data-source-kind="paragraph">
+          <p>There are two main aspects to consider when incorporating LLMs within applications</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0003" data-source-kind="quote">
+          <blockquote>The technical aspect , which covers the how . Integrating LLMs into applications involves embedding them through REST API calls and managing them with AI orchestrators. This means setting up architectural components that allow seamless communication with the LLMs via API calls.</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0004" data-source-kind="quote">
+          <blockquote>The conceptual aspect , which covers the what . LLMs bring a plethora of new capabilities that can be harnessed within applications.</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0005" data-source-kind="heading">
+          
+            <h3 id="heading-5">Copilot or AI assistant</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0006" data-source-kind="paragraph">
+          <p>Before we talk about technical aspects of LLMs ,we will cover a brand-new category of software — the copilot system. This concept was coined by Microsoft and has already been introduced into its applications, such as M365 Copilot and the new Bing, now powered by GPT-4.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0007" data-source-kind="paragraph">
+          <p>As the name suggests, copilots are meant to be AI assistants that work side by side with users and support them in various activities, from information retrieval to blog writing and posting, from brainstorming ideas to code review and generation.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0008" data-source-kind="heading">
+          
+            <h4 id="heading-8">A copilot is powered by Large Languague model (LLM)</h4>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0009" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*UFMILLRzQxPbsRaKGEv00g.png" alt="" loading="lazy" data-lightbox="true"><figcaption>Source: www.milanoutlook.com</figcaption></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0010" data-source-kind="paragraph">
+          <p>More generally, LFMs, meaning that these are the reasoning engines that make the copilot “intelligent.” This reasoning engine is one of its components, but not the only one. A copilot also relies on other technologies, such as apps, data sources, and user interfaces, to provide a useful and engaging experience for users.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0011" data-source-kind="paragraph">
+          <p>A copilot is designed with conversational user interface</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0012" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*8_Hmbo30kGD8At8BgqnAnQ.png" alt="" loading="lazy" data-lightbox="true"><figcaption>Source: https:// www.milanoutlook.com</figcaption></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0013" data-source-kind="paragraph">
+          <p>This is allowing users to interact with it using natural language. This reduces or even eliminates the knowledge gap between complex systems that need domain-specific taxonomy (for example, querying tabular data needs the knowledge of programming languages such as T-SQL) and users.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0014" data-source-kind="paragraph">
+          <p>A copilot grounded with domain data</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0015" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*q568U83RRqcYrnR-wqRU3w.png" alt="" loading="lazy" data-lightbox="true"><figcaption>Source: https:// www.milanoutlook.com</figcaption></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0016" data-source-kind="paragraph">
+          <p>This means that it is grounded to domain-specific data so that it is entitled to answer only within the perimeter of the application or domain. Grounding is the process of using LLMs with information that is use case specific, relevant, and not available as part of the LLM’s trained knowledge. It is crucial for ensuring the quality, accuracy, and relevance of the output.Grounding is achieved through an architectural framework called retrieval-augmented generation (RAG).</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0017" data-source-kind="paragraph">
+          <p>For example, let’s say we developed a copilot within our company that allows employees to chat with their enterprise knowledge base. As fun as it can be, we cannot provide users with a copilot they can use to plan their summer trip (it would be like providing users with a ChatGPT-like tool at our own hosting cost )on the contrary, we want the copilot to be grounded only to our enterprise knowledge base so that it can respond only if the answer is pertinent to the domain-specific context.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0018" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*eFBH8rHYKIMbm7FY33UUUw.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0019" data-source-kind="paragraph">
+          <p>The copilot’s capabilities can be extended by skills , which can be code or calls to other models. In fact, the LLM (our reasoning engine) might have two kinds of limitations:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0020" data-source-kind="list">
+          <ul><li>Limited parametric knowledge. This is due to the knowledge base cutoff date, which is a physiological feature of LLMs. In fact, their training dataset will always be “outdated,” not in line with the current trends. This can be overcome by adding non-parametric knowledge with grounding, as previously seen.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0021" data-source-kind="list">
+          <ul><li>Lack of executive power. This means that LLMs by themselves are not empowered to carry out actions. Plug-ins are LLMs’ connectors toward the external world that serve not only as input sources to extend LLMs’ non-parametric knowledge (for example, to allow a web search) but also as output sources so that the copilot can actually execute actions.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0022" data-source-kind="heading">
+          
+            <h3 id="heading-22">How to use AI orchestrators to embed LLMs into applications</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0023" data-source-kind="paragraph">
+          <p>While we can explain the conceptual aspect with the brand-new category of software called Copilot, in this section, we are going to further explore how to technically embed and orchestrate LLMs within our applications.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0024" data-source-kind="heading">
+          
+            <h3 id="heading-24">AI Orchestrators Main Components</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0025" data-source-kind="paragraph">
+          <p>From one side, the paradigm shift of foundation models implies a great simplification in the domain of AI-powered applications: after producing models, now the trend is consuming models. On the other side, many roadblocks might arise in developing this new kind of AI, since there are LLM-related components that are brand new and have never been managed before within an application life cycle.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0026" data-source-kind="paragraph">
+          <p>F or example, there might be malicious actors that could try to change the LLM instructions so that the application does not follow the correct instructions. This is an example of a new set of security threats that are typical to LLM-powered applications and need to be addressed with powerful counterattacks or preventive techniques.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0027" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*Hbn3Nieg1x4Cjpdsb8oKKg.png" alt="" loading="lazy" data-lightbox="true"><figcaption>Source: https:// www.milanoutlook.com</figcaption></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0028" data-source-kind="paragraph">
+          <p>Models : The model is simply the type of LLM we decide to embed in our application. There are two main categories of models</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0029" data-source-kind="list">
+          <ul><li>Proprietary LLMs: Models that are owned by specific companies or organizations. Examples include GPT-3.5 and GPT-4, developed by OpenAI, or Bard, developed by Google , Amazon Titan. As their source code and architecture are not available.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0030" data-source-kind="list">
+          <ul><li>Open-source: Models with code and architecture freely available and distributed, hence they can also be trained from scratch on custom data. Examples include Anthropic’s Claude or LLaMA, developed by Meta.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0031" data-source-kind="paragraph">
+          <p>Memory : LLM applications commonly use a conversational interface, which requires the ability to refer back to earlier information within the conversation. This is achieved through a “memory” system that allows the application to store and retrieve past interactions. To achieve that, it is important to store all the past conversations — properly embedded — into VectorDB, which is at the core of the application’s data.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0032" data-source-kind="paragraph">
+          <p>Plug-ins: They can be seen as additional modules or components that can be integrated into the LLM to extend its functionality or adapt it to specific tasks and applications. These plug-ins act as add-ons, enhancing the capabilities of the LLM beyond its core language generation or comprehension abilities.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0033" data-source-kind="paragraph">
+          <p>Prompts : This is probably the most interesting and pivotal component of an LLM-powered application. Prompts can defined at two different levels:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0034" data-source-kind="list">
+          <ul><li>“Frontend,” or what the user sees : A “prompt” refers to the input to the model. It is the way the user interacts with the application, asking things in natural language.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0035" data-source-kind="list">
+          <ul><li>“Backend,” or what the user does not see : Natural language is not only the way to interact, as a user, with the frontend; it is also the way we “program” the backend.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0036" data-source-kind="paragraph">
+          <p>With the AI orchestrator, we refer to lightweight libraries that make it easier to embed and orchestrate LLMs within applications. Many libraries started arising in the market : LangChain, Semantic Kernel, and Haystack .</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0037" data-source-kind="paragraph">
+          <p>These libraries are continuously evolving, so I recommend referring to their documentation for more detailed information.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0038" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*WXxbx3mPRlnvEfySJqUQ_w.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0039" data-source-kind="heading">
+          
+            <h3 id="heading-39">Criteria to choose a framework or libraries</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0040" data-source-kind="paragraph">
+          <p>So, a natural question might be: “Which one should I use to build my LLM-powered application?” Well, there is no right or wrong answer! All three are extremely valid. However, there are some features that might be more relevant for specific use cases or developers’ preferences.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0041" data-source-kind="list">
+          <ul><li>The programming language you are comfortable with or prefer to use: Different frameworks may support different programming languages or have different levels of compatibility or integration with them.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0042" data-source-kind="list">
+          <ul><li>The type and complexity of the natural language tasks you want to perform or support: Different frameworks may have different capabilities or features for handling various natural language tasks, such as summarization, generation, translation, reasoning, etc. For example, LangChain and Haystack provide utilities and components for orchestrating and executing natural language tasks, while Semantic Kernel allows you to use natural language semantic functions to invoke LLMs and services.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0043" data-source-kind="list">
+          <ul><li>The level of customization and control you need or want over the LLMs and their parameters or options : Different frameworks may have different ways of accessing, configuring, and fine-tuning the LLMs and their parameters or options, such as model selection, prompt design, inference speed, output format, etc. For example , Semantic Kernel provides connectors that make it easy to add memories and models to your AI app, while LangChain and Haystack allow you to plug in different components for the document store, retriever, reader, generator, summarizer, and evaluator.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0044" data-source-kind="list">
+          <ul><li>The availability and quality of the documentation, tutorials, examples, and community support for the framework: Different frameworks may have different levels of documentation, tutorials, examples, and community support that can help you learn, use, and troubleshoot the framework.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0045" data-source-kind="paragraph">
+          <p>we delved into the new way of developing applications that LLMs have been paving, as we introduced the concept of the copilot and discussed the emergence of new AI orchestrators. Among those, we focused on three projects — LangChain, Haystack, and Semantic Kernel but keep testing market offering in this chaning era.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0046" data-source-kind="paragraph">
+          <p>Once we have decided on the AI orchestrator, another pivotal step is to decide which LLM(s) we want to embed into our applications.</p>
+          
+          </div>
+        
+        </div>
+      </article>
+    </main>
+  </div>
+  <div class="lightbox" id="lightbox" hidden><img alt="Expanded article image"></div>
+</body>
+</html>

@@ -9,7 +9,27 @@ const path = require('path')
 const url  = require('url')
 const cp   = require('child_process')
 
-const PORT    = 3333
+// Load local CMS secrets without adding a dotenv runtime dependency. Existing
+// shell/CI environment variables always win over values in the local .env.
+function loadLocalEnv() {
+  const envPath = path.join(__dirname, '..', '.env')
+  if (!fs.existsSync(envPath)) return
+  const lines = fs.readFileSync(envPath, 'utf8').split(/\r?\n/)
+  for (const line of lines) {
+    const match = line.match(/^\s*(?:export\s+)?([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.*?)\s*$/)
+    if (!match || match[1] in process.env) continue
+    let value = match[2]
+    if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
+      value = value.slice(1, -1)
+    }
+    process.env[match[1]] = value
+  }
+}
+
+loadLocalEnv()
+const { generateEbook } = require('./ebook-agent.cjs')
+
+const PORT    = Number(process.env.CMS_PORT || 3333)
 const ROOT    = path.resolve(__dirname, '..')
 const ART_DIR = path.join(ROOT, 'public', 'articles')
 const DATA_JS = path.join(ROOT, 'src', 'data', 'articles.js')
@@ -20,6 +40,7 @@ const NEWS_JS = path.join(ROOT, 'src', 'data', 'news.js')
 const SUBSCRIBERS_SRC = path.join(ROOT, 'src', 'data', 'subscribers.json')
 const ALERTS_SRC      = path.join(ROOT, 'src', 'data', 'alerts.json')
 const ALERTS_PUB      = path.join(ROOT, 'public', 'alerts.json')
+const ebookGenerationJobs = new Map()
 
 // ── subscriber & alert helpers ────────────────────────────────────────────────
 
@@ -194,66 +215,173 @@ function scanHtmlFiles () {
   return results
 }
 
+const VALID_TOPICS = new Set(['ai-llms', 'rag-agents', 'cloud-devops', 'mlops', 'emerging-tech', 'tutorials', 'opinion'])
+const VALID_DIFFICULTIES = new Set(['Beginner', 'Intermediate', 'Advanced'])
+
+function escapeHtml (value) {
+  return String(value || '').replace(/[&<>"']/g, ch => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+  }[ch]))
+}
+
+function plainText (html) {
+  return String(html || '').replace(/<[^>]*>/g, ' ').replace(/&nbsp;/gi, ' ')
+    .replace(/&amp;/gi, '&').replace(/\s+/g, ' ').trim()
+}
+
+function excerptFromHtml (html) {
+  return plainText(html).slice(0, 280).trim()
+}
+
+function sanitizeArticleHtml (html) {
+  return String(html || '')
+    .replace(/<script\b[\s\S]*?<\/script>/gi, '')
+    .replace(/<style\b[\s\S]*?<\/style>/gi, '')
+    .replace(/\s+on[a-z]+\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]+)/gi, '')
+    .replace(/\s+(?:href|src)\s*=\s*(["'])\s*javascript:[\s\S]*?\1/gi, '')
+}
+
+function validateArticlePayload (payload, { seenSlugs = new Set() } = {}) {
+  const item = payload || {}
+  const title = String(item.title || '').trim()
+  const htmlContent = sanitizeArticleHtml(item.htmlContent || '').trim()
+  const excerpt = String(item.excerpt || '').trim() || excerptFromHtml(htmlContent)
+  const rawSlug = String(item.slug || title).trim()
+  const slug = slugify(rawSlug)
+  const errors = []
+  const warnings = []
+  const wordCount = plainText(htmlContent).split(/\s+/).filter(word => word.length > 2).length
+
+  if (!slug) errors.push('slug must contain letters or numbers')
+  if (!title) errors.push('title is required')
+  else if (title.length < 5 || title.length > 180) errors.push('title must be between 5 and 180 characters')
+  if (!htmlContent) errors.push('htmlContent is required')
+  if (wordCount < 20) errors.push('content must contain at least 20 words')
+  if (!excerpt || excerpt.length < 20) errors.push('excerpt or meta description must contain at least 20 characters')
+  if (!VALID_TOPICS.has(item.topicSlug)) errors.push('topicSlug is invalid')
+  if (!VALID_DIFFICULTIES.has(item.difficulty)) errors.push('difficulty is invalid')
+  if (/<(?:iframe|object|embed|form)\b/i.test(htmlContent)) errors.push('content contains an unsupported embedded element')
+  if (seenSlugs.has(slug)) errors.push('duplicate URL slug in batch')
+  if (/<h[2-6]\b/i.test(htmlContent) === false) warnings.push('no section headings found')
+
+  return {
+    ok: errors.length === 0,
+    errors,
+    warnings,
+    payload: { ...item, slug, title, excerpt, htmlContent },
+    wordCount
+  }
+}
+
+function buildArticleHtml ({ title, excerpt, htmlContent }) {
+  return [
+    '<!DOCTYPE html>',
+    '<html lang="en">',
+    '<head>',
+    '  <meta charset="UTF-8">',
+    '  <title>' + escapeHtml(title) + ' | IlluminAIst</title>',
+    '  <meta name="description" content="' + escapeHtml(excerpt) + '">',
+    '</head>',
+    '<body>',
+    sanitizeArticleHtml(htmlContent),
+    '</body>',
+    '</html>',
+  ].join('\n')
+}
+
+function buildArticleEntry (payload) {
+  return {
+    slug: payload.slug, topicSlug: payload.topicSlug, category: payload.category, difficulty: payload.difficulty,
+    title: payload.title, excerpt: payload.excerpt,
+    avatar: payload.avatar || 'AI', author: payload.author || 'IlluminAIst',
+    readingTime: Number(payload.readingTime) || 5,
+    publishedAt: payload.publishedAt || new Date().toISOString().split('T')[0],
+    htmlFile: true, featured: !!payload.featured, trending: !!payload.trending,
+    status: payload.status || 'published',
+    tags: Array.isArray(payload.tags) ? payload.tags : String(payload.tags || '').split(',').map(t => t.trim()).filter(Boolean),
+  }
+}
+
 // ── handlers ──────────────────────────────────────────────────────────────────
 
 async function handlePublish (req, res) {
   try {
     const body = await bodyJson(req)
-    const { slug: rawSlug, topicSlug, category, difficulty, title,
-            excerpt, avatar, author, readingTime, publishedAt,
-            featured, trending, tags, htmlContent, status } = body
-
-    if (!rawSlug || !topicSlug || !htmlContent || !title)
-      return send(res, 400, { error: 'slug, topicSlug, title and htmlContent are required' })
-
-    const slug = slugify(rawSlug)
-    const dir  = path.join(ART_DIR, topicSlug)
+    const validation = validateArticlePayload(body)
+    if (!validation.ok) return send(res, 400, { error: 'Article validation failed', errors: validation.errors, warnings: validation.warnings })
+    const item = validation.payload
+    const dir = path.join(ART_DIR, item.topicSlug)
     fs.mkdirSync(dir, { recursive: true })
+    fs.writeFileSync(path.join(dir, item.slug + '.html'), buildArticleHtml(item), 'utf8')
 
-    const descSafe = (excerpt || '').replace(/"/g, '&quot;')
-    const htmlFull = [
-      '<!DOCTYPE html>',
-      '<html lang="en">',
-      '<head>',
-      '  <meta charset="UTF-8">',
-      '  <title>' + title + ' | IlluminAIst</title>',
-      '  <meta name="description" content="' + descSafe + '">',
-      '</head>',
-      '<body>',
-      htmlContent,
-      '</body>',
-      '</html>',
-    ].join('\n')
-
-    fs.writeFileSync(path.join(dir, slug + '.html'), htmlFull, 'utf8')
-
-    const existing = readArticles().filter(a => a.slug !== slug)
-    const newEntry = {
-      slug, topicSlug, category, difficulty, title, excerpt,
-      avatar:      avatar || 'AI',
-      author:      author || 'IlluminAIst',
-      readingTime: Number(readingTime) || 5,
-      publishedAt: publishedAt || new Date().toISOString().split('T')[0],
-      htmlFile:    true,
-      featured:    !!featured,
-      trending:    !!trending,
-      status:      status || 'published',
-      tags:        Array.isArray(tags) ? tags : (tags || '').split(',').map(t => t.trim()).filter(Boolean),
-    }
+    const before = readArticles()
+    const existing = before.filter(a => a.slug !== item.slug)
+    const newEntry = buildArticleEntry(item)
     writeArticlesJs([newEntry, ...existing])
 
     // Broadcast alert to subscribers
     const alert = notifySubscribers({
       type: 'article',
-      title,
-      slug,
-      excerpt,
+      title: item.title,
+      slug: item.slug,
+      excerpt: item.excerpt,
       author: newEntry.author,
-      url: `/articles/${slug}`
+      url: `/articles/${item.slug}`
     })
 
-    const gitResult = gitSync(slug, 'Published')
-    send(res, 200, { ok: true, slug, path: 'public/articles/' + topicSlug + '/' + slug + '.html', alert, ...gitResult })
+    const gitResult = gitSync(item.slug, 'Published')
+    send(res, 200, { ok: true, slug: item.slug, path: 'public/articles/' + item.topicSlug + '/' + item.slug + '.html', alert, ...gitResult })
+  } catch (err) {
+    console.error(err)
+    send(res, 500, { error: err.message })
+  }
+}
+
+async function handlePublishBulk (req, res) {
+  try {
+    const body = await bodyJson(req)
+    const articles = Array.isArray(body.articles) ? body.articles : []
+    if (!articles.length) return send(res, 400, { error: 'articles must contain at least one item' })
+    if (articles.length > 100) return send(res, 400, { error: 'A maximum of 100 files can be uploaded at once' })
+    if (Buffer.byteLength(JSON.stringify(body), 'utf8') > 25 * 1024 * 1024)
+      return send(res, 413, { error: 'Bulk upload payload must be 25 MB or smaller' })
+
+    const seenSlugs = new Set()
+    const prepared = articles.map(item => {
+      const result = validateArticlePayload(item, { seenSlugs })
+      if (result.ok) seenSlugs.add(result.payload.slug)
+      return result
+    })
+    const invalid = prepared.map((result, index) => ({
+      fileName: articles[index].fileName || ('file ' + (index + 1)),
+      errors: result.errors,
+      warnings: result.warnings
+    })).filter(result => result.errors.length)
+    if (invalid.length) return send(res, 400, { error: 'Bulk validation failed; no files were published', validationErrors: invalid })
+
+    const before = readArticles()
+    const entries = []
+    const publishedSlugs = new Set()
+    const results = []
+    for (const result of prepared) {
+      const item = result.payload
+      const dir = path.join(ART_DIR, item.topicSlug)
+      fs.mkdirSync(dir, { recursive: true })
+      fs.writeFileSync(path.join(dir, item.slug + '.html'), buildArticleHtml(item), 'utf8')
+      const previous = before.find(article => article.slug === item.slug)
+      const entry = buildArticleEntry(item)
+      entries.push(entry)
+      publishedSlugs.add(item.slug)
+      results.push({ fileName: item.fileName, slug: item.slug, path: 'public/articles/' + item.topicSlug + '/' + item.slug + '.html', isUpdate: !!previous })
+    }
+    writeArticlesJs([...entries, ...before.filter(article => !publishedSlugs.has(article.slug))])
+
+    for (const result of prepared) {
+      const item = result.payload
+      notifySubscribers({ type: 'article', title: item.title, slug: item.slug, excerpt: item.excerpt, author: item.author, url: `/articles/${item.slug}` })
+    }
+    const gitResult = gitSync('bulk-' + prepared.length, 'Bulk published articles')
+    send(res, 200, { ok: true, count: results.length, results, ...gitResult })
   } catch (err) {
     console.error(err)
     send(res, 500, { error: err.message })
@@ -566,6 +694,94 @@ async function handleDeleteEbook (req, res) {
   }
 }
 
+// ── AI eBook generation handlers ─────────────────────────────────────────────
+
+function ebookJobView(job, includeResult = false) {
+  if (!job) return null
+  return {
+    id: job.id,
+    status: job.status,
+    stage: job.stage,
+    progress: job.progress,
+    message: job.message,
+    title: job.title,
+    audience: job.audience,
+    createdAt: job.createdAt,
+    updatedAt: job.updatedAt,
+    error: job.error || null,
+    result: includeResult ? (job.result || null) : undefined
+  }
+}
+
+async function handleGenerateEbook(req, res) {
+  try {
+    const body = await bodyJson(req)
+    const title = String(body.title || '').trim()
+    const audience = String(body.audience || '').trim()
+    if (!title || title.length < 5) return send(res, 400, { error: 'A book title of at least 5 characters is required' })
+    if (!audience) return send(res, 400, { error: 'Target audience is required' })
+    if (title.length > 180 || audience.length > 180) return send(res, 400, { error: 'Title and audience must be 180 characters or fewer' })
+
+    const id = 'ebook-job-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8)
+    const now = new Date().toISOString()
+    const job = { id, title, audience, status: 'queued', stage: 'queued', progress: 0, message: 'Queued for generation…', createdAt: now, updatedAt: now }
+    ebookGenerationJobs.set(id, job)
+
+    generateEbook({
+      title,
+      audience,
+      onUpdate(update) {
+        Object.assign(job, update, { updatedAt: new Date().toISOString() })
+        if (update.stage === 'complete') job.status = 'complete'
+        else job.status = 'running'
+      }
+    }).then(result => {
+      job.status = 'complete'
+      job.stage = 'complete'
+      job.progress = 100
+      job.message = `Draft complete — approximately ${result.pages} pages.`
+      job.result = result
+      job.updatedAt = new Date().toISOString()
+    }).catch(error => {
+      console.error('AI eBook generation failed:', error)
+      job.status = 'failed'
+      job.stage = 'failed'
+      job.message = 'Generation failed'
+      job.error = error.message
+      job.updatedAt = new Date().toISOString()
+    })
+
+    // Keep the local CMS process bounded if a user starts many generations.
+    if (ebookGenerationJobs.size > 20) {
+      const oldest = [...ebookGenerationJobs.values()].sort((a, b) => a.createdAt.localeCompare(b.createdAt))[0]
+      if (oldest && oldest.id !== id) ebookGenerationJobs.delete(oldest.id)
+    }
+    send(res, 202, { ok: true, job: ebookJobView(job) })
+  } catch (err) {
+    console.error(err)
+    send(res, 500, { error: err.message })
+  }
+}
+
+function handleGetEbookGeneration(req, res, id) {
+  const job = ebookGenerationJobs.get(id)
+  if (!job) return send(res, 404, { error: 'Generation job not found. Jobs are kept in the local CMS process.' })
+  send(res, 200, { ok: true, job: ebookJobView(job, job.status === 'complete') })
+}
+
+function handleExportEbookGeneration(req, res, id) {
+  const job = ebookGenerationJobs.get(id)
+  if (!job) return send(res, 404, { error: 'Generation job not found' })
+  if (job.status !== 'complete' || !job.result?.manuscriptHtml) return send(res, 409, { error: 'The manuscript is not ready yet' })
+  const filename = (job.result.slug || 'enterprise-ebook') + '-manuscript.html'
+  res.writeHead(200, {
+    'Content-Type': 'text/html; charset=utf-8',
+    'Content-Disposition': `attachment; filename="${filename}"`,
+    'Access-Control-Allow-Origin': '*'
+  })
+  res.end(job.result.manuscriptHtml)
+}
+
 // ── subscribers & alerts handlers ─────────────────────────────────────────────
 
 function handleGetSubscribers(res) {
@@ -631,6 +847,7 @@ const server = http.createServer(async (req, res) => {
   const { pathname } = url.parse(req.url)
 
   if (req.method === 'POST'   && pathname === '/api/publish')            return handlePublish(req, res)
+  if (req.method === 'POST'   && pathname === '/api/publish-bulk')       return handlePublishBulk(req, res)
   if (req.method === 'POST'   && pathname === '/api/publish-news')        return handlePublishNews(req, res)
   if (req.method === 'DELETE' && pathname === '/api/article')            return handleDelete(req, res)
   if (req.method === 'POST'   && pathname === '/api/delete')             return handleDelete(req, res)
@@ -644,6 +861,11 @@ const server = http.createServer(async (req, res) => {
   if (req.method === 'POST'   && pathname === '/api/publish-ebook')      return handlePublishEbook(req, res)
   if (req.method === 'POST'   && pathname === '/api/delete-ebook')       return handleDeleteEbook(req, res)
   if (req.method === 'DELETE' && pathname === '/api/ebook')              return handleDeleteEbook(req, res)
+  if (req.method === 'POST'   && pathname === '/api/generate-ebook')     return handleGenerateEbook(req, res)
+  if (req.method === 'GET'    && /^\/api\/ebook-generation\/[^/]+\/export$/.test(pathname))
+    return handleExportEbookGeneration(req, res, pathname.split('/')[3])
+  if (req.method === 'GET'    && /^\/api\/ebook-generation\/[^/]+$/.test(pathname))
+    return handleGetEbookGeneration(req, res, pathname.split('/')[3])
 
   // Subscribers & Alerts API endpoints
   if (req.method === 'GET'    && pathname === '/api/subscribers')        return handleGetSubscribers(res)
@@ -669,7 +891,7 @@ const server = http.createServer(async (req, res) => {
   send(res, 404, { error: 'not found' })
 })
 
-module.exports = { notifySubscribers, readSubscribers, readAlerts }
+module.exports = { notifySubscribers, readSubscribers, readAlerts, validateArticlePayload, sanitizeArticleHtml }
 
 if (require.main === module) {
   server.listen(PORT, '127.0.0.1', () => {

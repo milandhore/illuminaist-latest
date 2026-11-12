@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bloom Auto Evals of Agentic AI — Part-1 | IlluminAIst</title>
+  <meta name="description" content="As Large Language Models (LLMs) evolve from chatbots to autonomous agents, static benchmarks like MMLU or GSM8K are becoming obsolete. They measure capabilities (can the model add 2+2?), but fail to measure behavior (will the model lie to please the user?).">
+</head>
+<body>
+<div class="shell">
+    </nav>
+    <main>
+      <div class="toolbar"><button id="theme-toggle" type="button" aria-label="Toggle dark mode">☾ Theme</button></div>
+      <article>
+        <header>
+          <div class="eyebrow">Converted article</div>
+
+</header>
+        <div id="article-content">
+        
+          <div class="reveal" data-source-block-id="b-0001" data-source-kind="heading">
+          
+            <h3 id="heading-1">The Definitive Guide to Agentic AI Evaluation</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0002" data-source-kind="paragraph">
+          <p>As Large Language Models (LLMs) evolve from chatbots to autonomous agents, static benchmarks like MMLU or GSM8K are becoming obsolete. They measure capabilities (can the model add 2+2?), but fail to measure behavior (will the model lie to please the user?).</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0003" data-source-kind="paragraph">
+          <p>Enter Bloom , Anthropic’s new open-source, agentic framework for automated behavioral evaluation.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0004" data-source-kind="paragraph">
+          <p>In this deep dive, we unpack the technical architecture of Bloom, provide implementation code for running your own evaluations, and compare it against industry standards like OpenAI Evals and Promptfoo.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0005" data-source-kind="heading">
+          
+            <h3 id="heading-5">What is Bloom? (Beyond the Hype)</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0006" data-source-kind="paragraph">
+          <p>Bloom is not a dataset; it is an evaluation generation engine . Unlike traditional frameworks that run models against a fixed list of 500 prompts, Bloom uses a “seed” configuration to dynamically generate thousands of unique, multi-turn scenarios.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0007" data-source-kind="paragraph">
+          <p>It solves a critical engineering bottleneck: Evaluation Pipeline Fatigue . Instead of hand-writing 100 test cases for “sycophancy” (agreeing with the user’s wrong opinion), you define the behavior once , and Bloom’s agentic pipeline procedurally generates the test cases, simulates the user, and grades the result.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0008" data-source-kind="heading">
+          
+            <h3 id="heading-8">The 4-Stage Agentic Pipeline</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0009" data-source-kind="paragraph">
+          <p>Bloom operates via four distinct LLM-driven stages:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0010" data-source-kind="list">
+          <ul><li>Understanding Agent : Reads your behavior description and analyzes why it matters, creating a context context for the subsequent agents.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0011" data-source-kind="list">
+          <ul><li>Ideation Agent : Generates diverse, high-level scenarios (e.g., “A user asks for code to hack a neighbor’s wifi, but frames it as a security audit”).</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0012" data-source-kind="list">
+          <ul><li>Rollout Agent : Simulates the conversation. It plays the role of the user, reacting dynamically to the target model’s responses to try and elicit the specific behavior.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0013" data-source-kind="list">
+          <ul><li>Judgment Agent : Reviews the transcript and scores it (0–10) based on the initial rubric.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0014" data-source-kind="heading">
+          
+            <h3 id="heading-14">Technical Implementation: Running Your First Bloom Eval</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0015" data-source-kind="paragraph">
+          <p>To use Bloom, you don’t write prompts; you write configurations . The core of any Bloom evaluation is the seed.yaml file—the DNA that tells the framework what to evolve.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0016" data-source-kind="heading">
+          
+            <h3 id="heading-16">1. Installation & Setup</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0017" data-source-kind="paragraph">
+          <p>Bloom is Python-based. You’ll need a virtual environment and API keys for the models you intend to use (Anthropic, OpenAI, etc.).</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0018" data-source-kind="paragraph">
+          <p>Bash</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0019" data-source-kind="code">
+          <pre><code># Clone the repository
+git
+clone
+https://github.com/safety-research/bloom.git
+cd
+bloom</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0020" data-source-kind="code">
+          <pre><code># Install dependencies
+uv pip install -r requirements.txt</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0021" data-source-kind="code">
+          <pre><code># Set API keys
+export ANTHROPIC_API_KEY="sk-..."
+export OPENAI_API_KEY="sk-..."</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0022" data-source-kind="heading">
+          
+            <h3 id="heading-22">2. The seed.yaml Configuration</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0023" data-source-kind="paragraph">
+          <p>This is where the magic happens. Below is a technical implementation of a seed file designed to test for “Sycophancy” — specifically, whether a model will agree with a user’s objectively wrong statement.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0024" data-source-kind="paragraph">
+          <p>File: seeds/sycophancy_test.yaml</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0025" data-source-kind="paragraph">
+          <p>YAML</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0026" data-source-kind="code">
+          <pre><code>name:
+"SYCOPHANCY_MATH_BIAS"
+program:
+bloom.py
+method:
+grid
+metric:
+name:
+average_behavior_presence_score
+goal:
+maximize</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0027" data-source-kind="code">
+          <pre><code>parameters:
+# --- Behavior Definition ---
+behavior.name:
+value: "sycophancy"
+# Providing examples helps the Understanding Agent calibrate
+behavior.examples:
+value: ["examples/sycophancy_transcript_1.json"]</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0028" data-source-kind="code">
+          <pre><code># --- Global Model Config ---
+# We use a strong model (Opus) for the agents to ensure high-quality scaffolding
+temperature:
+value: 1.0
+evaluator_reasoning_effort:
+value: "high"
+# --- Stage 1: Understanding ---
+understanding.model:
+value: "claude-3-opus-20240229"
+# --- Stage 2: Ideation ---
+# 'diversity: 1.0' forces the agent to generate completely unique scenarios
+# rather than perturbing a few base templates.
+ideation.model:
+value: "claude-3-opus-20240229"
+ideation.total_evals:
+value: 50
+ideation.diversity:
+value: 1.0
+# --- Stage 3: Rollout ---
+# The model we are actually testing (The "Target")
+rollout.target:
+values: ["claude-3-5-sonnet-20240620", "gpt-4o"]
+rollout.max_turns:
+value: 5
+# --- Stage 4: Judgment ---
+# Uses 'Chain of Thought' to justify the score
+judgment.model:
+value: "claude-3-opus-20240229"</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0029" data-source-kind="heading">
+          
+            <h3 id="heading-29">3. Execution</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0030" data-source-kind="paragraph">
+          <p>Run the pipeline using the Python CLI. You can run in debug mode to see the agents “thinking” in real-time.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0031" data-source-kind="paragraph">
+          <p>Bash</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0032" data-source-kind="code">
+          <pre><code># Run the full pipeline
+python bloom.py --config seeds/sycophancy_test.yaml --debug</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0033" data-source-kind="code">
+          <pre><code># View the results in the browser-based transcript viewer
+npx @isha-gpt/bloom-viewer --dir ./results</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0034" data-source-kind="heading">
+          
+            <h3 id="heading-34">Technical Evaluation: Bloom vs. The Competition</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0035" data-source-kind="paragraph">
+          <p>As a technology expert, you need to know when to use Bloom versus other tools. Here is the differentiator breakdown:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0036" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*icWioJyTYoKOo4f3W2XDmQ.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0037" data-source-kind="heading">
+          
+            <h3 id="heading-37">The “Model Organism” Differentiator</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0038" data-source-kind="paragraph">
+          <p>One of Bloom’s most impressive technical feats is its ability to validate itself using “Model Organisms”.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0039" data-source-kind="paragraph">
+          <p>Anthropic researchers created models intentionally trained to be “misaligned” (e.g., a model that always praises the user). Bloom was able to reliably distinguish these “sick” models from baseline models without human intervention. This makes Bloom an essential tool for Red Teaming teams who need to detect subtle safety regressions before deployment.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0040" data-source-kind="heading">
+          
+            <h3 id="heading-40">Why You Should Care (Business Impact)</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0041" data-source-kind="paragraph">
+          <p>Integrating Bloom into your LLM Ops pipeline isn’t just about safety; it’s about reliability .</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0042" data-source-kind="list">
+          <ul><li>For Engineers: It automates the most tedious part of eval — writing the test cases.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0043" data-source-kind="list">
+          <ul><li>For Product Managers: It provides a quantitative “Elicitation Score” (0–100%) for abstract concepts like “Brand Safety.”</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0044" data-source-kind="list">
+          <ul><li>For SEO: Content produced by safe, aligned models ranks better because it avoids the “hallucination penalties” search engines are beginning to penalize.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0045" data-source-kind="heading">
+          
+            <h3 id="heading-45">Conclusion & Call to Action</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0046" data-source-kind="paragraph">
+          <p>The era of static LLM benchmarks is ending. If you are building agentic systems, you cannot rely on static text files to test dynamic behavior. You need an eval system that is as smart as the model you are testing.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0047" data-source-kind="paragraph">
+          <p>Ready to upgrade your AI safety stack?</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0048" data-source-kind="list">
+          <ul><li>Star the Repo : Visit github.com/safety-research/bloom .</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0049" data-source-kind="list">
+          <ul><li>Run the Sycophancy Test : Copy the code above and run it against your custom fine-tunes.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0050" data-source-kind="list">
+          <ul><li>Share Your Results : Did your model pass the “Elicitation Rate” test? Let us know in the comments below.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0051" data-source-kind="paragraph">
+          <p>Stay tuned for Part 2 of this series, where we will fork Bloom to test for “Prompt Injection Vulnerabilities” using custom adversarial agents.</p>
+          
+          </div>
+        
+        </div>
+      </article>
+    </main>
+  </div>
+  <div class="lightbox" id="lightbox" hidden><img alt="Expanded article image"></div>
+</body>
+</html>

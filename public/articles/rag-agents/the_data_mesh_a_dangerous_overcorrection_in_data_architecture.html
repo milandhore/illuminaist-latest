@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>The Data Mesh: A Dangerous Overcorrection in Data Architecture? | IlluminAIst</title>
+  <meta name="description" content="Data Mesh defines future of Data ,AI and ML area">
+</head>
+<body>
+<div class="shell">
+    </nav>
+    <main>
+      <div class="toolbar"><button id="theme-toggle" type="button" aria-label="Toggle dark mode">☾ Theme</button></div>
+      <article>
+        <header>
+          <div class="eyebrow">Converted article</div>
+
+</header>
+        <div id="article-content">
+        
+          <div class="reveal" data-source-block-id="b-0001" data-source-kind="paragraph">
+          <p>Data Mesh defines future of Data ,AI and ML area</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0002" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/0*gila6NUB2KvtoQT7.jpg" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0003" data-source-kind="paragraph">
+          <p>In the rapidly evolving landscape of technology, managing and leveraging data effectively has become paramount for organizations. Traditional centralized data architectures, such as data lakes and data warehouses, have faced challenges related to scalability, data quality, bottlenecks, cost, and timeliness. These architectures often lead to a centralized data team becoming a bottleneck, and responsibility for data quality being pushed downstream away from the data’s source.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0004" data-source-kind="paragraph">
+          <p>Enter the Data Mesh, a socio-technical architectural paradigm that offers a decentralized alternative to these traditional approaches. Inspired by the principles of domain-oriented microservices, data mesh treats data as a first-class citizen and promotes a shift in ownership and responsibility.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0005" data-source-kind="heading">
+          
+            <h3 id="heading-5">Core Principles of Data Mesh</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0006" data-source-kind="paragraph">
+          <p>Data Mesh is built upon four foundational principles:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0007" data-source-kind="heading">
+          
+            <h3 id="heading-7">Data as a Product</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0008" data-source-kind="paragraph">
+          <p>This is a fundamental shift where domain teams are responsible for providing their data as readily usable products. These data products should be discoverable, addressable, trustworthy, self-describing, and interoperable. The team owning the data product is wholly responsible for its contents, modeling, cohesiveness, quality, and service-level agreements (SLAs). A data product isn’t just the data itself, but also the code and infrastructure required to create and serve it. Data products should expose facts about a domain that are read-only, immutable, and timestamped, ensuring reproducibility.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0009" data-source-kind="heading">
+          
+            <h3 id="heading-9">Domain Ownership</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0010" data-source-kind="paragraph">
+          <p>Data products are organized and owned by the business domains that produce the data. This decentralizes data ownership and empowers domain teams, who have the most intimate knowledge of their data, to make it available to others. Domain owners are also responsible for making their data products discoverable and well-documented, typically by registering them with a discovery service and providing metadata and SLAs.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0011" data-source-kind="heading">
+          
+            <h3 id="heading-11">Self-Service Data Access</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0012" data-source-kind="paragraph">
+          <p>The data mesh platform should provide a self-service infrastructure that enables domain teams to easily create, publish, and manage their data products, and for data consumers to easily discover, access, and consume data products across the organization. This includes providing tools for creating access points, defining schemas, setting up access controls, and exploring available data products.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0013" data-source-kind="heading">
+          
+            <h3 id="heading-13">Federated Governance</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0014" data-source-kind="paragraph">
+          <p>While decentralized, a data mesh requires a federated governance model. A governing body, composed of individuals from across the organization, defines global standards, policies, and rules for interoperability, security, and data handling. This balances domain autonomy with the need for a cohesive and interoperable data ecosystem.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0015" data-source-kind="paragraph">
+          <p>These principles are interconnected and influence each other. For instance, the federated governance group defines the standards for data product formats, which in turn guide the development of the self-service platform used by domain owners to publish and manage their data products.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0016" data-source-kind="paragraph">
+          <p>Building Data Products with Event Streams</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0017" data-source-kind="list">
+          <ul><li>Event streams, particularly those based on Apache Kafka, are exceptionally well-suited for serving data products in a data mesh. Kafka’s immutable, append-only log of events aligns perfectly with the requirement for data product facts to be immutable and timestamped.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0018" data-source-kind="list">
+          <ul><li>Event streams provide real-time access to data, bridging the operational and analytical divide by providing a single source of truth for both streaming and batch use cases. They are scalable, reliable, and durable, propagating the latest data to all consumers in real time.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0019" data-source-kind="list">
+          <ul><li>Data product owners can leverage tools like Kafka Connect to source data from operational systems and publish it to event streams. Change Data Capture (CDC) and the Outbox Pattern are popular methods for extracting data from databases into event streams with low latency.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0020" data-source-kind="list">
+          <ul><li>Consumers can then access these event streams and materialize them into databases or use stream processing frameworks like ksqlDB to transform, aggregate, and enrich the data for their specific needs. This empowers consumers to independently remodel data products, combining information from multiple domains to build their own use case-specific models.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0021" data-source-kind="heading">
+          
+            <h3 id="heading-21">Practical Industry Example: Saxo Bank</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0022" data-source-kind="paragraph">
+          <p>Saxo Bank, a Danish investment bank, is an early adopter of the data mesh concept. They transitioned from a traditional ETL-into-data-lake architecture, which presented challenges with data discoverability, ownership, and brittle ETL jobs.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0023" data-source-kind="paragraph">
+          <p>Driven by the need to provide well-formulated operational data to multiple consumer systems, Saxo Bank adopted a data mesh architecture built on Apache Kafka. They made key design decisions, such as using Protobuf for event schemas due to their .NET environment, and implemented a federated governing body to define standards and policies.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0024" data-source-kind="paragraph">
+          <p>Saxo Bank’s implementation includes both domain-specific and common schemas, ensuring consistency for core business entities across domains. They use automated schema tests to enforce cross-domain and evolutionary compatibility, preventing unintentional breaking changes. For data discovery and metadata management, they utilize tools like Acryl Data.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0025" data-source-kind="paragraph">
+          <p>Their migration to data mesh was incremental, using Kafka Connect and stream processors to gradually add new data products and transform data into the required formats. This iterative approach allowed them to learn and adapt along the way.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0026" data-source-kind="paragraph">
+          <p>A significant aspect of Saxo Bank’s data mesh implementation is their focus on information security and data handling requirements, particularly for personally identifiable information (PII). They employ format-preserving encryption for PII and integrate it with their schemas using Protobuf tags.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0027" data-source-kind="paragraph">
+          <p>Saxo Bank’s experience highlights the social transformation required for a data mesh, including renegotiating responsibilities, readdressing boundaries, and establishing new roles like the data product owner.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0028" data-source-kind="heading">
+          
+            <h3 id="heading-28">Metrics in a Data Mesh</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0029" data-source-kind="paragraph">
+          <p>Metrics play a crucial role in monitoring the health, quality, and usage of data products in a data mesh. While specific metrics can vary, some key areas to consider include:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0030" data-source-kind="quote">
+          <blockquote>Data Product Quality : Metrics can reflect the quality of the data within a product, potentially using a tiering system (e.g., Authoritative, Curated, Raw).</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0031" data-source-kind="quote">
+          <blockquote>Service Level Agreements (SLAs) : Defining and monitoring SLAs for data products is essential. Metrics can track adherence to these agreements, such as data freshness, availability, and performance.</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0032" data-source-kind="quote">
+          <blockquote>Data Product Usage : Metrics can provide insights into how data products are being consumed across the organization. This can include the number of consumers, consumption volume, and popular access patterns.</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0033" data-source-kind="quote">
+          <blockquote>Metadata : Metadata itself contains valuable metrics about data products, such as the timestamp of the last published event, the number of events, and the size of the data product. Information about the presence of sensitive data like PII can also be included in the metadata.</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0034" data-source-kind="quote">
+          <blockquote>Lineage : Tracking data lineage provides visibility into the flow of data products, including upstream producers and downstream consumers. While not a direct metric, the completeness and accuracy of lineage information can be a metric of the data mesh’s health.</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0035" data-source-kind="paragraph">
+          <p>These metrics, made available through self-service tooling and discovery platforms, enable data product owners to monitor their products and consumers to evaluate the suitability and trustworthiness of data products for their needs.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0036" data-source-kind="heading">
+          
+            <h3 id="heading-36">Traditional Centralized Data Architecture</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0037" data-source-kind="paragraph">
+          <p>This diagram shows a typical centralized data lake or data warehouse architecture, highlighting the central data team and the flow of data from source systems.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0038" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*mSlx_YyMvrhCAqArgBrpsQ.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0039" data-source-kind="heading">
+          
+            <h3 id="heading-39">Data Mesh Architecture</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0040" data-source-kind="paragraph">
+          <p>This diagram illustrates the decentralized nature of the Data Mesh, with domains owning and serving data products.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0041" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*ZnHUijarrgaNYWML6kvhkw.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0042" data-source-kind="paragraph">
+          <p>This diagram illustrates a federated data governance model across different domains. Let’s break it down with an insurance example:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0043" data-source-kind="paragraph">
+          <p>Imagine an insurance company with different departments, which we can consider as Domains :</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0044" data-source-kind="list">
+          <ul><li>Domain A (Policy Management): This domain has a Source System A that manages all the policy details (customer information, coverage, premiums, etc.). This system produces a Data Product A , perhaps a dataset containing aggregated policy information. This data product is Registered with the platform .</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0045" data-source-kind="list">
+          <ul><li>Domain B (Claims Processing): This domain has a Source System B that handles all the insurance claims. It generates Data Product B , which could be a dataset of processed claims, including payout amounts and reasons. This data product is Access Registered within the platform, implying specific access controls.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0046" data-source-kind="paragraph">
+          <p>A central Federated entity defines overarching Policies that govern how data is managed and shared across all domains. These policies could include rules about data quality, security, and privacy (e.g., ensuring Personally Identifiable Information is masked).</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0047" data-source-kind="paragraph">
+          <p>Platform Tools are used by various domains and the federated entity. These tools might be for data cataloging, data lineage tracking, or enforcing the defined policies.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0048" data-source-kind="paragraph">
+          <p>Domain C (Consumer) represents an application or team that needs to use data from different domains. In our insurance example, this could be a Consumer Application used by actuaries to Discover Data Products from both policy management (Domain A) and claims processing (Domain B) to perform risk analysis.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0049" data-source-kind="paragraph">
+          <p>Ultimately, the Consumer Application accesses and utilizes a combined Data Product derived from the registered data products of Domain A and Domain B to gain a holistic view (e.g., understanding the correlation between policy types and claim frequencies).</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0050" data-source-kind="paragraph">
+          <p>In essence, the diagram shows how different parts of an insurance company can manage their data independently (within their domains) while adhering to central policies and making their data discoverable and accessible to authorized consumers through a federated platform.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0051" data-source-kind="heading">
+          
+            <h3 id="heading-51">Conclusion</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0052" data-source-kind="paragraph">
+          <p>In essence, the Data Mesh isn’t just a new architecture; it’s a fundamental shift in how we approach data. By embracing its core principles, organizations can unlock significant advantages:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0053" data-source-kind="list">
+          <ul><li>Empowered Domain Teams: Fostering ownership and accountability for data within specific business areas.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0054" data-source-kind="list">
+          <ul><li>Data as a Product: Elevating data to a first-class citizen, managed with care and consideration for its consumers.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0055" data-source-kind="list">
+          <ul><li>Self-Service Accessibility: Democratizing data access through intuitive platforms.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0056" data-source-kind="list">
+          <ul><li>Federated Governance: Balancing autonomy with consistent standards and policies.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0057" data-source-kind="list">
+          <ul><li>Real-Time Insights: Leveraging technologies like Apache Kafka to harness the power of event streams.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0058" data-source-kind="paragraph">
+          <p>Ultimately, the journey towards a Data Mesh, as seen with pioneers like Saxo Bank, is about more than just technology — it’s about cultivating a data-centric culture that drives innovation and unlocks the true value hidden within your information.</p>
+          
+          </div>
+        
+        </div>
+      </article>
+    </main>
+  </div>
+  <div class="lightbox" id="lightbox" hidden><img alt="Expanded article image"></div>
+</body>
+</html>

@@ -1,14 +1,14 @@
 import { Link } from 'react-router-dom'
 
 const TOPICS = [
-  { name: 'AI & LLMs', count: 24, emoji: '🤖', color: 'from-cyan/20 to-cyan/5 border-cyan/20' },
-  { name: 'RAG & Agents', count: 18, emoji: '🔍', color: 'from-blue-500/20 to-blue-500/5 border-blue-500/20' },
-  { name: 'Cloud & DevOps', count: 15, emoji: '☁️', color: 'from-amber/20 to-amber/5 border-amber/20' },
-  { name: 'MLOps', count: 12, emoji: '⚙️', color: 'from-purple-500/20 to-purple-500/5 border-purple-500/20' },
-  { name: 'Emerging Tech', count: 9, emoji: '🔬', color: 'from-green-500/20 to-green-500/5 border-green-500/20' },
-  { name: 'Research', count: 11, emoji: '📄', color: 'from-pink-500/20 to-pink-500/5 border-pink-500/20' },
-  { name: 'Tutorials', count: 20, emoji: '📚', color: 'from-indigo-500/20 to-indigo-500/5 border-indigo-500/20' },
-  { name: 'Opinion', count: 7, emoji: '💬', color: 'from-rose-500/20 to-rose-500/5 border-rose-500/20' },
+  { name: 'AI & LLMs', emoji: '🤖', color: 'from-cyan/20 to-cyan/5 border-cyan/20' },
+  { name: 'RAG & Agents', emoji: '🔍', color: 'from-blue-500/20 to-blue-500/5 border-blue-500/20' },
+  { name: 'Cloud & DevOps', emoji: '☁️', color: 'from-amber/20 to-amber/5 border-amber/20' },
+  { name: 'MLOps', emoji: '⚙️', color: 'from-purple-500/20 to-purple-500/5 border-purple-500/20' },
+  { name: 'Emerging Tech', emoji: '🔬', color: 'from-green-500/20 to-green-500/5 border-green-500/20' },
+  { name: 'Research', emoji: '📄', color: 'from-pink-500/20 to-pink-500/5 border-pink-500/20' },
+  { name: 'Tutorials', emoji: '📚', color: 'from-indigo-500/20 to-indigo-500/5 border-indigo-500/20' },
+  { name: 'Opinion', emoji: '💬', color: 'from-rose-500/20 to-rose-500/5 border-rose-500/20' },
 ]
 
 const TAGS = ['GPT-4o', 'Claude', 'RAG', 'LangChain', 'Pinecone', 'MLOps', 'Kubernetes', 'vLLM', 'MCP', 'AutoGen', 'LangGraph', 'Llama', 'LoRA', 'RLHF', 'Transformers', 'Embeddings', 'Vector DB', 'FAISS', 'Qdrant', 'Weaviate', 'Cohere', 'Mistral', 'OpenAI', 'Anthropic', 'Hugging Face', 'PyTorch', 'TensorFlow', 'CUDA']
@@ -33,7 +33,6 @@ export default function TopicsPage() {
             >
               <div className="text-3xl mb-3">{topic.emoji}</div>
               <h3 className="font-heading font-bold text-slate-100 text-sm mb-1 group-hover:text-cyan transition-colors">{topic.name}</h3>
-              <p className="text-slate-500 text-xs">{topic.count} articles</p>
             </Link>
           ))}
         </div>

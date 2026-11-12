@@ -265,7 +265,27 @@ npm run cms
 
 Open `http://localhost:3333`. The CMS server is intentionally bound to `127.0.0.1`; do not expose it to the public internet.
 
-The CMS supports local editorial operations for articles, news, eBooks, subscribers, and alerts. Publishing writes files into the repository and may create a local Git commit. Review the diff before pushing.
+The CMS supports local editorial operations for articles, news, eBooks, subscribers, alerts, and AI-generated enterprise eBook drafts. Publishing writes files into the repository and may create a local Git commit. Review the diff before pushing.
+
+### AI eBook Studio
+
+The CMS includes an **AI Studio** tab for the enterprise eBook workflow. Enter only a working title and target audience. The local agent then runs staged Gemini generation for:
+
+1. Research brief, positioning, sources, table of contents, and cover directions.
+2. A 10–12 chapter manuscript targeting approximately 60–100 designed pages.
+3. Editorial review, references, glossary, Kindle copy, keywords, and publishing recommendations.
+
+Set `GEMINI_API_KEY` in a local `.env` file before starting the CMS. Begin with `.env.example`:
+
+```bash
+cp .env.example .env
+# edit .env and replace replace_with_your_gemini_api_key
+npm run cms
+```
+
+`.env` and other `.env.*` files are ignored by Git; only `.env.example` is allowed to be committed. Shell/CI environment variables take precedence over values in `.env`. Optionally set `EBOOK_GEMINI_MODEL` to override the default `gemini-2.5-flash` model. Generation jobs are kept in the local CMS process and expose progress through polling endpoints. Export the reviewed manuscript as HTML, then use **Open eBook publisher** to upload the final PDF into the existing gated catalog workflow.
+
+The agent preserves the prompt template in `tools/ebook-agent.cjs`. It requires source URLs, labels hypothetical examples, avoids invented author credentials, and reports the word-count-based page estimate. Human fact-checking and final design review remain required before commercial publication.
 
 The CMS is not deployed to GitHub Pages and is not a production authentication system.
 
@@ -308,7 +328,9 @@ This API has read endpoints only. Editorial mutations remain in the local CMS bo
 
 | Variable | Used by | Required | Purpose |
 | --- | --- | --- | --- |
-| `GEMINI_API_KEY` | `tools/update-news.cjs`, `tools/list-models.cjs` | Optional locally; required for the current Actions preflight | Enables Gemini rewriting and model-list validation |
+| `GEMINI_API_KEY` | `tools/update-news.cjs`, `tools/list-models.cjs`, `tools/ebook-agent.cjs` | Optional locally; required for AI eBook generation | Enables Gemini rewriting, model-list validation, and staged eBook generation |
+| `EBOOK_GEMINI_MODEL` | `tools/ebook-agent.cjs` | No | Overrides the AI eBook model; default `gemini-2.5-flash` |
+| `CMS_PORT` | `tools/cms-server.cjs` | No | Overrides the local CMS port; default `3333` |
 | `PORT` | `tools/news-api.cjs` | No | Overrides the News API port; default `8787` |
 | `NEWS_DATA_FILE` | `tools/news-api.cjs` | No | Overrides the news index path |
 | `NEWS_ARTICLES_DIR` | `tools/news-api.cjs` | No | Overrides the news HTML directory |

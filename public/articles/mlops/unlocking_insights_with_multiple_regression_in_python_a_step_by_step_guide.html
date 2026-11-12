@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Unlocking Insights with Multiple Regression in Python: A Step-by-Step Guide | IlluminAIst</title>
+  <meta name="description" content="Multiple Regression in Python: A Step-by-Step Guide”">
+</head>
+<body>
+<div class="shell">
+    </nav>
+    <main>
+      <div class="toolbar"><button id="theme-toggle" type="button" aria-label="Toggle dark mode">☾ Theme</button></div>
+      <article>
+        <header>
+          <div class="eyebrow">Converted article</div>
+
+</header>
+        <div id="article-content">
+        
+          <div class="reveal" data-source-block-id="b-0001" data-source-kind="paragraph">
+          <p>Multiple Regression in Python: A Step-by-Step Guide”</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0002" data-source-kind="heading">
+          
+            <h3 id="heading-2">Introduction</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0003" data-source-kind="paragraph">
+          <p>Predictive modeling is a method of predicting future outcomes by using data modeling. It’s one of the premier ways a business can see its path forward and make plans accordingly. While not foolproof, this method tends to have high accuracy rates, which is why it is so commonly used. In short, predictive modeling is a statistical technique using machine learning and data mining to predict and forecast likely future outcomes with the aid of historical and existing data. It works by analyzing current and historical data and projecting what it learns on a model generated to forecast likely outcomes.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0004" data-source-kind="heading">
+          
+            <h3 id="heading-4">A1: Research Question</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0005" data-source-kind="paragraph">
+          <p>Can we predict from the available list of variables that how many GBs of data are used by customers yearly? We also need to find out the independent variable.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0006" data-source-kind="heading">
+          
+            <h3 id="heading-6">A2: Objectives and Goal</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0007" data-source-kind="paragraph">
+          <p>Customer churn rate is one of the critical key performance indicators (KPI) for the subscription business model. For this performance assessment and analysis, we would like to understand the amount of data in GBs used by customers yearly. The significant objective of this analysis is to identify high to low internet data plan users which indeed helps an organization to offer relevant services and discounts to such customers.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0008" data-source-kind="paragraph">
+          <p>Customers who are using very low internet data services then such customer might be at higher risk of churn or could be unsatisfied with services. Predication of such customers helps the organization to offer them discounted or relevant data plans with 1–3 years contracts for customer retention. For the unsatisfied customer, the organization can collect the subjective survey in detail. With the help of such kind of analysis, we can create a business value case for the organization and promote discounted data plans and contracts to low GBs data users. Retaining customers with the service provider is equally important as gaining new customers. For customers with more internet data usages, the organization can offer more discounted prices to retain such customers with the service provider.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0009" data-source-kind="heading">
+          
+            <h3 id="heading-9">B1: Summary of Assumptions</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0010" data-source-kind="paragraph">
+          <p>· We have the relationship between the dependent variables x & the independent variables y. It means any change in independent variables influence linear changes dependent variables x</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0011" data-source-kind="paragraph">
+          <p>· Observations are selected independently and randomly from populations</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0012" data-source-kind="paragraph">
+          <p>· Residuals should be normally distributed with a mean of 0</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0013" data-source-kind="paragraph">
+          <p>· Explanatory power should increase with the increase in variables</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0014" data-source-kind="paragraph">
+          <p>· Independent variables are not too highly correlated with each other. It’s known as multicollinearity.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0015" data-source-kind="heading">
+          
+            <h3 id="heading-15">B2: Tool Benefits</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0016" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*xeMriqVKxp0_IH7mpVP_cA.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0017" data-source-kind="heading">
+          
+            <h3 id="heading-17">B3: Appropriate Technique</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0018" data-source-kind="paragraph">
+          <p>The multiple linear regression techniques help to understand how much dependent variables changes or impact based on changes to one or more independent variables changes.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0019" data-source-kind="paragraph">
+          <p>In our case, multiple linear regression would help us to predict a relationship between Bandwidth_GB_Year dependent variable with other independent variables. Such independent variables indicate an organization to focus on different significant factors.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0020" data-source-kind="paragraph">
+          <p>By adding or removing different independent variables from our regression equation, we could find out whether they have a positive or negative relationship with our dependent(target) variable. Perhaps these independent variable helps organization for decision making and improve their services. Indirectly such findings will help to understand different factors for Bandwidth usages (Bandwidth_GB_Year) of customers.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0021" data-source-kind="paragraph">
+          <p>Multiple linear regression analysis predicts trends and future values for specific target values. This means Multiple linear regression analysis could help us to predict data usages of a customer for the next few months or next year. This kind of finding helps the company to work on its marketing strategy and create a business profit value case.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0022" data-source-kind="heading">
+          
+            <h3 id="heading-22">C1: Data Goals</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0023" data-source-kind="paragraph">
+          <p>· Download churn raw dataset to the local machine from provided location</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0024" data-source-kind="paragraph">
+          <p>· Install and set up an anaconda navigator environment. Setup Jupyter notebook/lab and run some sample code to verify the environment.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0025" data-source-kind="paragraph">
+          <p>· Import pandas, SciPy, sklearn, NumPy libraries, etc.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0026" data-source-kind="paragraph">
+          <p>· Read the data set into Python. It is very easy and simple to read a CSV file using pandas library functions.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0027" data-source-kind="paragraph">
+          <p>· read_csv() method of pandas library is used to read data from CSV files</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0028" data-source-kind="paragraph">
+          <p>· Analyze the data structure to better understand input data.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0029" data-source-kind="paragraph">
+          <p>· Find the missing data or count of null values in variables</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0030" data-source-kind="paragraph">
+          <p>· To assess the data quality of the cited dataset, we can first remove outliers and impute missing data with the central tendency approach (mean, median).</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0031" data-source-kind="paragraph">
+          <p>· There are any “NA” values in few significant columns. We must either impute such value in the case of numeric numbers with a central tendency or remove it if we have a very smaller number of rows with such values. But we must make sure we can’t remove a bigger number of such rows. Because that could result in dataset unbalancing.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0032" data-source-kind="paragraph">
+          <p>· This kind of huge data row removal approach won’t help much in predictive analysis. We also need to remove unnecessary features/variables from the dataset to reduce the burden on ML Model training for predictive data analysis.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0033" data-source-kind="paragraph">
+          <p>· Visualize the data for Bivariate analysis with the “Bandwidth_GB_Year” column and prepare a dataset for further analysis.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0034" data-source-kind="paragraph">
+          <p>· Write a program to identify initially estimated regression equation that would predict the “ Bandwidth_GB_Year” with other below cited independent variables.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0035" data-source-kind="paragraph">
+          <p>· Justify model reduction and reduce multiple regression model. After that Project residual plot</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0036" data-source-kind="heading">
+          
+            <h3 id="heading-36">C2: Summary Statistics</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0037" data-source-kind="paragraph">
+          <p>· “Bandwidth_GB_Year” (The average amount of data used in GB per year) is the dependent variable. This variable is most relevant to our decision-making process, and this will be our target variable.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0038" data-source-kind="paragraph">
+          <p>· The original dataset has 50 columns. For purposes of this analysis, we have removed below cited demographic categorical variables</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0039" data-source-kind="paragraph">
+          <p>Phone, Multiple, Gender, Churn, Techie, Contract, Port_modem, Tablet,InternetService, OnlineSecurity,OnlineBackup, DeviceProtection, TechSupport,StreamingTV, StreamingMovies, PaperlessBilling,CaseOrder, Customer_id, Interaction, City, State, County,Zip, Lat, Lng, Population, Area, Timezone, Job,Marital, PaymentMethod</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0040" data-source-kind="paragraph">
+          <p>· Turned all binomial Yes/No or Male/Female, variables were encoded to 1/0, respectively.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0041" data-source-kind="paragraph">
+          <p>· Identified all null or missing values in categorical variables</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0042" data-source-kind="paragraph">
+          <p>· Imputed the variable Children, Age, Income, Tenure and Bandwidth_GB_Year with missing data or null values using central tendency</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0043" data-source-kind="paragraph">
+          <p>· Histograms & boxplots revealed normal distributions for Monthly_Charge, Outage_sec_perweek & Email.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0044" data-source-kind="paragraph">
+          <p>· The cleaned dataset no longer retained any outliers.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0045" data-source-kind="paragraph">
+          <p>· This resulted in 33 remaining numerical variables, including the target variable.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0046" data-source-kind="paragraph">
+          <p>· The dataset appeared to be sufficiently cleaned leaving no null, NA, or missing data points.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0047" data-source-kind="paragraph">
+          <p>· Histograms for Bandwidth_GB_Year & Tenure displayed bimodal distributions, which demonstrated a direct linear relationship with each other in a scatterplot.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0048" data-source-kind="paragraph">
+          <p>· Average Customer statistics summary</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0049" data-source-kind="paragraph">
+          <p>· Customers have 53 years old average age (a standard deviation of 18 years)</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0050" data-source-kind="paragraph">
+          <p>· During service customer experienced 11 outages per week,</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0051" data-source-kind="paragraph">
+          <p>· Customer marketed 12 times by email</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0052" data-source-kind="paragraph">
+          <p>· Have 2 children (a standard deviation of 2 kids),</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0053" data-source-kind="paragraph">
+          <p>· The average income of $38256 (a standard deviation around $24747),</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0054" data-source-kind="paragraph">
+          <p>· Connected with technical support less than one time</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0055" data-source-kind="paragraph">
+          <p>· The customer had less than 1 yearly equipment failure,</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0056" data-source-kind="paragraph">
+          <p>· A monthly charge average is approximately 174.91 & the customer uses 3397 GBs/year.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0057" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*oK0SwL5bbI_pu-Fih-d_Vw.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0058" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*Qx-QGcvJNI5kx4efhTvy6Q.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0059" data-source-kind="heading">
+          
+            <h3 id="heading-59">C3: Steps to Prepare Data</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0060" data-source-kind="paragraph">
+          <p>· Using python, Import all required libraries then the dataset to the Python dataframe.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0061" data-source-kind="paragraph">
+          <p>· Survey columns are not properly named. Rename these survey columns to easily recognizable features (ex: “Item1” to “Timely Response”).</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0062" data-source-kind="paragraph">
+          <p>· To understand the overall dataset, Get a description of the dataframe, structure (columns & rows) & data types.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0063" data-source-kind="paragraph">
+          <p>· View summary statistics.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0064" data-source-kind="paragraph">
+          <p>· Drop less meaningful identifying (ex: “Customer_id”) & demographic columns (ex: zip code) from dataframe.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0065" data-source-kind="paragraph">
+          <p>· Check for records with missing data or null values in columns.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0066" data-source-kind="paragraph">
+          <p>· Impute missing data with meaningful measures of central tendency (mean, median, or mode)</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0067" data-source-kind="paragraph">
+          <p>· If required simply remove outliers that are several standard deviations above the mean.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0068" data-source-kind="paragraph">
+          <p>· Create dummy variables to encode categorical, yes/no data points into 1/0 numerical values.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0069" data-source-kind="paragraph">
+          <p>· Move Bandwidth_GB_Year to the end of the dataset as target and verify the newly created dataframe.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0070" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*zNxteIHFzhbxVvy-ooJGbA.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0071" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*Ycse_d_olJF2fs2YZZQVWw.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0072" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*2IV9SIBX-FngfV5as7jaxg.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0073" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*VlOtu-LCeI0ncuLbt-qsaw.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0074" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*Mkb6xnvgOV6KXSHwdD36VA.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0075" data-source-kind="heading">
+          
+            <h3 id="heading-75">C4: Visualizations</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0076" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*kZsaWvMSgqBmgOgPzijm3Q.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0077" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*f56l0GGED31ec2eTAQkSLQ.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0078" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*o3eh2vDED7NJCHLLlNIkDw.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0079" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*KHZbxNrX3CJtSozCj5MubQ.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0080" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*JLKzP1uEkLf5n7_BJ1eyTQ.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0081" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*0vZUuJIRfIGyKamH0nta3g.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0082" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*REKcyUhnd6L8v6mAjgcczQ.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0083" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*iL_5B2dTVSuIJcvn9g5P-w.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0084" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*LcWZ5d_uINXz0Qdd3gJfjQ.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0085" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*lAzTDS_Eup1-2qRGJ2mM8A.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0086" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*2UuNgjWB6icoE1o7q4xZjA.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0087" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*Kf9vulshqwyd5aYn12x3CA.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0088" data-source-kind="heading">
+          
+            <h3 id="heading-88">C5: Prepared Dataset Copy</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0089" data-source-kind="paragraph">
+          <p>Please find the copy of prepared data- Public Link -Prepared Dataset</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0090" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*r7_gWXEFXm0ML-hLiUURJA.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0091" data-source-kind="heading">
+          
+            <h3 id="heading-91">D1: Initial Model</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0092" data-source-kind="paragraph">
+          <p>A significant advantage of the OLS model is it gives us the summary report of the model. It gives us a comprehensive report on how the model is split, what are the main parameters to look at, what are the different tests that are performed to validate if a feature is necessary or not for model creation.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0093" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*vontuoiLPa7nAxEIl2TCBw.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0094" data-source-kind="paragraph">
+          <p>Based on an R2 value = 0.812. So, 81% of the variation is explained by this model. The condition number is large which might suggest strong multicollinearity. We do not need all these variables to explain the variance. So, it’s a very well-fitted model where we don’t have any such feature which is affecting our model performance out of proportion.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0095" data-source-kind="paragraph">
+          <p>Result summary of Ordinal least square</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0096" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*oXBRFnOapPC8N4N7tEtJKw.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0097" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*PEWtPFIHGgfJtD5oiR_NDg.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0098" data-source-kind="heading">
+          
+            <h3 id="heading-98">D2: Justification of Model Reduction</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0099" data-source-kind="paragraph">
+          <p>From the heatmap in section C4, we can say that there is a correlation between Tenure and Bandwidth_GB_Year variables. Again, it appears that Tenure is the predictor for most of the variance. There is a direct linear relationship between customer tenure with the telecom company & the amount of data (in GBs) that is being used. We have also considered the variables with the positive coefficient for model reduction.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0100" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*-6epd2Z1aNk3ob3ciSkTFg.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0101" data-source-kind="heading">
+          
+            <h3 id="heading-101">D3: Reduced Multiple Regression Model</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0102" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*De-j1UYELawJ_Zb5wFpx3g.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0103" data-source-kind="paragraph">
+          <p>According to the below reduced multiple regression model results, we can say that after removing all those other predictor variables also our model still explains 80% of the variance. This means we can consider the above-cited variables have a significant impact on our target variable “Bandwidth_GB_Year”.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0104" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*SQKWcooxi_LM7GxbRzhgWw.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0105" data-source-kind="heading">
+          
+            <h3 id="heading-105">E1: Model Comparison</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0106" data-source-kind="paragraph">
+          <p>We have selected two continuous variables Children & Tenure as well as two discrete ordinal predictor variables Timely Fixes and courteous exchange. A significant reason to choose these variables is explained by the above reduced multiple regression model. In the reduced regression model, we 80% of variance after removing all independent variables. It means our model is still a good fit with the reduced number of variables for data analysis.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0107" data-source-kind="paragraph">
+          <p>Once again we can create a residual vs. predictor plot for each of the individual predictors using the plot_regress_exog() function from the statsmodels library</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0108" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*rDUoCcQlJmxExiCF81xdNA.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0109" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*5tqkDaDjNu5z06NevUGiYg.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0110" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*R9gS2-n7DEU7vMlNdF6s7A.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0111" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*7bYGa2M681CJXtTrMsdcDA.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0112" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*Dk169_Hg5YRgKN7uIP-Uxw.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0113" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*y2LnZhkTBWsuFv7P3y8pjw.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0114" data-source-kind="heading">
+          
+            <h3 id="heading-114">E2. Output and Calculations</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0115" data-source-kind="paragraph">
+          <p>Please refer to section E1 for output and all calculations.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0116" data-source-kind="paragraph">
+          <p>F1. Results</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0117" data-source-kind="paragraph">
+          <p>· The coefficients suggest that for every 1 unit of:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0118" data-source-kind="paragraph">
+          <p>§ Children — Bandwidth_GB_Year will increase 23.96 units</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0119" data-source-kind="paragraph">
+          <p>§ Tenure — Bandwidth_GB_Year will increase 73.61 units</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0120" data-source-kind="paragraph">
+          <p>§ Timely_Fixes- Bandwidth_GB_Year will decrease 3.36 units</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0121" data-source-kind="paragraph">
+          <p>§ Courteous_Exchange — Bandwidth_GB_Year will increase 8.6029 units</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0122" data-source-kind="paragraph">
+          <p>· P-values for Children & Tenure are statistically significant at 0.000, while p-values for Timely_Fixes & Courteous_Exchange are not statistically significant at 0.72 & 0.36, respectively.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0123" data-source-kind="paragraph">
+          <p>· The limitations of this analysis are that the data set is a bit small & that perhaps more years of data need to be collected. Also, correlation is not causation so we cannot tell whether longer tenure with the company causes higher yearly bandwidth usage or vice versa or if there is another variable that causes both. More investigation is required.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0124" data-source-kind="paragraph">
+          <p>y = 783.8177 + (23.96 * Children) + (73.61 * Tenure) + (-3.36 * Timely_Fixes) + (8.6029 * Courteous_Exchange)</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0125" data-source-kind="heading">
+          
+            <h3 id="heading-125">F2. Recommendations</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0126" data-source-kind="paragraph">
+          <p>For this analysis & to make the time spent on the analysis acceptable & provide actionable information: with such a direct linear relationship between bandwidth used yearly & tenure with the telecom company it makes sense to suggest the company do everything within marketing & customer service capability to retain the customers gained as the longer, they stay with the company the more bandwidth they tend to use. This would include making sure that fixes to customer problems are prompt & that the equipment provided is high quality to avoid fewer replacements of equipment.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0127" data-source-kind="paragraph">
+          <p>· We can still collect more data points and perform the same analysis with the huge data points. Evaluation metrics might change and provide more and more accurate figures with more data points. This will give an opportunity to increase model precision as well as help to identify more features related to model training and inference.</p>
+          
+          </div>
+        
+        </div>
+      </article>
+    </main>
+  </div>
+  <div class="lightbox" id="lightbox" hidden><img alt="Expanded article image"></div>
+</body>
+</html>

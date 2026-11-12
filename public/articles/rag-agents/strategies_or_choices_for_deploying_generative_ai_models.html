@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Strategies or Choices for Deploying Generative AI Models | IlluminAIst</title>
+  <meta name="description" content="Generative AI is advancing rapidly, and IT leaders are struggling to keep up. The number of pre-trained models and applications is skyrocketing, but it’s difficult to align them with enterprise needs and AI governance.">
+</head>
+<body>
+<div class="shell">
+    </nav>
+    <main>
+      <div class="toolbar"><button id="theme-toggle" type="button" aria-label="Toggle dark mode">☾ Theme</button></div>
+      <article>
+        <header>
+          <div class="eyebrow">Converted article</div>
+
+</header>
+        <div id="article-content">
+        
+          <div class="reveal" data-source-block-id="b-0001" data-source-kind="paragraph">
+          <p>Generative AI is advancing rapidly, and IT leaders are struggling to keep up. The number of pre-trained models and applications is skyrocketing, but it’s difficult to align them with enterprise needs and AI governance.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0002" data-source-kind="paragraph">
+          <p>Technology leaders lack a deep understanding of the various generative AI deployment approaches, and their pros and cons. Popular approaches include consuming models as embedded applications, embedding model APIs and steering them with prompt engineering and extending them with retrieval-augmented generation ( RAG ) architecture.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0003" data-source-kind="paragraph">
+          <p>ChatGPT’s popularity has spurred a wave of innovation in generative AI. In the past few months, a flurry of AI foundation models, provider fine-tuned models, generative AI applications, and MLOps tools have been released. Additionally, many large ISVs are embedding generative AI into their existing applications to make it accessible to business users.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0004" data-source-kind="paragraph">
+          <p>While these rapid developments are a sign of the competitive jostling that is characteristic of most high-stakes early-stage markets, they also present a daunting array of choices for enterprise IT leaders. This article aims to demystify the differences between various generative AI deployment approaches and provide a decision framework for choosing one over the other.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0005" data-source-kind="paragraph">
+          <p>The easiest way to deploy generative AI is to use applications like ChatGPT through their web interfaces or mobile apps. However, these services are more consumer-oriented, although OpenAI and other providers plan to introduce enterprise-grade services (such as ChatGPT for Business) with better data privacy terms in the future.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0006" data-source-kind="heading">
+          
+            <h3 id="heading-6">Organizations can consume generative AI in five key ways.</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0007" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/0*PKGvDRRQRYrEbEjk" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0008" data-source-kind="list">
+          <ul><li>Use commercial applications with embedded generative AI capabilities. For example, a design software application with image generation capabilities. Consuming generative AI embedded in commercial applications is the easiest and least disruptive approach to get started with generative AI. It requires low or no fixed costs, and users can benefit from improvements to the underlying generative AI model without having to invest further. However , this approach offers less flexibility and customization options. Applications with embedded AI may not be able to handle complex workflows or understand the context of a conversation as well as more sophisticated generative AI solutions. Additionally, organizations have less control over security and data privacy risks, as they are reliant on the application provider’s security and data protection controls.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0009" data-source-kind="list">
+          <ul><li>Integrate generative AI APIs into custom applications . Most closed-source generative AI models can be deployed via cloud APIs. Prompt engineering can be used to improve the quality of model output. Embedding generative AI APIs in a custom application frame is a more flexible and customizable approach than using commercial applications with embedded AI. It also offers lower fixed costs, as you only pay for the use of the model (inference), not for its training. This approach can help you get your use case to production faster, with acceptable degrees of customization. However , there are some drawbacks to this approach. One limitation is that there is a limit to how much data can be transmitted via prompts, which can restrict the types of use cases that can be implemented. Additionally, prompt engineering is a relatively new field, and best practices are still emerging. This means that new skills are required, and there may be a learning curve.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0010" data-source-kind="list">
+          <ul><li>Use retrieval augmented generation (RAG) to extend generative AI models . RAG enables organizations to retrieve data from outside a foundation model and add it to the prompt. This improves the accuracy and quality of model response for domain-specific tasks. Retrieval augmented generation (RAG) allows organizations to incorporate additional information into foundation models, including more up-to-date data, domain-specific data, and private data. This can be done without the complexity and cost of modifying the underlying models, as is required for fine-tuning, data embedding, or building models from scratch. RAG can also improve the accuracy of foundation models on domain-specific tasks and reduce hallucinations in their output. However , RAG approaches are limited by the context window of the generative model, which constrains the amount of retrieved information that can be sent to the model. Additionally, the additional retrieval step to augment the prompt can increase latency, making RAG less viable for real-time use cases. Implementing an RAG approach requires redesigning the technical architecture and workflow to include new technology components such as vector databases and embedding models. Most enterprises lack the know-how to implement and manage these components, which can be costly.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0011" data-source-kind="list">
+          <ul><li>Fine-tune generative AI models. Fine-tuning takes a pre-trained foundation model and further trains it on a new dataset to incorporate additional domain knowledge or improve performance on specific tasks. This often results in custom models that are dedicated to the organization. Fine-tuning allows organizations to quickly enhance the performance of generative AI models for specific use cases without having to train a complete model from scratch. This can lead to improved performance and reduced hallucinations by fine-tuning the model with organizational data or domain-specific data for particular tasks. Fine-tuning typically requires relatively small amounts of high-quality data, significantly less than the massive datasets needed to train the underlying foundation models. The ongoing trend towards smaller, yet highly performant, open-source foundation models further simplifies and cost-effectively facilitates the creation of fine-tuned models. While fine-tuning offers rapid performance improvements for specific use cases, the ongoing inference costs can be substantial, even if the initial fine-tuning training costs are relatively low. Fine-tuned models remain large and complex, with billions of parameters, and may require optimization for efficient deployment at scale. Fine-tuning a model to a specific foundation model may limit future flexibility in adopting newer and improved foundation models as they emerge.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0012" data-source-kind="list">
+          <ul><li>Build custom foundation models from scratch . This is the most complex approach, but it allows organizations to fully customize the model to their own data and business domains. Building custom foundation models from scratch offers the highest theoretical accuracy, as the models are specifically tailored to the organization’s use case or domain. This approach provides complete control over the training datasets and model parameters, enabling organizations to optimize performance and mitigate bias or other unintended consequences. Developing a custom foundation model can yield significant competitive advantages, resulting in a differentiated product offering and enhanced market positioning. If the model demonstrates exceptional performance and domain-specific expertise, it could potentially be commercialized for broader use. Developing and maintaining a large generative AI model can be a costly endeavor. Expenses include training infrastructure, data acquisition, infrastructure and labeling costs, human audit of model quality, and inferencing costs. Continuous access to top-tier AI researchers is crucial for constructing a high-quality model and ensuring its ongoing maintenance and updates. The generative AI landscape is rapidly evolving, and for most organizations, the pace of external innovation driven by technology vendors will outpace their internal innovation capabilities. This may lead to future regret associated with the decision to build a custom model.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0013" data-source-kind="heading">
+          
+            <h3 id="heading-13">Conclusion</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0014" data-source-kind="paragraph">
+          <p>1. Understand and Document Technical Differences:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0015" data-source-kind="list">
+          <ul><li>Thoroughly comprehend the technical distinctions between each deployment approach to avoid vendor lock-in.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0016" data-source-kind="list">
+          <ul><li>Fully grasp the shared responsibility models with vendors to ensure clear expectations and accountability.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0017" data-source-kind="paragraph">
+          <p>2. Analyze Pros and Cons for Informed Decision-Making:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0018" data-source-kind="list">
+          <ul><li>Evaluate the advantages and disadvantages of each deployment approach to make informed decisions.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0019" data-source-kind="list">
+          <ul><li>Align specific use cases with the most suitable deployment approach for optimal results.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0020" data-source-kind="paragraph">
+          <p>3. Make Objective, Use-Case-Driven Decisions:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0021" data-source-kind="list">
+          <ul><li>Consider all critical decision factors objectively and make informed choices on a use-case-by-use-case basis.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0022" data-source-kind="list">
+          <ul><li>Recognize that the deployment approaches are not mutually exclusive; a combination may be appropriate.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0023" data-source-kind="paragraph">
+          <p>4. Monitor Emerging Trends for Futureproofing:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0024" data-source-kind="list">
+          <ul><li>Continuously monitor emerging trends in the rapidly evolving generative AI landscape.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0025" data-source-kind="list">
+          <ul><li>Regularly update generative AI strategies, ideally every few months, to stay ahead of the curve.</li></ul>
+          
+          </div>
+        
+        </div>
+      </article>
+    </main>
+  </div>
+  <div class="lightbox" id="lightbox" hidden><img alt="Expanded article image"></div>
+</body>
+</html>

@@ -14,10 +14,52 @@ const ARTICLES_JSON_PATH = path.join(__dirname, '../src/data/articles.js');
 const NEWS_DIR = path.join(__dirname, '../public/articles/news');
 const ARTICLES_DIR = path.join(__dirname, '../public/articles/main');
 
-const upload = multer({ dest: '/tmp/' });
+const upload = multer({ dest: '/tmp/', limits: { files: 100, fileSize: 5 * 1024 * 1024 } });
 
 function slugify(text) {
   return text.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/(^_|_$)/g, '');
+}
+
+function plainText(html) {
+  return String(html || '').replace(/<[^>]*>/g, ' ').replace(/&nbsp;/gi, ' ').replace(/\s+/g, ' ').trim();
+}
+
+function metaValue(html, name) {
+  const pattern = new RegExp('<meta[^>]+name=["\\\']' + name + '["\\\'][^>]+content=["\\\']([^"\\\']+)', 'i');
+  const reverse = new RegExp('<meta[^>]+content=["\\\']([^"\\\']+)["\\\'][^>]+name=["\\\']' + name + '["\\\']', 'i');
+  const match = html.match(pattern) || html.match(reverse);
+  return match ? match[1].trim() : '';
+}
+
+function sanitizeHtml(html) {
+  return String(html || '')
+    .replace(/<script\b[\s\S]*?<\/script>/gi, '')
+    .replace(/<style\b[\s\S]*?<\/style>/gi, '')
+    .replace(/\s+on[a-z]+\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]+)/gi, '')
+    .replace(/\s+(?:href|src)\s*=\s*(["'])\s*javascript:[\s\S]*?\1/gi, '');
+}
+
+function inspectUpload(file, type, overrideTitle, overrideExcerpt, useOverrides) {
+  const html = fs.readFileSync(file.path, 'utf8');
+  const safeHtml = sanitizeHtml(html);
+  const body = (html.match(/<body[^>]*>([\s\S]*?)<\/body>/i) || [null, html])[1].trim();
+  const titleMatch = html.match(/<title[^>]*>([^<]+)<\/title>/i);
+  const headingMatch = body.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i);
+  const fallbackTitle = file.originalname.replace(/\.html?$/i, '').replace(/[_-]+/g, ' ').trim();
+  const title = (useOverrides && overrideTitle ? overrideTitle : (titleMatch ? titleMatch[1] : (headingMatch ? plainText(headingMatch[1]) : fallbackTitle)))
+    .replace(/\s*\|\s*IlluminAIst\s*$/i, '').trim();
+  const paragraph = body.match(/<p[^>]*>([\s\S]*?)<\/p>/i);
+  const excerpt = (useOverrides && overrideExcerpt ? overrideExcerpt : (metaValue(html, 'description') || (paragraph ? plainText(paragraph[1]) : plainText(body)))).slice(0, 280).trim();
+  const words = plainText(body).split(/\s+/).filter(word => word.length > 2).length;
+  const errors = [];
+  if (!/^news$|^article$/.test(type)) errors.push('type must be news or article');
+  if (!title || title.length < 5 || title.length > 180) errors.push('title must be 5–180 characters');
+  if (!excerpt || excerpt.length < 20) errors.push('excerpt must contain at least 20 characters');
+  if (words < 20) errors.push('HTML content must contain at least 20 words');
+  if (/<(?:iframe|object|embed|form)\b/i.test(safeHtml)) errors.push('unsupported embedded element');
+  const slug = slugify(title);
+  if (!slug) errors.push('title must produce a valid URL slug');
+  return { file, html: safeHtml, title, excerpt, slug, errors };
 }
 
 app.get('/', (req, res) => {
@@ -83,16 +125,17 @@ app.get('/', (req, res) => {
             </select>
           </div>
           <div class="form-group">
-            <label>Title</label>
-            <input type="text" id="uploadTitle" required>
+            <label>Title (optional override for a single file)</label>
+            <input type="text" id="uploadTitle">
           </div>
           <div class="form-group">
-            <label>Excerpt / Description</label>
-            <textarea id="uploadExcerpt" rows="3" required></textarea>
+            <label>Excerpt / Description (optional override for a single file)</label>
+            <textarea id="uploadExcerpt" rows="3"></textarea>
           </div>
           <div class="form-group">
-            <label>HTML File</label>
-            <input type="file" id="uploadFile" accept=".html" required>
+            <label>HTML Files</label>
+            <input type="file" id="uploadFile" accept=".html,.htm" multiple required onchange="inspectSelectedFiles(event)">
+            <div id="uploadSummary" style="margin-top:.6rem;color:#94a3b8;font-size:.9rem"></div>
           </div>
           <button type="submit" class="btn-upload" style="width: 100%">Upload & Publish to GitHub</button>
         </form>
@@ -137,19 +180,28 @@ app.get('/', (req, res) => {
           document.getElementById(tab + '-tab').classList.add('active');
         }
 
+        function inspectSelectedFiles(e) {
+          const files = [...e.target.files];
+          const summary = document.getElementById('uploadSummary');
+          if (!files.length) { summary.textContent = ''; return; }
+          summary.textContent = '✓ ' + files.length + ' HTML file' + (files.length === 1 ? '' : 's') + ' selected. Titles, excerpts, slugs, and content will be validated automatically.';
+        }
+
         async function submitUpload(e) {
           e.preventDefault();
+          const files = [...document.getElementById('uploadFile').files];
+          if (!files.length) return alert('Select at least one HTML file.');
           const formData = new FormData();
           formData.append('type', document.getElementById('uploadType').value);
           formData.append('title', document.getElementById('uploadTitle').value);
           formData.append('excerpt', document.getElementById('uploadExcerpt').value);
-          formData.append('file', document.getElementById('uploadFile').files[0]);
+          files.forEach(file => formData.append('files', file));
 
           try {
             const res = await fetch('/api/upload', { method: 'POST', body: formData });
             const data = await res.json();
             if (data.success) {
-              alert('Successfully uploaded and pushed to GitHub!');
+              alert('Successfully uploaded ' + data.count + ' HTML file' + (data.count === 1 ? '' : 's') + ' and pushed to GitHub!');
               window.location.reload();
             } else {
               alert('Error: ' + data.error);
@@ -184,74 +236,72 @@ app.get('/', (req, res) => {
   `);
 });
 
-app.post('/api/upload', upload.single('file'), (req, res) => {
+app.post('/api/upload', upload.array('files', 100), (req, res) => {
   try {
     const { type, title, excerpt } = req.body;
-    const slug = slugify(title);
-    const date = new Date().toISOString().split('T')[0];
+    const files = req.files || [];
+    if (!files.length) return res.status(400).json({ success: false, error: 'At least one HTML file is required.' });
+    const seenSlugs = new Set();
+    const inspected = files.map(file => inspectUpload(file, type, title, excerpt, files.length === 1));
+    inspected.forEach(item => {
+      if (seenSlugs.has(item.slug)) item.errors.push('duplicate title creates the same URL slug');
+      seenSlugs.add(item.slug);
+    });
+    const invalid = inspected.filter(item => item.errors.length);
+    if (invalid.length) {
+      files.forEach(file => { try { fs.unlinkSync(file.path); } catch (_) {} });
+      return res.status(400).json({
+        success: false,
+        error: 'Upload validation failed; no files were published.',
+        validationErrors: invalid.map(item => ({ fileName: item.file.originalname, errors: item.errors }))
+      });
+    }
 
-    // Move file
+    const date = new Date().toISOString().split('T')[0];
     const targetDir = type === 'news' ? NEWS_DIR : ARTICLES_DIR;
     if (!fs.existsSync(targetDir)) fs.mkdirSync(targetDir, { recursive: true });
-    
-    const targetPath = path.join(targetDir, `${slug}.html`);
-    fs.renameSync(req.file.path, targetPath);
 
     // Update JSON
     if (type === 'news') {
       let dataFile = fs.readFileSync(NEWS_JSON_PATH, 'utf8');
       const match = dataFile.match(/export const newsItems = (\[[\s\S]*?^\]);/m);
       let newsItems = JSON.parse(match[1]);
-      
-      const newId = newsItems.length > 0 ? Math.max(...newsItems.map(n => n.id)) + 1 : 1;
-      newsItems.unshift({
-        id: newId,
-        title: title,
-        excerpt: excerpt,
-        source: 'Manual Upload',
-        slug: slug,
-        htmlPath: `/articles/news/${slug}.html`,
-        publishedAt: date,
-        badge: "New",
-        badgeColor: "emerald",
-        category: "AI News"
+      let nextId = newsItems.length > 0 ? Math.max(...newsItems.map(n => n.id)) + 1 : 1;
+      inspected.forEach(item => {
+        fs.writeFileSync(path.join(targetDir, `${item.slug}.html`), item.html, 'utf8');
+        newsItems.unshift({
+          id: nextId++, title: item.title, excerpt: item.excerpt, source: 'Manual Upload', slug: item.slug,
+          htmlPath: `/articles/news/${item.slug}.html`, publishedAt: date, badge: 'New', badgeColor: 'emerald', category: 'AI News'
+        });
       });
-      
       dataFile = dataFile.replace(/export const newsItems = \[[\s\S]*?^\];/m, `export const newsItems = ${JSON.stringify(newsItems, null, 2)};`);
       fs.writeFileSync(NEWS_JSON_PATH, dataFile);
     } else {
       let dataFile = fs.readFileSync(ARTICLES_JSON_PATH, 'utf8');
       const match = dataFile.match(/export const articles = (\[[\s\S]*?^\])/m);
       let articles = JSON.parse(match[1]);
-      
-      articles.unshift({
-        slug: slug,
-        topicSlug: "ai-llms",
-        category: "AI & LLMs",
-        difficulty: "Beginner",
-        title: title,
-        excerpt: excerpt,
-        avatar: "AI",
-        author: "IlluminAIst",
-        readingTime: 5,
-        publishedAt: date,
-        htmlFile: true,
-        featured: false,
-        status: "published",
-        tags: []
+      inspected.forEach(item => {
+        fs.writeFileSync(path.join(targetDir, `${item.slug}.html`), item.html, 'utf8');
+        const wordCount = plainText(item.html).split(/\s+/).filter(word => word.length > 2).length;
+        articles.unshift({
+          slug: item.slug, topicSlug: 'ai-llms', category: 'AI & LLMs', difficulty: 'Intermediate',
+          title: item.title, excerpt: item.excerpt, avatar: 'AI', author: 'IlluminAIst',
+          readingTime: Math.max(1, Math.round(wordCount / 200)), publishedAt: date,
+          htmlFile: true, featured: false, status: 'published', tags: []
+        });
       });
-      
       dataFile = dataFile.replace(/export const articles = \[[\s\S]*?^\]/m, `export const articles = ${JSON.stringify(articles, null, 2)}`);
       fs.writeFileSync(ARTICLES_JSON_PATH, dataFile);
     }
 
     // Git push
     execSync('git add src/data/ public/articles/');
-    execSync(`git commit -m "CMS: Uploaded new ${type} '${slug}'"`);
+    execSync(`git commit -m "CMS: Uploaded ${inspected.length} ${type} HTML file(s)"`);
     execSync('git push origin main');
 
-    res.json({ success: true });
+    res.json({ success: true, count: inspected.length, results: inspected.map(item => ({ fileName: item.file.originalname, slug: item.slug })) });
   } catch (err) {
+    (req.files || []).forEach(file => { try { fs.unlinkSync(file.path); } catch (_) {} });
     res.status(500).json({ success: false, error: err.message });
   }
 });

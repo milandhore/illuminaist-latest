@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>How Anthropic’s Open-Source Circuit Tracing is Revolutionizing LLM Interpretability | IlluminAIst</title>
+  <meta name="description" content="A new method to trace the thoughts of a large language model">
+</head>
+<body>
+<div class="shell">
+    </nav>
+    <main>
+      <div class="toolbar"><button id="theme-toggle" type="button" aria-label="Toggle dark mode">☾ Theme</button></div>
+      <article>
+        <header>
+          <div class="eyebrow">Converted article</div>
+
+</header>
+        <div id="article-content">
+        
+          <div class="reveal" data-source-block-id="b-0001" data-source-kind="paragraph">
+          <p>A new method to trace the thoughts of a large language model</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0002" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*FLkdkJVLqed-enwrzaKEtQ.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0003" data-source-kind="paragraph">
+          <p>The incredible power of large language models (LLMs) has captured the world’s imagination, but with this power comes a profound challenge: understanding how they work. These complex systems often function as “black boxes,” producing astonishing results without revealing the internal logic behind their decisions. This opacity is a major hurdle for ensuring AI safety, reliability, and fairness.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0004" data-source-kind="paragraph">
+          <p>Anthropic, a leading AI safety research company, is tackling this problem head-on with a groundbreaking initiative: open-source circuit tracing. By making their tools and methodologies publicly available, they are inviting the global community to peer inside the mind of an LLM and begin to understand its inner workings.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0005" data-source-kind="heading">
+          
+            <h3 id="heading-5">What is AI Circuit Tracing? A Breakthrough in Interpretability</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0006" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*gT7DKKeZLlX_3lPIKZeiTQ.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0007" data-source-kind="paragraph">
+          <p>At its core, AI circuit tracing is the process of mapping the specific connections and computations within a neural network that are responsible for a particular behavior or output. Think of it like reverse-engineering a complex electronic device. Instead of a traditional circuit board with wires and components, an LLM’s “circuit” is made up of a vast network of artificial neurons and connections.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0008" data-source-kind="paragraph">
+          <p>Anthropic’s approach focuses on generating what they call “attribution graphs.” These graphs are a visual representation of the computational path a model takes to generate a specific output, highlighting the most important components and interactions. For example, if a model completes the sentence “The capital of France is...”, the attribution graph would show which parts of the model were activated by the tokens “France” and “capital” to arrive at the answer “Paris.”</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0009" data-source-kind="paragraph">
+          <p>This method is a significant advancement in the field of LLM interpretability . While other techniques like LIME (Local Interpretable Model-agnostic Explanations) and SHAP (SHapley Additive exPlanations) can provide insights into a model’s local behavior, Anthropic’s circuit tracing offers a more structural and detailed view of the underlying mechanisms.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0010" data-source-kind="heading">
+          
+            <h3 id="heading-10">A Technical Deep Dive: Tools, Platforms, and Hypothesis Testing</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0011" data-source-kind="paragraph">
+          <p>Anthropic’s open-source initiative is powered by a specific Python library called circuit-tracer and an interactive frontend platform. This toolkit allows researchers to go beyond observation and actively test hypotheses about how an LLM operates.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0012" data-source-kind="paragraph">
+          <p>Here’s a simplified look at the process and the key technologies involved:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0013" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*gvuM5ZGDvsUhb8AScI4JSg.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0014" data-source-kind="heading">
+          
+            <h3 id="heading-14">The circuit-tracer Library and Neuronpedia</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0015" data-source-kind="paragraph">
+          <p>The heart of the project is the open-source circuit-tracer Python library . This library is designed to work with popular open-weights models like Gemma-2-2b and Llama-3.2-1b . It performs three primary functions:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0016" data-source-kind="list">
+          <ul><li>Attribution Graph Generation: It traces the direct effects that each non-zero feature, error node, and input token has on each other, computing the computational pathway and generating the attribution graph.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0017" data-source-kind="list">
+          <ul><li>Visualization and Annotation: The library’s output is a pruned JSON file that can be visualized and explored in an interactive frontend. This is where the Neuronpedia platform comes in. Neuronpedia acts as a public-facing host for these graphs, providing a rich, interactive environment for researchers to analyze, annotate, and share their findings.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0018" data-source-kind="list">
+          <ul><li>Feature Interventions: This is the most powerful aspect for hypothesis testing. The library enables researchers to “intervene” on a model’s internal features by setting them to arbitrary values. By observing how the model’s output changes, a researcher can causally confirm a hypothesis about that feature’s role.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0019" data-source-kind="heading">
+          
+            <h3 id="heading-19">The Science Behind the Circuit</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0020" data-source-kind="paragraph">
+          <p>The circuit-tracer library relies on a technique involving transcoders , specifically cross-layer MLP transcoders. Instead of analyzing the model's raw neurons directly, which are often polysemantic and hard to interpret, this method first uses transcoders to replace them with more interpretable "features." These features represent human-understandable concepts (e.g., a specific city, a positive sentiment). The attribution graph then maps the flow of information between these interpretable features.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0021" data-source-kind="paragraph">
+          <p>This ability to manipulate and observe the internal state of a model is a critical differentiator. It moves beyond passive explanation to active, empirical testing. By providing an open-source framework, Anthropic is empowering a global community of researchers, students, and engineers to collaborate on this vital work, accelerating the pace of discovery.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0022" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*IdMVvuIc2FGnJzl8Kx90cg.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0023" data-source-kind="heading">
+          
+            <h3 id="heading-23">The Path to a Safer, More Transparent Future</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0024" data-source-kind="paragraph">
+          <p>The implications of open-source circuit tracing are vast. By demystifying the black box of LLMs, this research opens the door to:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0025" data-source-kind="list">
+          <ul><li>Enhanced AI Safety: Identifying and mitigating dangerous or unintended behaviors before they cause harm.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0026" data-source-kind="list">
+          <ul><li>Robustness and Reliability: Debugging model failures and ensuring consistent, predictable performance.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0027" data-source-kind="list">
+          <ul><li>Bias Detection: Pinpointing and correcting biases that may be embedded within the model’s training data and internal circuits.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0028" data-source-kind="list">
+          <ul><li>Accelerated Research: Providing a common toolkit that allows researchers to build upon each other’s findings.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0029" data-source-kind="paragraph">
+          <p>This is a powerful step towards building an ecosystem of truly responsible and transparent AI. Instead of merely accepting a model’s output, we can now ask why it made a certain choice, and with open-source tools, we can collectively work to ensure the answers are aligned with human values and intentions.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0030" data-source-kind="quote">
+          <blockquote>By working together, we can move from simply using AI to truly understanding and responsibly guiding its evolution.</blockquote>
+          
+          </div>
+        
+        </div>
+      </article>
+    </main>
+  </div>
+  <div class="lightbox" id="lightbox" hidden><img alt="Expanded article image"></div>
+</body>
+</html>

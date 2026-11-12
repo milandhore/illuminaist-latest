@@ -67,14 +67,6 @@ export default function ArticlesPage() {
     setSearchParams(searchParams, { replace: true })
   }
 
-  // Count articles per topic for live counts
-  const countFor = (category) => {
-    const publishedArticles = getPublishedArticles()
-    return category === 'All'
-      ? publishedArticles.length
-      : publishedArticles.filter(a => a.category === category).length
-  }
-
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
@@ -106,7 +98,6 @@ export default function ArticlesPage() {
         <div className={`grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-3`}>
           {TOPICS.map((topic) => {
             const isActive   = activeTopic.category === topic.category
-            const count      = countFor(topic.category)
             const isHiddenMobile = !topicsExpanded && TOPICS.indexOf(topic) >= 4
 
             return (
@@ -130,7 +121,6 @@ export default function ArticlesPage() {
                   <p className={`font-heading font-bold text-sm leading-snug transition-colors ${isActive ? 'text-cyan' : 'text-slate-200 group-hover:text-slate-100'}`}>
                     {topic.label}
                   </p>
-                  <p className="text-slate-500 text-xs mt-0.5">{count} article{count !== 1 ? 's' : ''}</p>
                 </div>
               </button>
             )

@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Data Cleaning and Principal Components Analysis (PCA) using Python. | IlluminAIst</title>
+  <meta name="description" content="G ood data hygiene is very important for business. At high level, Data cleaning (sometimes also known as data cleansing or data wrangling) is an important early step in the data analytics process. This crucial exercise, which involves preparing and validating data, usually takes">
+</head>
+<body>
+<div class="shell">
+    </nav>
+    <main>
+      <div class="toolbar"><button id="theme-toggle" type="button" aria-label="Toggle dark mode">☾ Theme</button></div>
+      <article>
+        <header>
+          <div class="eyebrow">Converted article</div>
+
+</header>
+        <div id="article-content">
+        
+          <div class="reveal" data-source-block-id="b-0001" data-source-kind="paragraph">
+          <p>G ood data hygiene is very important for business. At high level, Data cleaning (sometimes also known as data cleansing or data wrangling) is an important early step in the data analytics process. This crucial exercise, which involves preparing and validating data, usually takes place before your core analysis.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0002" data-source-kind="paragraph">
+          <p>Most of the work goes into detecting things like incomplete, inaccurate, irrelevant, corrupt, or incorrectly formatted data. The process also involves deduplicating, or ‘deduping’. This effectively means merging or removing identical data points.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0003" data-source-kind="heading">
+          
+            <h3 id="heading-3">High Level Steps to Clean your data.</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0004" data-source-kind="paragraph">
+          <p>We’ll explore the practical aspects of effective data cleaning. Since there are multiple approaches, you can take for completing each of these tasks.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0005" data-source-kind="quote">
+          <blockquote>1: Get rid of unwanted observations</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0006" data-source-kind="quote">
+          <blockquote>2: Fix structural errors</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0007" data-source-kind="quote">
+          <blockquote>3: Standardize your data</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0008" data-source-kind="quote">
+          <blockquote>4: Remove unwanted outliers</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0009" data-source-kind="quote">
+          <blockquote>5: Fix contradictory data errors</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0010" data-source-kind="quote">
+          <blockquote>6: Type conversion and syntax errors</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0011" data-source-kind="quote">
+          <blockquote>7: Deal with missing data</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0012" data-source-kind="quote">
+          <blockquote>8: Validate your dataset</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0013" data-source-kind="paragraph">
+          <p>Download and Access GitHub Codebase</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0014" data-source-kind="paragraph">
+          <p>Churn Raw Data File</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0015" data-source-kind="paragraph">
+          <p>Data Cleaning Python Code.ipynb</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0016" data-source-kind="paragraph">
+          <p>A: Research Question or Decision</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0017" data-source-kind="paragraph">
+          <p>· How can we determine customers at high risk of churn in future?</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0018" data-source-kind="paragraph">
+          <p>· How can we find out high profitable customers and offer them service discount to retain?</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0019" data-source-kind="paragraph">
+          <p>B: Required Variables</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0020" data-source-kind="paragraph">
+          <p>• Churn datasets has 50 columns/variables, but all these variables may not help to resolve above cited question. We have to choose right variables for analysis</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0021" data-source-kind="paragraph">
+          <p>• “Churn” is dependent variable and help to determine whether customers using services or discontinued from services within last month</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0022" data-source-kind="paragraph">
+          <p>• To predict which customers are at high risk of churn, there are few significant independent variables in dataset which could help for analysis. These variables are either directly or indirectly influence customers mindset to discontinue services.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0023" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*NqfeNZiRQQjHBAX6E9GKWA.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0024" data-source-kind="heading">
+          
+            <h3 id="heading-24">C1: Plan to Find Anomalies</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0025" data-source-kind="paragraph">
+          <p>· Below section will provide high level steps required to find anomalies (aka Outlier) in dataset. Sometimes anomalies considered different from outlier in system.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0026" data-source-kind="paragraph">
+          <p>· Download churn raw dataset to local machine from provided location</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0027" data-source-kind="paragraph">
+          <p>· Install and setup anaconda navigator environment.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0028" data-source-kind="paragraph">
+          <p>· Setup Jupyter notebook/lab and run some sample code to verify environment.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0029" data-source-kind="paragraph">
+          <p>· Import pandas, SciPy, sklearn, NumPy libraries etc.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0030" data-source-kind="paragraph">
+          <p>· Read the data set into Python</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0031" data-source-kind="paragraph">
+          <p>· It is very easy and simple to read a CSV file using pandas library functions.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0032" data-source-kind="paragraph">
+          <p>· read_csv() method of pandas library is used to read data from CSV files</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0033" data-source-kind="paragraph">
+          <p>· Analyze the data structure to better understand input data.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0034" data-source-kind="paragraph">
+          <p>· There are number of methods such as z-score, interquartile range, standard deviation to find outlier in data, but I will be using standard deviation to find outliers/anomalies.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0035" data-source-kind="paragraph">
+          <p>· Calculate mean & standard deviation.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0036" data-source-kind="paragraph">
+          <p>· For this outlier detection method, the mean and standard deviation of the residuals are calculated and compared. If a value is a certain number of standard deviations away from the mean, that data point is identified as an outlier. The specified number of standard deviations is called the threshold. The default value is 3.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0037" data-source-kind="paragraph">
+          <p>· If a data distribution is approximately normal then about 68% of the data values lie within one standard deviation of the mean and about 95% are within two standard deviations, and about 99.7% lie within three standard deviations.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0038" data-source-kind="paragraph">
+          <p>· Represent data using statistical way such as histogram or boxplot</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0039" data-source-kind="heading">
+          
+            <h3 id="heading-39">C2: Justification of Approach</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0040" data-source-kind="paragraph">
+          <p>· To assess data quality of cited dataset, we can first remove outlier and impute missing data with central tendency approach (mean, median).</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0041" data-source-kind="paragraph">
+          <p>· There are any “NA” values in few significant columns. We must either impute such value in case of numeric numbers with central tendency or remove if we have a very smaller number of rows with such values. But we must make sure we can’t remove bigger number of such rows. Because that could create imbalance of dataset.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0042" data-source-kind="paragraph">
+          <p>· This kind of huge data row removal approach won’t help much on predicative analysis. We also need to remove unnecessary features/variables from dataset to reduce burden on ML Model training for predicative data analysis.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0043" data-source-kind="heading">
+          
+            <h3 id="heading-43">C3: Justification of Tools</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0044" data-source-kind="paragraph">
+          <p>Please find details of all tools I will be utilizing to accomplish this assessment.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0045" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*VeGU7CFi5BJDUfkjcku1cw.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0046" data-source-kind="paragraph">
+          <p>Pandas libraries provide direct method to read the data using dataframe. A Dataframe is a two-dimensional data ­structure. A pandas Dataframe can be created using various inputs such as lists, dict, series, NumPy arrays, another</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0047" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*McaJR7giuXdOBpUYGodT_A.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0048" data-source-kind="heading">
+          
+            <h3 id="heading-48">C4: Provide the code to find Anomalies.</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0049" data-source-kind="paragraph">
+          <p>Please find the code to find anomalies.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0050" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*A3tSiAWpQZwqjxAuo0qRuQ.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0051" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*khMevR15w52EoDmnE47Rgw.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0052" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*SYzU67OTnvzyBqR1c8z3qg.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0053" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*FKNoPNC84XdsNnvuV4dU4A.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0054" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*tBwgzJockbhpIXu0ei-cyg.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0055" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*XZk0so69dAnGx-yVEAkXTA.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0056" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*kc_ZwsB5lMLyNFqP4GVwPA.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0057" data-source-kind="heading">
+          
+            <h3 id="heading-57">D1: Cleaning Findings</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0058" data-source-kind="paragraph">
+          <p>At first, we analyzed the dataset and count of missing values or “NA” into data. Imputation of these missing data values were as significant as their identification. We found that thousands of missing records for children, age, Income, Phone, Tenure and MonthlyCharge columns. Few other columns also have missing values, but they don’t seem significant for data analysis and solutioning churn rate problem statement.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0059" data-source-kind="paragraph">
+          <p>After the imputation we identified the outliers in above cited columns with the help of histogram and boxplot statistics. We also used seaborn boxplot to understand outlier values for MonthlyCharge.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0060" data-source-kind="heading">
+          
+            <h3 id="heading-60">D2: Justification of Mitigation Methods</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0061" data-source-kind="paragraph">
+          <p>After the identification of missing data values, I have imputed all required columns such as children, age, Income, Phone, Tenure with central tendency approach. MonthlyCharge have outliers in values, but we don’t see significance for our analysis. I have also created new dataset to save copy of curated and clean data. To analyze dataset more closely and identify outlier, I have imported statistics to images.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0062" data-source-kind="heading">
+          
+            <h3 id="heading-62">D3: Outcomes Summary</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0063" data-source-kind="paragraph">
+          <p>· At beginning of our data analysis process, we have removed unwanted and less useful columns from data. After these column removals we left with 46 columns in total.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0064" data-source-kind="paragraph">
+          <p>· We have also renamed 8 survey columns with logical names to represent dataset more accurately</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0065" data-source-kind="paragraph">
+          <p>· I have identified missing values in dataset. As result of it, I have found thousands of missing values in Children, Age, Income, Tenure and Bandwidth_GB_Year.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0066" data-source-kind="paragraph">
+          <p>· To analysis significant columns, I have found unique values in few important columns such as employment, Area, Children, Education, Marital, Gender, Contract, PaymentMethod, Age. That helped to identify misspells and invalid data value.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0067" data-source-kind="paragraph">
+          <p>· I have imputed all missing values for important columns. This helped to find out outlier in dataset.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0068" data-source-kind="paragraph">
+          <p>· I have plotted histogram and boxplot to understand above cited columns. This helped to visualized outliers.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0069" data-source-kind="heading">
+          
+            <h3 id="heading-69">D4: Mitigation code for anomalies</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0070" data-source-kind="paragraph">
+          <p>Please refer python codebase from page ‘12’ to page ‘16’.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0071" data-source-kind="paragraph">
+          <p>To mitigate we must understand few more guiding principles</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0072" data-source-kind="paragraph">
+          <p>· Before dropping the Outliers, we must analyze the dataset with and without outliers and understand better the impact of the results.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0073" data-source-kind="paragraph">
+          <p>· If you observed that it is obvious due to incorrectly entered or measured, certainly you can drop the outlier. No issues on that case.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0074" data-source-kind="paragraph">
+          <p>· If you find that your assumptions are getting affected, you may drop the outlier straight away, provided that no changes in the results.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0075" data-source-kind="paragraph">
+          <p>· If the outlier affects your assumptions and results. No questions simply drop the outlier and proceed with your further steps.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0076" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*zvqKwE5KTLOIfkuapeHxtg.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0077" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*Fo0GpXy3vzA3p8pTSt5mCw.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0078" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*TgXzEVitTpB1DZ1SApnLjQ.png" alt="" loading="lazy" data-lightbox="true"><figcaption>From below correlation matrix, we can say that Churn variable has positive correlation with Monthly charges. if company increases the Monthly charges for services that might impact churn rate of customer.</figcaption></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0079" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*SplSqlZx6_nbz_-cPUV67w.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0080" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*lio75iPkLHrc-WfzsWm-RA.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0081" data-source-kind="heading">
+          
+            <h3 id="heading-81">E1: Principal Components Analysis (PCA)</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0082" data-source-kind="paragraph">
+          <p>PCA is used to reduce dimensionality of datasets. It also helps to address model overfitting problems. PCA only works with numeric values/variables.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0083" data-source-kind="heading">
+          
+            <h3 id="heading-83">Basic Steps to perform PCA</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0084" data-source-kind="paragraph">
+          <p>· Data Normalization for standardization</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0085" data-source-kind="paragraph">
+          <p>· Computing Covariance Matrix</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0086" data-source-kind="paragraph">
+          <p>· Calculating Eigenvector and eigenvalue</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0087" data-source-kind="paragraph">
+          <p>· Compute Principal Components</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0088" data-source-kind="paragraph">
+          <p>· Reduce data dimension</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0089" data-source-kind="paragraph">
+          <p>List of Principal Components: I have considered all 23 numeric variables for principal component analysis work.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0090" data-source-kind="paragraph">
+          <p>PCA works only with numeric columns.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0091" data-source-kind="paragraph">
+          <p>CaseOrder, Zip, Lat, Lng, Population ,Children,Age,Income,Outage_sec_perweek,Email,</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0092" data-source-kind="paragraph">
+          <p>Contacts, Yearly_equip_failure, Tenure,MonthlyCharge,Bandwidth_GB_Year,Timely_Responses,Timely_Fixes,</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0093" data-source-kind="paragraph">
+          <p>Timely_Replacements, Reliability, Options, Respectful_Response, Courteous_Exchange, Active_Listening</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0094" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*quXPIvnLfTjsWeYoMsygAQ.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0095" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*sCaBqjhg_BG_TLH-6EM7Fw.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0096" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*bLWR-cr1sfFTCiIS9GKHag.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0097" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*ZAlCud7zLWnsv3PqNhhS8A.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0098" data-source-kind="heading">
+          
+            <h3 id="heading-98">E2: Criteria used for Principal Components Analysis (PCA)</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0099" data-source-kind="paragraph">
+          <p>Refer section E1 and above principal component analysis(pca) code snippet</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0100" data-source-kind="paragraph">
+          <p>· For PCA work I have imported sklearn decomposition libraries. Sklearn.decomposition.pca has simplifies the PCA work using linear dimensionality reduction method. I have used PCA() function from sklearn</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0101" data-source-kind="paragraph">
+          <p>· At first, I have normalized the data to get all features at one scale. Normalizing data is important otherwise biggest dispersion column dominate loading to components.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0102" data-source-kind="paragraph">
+          <p>· As PCA works with numeric values so I have created “df_numeric” dataframe with 18 variables into it.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0103" data-source-kind="paragraph">
+          <p>· I have created list of all principal component and labeled them as PC1, PC2...PC18 so on.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0104" data-source-kind="paragraph">
+          <p>· With help of fit() and transform() functions , I have applied dimensionality reduction to normalized data</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0105" data-source-kind="paragraph">
+          <p>· I have used “Sree” plot visualization to understand which features help to preserve original dataset variance after dimension reduction</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0106" data-source-kind="paragraph">
+          <p>· To understand how each component associated with other component, I have calculated eigenvalues and eigen vectors</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0107" data-source-kind="paragraph">
+          <p>· Kaiser criterion approach (Eigenvalues ≥1) I have used Sree plot with Kaiser criterion approach to identity all Principal component for loadings. We can see that 20 component help to preserve 98% of variance.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0108" data-source-kind="paragraph">
+          <p>· To understand variance ratio in percentage form, I have also used pca.explained_variance_ratio_</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0109" data-source-kind="paragraph">
+          <p>· To calculate total variance preserve by all selected component, I have used np.cumsum() function</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0110" data-source-kind="paragraph">
+          <p>· To understand which variables are most significant in explaining the original datasets total variance, I have calculated loadings for each component. This helped to understand highest loadings in components.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0111" data-source-kind="heading">
+          
+            <h3 id="heading-111">E3: Benefits of PCA</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0112" data-source-kind="paragraph">
+          <p>· We have 50 features in original dataset but based on PCA, we can say that 20 components explain approximately 98% of the variance which means these 20 features can play significant role for EDA and model training. Reducing dimensionality of dataset and removing correlated features from original dataset improve algorithm training and save cost on model training.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0113" data-source-kind="paragraph">
+          <p>· During PCA work, we have used “Sree plot” which easily help us to visualize eigen values ≥ 1 & identify which components are significant for selection without impacting original dataset variance.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0114" data-source-kind="paragraph">
+          <p>· With PCA, we have not only reduced number of features but also found important features required for decision making based on given dataset. Such as company should more focus on customer services and timely response as per survey data features.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0115" data-source-kind="paragraph">
+          <p>· Model training with limited as well as significant features reduces model overfitting challenges.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0116" data-source-kind="paragraph">
+          <p>· With the help of PCA & correlation matrix, we can say that increasing monthly charges for service can impact customer churn rate.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0117" data-source-kind="paragraph">
+          <p>· A loadings variable suggests the highest loadings for each component.</p>
+          
+          </div>
+        
+        </div>
+      </article>
+    </main>
+  </div>
+  <div class="lightbox" id="lightbox" hidden><img alt="Expanded article image"></div>
+</body>
+</html>

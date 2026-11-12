@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chatbot to Query Enterprise Documents using Large Language Model (LLM) | IlluminAIst</title>
+  <meta name="description" content="The attached image shows how to build a large language model (LLM)-based chatbot to query an enterprise knowledge base.">
+</head>
+<body>
+<div class="shell">
+    </nav>
+    <main>
+      <div class="toolbar"><button id="theme-toggle" type="button" aria-label="Toggle dark mode">☾ Theme</button></div>
+      <article>
+        <header>
+          <div class="eyebrow">Converted article</div>
+
+</header>
+        <div id="article-content">
+        
+          <div class="reveal" data-source-block-id="b-0001" data-source-kind="paragraph">
+          <p>The attached image shows how to build a large language model (LLM)-based chatbot to query an enterprise knowledge base.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0002" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*LdK4_YvGwl4j8yZDNjnGIg.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0003" data-source-kind="heading">
+          
+            <h3 id="heading-3">Enterprise Document Repository</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0004" data-source-kind="paragraph">
+          <p>An enterprise document repository is a system for storing, organizing, and managing electronic documents. It is typically used by large organizations to store a wide variety of documents, such as contracts, financial records, customer data, and product specifications. Your internal knowledge base documents in a format suitable for querying.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0005" data-source-kind="paragraph">
+          <p>Example: Microsoft SharePoint, Google Workspace, Box, Dropbox Business, IBM FileNet, DocuWare</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0006" data-source-kind="heading">
+          
+            <h3 id="heading-6">Embeddings via Embedding Model</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0007" data-source-kind="paragraph">
+          <p>Embeddings are a key component of large language models (LLMs). They are used to represent words and phrases in a way that computers can process — as vectors, or N-dimensional arrays, of numbers. These numerical vectors capture the meaning of words by representing different characteristics of a word with numbers in an array.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0008" data-source-kind="paragraph">
+          <p>In this step, Embed the text chunks using an embedding model. This transforms each chunk of text into a numerical representation that captures its essence.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0009" data-source-kind="paragraph">
+          <p>Example: Word2Vec, OpenAI Embedding Model (via Subscription only) , BERT, Node2Vec</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0010" data-source-kind="heading">
+          
+            <h3 id="heading-10">Vector Database</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0011" data-source-kind="paragraph">
+          <p>Vector databases are important because they provide a way to efficiently store and query vector data. Vector data is a type of data that is represented as a vector, or a multidimensional array of numbers. Vector data is commonly used in machine learning applications, such as natural language processing (NLP), computer vision, and recommendation systems.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0012" data-source-kind="paragraph">
+          <p>Store the vector embeddings in a vector database. This database will serve as the repository for your encoded knowledge base.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0013" data-source-kind="paragraph">
+          <p>Examples: AWS OpenSearch, Azure Cognitive Search, Pinecone, Milvus, Weaviate, Faiss</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0014" data-source-kind="heading">
+          
+            <h3 id="heading-14">Vector Indexing</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0015" data-source-kind="paragraph">
+          <p>Approximate nearest neighbor (ANN) search is a technique for finding the closest points to a query point in a high-dimensional space. ANN search is often used in machine learning applications, such as natural language processing, computer vision, and recommendation systems.ANN search algorithms are designed to be fast and efficient, even when dealing with large datasets and complex feature spaces. However, ANN search algorithms typically trade accuracy for speed. This means that the results of an ANN search may not be as accurate as the results of an exhaustive search. Index the vector embeddings using an approximate nearest neighbor (ANN) search algorithm. This will allow you to quickly find the most similar vectors to a given query.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0016" data-source-kind="heading">
+          
+            <h3 id="heading-16">Online Process to Submit User Query via Chatbot</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0017" data-source-kind="paragraph">
+          <p>Build a chatbot using an LLM. The LLM will be used to generate answers to user queries by retrieving relevant information from the vector database. Connect the chatbot to the vector database. This can be done using a REST API or another communication protocol.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0018" data-source-kind="paragraph">
+          <p>Deploy the chatbot to a production environment. This can involve making it available through a website, mobile app, or other channel. Once the chatbot is deployed, users can interact with it by asking questions in natural language. The chatbot will use the LLM to generate answers by retrieving relevant information from the vector database.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0019" data-source-kind="heading">
+          
+            <h3 id="heading-19">Here is an example of how the chatbot would work:</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0020" data-source-kind="list">
+          <ul><li>User : Where can find good Strategic Articles?</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0021" data-source-kind="list">
+          <ul><li>Chatbot : You can find good strategic Articles on Milan’s Outlook.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0022" data-source-kind="paragraph">
+          <p>The chatbot would first retrieve the vector embedding for the query “Where can find good Strategic Articles?”. Then, it would use the ANN search algorithm to find the most similar vector embeddings in the vector database. These embeddings would correspond to articles, blog posts, or FAQs about the good strategic Articles. The chatbot would then use the LLM to generate an answer based on this information.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0023" data-source-kind="paragraph">
+          <p>LLM-based chatbots can be a powerful way to query enterprise knowledge bases. They can provide users with quick and accurate answers to their questions, even if they are complex or open-ended.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0024" data-source-kind="paragraph">
+          <p>Please note that the diagram in the image is a simplified representation of the process. In practice, there are a number of additional factors to consider, such as the specific LLM that is used, the way that the knowledge base is structured, and the security and performance requirements of the chatbot.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0025" data-source-kind="heading">
+          
+            <h3 id="heading-25">Offline Process (In-Short)</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0026" data-source-kind="list">
+          <ul><li>The user ingests enterprise documents.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0027" data-source-kind="list">
+          <ul><li>The query is sent to an embedding model, which generates a vector representation of the query.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0028" data-source-kind="list">
+          <ul><li>The vector representation of the query is compared to the vector representations of all documents in the enterprise document repository.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0029" data-source-kind="list">
+          <ul><li>The documents with the most similar vector representations to the query are retrieved.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0030" data-source-kind="heading">
+          
+            <h3 id="heading-30">Online Process (In-Short)</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0031" data-source-kind="list">
+          <ul><li>The user enters a query.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0032" data-source-kind="list">
+          <ul><li>The query is sent to a large language model (LLM) embedding model.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0033" data-source-kind="list">
+          <ul><li>The LLM generates a vector representation of the query.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0034" data-source-kind="list">
+          <ul><li>The vector representation of the query is compared to the vector representations of all documents in the vector database.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0035" data-source-kind="list">
+          <ul><li>The documents with the most similar vector representations to the query are retrieved.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0036" data-source-kind="heading">
+          
+            <h3 id="heading-36">Key differences between the offline and online processes:</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0037" data-source-kind="list">
+          <ul><li>The offline process is a batch process, meaning that it is performed periodically on the entire document repository. The online process is a real-time process, meaning that it is performed on demand for each user query.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0038" data-source-kind="list">
+          <ul><li>The offline process uses a vector indexing algorithm to find the most similar documents to the query. The online process uses a nearest-neighbor search algorithm to find the most similar documents to the query.</li></ul>
+          
+          </div>
+        
+        </div>
+      </article>
+    </main>
+  </div>
+  <div class="lightbox" id="lightbox" hidden><img alt="Expanded article image"></div>
+</body>
+</html>

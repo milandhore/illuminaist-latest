@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Clear Confusion: Architecture Thinking is NOT Solution Design | IlluminAIst</title>
+  <meta name="description" content="Brain-Map for Architecture thinking and Transforming Challenges into Opportunities. People always get confused between solution design and architecture thinking .">
+</head>
+<body>
+<div class="shell">
+    </nav>
+    <main>
+      <div class="toolbar"><button id="theme-toggle" type="button" aria-label="Toggle dark mode">☾ Theme</button></div>
+      <article>
+        <header>
+          <div class="eyebrow">Converted article</div>
+
+</header>
+        <div id="article-content">
+        
+          <div class="reveal" data-source-block-id="b-0001" data-source-kind="paragraph">
+          <p>Brain-Map for Architecture thinking and Transforming Challenges into Opportunities. People always get confused between solution design and architecture thinking .</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0002" data-source-kind="paragraph">
+          <p>Architectural thinking involves viewing situations from an architect’s perspective. This means understanding how changes affect scalability, observing system interactions, and selecting the most suitable third-party libraries and frameworks.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0003" data-source-kind="paragraph">
+          <p>To think like an architect, one must first grasp the concept of software architecture and distinguish it from design. It requires extensive knowledge to identify solutions and opportunities that others might miss, comprehend the significance of business drivers and their impact on architectural decisions, and evaluate and balance trade-offs between different solutions and technologies.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0004" data-source-kind="heading">
+          
+            <h3 id="heading-4">Architecture Versus Design</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0005" data-source-kind="paragraph">
+          <p>Imagine your dream house. How many floors does it have? Is the roof flat or peaked? Is it a sprawling single-story ranch or a multistory contemporary home? How many bedrooms are there? These elements define the house’s overall structure — its architecture. Now, think about the interior. Does it have carpeting or hardwood floors? What color are the walls? Are there floor lamps or ceiling lights? These details pertain to the house’s design.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0006" data-source-kind="paragraph">
+          <p>Similarly, software architecture focuses on a system’s structure, while design emphasizes its appearance. For instance, choosing microservices shapes the system’s architecture, whereas the user interface (UI) screen’s look and feel define its design.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0007" data-source-kind="paragraph">
+          <p>Decisions like breaking a service into smaller parts or selecting a UI framework often lie between architecture and design, making it challenging to categorize them.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0008" data-source-kind="paragraph">
+          <p>Consider these criteria to determine if something is more about architecture or design:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0009" data-source-kind="list">
+          <ul><li>Is it more strategic or tactical?</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0010" data-source-kind="list">
+          <ul><li>How much effort is required to change or construct it?</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0011" data-source-kind="list">
+          <ul><li>How significant are the trade-offs?</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0012" data-source-kind="heading">
+          
+            <h3 id="heading-12">Strategic v/s Tactical Decisions</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0013" data-source-kind="paragraph">
+          <p>The more strategic a decision, the more it aligns with architectural considerations. Conversely, tactical decisions tend to focus more on design aspects. Generally, strategic decisions are long-term, while tactical decisions are short-term and often independent of other actions or decisions.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0014" data-source-kind="paragraph">
+          <p>To determine whether a decision is strategic or tactical, consider the following questions:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0015" data-source-kind="paragraph">
+          <p>How much thought and planning is involved?</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0016" data-source-kind="list">
+          <ul><li>A decision made in a few minutes is likely tactical and design-oriented, whereas one requiring weeks of planning is probably strategic and architectural.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0017" data-source-kind="paragraph">
+          <p>How many people are involved?</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0018" data-source-kind="list">
+          <ul><li>A decision made alone or with a colleague is likely tactical and design-focused, while one involving numerous meetings with various stakeholders is likely strategic and architectural.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0019" data-source-kind="paragraph">
+          <p>Is the decision a long-term vision or a short-term action?</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0020" data-source-kind="list">
+          <ul><li>A decision expected to change soon is usually tactical and design-related, whereas one intended to last a long time is typically strategic and architectural.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0021" data-source-kind="paragraph">
+          <p>While these questions are somewhat subjective, they can help determine whether a decision is strategic or tactical, and thus more about architecture or design.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0022" data-source-kind="heading">
+          
+            <h3 id="heading-22">Level of Effort</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0023" data-source-kind="quote">
+          <blockquote>In his renowned paper “ Who Needs an Architect? ”, software architect Martin Fowler states that architecture is “the stuff that’s hard to change.” Generally, the harder something is to change, the more effort it requires, placing it towards the architectural side of the spectrum. Conversely, tasks that require minimal effort to implement or change fall more on the design side.</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0024" data-source-kind="paragraph">
+          <p>For instance, transitioning from a monolithic layered architecture to microservices demands significant effort, making it an architectural concern. On the other hand, rearranging fields on a screen requires minimal effort, thus being more about design.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0025" data-source-kind="heading">
+          
+            <h3 id="heading-25">Significance of Trade-offs</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0026" data-source-kind="paragraph">
+          <p>Evaluating the trade-offs of a decision can greatly aid in determining whether it is more architectural or design-oriented. The more significant the trade-offs, the more architectural the decision tends to be. For example, opting for a microservices architecture enhances scalability, agility, elasticity, and fault tolerance. However, it also introduces high complexity, significant costs, poor data consistency, and performance issues due to service coupling. These substantial trade-offs indicate that this decision is more architectural.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0027" data-source-kind="paragraph">
+          <p>Design decisions also involve trade-offs. For example, breaking apart a class file improves maintainability and readability but increases the number of classes to manage. These trade-offs are less significant compared to those of microservices, making this decision more design-oriented.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0028" data-source-kind="heading">
+          
+            <h3 id="heading-28">Technical Breadth</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0029" data-source-kind="paragraph">
+          <p>Unlike developers, who need deep technical expertise to perform their roles, software architects require a broad technical understanding to view things from an architectural perspective.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0030" data-source-kind="quote">
+          <blockquote>Technical depth involves having extensive knowledge of a specific programming language, platform, framework, or product.</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0031" data-source-kind="quote">
+          <blockquote>In contrast, technical breadth means having a general understanding of many different areas.</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0032" data-source-kind="paragraph">
+          <p>To better grasp this distinction, consider the knowledge pyramid illustrated in below diagram. It represents all technical knowledge, divided into three levels: stuff you know , stuff you know you don’t know , and stuff you don’t know you don’t know .</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0033" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*o4r8x33wvWP6OSQLv8cL0Q.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0034" data-source-kind="list">
+          <ul><li>Stuff you know includes the technologies, frameworks, languages, and tools technologists use daily (such as a Java programmer knowing Java). They are proficient or even expert in these areas. This level of knowledge, represented by the top part of the pyramid, is the smallest and contains the fewest items. This is because technologists must choose specific areas to develop expertise — no one can be an expert in everything.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0035" data-source-kind="list">
+          <ul><li>Stuff you know you don’t know (the middle part of the pyramid) includes things a technologist is somewhat familiar with or has heard of but has little or no experience in. For example, most technologists have heard of AI/ML and know it’s a programming language based on python, but they can’t write code in python. This level of knowledge is larger than the top level because people can be familiar with many more things than they can develop expertise in.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0036" data-source-kind="list">
+          <ul><li>Stuff you don’t know you don’t know is the largest part of the knowledge pyramid. It encompasses all the technologies, tools, frameworks, and languages that could be the perfect solution to a problem, if only the technologist knew they existed. The goal in any career should be to move items from the “stuff you don’t know you don’t know” category to the “stuff you know you don’t know” category — and, when necessary, to move items from the middle part of the pyramid to the top: the “stuff you know.”</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0037" data-source-kind="heading">
+          
+            <h3 id="heading-37">Everything in architecture involves trade-offs</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0038" data-source-kind="paragraph">
+          <p>Everything in architecture involves trade-offs, which is why the common answer to any architectural question is “it depends.” While this response might be frustrating, it is unfortunately true .</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0039" data-source-kind="paragraph">
+          <p>You cannot simply Google the answer or ask an AI engine whether REST or messaging is better for your system, or if microservices is the right architecture style for your new product, because the answer depends on numerous factors. These include the deployment environment, business drivers, company culture, budgets, timeframes, developer skill sets, and many other considerations . Each environment, situation, and problem is unique, making architecture a challenging field.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0040" data-source-kind="heading">
+          
+            <h3 id="heading-40">Understanding Business Drivers</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0041" data-source-kind="paragraph">
+          <p>Thinking like an architect involves understanding the business drivers essential for the system’s success and translating these requirements into architectural characteristics such as scalability, performance, and availability. This challenging task requires the architect to possess some business-domain knowledge and maintain collaborative relationships with key business stakeholders.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0042" data-source-kind="heading">
+          
+            <h3 id="heading-42">Balancing Architecture and Hands-On Coding</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0043" data-source-kind="paragraph">
+          <p>One of the challenging tasks an architect faces is balancing hands-on coding with software architecture responsibilities. We firmly believe that every architect should code and maintain a certain level of technical depth (see “Technical Breadth” as well).</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0044" data-source-kind="paragraph">
+          <p>While this may seem straightforward, it can be quite difficult to achieve.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0045" data-source-kind="list">
+          <ul><li>My first tip for anyone striving to balance hands-on coding with being a software architect is to avoid the Bottleneck Trap. This antipattern occurs when an architect takes ownership of critical path code (usually the underlying framework or more complex parts) and becomes a bottleneck for the team.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0046" data-source-kind="list">
+          <ul><li>To avoid the Bottleneck Trap, architects should delegate critical parts of the system to other team members and focus on coding minor business functionalities (such as a service or UI screen) one to three iterations ahead.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0047" data-source-kind="heading">
+          
+            <h3 id="heading-47">Some tips & techniques for architects</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0048" data-source-kind="quote">
+          <blockquote>Frequent Proofs of Concept</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0049" data-source-kind="quote">
+          <blockquote>Conducting frequent proofs-of-concept (POCs) requires architects to write source code, which helps validate architectural decisions by considering implementation details. For instance, if an architect is deciding between two caching solutions, developing a working example for each and comparing the results can be effective.</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0050" data-source-kind="quote">
+          <blockquote>Tackle Technical Debt</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0051" data-source-kind="quote">
+          <blockquote>Architects can stay hands-on by addressing technical debt, allowing the development team to focus on critical functional user stories. Since technical debt is usually low priority, if an architect doesn’t complete a technical debt task within an iteration, it generally won’t impact the iteration’s success.</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0052" data-source-kind="quote">
+          <blockquote>Fix Bugs</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0053" data-source-kind="quote">
+          <blockquote>Working on bug fixes within an iteration is another way for architects to maintain hands-on coding skills while assisting the development team.</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0054" data-source-kind="quote">
+          <blockquote>Automate</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0055" data-source-kind="quote">
+          <blockquote>Creating simple command-line tools and analyzers to help the development team with daily tasks is a great way for architects to stay hands-on and enhance team efficiency.</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0056" data-source-kind="heading">
+          
+            <h3 id="heading-56">At End.....</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0057" data-source-kind="paragraph">
+          <p>However, thinking like an architect involves more than these activities. It requires understanding the overall system structure , translating business needs into architectural characteristics , and viewing the system through its logical components — the building blocks of a system.</p>
+          
+          </div>
+        
+        </div>
+      </article>
+    </main>
+  </div>
+  <div class="lightbox" id="lightbox" hidden><img alt="Expanded article image"></div>
+</body>
+</html>

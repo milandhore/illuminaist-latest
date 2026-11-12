@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>LangChain Magic: Cutting-Edge Techniques for Text Generation | IlluminAIst</title>
+  <meta name="description" content="Mastering Complex Generative AI Challenges with LangChain">
+</head>
+<body>
+<div class="shell">
+    </nav>
+    <main>
+      <div class="toolbar"><button id="theme-toggle" type="button" aria-label="Toggle dark mode">☾ Theme</button></div>
+      <article>
+        <header>
+          <div class="eyebrow">Converted article</div>
+
+</header>
+        <div id="article-content">
+        
+          <div class="reveal" data-source-block-id="b-0001" data-source-kind="image">
+          <figure><img src="https://cdn-images-1.medium.com/max/800/1*l-e_MX3QB-RQBShj3uQ-QQ.png" alt="" loading="lazy" data-lightbox="true"></figure>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0002" data-source-kind="paragraph">
+          <p>Mastering Complex Generative AI Challenges with LangChain</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0003" data-source-kind="paragraph">
+          <p>While simple prompt engineering techniques can handle most tasks, there are times when you need a more robust toolkit to tackle complex generative AI problems. These challenges include:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0004" data-source-kind="list">
+          <ul><li>Managing Long Contexts : For example, summarizing an entire book into a concise and digestible synopsis.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0005" data-source-kind="list">
+          <ul><li>Combining Sequential Inputs/Outputs : Such as creating a comprehensive story for a book, including characters, plot, and world-building.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0006" data-source-kind="list">
+          <ul><li>Performing Complex Reasoning Tasks : Like using AI as an agent to help you achieve personal fitness goals.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0007" data-source-kind="paragraph">
+          <p>To effectively address these sophisticated AI challenges, it’s highly beneficial to become familiar with LangChain, an open-source framework. LangChain significantly simplifies and enhances your AI workflows, making it easier to manage and execute complex tasks.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0008" data-source-kind="paragraph">
+          <p>L angChain is a powerful framework designed to create applications using Large Language Models (LLMs). Available in both Python and TypeScript , LangChain goes beyond simple API interactions with language models. It focuses on two key enhancements:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0009" data-source-kind="list">
+          <ul><li>Data Awareness : LangChain seamlessly connects language models with external data sources, ensuring they are well-informed and contextually relevant.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0010" data-source-kind="list">
+          <ul><li>Agency : This framework empowers language models to interact with and influence their environment, making them more dynamic and effective.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0011" data-source-kind="paragraph">
+          <p>LangChain offers a variety of modular abstractions essential for working with LLMs, along with numerous implementations to support these abstractions. This versatility makes it an invaluable tool for enterprise architecture leaders looking to leverage advanced AI capabilities.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0012" data-source-kind="heading">
+          
+            <h3 id="heading-12">A Modular Approach for AI Engineers</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0013" data-source-kind="paragraph">
+          <p>LangChain is designed with user-friendliness in mind, offering modules that can be used independently or together to create powerful applications. Here are the six key modules within LangChain:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0014" data-source-kind="list">
+          <ul><li>Model I/O : Manages the input and output operations related to the language model.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0015" data-source-kind="list">
+          <ul><li>Retrieval : Focuses on fetching relevant text for the language model to use.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0016" data-source-kind="list">
+          <ul><li>Chains : Also known as LangChain runnables, these enable the creation of sequences of operations or function calls for the language model.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0017" data-source-kind="list">
+          <ul><li>Agents : Allow chains to decide which tools to use based on high-level instructions or directives.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0018" data-source-kind="list">
+          <ul><li>Memory : Maintains the state of an application across different runs of a chain.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0019" data-source-kind="list">
+          <ul><li>Callbacks : Execute additional code on specific events, such as when a new token is generated.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0020" data-source-kind="paragraph">
+          <p>These modules make LangChain a versatile and powerful tool for AI Engineers, enabling them to build sophisticated AI-driven applications with ease.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0021" data-source-kind="paragraph">
+          <p>You can install LangChain on your terminal with either of these commands:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0022" data-source-kind="quote">
+          <blockquote>pip install langchain langchain-openai</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0023" data-source-kind="quote">
+          <blockquote>conda install -c conda-forge langchain langchain-openai</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0024" data-source-kind="paragraph">
+          <p>It’s recommended to install the packages within a virtual environment:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0025" data-source-kind="paragraph">
+          <p>Create and Activate the virtual environment with dependencies</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0026" data-source-kind="quote">
+          <blockquote>python -m venv venv</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0027" data-source-kind="quote">
+          <blockquote>source venv/bin/activate</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0028" data-source-kind="quote">
+          <blockquote>pip install -r requirements.txt</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0029" data-source-kind="paragraph">
+          <p>LangChain requires integrations with one or more model providers. For example, to use OpenAI’s model APIs, you’ll need to install their Python package with</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0030" data-source-kind="quote">
+          <blockquote>pip install openai</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0031" data-source-kind="paragraph">
+          <p>it’s best practice to set an environment variable called OPENAI_API_KEY in your terminal or load it from an .env file using python-dotenv . However, for prototyping you can choose to skip this step by passing in your API key directly when loading a chat model in LangChain.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0032" data-source-kind="paragraph">
+          <p>Best Practices for Managing API Keys in LangChain</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0033" data-source-kind="paragraph">
+          <p>When working with LangChain, it’s recommended to set an environment variable called OPENAI_API_KEY in your terminal. Alternatively, you can load it from an .env file using the python-dotenv package. This approach helps keep your API keys secure and organized.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0034" data-source-kind="paragraph">
+          <p>However, if you’re just prototyping, you can simplify the process by directly passing your API key when loading a chat model in LangChain. While this method is convenient for quick tests, it’s important to adopt the best practice of using environment variables for production environments to ensure security and maintainability.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0035" data-source-kind="code">
+          <pre><code>from
+langchain_openai.chat_models
+import
+ChatOpenAI
+chat = ChatOpenAI(api_key=
+"api_key"
+)</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0036" data-source-kind="paragraph">
+          <p>In the ever-evolving world of Large Language Models (LLMs), one major challenge is the lack of standardization across different model APIs. This disparity can complicate prompt engineering and hinder the seamless integration of various models into your projects.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0037" data-source-kind="paragraph">
+          <p>LangChain addresses this issue effectively. As a comprehensive framework, LangChain allows you to easily work with different model interfaces without the need to constantly reinvent your prompts or code. Its platform-agnostic approach supports rapid experimentation with a wide range of models, including Anthropic, Vertex AI, OpenAI, and BedrockChat.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0038" data-source-kind="quote">
+          <blockquote>By using LangChain, you can streamline the model evaluation process, saving valuable time and resources. This makes it an essential tool for enterprise teams looking to integrate diverse AI models efficiently.</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0039" data-source-kind="code">
+          <pre><code>from
+langchain_openai.chat_models
+import
+ChatOpenAI
+from
+langchain.schema
+import
+AIMessage, HumanMessage, SystemMessage
+chat = ChatOpenAI(temperature=
+0.5
+)
+messages = [SystemMessage(content=
+'''Act as AI Engineer
+at the startup company..'''
+),
+HumanMessage(content=
+'''Please can you provide a funny joke
+about AI Engineer ?'''
+)]
+response = chat.invoke(
+input
+=messages)
+print
+(response.content)</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0040" data-source-kind="code">
+          <pre><code>Sure, here's a lighthearted joke for you:
+Why did the AI engineer break up with their partner?
+Because they had too many "issues" to debug!</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0041" data-source-kind="paragraph">
+          <p>To begin, you’ll need to import the necessary components: ChatOpenAI , AIMessage , HumanMessage , and SystemMessage . Next, create an instance of the ChatOpenAI class, setting the temperature parameter to 0.5 to control the randomness of the responses.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0042" data-source-kind="paragraph">
+          <p>Once your model is set up, you’ll create a list called messages . This list will include a SystemMessage object to define the role of the language model, and a HumanMessage object to ask for a software engineer-related joke.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0043" data-source-kind="paragraph">
+          <p>By calling the chat model with .invoke(input=messages) , you feed the language model with your list of messages. You can then retrieve the model’s response using response.content .</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0044" data-source-kind="heading">
+          
+            <h3 id="heading-44">Multiple LLM Response Generations</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0045" data-source-kind="paragraph">
+          <p>In certain scenarios, it can be beneficial to generate multiple responses from Large Language Models (LLMs). This is especially useful when creating dynamic content, such as social media posts. Instead of providing a single list of messages, you can supply a list of message lists to the LLM.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0046" data-source-kind="paragraph">
+          <p>This approach allows the model to generate a variety of responses, giving you more options to choose from and enhancing the dynamism of your content.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0047" data-source-kind="code">
+          <pre><code># 2x lists of messages, which is the same as [messages, messages]
+synchronous_llm_result = chat.batch([messages]*
+2
+)
+print
+(synchronous_llm_result)
+Output:
+[AIMessage(content=
+'''Sure, here's a lighthearted joke for you:\n\nWhy did
+the AI engineer go broke?\n\nBecause he kept forgetting to Ctrl+ Z
+his expenses!'''
+),
+AIMessage(content=
+'''Sure, here\'s a lighthearted joke for you:\n\nWhy do
+AI engineers prefer dark mode?\n\nBecause it\'s easier on their
+"byte" vision!'''
+)]</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0048" data-source-kind="paragraph">
+          <p>The true advantage of using .batch() over .invoke() is that you can parallelize the number of API requests made to OpenAI.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0049" data-source-kind="heading">
+          
+            <h3 id="heading-49">LangChain Prompt Templates</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0050" data-source-kind="paragraph">
+          <p>The Importance of Prompt Templates in Scaling LLM Applications</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0051" data-source-kind="paragraph">
+          <p>So far, you have been hardcoding strings directly into your ChatOpenAI objects. However, as your LLM applications grow, it’s crucial to start using prompt templates.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0052" data-source-kind="paragraph">
+          <p>Prompt templates are essential for creating consistent and reproducible prompts for AI language models. They consist of a template — a text string that can accept parameters and construct a dynamic text prompt for the language model. This approach not only streamlines your workflow but also ensures that your prompts are scalable and maintainable as your projects expand.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0053" data-source-kind="paragraph">
+          <p>Without prompt templates, you would likely use Python f-string formatting:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0054" data-source-kind="code">
+          <pre><code>language =
+"Python"
+prompt =
+f"What is the best way to learn coding in
+{language}
+?"
+print
+(prompt)
+# What is the best way to learn coding in Python?</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0055" data-source-kind="paragraph">
+          <p>Why Choose LangChain’s Prompt Templates Over f-Strings?</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0056" data-source-kind="paragraph">
+          <p>You might wonder why not just use an f-string for prompt templating. While f-strings are simple and effective, LangChain’s prompt templates offer several advantages that make them a better choice for more complex applications:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0057" data-source-kind="list">
+          <ul><li>Input Validation : LangChain’s templates can validate your prompt inputs, ensuring they meet the required criteria.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0058" data-source-kind="list">
+          <ul><li>Prompt Composition : Easily combine multiple prompts together, allowing for more sophisticated and dynamic interactions.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0059" data-source-kind="list">
+          <ul><li>Custom Selectors : Define custom selectors to inject k-shot examples into your prompts, enhancing the model’s performance.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0060" data-source-kind="list">
+          <ul><li>File Management : Save and load prompts from .yml and .json files, making it easier to manage and reuse your prompts.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0061" data-source-kind="list">
+          <ul><li>Custom Templates : Create custom prompt templates that can execute additional code or instructions when they are created, adding a layer of functionality beyond simple text replacement.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0062" data-source-kind="paragraph">
+          <p>These features make LangChain’s prompt templates a powerful tool for developing robust and scalable AI applications.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0063" data-source-kind="paragraph">
+          <p>Harnessing the Power of the Pipe Operator in LangChain Expression Language (LCEL)</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0064" data-source-kind="paragraph">
+          <p>The | pipe operator is a crucial feature of LangChain Expression Language (LCEL). It enables you to link different components or runnables in a data processing pipeline seamlessly.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0065" data-source-kind="paragraph">
+          <p>In LCEL, the | operator works similarly to the Unix pipe operator. It takes the output from one component and uses it as the input for the next component in the sequence. This chaining mechanism allows for efficient and streamlined data processing, making your workflows more effective and easier to manage.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0066" data-source-kind="code">
+          <pre><code>from
+langchain_openai.chat_models
+import
+ChatOpenAI
+from
+langchain_core.prompts
+import
+(SystemMessagePromptTemplate,
+ChatPromptTemplate)
+template =
+"""
+You are a creative consultant brainstorming names for businesses.
+You must follow the following principles:
+{principles}
+Please generate a numerical list of five catchy names for a start-up in the
+{industry} industry that deals with {context}?
+Here is an example of the format:
+1. Name1
+2. Name2
+3. Name3
+4. Name4
+5. Name5
+"""
+model = ChatOpenAI()
+system_prompt = SystemMessagePromptTemplate.from_template(template)
+chat_prompt = ChatPromptTemplate.from_messages([system_prompt])
+chain = chat_prompt | model
+result = chain.invoke({
+"industry"
+:
+"medical"
+,
+"context"
+:
+'''creating AI solutions by automatically summarizing patient
+records'''
+,
+"principles"
+:
+'''1. Each name should be short and easy to
+remember. 2. Each name should be easy to pronounce.
+3. Each name should be unique and not already taken by another company.'''
+})
+print
+(result.content)</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0067" data-source-kind="paragraph">
+          <p>To get started, you’ll need to import ChatOpenAI , SystemMessagePromptTemplate , and ChatPromptTemplate . Next, define a prompt template with specific guidelines to instruct the LLM to generate business names. Initialize the chat with ChatOpenAI() , and create your prompt template using SystemMessagePromptTemplate.from_template(template) and ChatPromptTemplate.from_messages([system_prompt]) .</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0068" data-source-kind="paragraph">
+          <p>You can then create an LCEL chain by linking the chat_prompt and the model using the pipe operator. When invoked, this chain replaces the {industries} , {context} , and {principles} placeholders in the prompt with the corresponding values from a dictionary.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0069" data-source-kind="paragraph">
+          <p>Finally, extract the LLM’s response by accessing the .content property on the result variable, giving you the generated business names as a string.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0070" data-source-kind="heading">
+          
+            <h3 id="heading-70">Automating Data Extraction with LangChain Output Parsers</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0071" data-source-kind="paragraph">
+          <p>While regular expressions (regex) can be used to extract structured data from text, LangChain offers a more automated solution with its output parsers. These parsers provide a higher-level abstraction for parsing structured data from LLM string responses. Here are the available output parsers in LangChain:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0072" data-source-kind="list">
+          <ul><li>List Parser : Returns a list of comma-separated items.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0073" data-source-kind="list">
+          <ul><li>Datetime Parser : Converts LLM output into datetime format.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0074" data-source-kind="list">
+          <ul><li>Enum Parser : Transforms strings into enum values.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0075" data-source-kind="list">
+          <ul><li>Auto-fixing Parser : Wraps another output parser and calls another LLM to fix errors if the initial parser fails.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0076" data-source-kind="list">
+          <ul><li>Pydantic (JSON) Parser : Converts LLM responses into JSON that conforms to a Pydantic schema.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0077" data-source-kind="list">
+          <ul><li>Retry Parser : Retries a failed parse from a previous output parser.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0078" data-source-kind="list">
+          <ul><li>Structured Output Parser : Useful for returning multiple fields.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0079" data-source-kind="list">
+          <ul><li>XML Parser : Converts LLM responses into an XML-based format.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0080" data-source-kind="paragraph">
+          <p>LangChain output parsers have two key functions:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0081" data-source-kind="list">
+          <ul><li>.get_format_instructions() : Provides the necessary instructions in your prompt to output a structured format that can be parsed.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0082" data-source-kind="list">
+          <ul><li>.parse(llm_output: str) : Parses your LLM responses into a predefined format.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0083" data-source-kind="paragraph">
+          <p>These tools simplify the process of extracting structured data, making your AI and ML workflows more efficient and effective.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0084" data-source-kind="heading">
+          
+            <h3 id="heading-84">Evaluating AI Models with LangChain</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0085" data-source-kind="paragraph">
+          <p>In addition to using output parsers to check for formatting errors, most AI systems employ evaluation metrics, or “evals,” to measure the performance of each prompt response. LangChain offers a variety of built-in evaluators that can be logged directly into their LangSmith platform for debugging, monitoring, and testing. Another platform, Weights and Biases, provides similar functionality and tracing capabilities for LLMs.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0086" data-source-kind="quote">
+          <blockquote>Evaluation metrics are not just for testing prompts; they can also help identify positive and negative examples for retrieval and build datasets for fine-tuning custom models.</blockquote>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0087" data-source-kind="paragraph">
+          <p>Most evaluation metrics rely on test cases, which are input-output pairs where the correct answer is known. These reference answers are often created manually by humans, but it’s also common to use a more advanced model like GPT-4 to generate the ground truth answers. For example, given a list of financial transaction descriptions, GPT-4 can classify each transaction with a category and type. This process is detailed in the langchain-evals.ipynb Jupyter Notebook available in the book’s GitHub repository.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0088" data-source-kind="paragraph">
+          <p>It’s recommended to test with an external API first before committing to self-hosting an open-source model.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0089" data-source-kind="heading">
+          
+            <h3 id="heading-89">Few-Shot Prompt Templates Creations</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0090" data-source-kind="paragraph">
+          <p>Choosing Between Zero-Shot and Few-Shot Learning in LLMs</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0091" data-source-kind="paragraph">
+          <p>When working with the generative capabilities of Large Language Models (LLMs), you often need to decide between zero-shot and few-shot learning (k-shot).</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0092" data-source-kind="paragraph">
+          <p>Zero-shot learning doesn’t require any explicit examples and relies solely on the prompt to adapt to tasks. However, because it depends heavily on the pretraining phase, it may not always produce precise results.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0093" data-source-kind="paragraph">
+          <p>Few-shot learning, on the other hand, involves providing a few examples of the desired task performance within the prompt. This approach allows you to fine-tune the model’s behavior, leading to more accurate and desirable outputs.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0094" data-source-kind="paragraph">
+          <p>One challenge you might face is balancing the inclusion of high-quality k-shot examples with the token limit of the LLM’s context length. This balance is crucial to ensure you generate effective and consistent outputs without exceeding the model’s capacity.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0095" data-source-kind="code">
+          <pre><code>from
+langchain_core.output_parsers
+import
+StrOutputParser
+final_prompt = ChatPromptTemplate.from_messages(
+[(
+"system"
+,
+'''You are responsible for answering
+questions about countries. Only return the country
+name.'''
+),
+few_shot_prompt,(
+"human"
+,
+"{question}"
+),]
+)
+model = ChatOpenAI()
+# Creating the LCEL chain with the prompt, model, and a StrOutputParser():
+chain = final_prompt | model | StrOutputParser()
+result = chain.invoke({
+"question"
+:
+"What is the capital of America?"
+})
+print
+(result)
+===============
+Output:
+Washington, D.C.</code></pre>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0096" data-source-kind="paragraph">
+          <p>When you invoke the LCEL chain on final_prompt , your few-shot examples are added after the SystemMessage .</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0097" data-source-kind="paragraph">
+          <p>You’ll notice that the LLM only returns “Washington, D.C.” This happens because the response is parsed by StrOutputParser() , an output parser. Using StrOutputParser() ensures that LLM responses in chains are returned as string values. This method is commonly used to maintain consistency in the output format.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0098" data-source-kind="paragraph">
+          <p>You’ll delve deeper into this topic while exploring sequential chains in LCEL, where you’ll see how output parsers play a crucial role in refining and structuring LLM responses.</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0099" data-source-kind="heading">
+          
+            <h3 id="heading-99">Understanding the Limitations of Few-Shot Learning</h3>
+
+</div>
+        
+          <div class="reveal" data-source-block-id="b-0100" data-source-kind="paragraph">
+          <p>Few-shot learning can be incredibly useful in certain scenarios, but it does have its limitations. Here are the main challenges:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0101" data-source-kind="list">
+          <ul><li>Overfitting to Examples : Pretrained models like GPT-4 can sometimes overfit to the few-shot examples provided, prioritizing these examples over the actual prompt.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0102" data-source-kind="list">
+          <ul><li>Token Limit Constraints : LLMs have a token limit, which means there’s always a trade-off between the number of examples you can provide and the length of the response. More examples might limit the response length and vice versa.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0103" data-source-kind="paragraph">
+          <p>To address these limitations, consider the following strategies:</p>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0104" data-source-kind="list">
+          <ul><li>Experiment with Prompt Phrasing : If few-shot prompting isn’t yielding the desired results, try rephrasing the prompts or using different language. This trial-and-error approach can lead to better responses.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0105" data-source-kind="list">
+          <ul><li>Explicit Instructions : Include clear instructions for the model to ignore the examples after understanding the task or to use the examples just for formatting guidance. This can help prevent overfitting.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0106" data-source-kind="list">
+          <ul><li>Fine-Tuning : For complex tasks where few-shot learning isn’t sufficient, consider fine-tuning your model. Fine-tuning allows the model to gain a more nuanced understanding of specific tasks, significantly improving performance.</li></ul>
+          
+          </div>
+        
+          <div class="reveal" data-source-block-id="b-0107" data-source-kind="paragraph">
+          <p>By implementing these strategies, you can enhance the effectiveness of few-shot learning and achieve better results in your AI and ML projects.</p>
+          
+          </div>
+        
+        </div>
+      </article>
+    </main>
+  </div>
+  <div class="lightbox" id="lightbox" hidden><img alt="Expanded article image"></div>
+</body>
+</html>
