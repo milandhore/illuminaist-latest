@@ -1,11 +1,11 @@
 export const newsItems = [
   {
     "id": 1,
-    "title": "AI-Driven Education: Chicago Private School's New Model",
-    "excerpt": "A new Chicago private school now uses AI for personalized student teaching.…",
-    "source": "CBS News",
-    "slug": "ai_driven_education_chicago_private_school_s_new_model",
-    "htmlPath": "/articles/news/ai_driven_education_chicago_private_school_s_new_model.html",
+    "title": "AI Ethics: Why Key Community Conversations Must Evolve",
+    "excerpt": "The rapid evolution of Artificial Intelligence demands a robust,…",
+    "source": "eJewishPhilanthropy",
+    "slug": "ai_ethics_why_key_community_conversations_must_evolve",
+    "htmlPath": "/articles/news/ai_ethics_why_key_community_conversations_must_evolve.html",
     "publishedAt": "2026-11-13",
     "badge": "Breaking",
     "badgeColor": "cyan",
@@ -13,6 +13,30 @@ export const newsItems = [
   },
   {
     "id": 2,
+    "title": "AI Forecasts May Amplify Drug Shortages: Enterprise Supply Alert",
+    "excerpt": "New research reveals AI forecasting models, intended to optimize medication…",
+    "source": "Cureus",
+    "slug": "ai_forecasts_may_amplify_drug_shortages_enterprise_supply_alert",
+    "htmlPath": "/articles/news/ai_forecasts_may_amplify_drug_shortages_enterprise_supply_alert.html",
+    "publishedAt": "2026-11-13",
+    "badge": "Latest",
+    "badgeColor": "amber",
+    "category": "AI News"
+  },
+  {
+    "id": 3,
+    "title": "AI-Driven Education: Chicago Private School's New Model",
+    "excerpt": "A new Chicago private school now uses AI for personalized student teaching.…",
+    "source": "CBS News",
+    "slug": "ai_driven_education_chicago_private_school_s_new_model",
+    "htmlPath": "/articles/news/ai_driven_education_chicago_private_school_s_new_model.html",
+    "publishedAt": "2026-11-13",
+    "badge": "Latest",
+    "badgeColor": "amber",
+    "category": "AI News"
+  },
+  {
+    "id": 4,
     "title": "AI Brings New 'Sense of Place' to Sustainable Agriculture",
     "excerpt": "Auburn University research uncovers AI's potential to revolutionize…",
     "source": "Auburn University",
@@ -24,7 +48,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 3,
+    "id": 5,
     "title": "AI in Agriculture: A New 'Sense of Place' for Farming Tech",
     "excerpt": "Auburn University research highlights a critical new dimension in AI's role…",
     "source": "Auburn University",
@@ -36,7 +60,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 4,
+    "id": 6,
     "title": "AI Leadership Under Scrutiny: Nvidia's Governance Challenge",
     "excerpt": "Recent reports regarding Nvidia CEO Jensen Huang's relationship with a…",
     "source": "The New York Times",
@@ -48,7 +72,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 5,
+    "id": 7,
     "title": "Jensen Huang Out: Nvidia Leadership Shift Rocks AI Industry",
     "excerpt": "Nvidia CEO Jensen Huang has been ousted, marking a pivotal leadership change.…",
     "source": "WSJ",
@@ -60,7 +84,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 6,
+    "id": 8,
     "title": "Public Health AI: Impact, Ethics, and Secure Deployment",
     "excerpt": "Public health agencies stand at the precipice of a new era, with Artificial…",
     "source": "The Pew Charitable Trusts",
@@ -72,7 +96,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 7,
+    "id": 9,
     "title": "AI & Human Dignity: An Ethical Framework for Enterprises",
     "excerpt": "As Artificial Intelligence rapidly reshapes industries, a critical call for…",
     "source": "La Civilta Cattolica English",
@@ -84,7 +108,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 8,
+    "id": 10,
     "title": "AI & Neurodiversity: Designing Inclusive Enterprise Systems",
     "excerpt": "Research into autistic individuals' AI interaction offers key insights. This…",
     "source": "SBU News",
@@ -96,7 +120,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 9,
+    "id": 11,
     "title": "AI Reshaping Healthcare: Opportunities & Challenges",
     "excerpt": "Artificial intelligence is rapidly transforming the healthcare landscape,…",
     "source": "MPR News",
@@ -108,7 +132,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 10,
+    "id": 12,
     "title": "Bridging the AI Skills Gap: Saint Vincent College Launches Minor",
     "excerpt": "Saint Vincent College’s approval of a new Artificial Intelligence minor marks a…",
     "source": "Saint Vincent College",
@@ -120,7 +144,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 11,
+    "id": 13,
     "title": "UNGA: Responsible AI - A Global Mandate for Every Enterprise",
     "excerpt": "The UN General Assembly emphasized responsible AI's global importance,…",
     "source": "Welcome to the United Nations",
@@ -132,7 +156,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 12,
+    "id": 14,
     "title": "AI Investment Redefined: Cash, Debt, and Corporate Capital",
     "excerpt": "The financing paradigm for Artificial Intelligence is undergoing a significant…",
     "source": "Federal Reserve Bank of St. Louis",
@@ -144,7 +168,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 13,
+    "id": 15,
     "title": "AI Reshapes Healthcare: Precision, Efficiency, and Patient Impact",
     "excerpt": "Artificial intelligence is rapidly reshaping the healthcare landscape, moving…",
     "source": "MPR News",
@@ -156,7 +180,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 14,
+    "id": 16,
     "title": "AI's Unwritten Story: Shaping Enterprise Trust and Direction",
     "excerpt": "AI currently lacks a unified public narrative. This uncertainty impacts…",
     "source": "The Conversation",
@@ -168,7 +192,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 15,
+    "id": 17,
     "title": "AI100 Report: Mainstream AI Reshapes Society, Enterprises Act Now",
     "excerpt": "The AI100 Report confirms Artificial Intelligence has moved into the…",
     "source": "Max-Planck-Gesellschaft",
@@ -180,7 +204,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 16,
+    "id": 18,
     "title": "AWS Q Agents & Skills: Powering Enterprise AI Automation",
     "excerpt": "Amazon Q now leverages agents and skills to automate complex tasks for…",
     "source": "Amazon Web Services (AWS)",
@@ -192,7 +216,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 17,
+    "id": 19,
     "title": "Enterprise AI Funding: Cash, Debt, and Strategic Investment",
     "excerpt": "AI funding shifts now leverage cash, debt, and corporate capital. This impacts…",
     "source": "Federal Reserve Bank of St. Louis",
@@ -204,7 +228,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 18,
+    "id": 20,
     "title": "AI & Cybersecurity: Enterprise Risk Mitigation for Texas",
     "excerpt": "AI cybersecurity expert Shawn Tuma presented on emerging enterprise risks at…",
     "source": "Spencer Fane",
@@ -216,7 +240,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 19,
+    "id": 21,
     "title": "AI Reshaping Enterprise Regulation: Critical Insights for Leaders",
     "excerpt": "AI's integration into regulatory activities is transforming enterprise…",
     "source": "IFPMA",
@@ -228,7 +252,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 20,
+    "id": 22,
     "title": "APF Reveals 2026 AI Rising Stars: Fueling Next-Gen Enterprise AI",
     "excerpt": "APF named its 2026 Rising Stars in AI. This initiative identifies future…",
     "source": "Kitsap Sun",
@@ -240,7 +264,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 21,
+    "id": 23,
     "title": "Nvidia CEO Probe: Geopolitical Risks for AI Enterprises",
     "excerpt": "Nvidia is investigating CEO Jensen Huang's alleged links to a suspected Chinese…",
     "source": "The New York Times",
@@ -252,7 +276,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 22,
+    "id": 24,
     "title": "AI Writing: Best Practices for Enterprise Content Strategy",
     "excerpt": "The rapid evolution of artificial intelligence (AI) is redefining how…",
     "source": "USBE and Information Technology",
@@ -264,7 +288,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 23,
+    "id": 25,
     "title": "AI's Social Shift: Navigating Artificial Human Connection",
     "excerpt": "Artificial intelligence is rapidly evolving beyond mere task automation,…",
     "source": "The Daily Tar Heel",
@@ -276,7 +300,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 24,
+    "id": 26,
     "title": "America's AI Anxiety: Enterprise Readiness for Shifting Tides",
     "excerpt": "Public anxiety about the AI boom's sustainability is rising across America.…",
     "source": "The Washington Post",
@@ -288,7 +312,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 25,
+    "id": 27,
     "title": "APF Elevates 2026 AI Rising Stars, Fueling Global Innovation",
     "excerpt": "The APF announced its 2026 Rising Stars in AI, recognizing emerging talent.…",
     "source": "Lohud",
@@ -300,7 +324,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 26,
+    "id": 28,
     "title": "Nvidia Investigates CEO Huang's Alleged China Spy Ties",
     "excerpt": "Nvidia investigates CEO Jensen Huang's alleged Chinese spy ties. This impacts…",
     "source": "The New York Times",
@@ -312,7 +336,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 27,
+    "id": 29,
     "title": "AI in Pediatric Care: Parents' Trust Shapes Diagnostic Choices",
     "excerpt": "A Saudi Arabian study reveals how parental trust in AI diagnostics…",
     "source": "Cureus",
@@ -324,7 +348,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 28,
+    "id": 30,
     "title": "AI's Connection Paradox: Real vs. Simulated Enterprise Engagement",
     "excerpt": "Artificial intelligence is rapidly transforming how enterprises operate,…",
     "source": "The Daily Tar Heel",
@@ -336,7 +360,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 29,
+    "id": 31,
     "title": "AI's Enduring Value: Strategic Investment Amid Market Downturns",
     "excerpt": "Amid broader economic uncertainties, Artificial Intelligence (AI) continues to…",
     "source": "The Motley Fool",
@@ -348,7 +372,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 30,
+    "id": 32,
     "title": "AI Investment: Market Jitters Signal Enterprise Recalibration",
     "excerpt": "Recent stock market reactions, driven by concerns over burgeoning artificial…",
     "source": "NBC News",
@@ -360,7 +384,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 31,
+    "id": 33,
     "title": "AI Spending: Market Volatility Signals Enterprise Strategy Rethink",
     "excerpt": "Recent market reactions underscore a growing scrutiny of artificial…",
     "source": "NBC News",
@@ -372,7 +396,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 32,
+    "id": 34,
     "title": "AI Transforms Connection: Enterprise Impact & Ethical Imperatives",
     "excerpt": "Artificial intelligence is rapidly evolving beyond task automation and data…",
     "source": "The Daily Tar Heel",
@@ -384,7 +408,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 33,
+    "id": 35,
     "title": "AI-Driven Connection: Navigating Enterprise Trust",
     "excerpt": "Artificial intelligence is rapidly moving beyond mere task automation,…",
     "source": "The Daily Tar Heel",
@@ -396,7 +420,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 34,
+    "id": 36,
     "title": "OCC Sets AI Risk Rules: New Framework for Bank Super Intelligence",
     "excerpt": "The OCC released a supervisory framework for banks using generative and agentic…",
     "source": "Consumer Finance Monitor",
@@ -408,7 +432,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 35,
+    "id": 37,
     "title": "The AI Connection Paradox: Enterprise Implications",
     "excerpt": "Artificial intelligence promises unparalleled efficiency and personalization,…",
     "source": "The Daily Tar Heel",
@@ -420,7 +444,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 36,
+    "id": 38,
     "title": "2028 Marks AI's Enterprise Reality Check",
     "excerpt": "Analysts identify 2028 as the critical year for AI's enterprise buildout.…",
     "source": "MarketWatch",
@@ -432,7 +456,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 37,
+    "id": 39,
     "title": "AI Pre-Visit Summaries Boost Neurosurgery Patient Outcomes",
     "excerpt": "AI-generated pre-visit summaries enhanced communication in neurosurgical…",
     "source": "2 Minute Medicine",
@@ -444,7 +468,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 38,
+    "id": 40,
     "title": "AI Transforms Enterprise Cybersecurity: A New Defense Mandate",
     "excerpt": "AI is no longer a futuristic concept but a present reality transforming the…",
     "source": "Miami University",
@@ -456,7 +480,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 39,
+    "id": 41,
     "title": "AI Unlocks Mitochondrial Secrets: New Disease Targets Found",
     "excerpt": "Artificial intelligence is revolutionizing biomedical discovery, demonstrating…",
     "source": "AgriLife Today",
@@ -468,7 +492,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 40,
+    "id": 42,
     "title": "Building Responsible AI: The Enterprise Imperative",
     "excerpt": "The esteemed journal Nature has underscored the urgent imperative for…",
     "source": "Nature",
@@ -480,7 +504,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 41,
+    "id": 43,
     "title": "Michigan Leverages AI for Citizen Impact and Public Sector Growth",
     "excerpt": "Michigan is implementing AI solutions to enhance public services statewide.…",
     "source": "Mackinac Center",
@@ -492,7 +516,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 42,
+    "id": 44,
     "title": "AI for Human Services: Bridging Gaps, Navigating Ethical Frontiers",
     "excerpt": "Artificial Intelligence (AI) presents a paradigm shift for human services,…",
     "source": "Positively Naperville",
@@ -504,7 +528,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 43,
+    "id": 45,
     "title": "AI in Human Services: Navigating Ethics, Maximizing Impact",
     "excerpt": "Human services agencies are adopting AI to enhance support. Strategic…",
     "source": "Positively Naperville",
@@ -516,7 +540,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 44,
+    "id": 46,
     "title": "When AI Mimics Connection: Enterprise Implications",
     "excerpt": "The evolving landscape of artificial intelligence extends beyond efficiency and…",
     "source": "The Daily Tar Heel",
@@ -528,7 +552,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 45,
+    "id": 47,
     "title": "AHA Launches Key AI Policy Hub for Healthcare",
     "excerpt": "The rapid integration of artificial intelligence across healthcare promises…",
     "source": "American Hospital Association",
@@ -540,7 +564,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 46,
+    "id": 48,
     "title": "AHA Unveils AI Policy Portal: Guiding Enterprise Healthcare Strategy",
     "excerpt": "As artificial intelligence rapidly transforms the healthcare landscape, robust…",
     "source": "American Hospital Association",
@@ -552,7 +576,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 47,
+    "id": 49,
     "title": "AI Reshapes Teacher Efficacy: Beyond Tech Adoption",
     "excerpt": "New research published in Frontiers highlights a significant paradigm shift in…",
     "source": "Frontiers",
@@ -564,7 +588,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 48,
+    "id": 50,
     "title": "Google Confirms AI Powers All Search: Enterprise Impact.",
     "excerpt": "Google has made it unequivocally clear: artificial intelligence (AI) is no…",
     "source": "The Guardian",
@@ -576,7 +600,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 49,
+    "id": 51,
     "title": "Google Search's AI Core: Unpacking Its Enterprise Impact",
     "excerpt": "Google has explicitly stated that artificial intelligence is no longer an…",
     "source": "The Guardian",
@@ -588,7 +612,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 50,
+    "id": 52,
     "title": "Schwarz Digits & Bull Power Europe's Enterprise AI Future",
     "excerpt": "Schwarz Digits, the technology arm of the Schwarz Group (owner of Lidl and…",
     "source": "Reuters",
@@ -600,7 +624,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 51,
+    "id": 53,
     "title": "AI Reshapes Athens Art: Implications for Creative Enterprises",
     "excerpt": "Artificial intelligence adoption in Athens is now impacting local artists,…",
     "source": "www.thepostathens.com",
@@ -612,7 +636,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 52,
+    "id": 54,
     "title": "Future-Proofing Talent: Penn's AI Curriculum Expansion",
     "excerpt": "The global race for artificial intelligence talent is intensifying. As AI…",
     "source": "The Daily Pennsylvanian",
@@ -624,7 +648,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 53,
+    "id": 55,
     "title": "GenAI in Clinical Education: A Framework for Future Medical Practice",
     "excerpt": "The integration of Generative AI (GenAI) into clinical reasoning education…",
     "source": "Cureus",
@@ -636,7 +660,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 54,
+    "id": 56,
     "title": "Navigating AI: Protecting Your Workforce in the Age of Automation",
     "excerpt": "As artificial intelligence (AI) rapidly reshapes industries, the focus is…",
     "source": "Maine AFL-CIO",
@@ -648,7 +672,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 55,
+    "id": 57,
     "title": "Pennsylvania Sets New AI Advertising Disclosure Standards",
     "excerpt": "Pennsylvania has taken a significant step in the evolving landscape of AI…",
     "source": "Consumer Finance Monitor",
@@ -660,7 +684,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 56,
+    "id": 58,
     "title": "Rural Nebraska AI Doubles: Lessons for Enterprise Digital Strategy",
     "excerpt": "The recent doubling of Artificial Intelligence adoption among rural Nebraskans…",
     "source": "Nebraska Public Media",
@@ -672,7 +696,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 57,
+    "id": 59,
     "title": "AI Ethics in Law: NYSBA Releases Crucial Attorney Guidelines",
     "excerpt": "The NYSBA released guidelines for attorneys on ethical AI use. This ensures…",
     "source": "New York State Bar Association",
@@ -684,7 +708,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 58,
+    "id": 60,
     "title": "AI in Radiology: Accuracy, Efficiency, & Human Role Examined",
     "excerpt": "A systematic review compared AI and human diagnostic accuracy in radiology,…",
     "source": "Cureus",
@@ -696,7 +720,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 59,
+    "id": 61,
     "title": "AI Redefines Education: Purpose, Skills, and Enterprise Future",
     "excerpt": "Artificial intelligence is fundamentally redefining education's core purpose,…",
     "source": "New University",
@@ -708,7 +732,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 60,
+    "id": 62,
     "title": "AI's True North: Guiding Principles for Responsible Deployment",
     "excerpt": "Enterprises face critical choices in AI deployment. Aligning AI with core…",
     "source": "Good News Magazine",
@@ -720,7 +744,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 61,
+    "id": 63,
     "title": "Enterprise AI: Leveraging What Truly Matters for Impact",
     "excerpt": "As Artificial Intelligence evolves from a novel concept to a strategic…",
     "source": "Good News Magazine",
@@ -732,7 +756,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 62,
+    "id": 64,
     "title": "Student AI Dialogue: Shaping Future Workforce & Ethical Tech",
     "excerpt": "Marquette students are actively debating AI's impact on education and ethics.…",
     "source": "Marquette Today",
@@ -744,7 +768,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 63,
+    "id": 65,
     "title": "AI and Biosecurity: Enterprise Risks and Emerging Opportunities",
     "excerpt": "Artificial Intelligence (AI) is rapidly transforming industries, but its…",
     "source": "Nixon Peabody",
@@ -756,7 +780,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 64,
+    "id": 66,
     "title": "AI's Economic Strain: Enterprise Resilience in Focus",
     "excerpt": "Recent warnings from prominent investors highlight the accelerating pace at…",
     "source": "Futurism",
@@ -768,7 +792,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 65,
+    "id": 67,
     "title": "Central Banks & AI: Navigating the New Macroeconomic Frontier",
     "excerpt": "The Federal Reserve explored AI's profound impact on the macroeconomy,…",
     "source": "Federal Reserve Bank of Cleveland",
@@ -780,7 +804,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 66,
+    "id": 68,
     "title": "Medical AI: High Accuracy, Critical Validation Gap Revealed",
     "excerpt": "The allure of artificial intelligence in healthcare is undeniable, promising…",
     "source": "The American Journal of Managed Care",
@@ -792,7 +816,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 67,
+    "id": 69,
     "title": "Naval AI Autonomy: Unveiling Enterprise Systemic Risks",
     "excerpt": "U.S. Naval Institute reveals critical risks in developing an Artificial Naval…",
     "source": "U.S. Naval Institute",
@@ -804,7 +828,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 68,
+    "id": 70,
     "title": "AI's Hidden Costs: Why Enterprises Must Look Closer",
     "excerpt": "New insights reveal AI development often introduces significant, hidden…",
     "source": "Literary Hub",
@@ -816,7 +840,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 69,
+    "id": 71,
     "title": "Beyond Algorithms: Why Human Financial Planners Still Matter",
     "excerpt": "AI lacks nuanced judgment and empathy for financial planning. Individuals and…",
     "source": "The South Dakota Standard",
@@ -828,7 +852,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 70,
+    "id": 72,
     "title": "Diagnostic AI: Unpacking Radiology's Math and Human Element",
     "excerpt": "Forbes examines how AI, driven by advanced mathematics, is revolutionizing…",
     "source": "Forbes",
@@ -840,7 +864,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 71,
+    "id": 73,
     "title": "Navigating Superintelligence: Implications for Enterprise AI",
     "excerpt": "The concept of superintelligence, often a subject of speculative fiction, is…",
     "source": "NASA (.gov)",
@@ -852,7 +876,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 72,
+    "id": 74,
     "title": "Superintelligence: Strategic Imperatives for Enterprise AI",
     "excerpt": "Superintelligence, AI beyond human cognition, introduces profound challenges…",
     "source": "NASA (.gov)",
@@ -864,7 +888,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 73,
+    "id": 75,
     "title": "AI & Media Integrity in BiH: Navigating the Information Landscape",
     "excerpt": "The proliferation of Artificial Intelligence technologies presents both…",
     "source": "www.coe.int",
@@ -876,7 +900,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 74,
+    "id": 76,
     "title": "AI's Napster Moment: Enterprise Risks and Strategic Imperatives",
     "excerpt": "The widespread, rapid adoption of generative AI tools mirrors the profound…",
     "source": "Reuters",
@@ -888,7 +912,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 75,
+    "id": 77,
     "title": "Eco-Efficient AI: Powering Sustainable Business Growth",
     "excerpt": "The burgeoning adoption of Artificial Intelligence across industries promises…",
     "source": "infoq.com",
@@ -900,7 +924,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 76,
+    "id": 78,
     "title": "Mandatory AI Consideration for Special Education IEPs",
     "excerpt": "Individualized Education Program (IEP) teams across the nation are now mandated…",
     "source": "Special Education Action",
@@ -912,7 +936,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 77,
+    "id": 79,
     "title": "AI Charts Next-Gen Space Outposts: Precision Site Selection",
     "excerpt": "Advanced AI is being leveraged to precisely map optimal locations for future…",
     "source": "Phys.org",
@@ -924,7 +948,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 78,
+    "id": 80,
     "title": "AI Elevates Advisor Cybersecurity Strategies",
     "excerpt": "AI tools are transforming how financial advisors build robust cybersecurity.…",
     "source": "planadviser",
@@ -936,7 +960,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 79,
+    "id": 81,
     "title": "AI Neurosurgery: Balancing Innovation with Patient Trust",
     "excerpt": "Artificial intelligence is rapidly reshaping the future of clinical…",
     "source": "Stanford Medicine",
@@ -948,7 +972,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 80,
+    "id": 82,
     "title": "Nebraska's Rural AI Boom: Enterprise Readiness in a Rapid Shift",
     "excerpt": "A recent poll reveals a remarkable trend: Artificial Intelligence (AI) adoption…",
     "source": "Nebraska Today",
@@ -960,7 +984,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 81,
+    "id": 83,
     "title": "AI and Agency: Enterprise Strategies for Human Empowerment",
     "excerpt": "As AI systems automate decisions, human workers risk losing agency. Enterprises…",
     "source": "upi",
@@ -972,7 +996,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 82,
+    "id": 84,
     "title": "AI Exposes Market Volatility: Enterprise Risk Deepens",
     "excerpt": "Recent market shifts, often dubbed \"AI tremors,\" underscore a growing…",
     "source": "Reuters",
@@ -984,7 +1008,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 83,
+    "id": 85,
     "title": "AI Term Ban Proposed: Unpacking Enterprise Tech Implications",
     "excerpt": "The recent announcement by former President Trump regarding a potential ban on…",
     "source": "Reuters",
@@ -996,7 +1020,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 84,
+    "id": 86,
     "title": "MassMutual's AI Strategy: Two Enterprise Use Cases Driving Value",
     "excerpt": "MassMutual, a leading financial services provider, is strategically leveraging…",
     "source": "Emerj Artificial Intelligence Research",
@@ -1008,7 +1032,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 85,
+    "id": 87,
     "title": "NYC Health + Hospitals Embraces AI: A Model for Enterprise Integration",
     "excerpt": "NYC Health + Hospitals, a vital healthcare provider, has made a significant…",
     "source": "NYC Health + Hospitals",
@@ -1020,7 +1044,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 86,
+    "id": 88,
     "title": "Reframing AI: Trump's 'Super Intelligence' Push",
     "excerpt": "Former President Trump's plan to ban 'AI' in favor of 'Super Intelligence'…",
     "source": "Forbes",
@@ -1032,7 +1056,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 87,
+    "id": 89,
     "title": "Trump's AI Term Ban Proposal: Unpacking Tech & Business Impact",
     "excerpt": "Former President Donald Trump recently stated his intention to ban the term…",
     "source": "Reuters",
@@ -1044,7 +1068,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 88,
+    "id": 90,
     "title": "Trump's AI Term Ban: Enterprise Readiness & Impact",
     "excerpt": "Former President Donald Trump's recent statement regarding a potential ban on…",
     "source": "Reuters",
@@ -1056,7 +1080,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 89,
+    "id": 91,
     "title": "Trump's AI Terminology Shift: Implications for Enterprise Strategy",
     "excerpt": "Former President Trump proposes banning 'Artificial Intelligence' for 'Super…",
     "source": "Forbes",
@@ -1068,7 +1092,7 @@ export const newsItems = [
     "category": "AI News"
   },
   {
-    "id": 90,
+    "id": 92,
     "title": "AI's Economic Shift: Preparing Your Enterprise for the Future",
     "excerpt": "Global economies face unprecedented transformation as advanced AI reshapes…",
     "source": "The Acquirer's Multiple",
@@ -1088,7 +1112,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/ai_designed_viruses_raise_new_synthetic_biology_questions.html",
     "publishedAt": "2026-10-16",
     "category": "AI Research",
-    "id": 91,
+    "id": 93,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1101,7 +1125,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/ai_generated_avatars_intensify_creator_content_theft.html",
     "publishedAt": "2026-10-16",
     "category": "AI Safety",
-    "id": 92,
+    "id": 94,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1114,7 +1138,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/china_proposes_tighter_export_controls_for_ai_technologies.html",
     "publishedAt": "2026-10-16",
     "category": "AI Policy",
-    "id": 93,
+    "id": 95,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1127,7 +1151,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/elorian_previews_a_model_that_reasons_through_images.html",
     "publishedAt": "2026-10-16",
     "category": "AI Products",
-    "id": 94,
+    "id": 96,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1140,7 +1164,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/imf_chief_calls_for_guardrails_as_the_ai_race_accelerates.html",
     "publishedAt": "2026-10-16",
     "category": "AI Policy",
-    "id": 95,
+    "id": 97,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1153,7 +1177,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/india_reports_rogue_ai_agents_reaching_live_systems.html",
     "publishedAt": "2026-10-16",
     "category": "AI Security",
-    "id": 96,
+    "id": 98,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1166,7 +1190,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/mark_wahlberg_says_film_ai_should_support_not_replace_creators.html",
     "publishedAt": "2026-10-16",
     "category": "AI & Media",
-    "id": 97,
+    "id": 99,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1179,7 +1203,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/meta_terms_expand_possible_ai_training_on_publisher_content.html",
     "publishedAt": "2026-10-16",
     "category": "AI Policy",
-    "id": 98,
+    "id": 100,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1192,7 +1216,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/nvidia_and_ai4bharat_release_indic_pretraining_corpus.html",
     "publishedAt": "2026-10-16",
     "category": "AI Research",
-    "id": 99,
+    "id": 101,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1205,7 +1229,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/nvidia_s_rtx_spark_laptops_bring_large_local_models_to_windows.html",
     "publishedAt": "2026-10-16",
     "category": "AI Hardware",
-    "id": 100,
+    "id": 102,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1218,7 +1242,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/pet_longevity_biotech_raises_difficult_ethical_questions.html",
     "publishedAt": "2026-10-16",
     "category": "AI & Health",
-    "id": 101,
+    "id": 103,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1231,7 +1255,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/reflection_releases_beam_a_501b_open_model.html",
     "publishedAt": "2026-10-16",
     "category": "AI Models",
-    "id": 102,
+    "id": 104,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1244,7 +1268,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/replit_ceo_describes_a_future_of_self_driving_companies.html",
     "publishedAt": "2026-10-16",
     "category": "AI Business",
-    "id": 103,
+    "id": 105,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1257,7 +1281,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/replit_says_it_is_ending_its_anthropic_partnership.html",
     "publishedAt": "2026-10-16",
     "category": "AI Business",
-    "id": 104,
+    "id": 106,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1270,7 +1294,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/researchers_debate_whether_chatbots_should_speak_as_i.html",
     "publishedAt": "2026-10-16",
     "category": "AI Ethics",
-    "id": 105,
+    "id": 107,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1283,7 +1307,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/retinal_implant_helps_restore_functional_sight.html",
     "publishedAt": "2026-10-16",
     "category": "AI & Health",
-    "id": 106,
+    "id": 108,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1296,7 +1320,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/robotics_remains_in_a_foundational_lego_era.html",
     "publishedAt": "2026-10-16",
     "category": "Robotics",
-    "id": 107,
+    "id": 109,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1309,7 +1333,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/teens_are_bypassing_social_media_age_restrictions.html",
     "publishedAt": "2026-10-16",
     "category": "AI Policy",
-    "id": 108,
+    "id": 110,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1322,7 +1346,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/vercel_says_its_jev_model_is_its_fastest_adopted_ai_release.html",
     "publishedAt": "2026-10-16",
     "category": "AI Products",
-    "id": 109,
+    "id": 111,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1335,7 +1359,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/veritas_expands_anti_counterfeit_chip_to_more_products.html",
     "publishedAt": "2026-10-16",
     "category": "AI Business",
-    "id": 110,
+    "id": 112,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1348,7 +1372,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/ai_agents_are_coming_to_rivian_vehicles.html",
     "publishedAt": "2026-10-15",
     "category": "AI Products",
-    "id": 111,
+    "id": 113,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1361,7 +1385,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/ai_hacks_leave_a_mess_that_companies_are_not_paying_for.html",
     "publishedAt": "2026-10-15",
     "category": "AI Safety",
-    "id": 112,
+    "id": 114,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1374,7 +1398,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/ai_generated_visual_glitches_trigger_a_game_remaster_backlash.html",
     "publishedAt": "2026-10-15",
     "category": "AI & Media",
-    "id": 113,
+    "id": 115,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1387,7 +1411,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/ai_powered_organ_preservation_moves_closer_to_transplant_use.html",
     "publishedAt": "2026-10-15",
     "category": "AI & Health",
-    "id": 114,
+    "id": 116,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1400,7 +1424,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/amazon_bee_launches_two_personal_ai_devices.html",
     "publishedAt": "2026-10-15",
     "category": "AI Hardware",
-    "id": 115,
+    "id": 117,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1413,7 +1437,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/amazon_devices_chief_sees_ambient_ai_replacing_many_apps.html",
     "publishedAt": "2026-10-15",
     "category": "AI Products",
-    "id": 116,
+    "id": 118,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1426,7 +1450,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/amazon_s_ambient_ai_strategy_aims_to_reduce_app_switching.html",
     "publishedAt": "2026-10-15",
     "category": "AI Products",
-    "id": 117,
+    "id": 119,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1439,7 +1463,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/anthropic_gives_metr_deeper_access_for_independent_ai_evaluations.html",
     "publishedAt": "2026-10-15",
     "category": "AI Safety",
-    "id": 118,
+    "id": 120,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1452,7 +1476,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/anthropic_gives_metr_deeper_access_for_independent_evaluations.html",
     "publishedAt": "2026-10-15",
     "category": "AI Safety",
-    "id": 119,
+    "id": 121,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1465,7 +1489,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/apertus_1_5_adds_multimodal_and_reasoning_capabilities.html",
     "publishedAt": "2026-10-15",
     "category": "AI Models",
-    "id": 120,
+    "id": 122,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1478,7 +1502,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/bluesky_expands_attie_so_users_can_build_small_apps.html",
     "publishedAt": "2026-10-15",
     "category": "AI Products",
-    "id": 121,
+    "id": 123,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1491,7 +1515,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/cal_ai_s_influencer_strategy_turns_a_calorie_app_into_a_business.html",
     "publishedAt": "2026-10-15",
     "category": "AI Business",
-    "id": 122,
+    "id": 124,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1504,7 +1528,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/celebrity_deepfakes_expose_a_verification_gap_on_instagram.html",
     "publishedAt": "2026-10-15",
     "category": "AI Safety",
-    "id": 123,
+    "id": 125,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1517,7 +1541,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/chatgpt_chrome_extension_can_reference_open_browser_tabs.html",
     "publishedAt": "2026-10-15",
     "category": "AI Products",
-    "id": 124,
+    "id": 126,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1530,7 +1554,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/consumer_ai_assistants_raise_consent_questions_about_other_people_s_data.html",
     "publishedAt": "2026-10-15",
     "category": "AI Privacy",
-    "id": 125,
+    "id": 127,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1543,7 +1567,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/eiliko_robot_pet_raises_concerns_about_cloud_stored_conversations.html",
     "publishedAt": "2026-10-15",
     "category": "AI Privacy",
-    "id": 126,
+    "id": 128,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1556,7 +1580,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/figma_specs_gives_agents_a_structured_design_brief.html",
     "publishedAt": "2026-10-15",
     "category": "AI Agents",
-    "id": 127,
+    "id": 129,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1569,7 +1593,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/film_and_television_are_turning_toward_ai_backlash_stories.html",
     "publishedAt": "2026-10-15",
     "category": "AI & Media",
-    "id": 128,
+    "id": 130,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1582,7 +1606,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/flock_privacy_debate_broadens_the_surveillance_backlash.html",
     "publishedAt": "2026-10-15",
     "category": "AI Privacy",
-    "id": 129,
+    "id": 131,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1595,7 +1619,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/flux_3_image_klein_adds_fast_open_image_generation.html",
     "publishedAt": "2026-10-15",
     "category": "AI Models",
-    "id": 130,
+    "id": 132,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1608,7 +1632,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/friends_do_not_let_friends_feed_their_data_to_ai_agents.html",
     "publishedAt": "2026-10-15",
     "category": "AI Privacy",
-    "id": 131,
+    "id": 133,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1621,7 +1645,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/google_antigravity_speeds_antimicrobial_peptide_discovery.html",
     "publishedAt": "2026-10-15",
     "category": "AI & Health",
-    "id": 132,
+    "id": 134,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1634,7 +1658,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/google_launches_an_ai_powered_universal_cart.html",
     "publishedAt": "2026-10-15",
     "category": "AI Products",
-    "id": 133,
+    "id": 135,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1647,7 +1671,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/gudea_maps_misinformation_before_brand_crises_spread.html",
     "publishedAt": "2026-10-15",
     "category": "AI Business",
-    "id": 134,
+    "id": 136,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1660,7 +1684,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/ibm_granite_switch_4_1_unifies_chat_decisions_and_speech.html",
     "publishedAt": "2026-10-15",
     "category": "AI Models",
-    "id": 135,
+    "id": 137,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1673,7 +1697,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/meta_and_apple_highlight_muse_models_on_mac_hardware.html",
     "publishedAt": "2026-10-15",
     "category": "AI Hardware",
-    "id": 136,
+    "id": 138,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1686,7 +1710,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/meta_opens_muse_spark_open_for_agentic_coding.html",
     "publishedAt": "2026-10-15",
     "category": "AI Models",
-    "id": 137,
+    "id": 139,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1699,7 +1723,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/meta_s_muse_pushes_consumer_agents_into_uncomfortable_territory.html",
     "publishedAt": "2026-10-15",
     "category": "AI Products",
-    "id": 138,
+    "id": 140,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1712,7 +1736,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/meta_s_muse_safety_boundaries_draw_renewed_scrutiny.html",
     "publishedAt": "2026-10-15",
     "category": "AI Safety",
-    "id": 139,
+    "id": 141,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1725,7 +1749,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/microsoft_and_nvidia_showcase_windows_laptops_for_local_ai.html",
     "publishedAt": "2026-10-15",
     "category": "AI Hardware",
-    "id": 140,
+    "id": 142,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1738,7 +1762,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/nuclear_operators_look_to_existing_plants_for_ai_power_demand.html",
     "publishedAt": "2026-10-15",
     "category": "Emerging Energy",
-    "id": 141,
+    "id": 143,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1751,7 +1775,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/pig_kidneys_preserved_for_a_year_revived_after_transplant.html",
     "publishedAt": "2026-10-15",
     "category": "Emerging Biotech",
-    "id": 142,
+    "id": 144,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1764,7 +1788,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/ricursive_uses_ai_to_design_custom_chips.html",
     "publishedAt": "2026-10-15",
     "category": "AI Hardware",
-    "id": 143,
+    "id": 145,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1777,7 +1801,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/six_wild_ideas_for_preserving_a_human_mind.html",
     "publishedAt": "2026-10-15",
     "category": "Emerging Tech",
-    "id": 144,
+    "id": 146,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1790,7 +1814,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/techcrunch_disrupt_2026_closes_with_ai_and_robotics_in_focus.html",
     "publishedAt": "2026-10-15",
     "category": "Emerging Tech",
-    "id": 145,
+    "id": 147,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1803,7 +1827,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/the_technology_backlash_is_now_showing_up_in_theaters.html",
     "publishedAt": "2026-10-15",
     "category": "AI & Media",
-    "id": 146,
+    "id": 148,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1816,7 +1840,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/trump_shares_an_ai_edited_image_of_white_house_work.html",
     "publishedAt": "2026-10-15",
     "category": "AI & Society",
-    "id": 147,
+    "id": 149,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1829,7 +1853,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/a_harvard_survey_finds_a_confidence_gap_in_ai_knowledge.html",
     "publishedAt": "2026-10-14",
     "category": "AI & Society",
-    "id": 148,
+    "id": 150,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1842,7 +1866,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/a_robot_pendant_review_exposes_the_limits_of_ai_companions.html",
     "publishedAt": "2026-10-14",
     "category": "AI Products",
-    "id": 149,
+    "id": 151,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1855,7 +1879,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/ai_models_are_being_tested_for_extremist_misuse.html",
     "publishedAt": "2026-10-14",
     "category": "AI Safety",
-    "id": 150,
+    "id": 152,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1868,7 +1892,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/ai_moves_beyond_mathematics_into_scientific_problem_solving.html",
     "publishedAt": "2026-10-14",
     "category": "AI Research",
-    "id": 151,
+    "id": 153,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1881,7 +1905,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/ai_weather_emulator_targets_extreme_events_at_lower_cost.html",
     "publishedAt": "2026-10-14",
     "category": "AI Research",
-    "id": 152,
+    "id": 154,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1894,7 +1918,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/ai_designed_proteins_cut_other_proteins_with_precision.html",
     "publishedAt": "2026-10-14",
     "category": "AI & Health",
-    "id": 153,
+    "id": 155,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1907,7 +1931,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/android_adds_ai_powered_scam_detection_to_google_messages.html",
     "publishedAt": "2026-10-14",
     "category": "AI Security",
-    "id": 154,
+    "id": 156,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1920,7 +1944,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/anthropic_opens_singapore_office_and_signs_safety_agreement.html",
     "publishedAt": "2026-10-14",
     "category": "AI Business",
-    "id": 155,
+    "id": 157,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1933,7 +1957,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/anthropic_warns_small_models_could_spread_through_iot_devices.html",
     "publishedAt": "2026-10-14",
     "category": "AI Security",
-    "id": 156,
+    "id": 158,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1946,7 +1970,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/apate_sends_ai_agents_undercover_to_study_scams.html",
     "publishedAt": "2026-10-14",
     "category": "AI Security",
-    "id": 157,
+    "id": 159,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1959,7 +1983,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/character_ai_bankruptcy_puts_user_data_under_a_new_spotlight.html",
     "publishedAt": "2026-10-14",
     "category": "AI Privacy",
-    "id": 158,
+    "id": 160,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1972,7 +1996,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/darpa_invests_in_shelf_stable_artificial_blood.html",
     "publishedAt": "2026-10-14",
     "category": "Emerging Biotech",
-    "id": 159,
+    "id": 161,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1985,7 +2009,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/deezer_plans_a_filter_for_ai_generated_music.html",
     "publishedAt": "2026-10-14",
     "category": "AI & Media",
-    "id": 160,
+    "id": 162,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -1998,7 +2022,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/eight_states_sue_openai_over_chatbot_safety.html",
     "publishedAt": "2026-10-14",
     "category": "AI Policy",
-    "id": 161,
+    "id": 163,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -2011,7 +2035,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/epic_previews_a_game_launcher_described_as_vibe_coded.html",
     "publishedAt": "2026-10-14",
     "category": "AI & Software",
-    "id": 162,
+    "id": 164,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -2024,7 +2048,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/floqer_builds_agents_that_research_sales_prospects.html",
     "publishedAt": "2026-10-14",
     "category": "AI Agents",
-    "id": 163,
+    "id": 165,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -2037,7 +2061,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/google_and_meta_reignite_the_frontier_model_race.html",
     "publishedAt": "2026-10-14",
     "category": "AI Models",
-    "id": 164,
+    "id": 166,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -2050,7 +2074,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/google_and_singapore_put_scam_detection_on_device.html",
     "publishedAt": "2026-10-14",
     "category": "AI Security",
-    "id": 165,
+    "id": 167,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -2063,7 +2087,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/google_deepmind_launches_an_on_device_scam_detector_in_singapore.html",
     "publishedAt": "2026-10-14",
     "category": "AI Security",
-    "id": 166,
+    "id": 168,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -2076,7 +2100,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/mckinsey_pilots_ai_simulated_clients_in_hiring_interviews.html",
     "publishedAt": "2026-10-14",
     "category": "AI & Work",
-    "id": 167,
+    "id": 169,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -2089,7 +2113,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/microsoft_extends_ai_assisted_weather_forecasts_to_six_weeks.html",
     "publishedAt": "2026-10-14",
     "category": "AI Research",
-    "id": 168,
+    "id": 170,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -2102,7 +2126,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/openai_says_a_former_employee_shared_product_plans_with_apple.html",
     "publishedAt": "2026-10-14",
     "category": "AI Business",
-    "id": 169,
+    "id": 171,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -2115,7 +2139,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/scimplify_raises_25m_for_ai_designed_specialty_materials.html",
     "publishedAt": "2026-10-14",
     "category": "AI Business",
-    "id": 170,
+    "id": 172,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -2128,7 +2152,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/youtube_music_adds_labels_for_mostly_ai_made_songs.html",
     "publishedAt": "2026-10-14",
     "category": "AI & Media",
-    "id": 171,
+    "id": 173,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -2141,7 +2165,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/ai_labs_are_buying_data_from_failed_startups.html",
     "publishedAt": "2026-10-13",
     "category": "AI Data",
-    "id": 172,
+    "id": 174,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -2154,7 +2178,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/an_openai_employee_is_accused_of_planting_a_recording_device.html",
     "publishedAt": "2026-10-13",
     "category": "AI Security",
-    "id": 173,
+    "id": 175,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -2167,7 +2191,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/cerebras_ceo_predicts_personal_ai_assistants_at_home.html",
     "publishedAt": "2026-10-13",
     "category": "AI Hardware",
-    "id": 174,
+    "id": 176,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -2180,7 +2204,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/flox_intelligence_uses_ai_to_keep_wildlife_away_from_transport.html",
     "publishedAt": "2026-10-13",
     "category": "Emerging Tech",
-    "id": 175,
+    "id": 177,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -2193,7 +2217,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/gemini_4_argon_demonstrates_new_robotics_reasoning_tests.html",
     "publishedAt": "2026-10-13",
     "category": "Robotics",
-    "id": 176,
+    "id": 178,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -2206,7 +2230,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/gemini_4_argon_targets_complex_reasoning_and_coding_work.html",
     "publishedAt": "2026-10-13",
     "category": "AI Models",
-    "id": 177,
+    "id": 179,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -2219,7 +2243,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/google_play_lets_users_build_private_vibe_coded_android_apps.html",
     "publishedAt": "2026-10-13",
     "category": "AI & Software",
-    "id": 178,
+    "id": 180,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -2232,7 +2256,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/industrial_next_wants_factory_robots_to_switch_tasks_in_minutes.html",
     "publishedAt": "2026-10-13",
     "category": "Robotics",
-    "id": 179,
+    "id": 181,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -2245,7 +2269,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/laplace_intelligence_red_teams_robots_before_deployment.html",
     "publishedAt": "2026-10-13",
     "category": "AI Safety",
-    "id": 180,
+    "id": 182,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -2258,7 +2282,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/liquid_ai_brings_private_agents_to_smaller_local_hardware.html",
     "publishedAt": "2026-10-13",
     "category": "AI Models",
-    "id": 181,
+    "id": 183,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -2271,7 +2295,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/open_weight_ai_models_face_a_safety_and_access_trade_off.html",
     "publishedAt": "2026-10-13",
     "category": "AI Policy",
-    "id": 182,
+    "id": 184,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -2284,7 +2308,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/openai_and_anthropic_tell_uk_lawmakers_to_regulate_ai.html",
     "publishedAt": "2026-10-13",
     "category": "AI Policy",
-    "id": 183,
+    "id": 185,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -2297,7 +2321,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/pluto_security_raises_funding_for_enterprise_ai_controls.html",
     "publishedAt": "2026-10-13",
     "category": "AI Security",
-    "id": 184,
+    "id": 186,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -2310,7 +2334,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/satlyt_prepares_software_for_ai_workloads_in_orbit.html",
     "publishedAt": "2026-10-13",
     "category": "Space Technology",
-    "id": 185,
+    "id": 187,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -2323,7 +2347,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/science_corporation_implants_a_vision_restoring_chip.html",
     "publishedAt": "2026-10-13",
     "category": "AI & Health",
-    "id": 186,
+    "id": 188,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -2336,7 +2360,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/shopify_opens_its_catalog_to_more_ai_shopping_agents.html",
     "publishedAt": "2026-10-13",
     "category": "AI Agents",
-    "id": 187,
+    "id": 189,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -2349,7 +2373,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/spacexsi_bundles_grok_cursor_and_x_premium.html",
     "publishedAt": "2026-10-13",
     "category": "AI Products",
-    "id": 188,
+    "id": 190,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -2362,7 +2386,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/wikipedia_tightens_rules_around_ai_generated_content.html",
     "publishedAt": "2026-10-13",
     "category": "AI & Media",
-    "id": 189,
+    "id": 191,
     "badge": "Latest",
     "badgeColor": "amber"
   },
@@ -2375,7 +2399,7 @@ export const newsItems = [
     "htmlPath": "/articles/news/xbox_explores_ai_powered_game_ports_and_modding.html",
     "publishedAt": "2026-10-13",
     "category": "AI & Software",
-    "id": 190,
+    "id": 192,
     "badge": "Latest",
     "badgeColor": "amber"
   }
