@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { ArrowUpRight } from 'lucide-react'
 import InlineSubscribe from '../components/subscription/InlineSubscribe'
 import PageAdLayout from '../components/ads/PageAdLayout'
 
@@ -19,7 +20,7 @@ export default function AboutPage() {
 
         <p><strong>IlluminAIst</strong> was founded to cut through the marketing hype and illuminate the engineering realities, architectural paradigms, and strategic impacts of frontier artificial intelligence and emerging technologies.</p>
 
-        <p>It is an independent publication and a hands-on product build, designed and engineered by Milan Dhore. <a href="https://www.milanoutlook.com/" target="_blank" rel="noreferrer">View portfolio →</a></p>
+        <p>It is an independent publication and a hands-on product build, created to keep the focus on practical ideas, clear reasoning, and useful engineering work.</p>
 
         <h2>Our Mission</h2>
         <p>To equip engineers, architects, researchers, and technology leaders with the technical depth and strategic clarity required to build, govern, and scale the next generation of intelligent systems.</p>
@@ -47,6 +48,28 @@ export default function AboutPage() {
           <li>Join our community discussions on LinkedIn and Discord</li>
           <li><Link to="/subscribe">Subscribe to our weekly dispatch</Link></li>
         </ul>
+      </div>
+
+      <div className="mb-16 pt-6 border-t border-slate-200 dark:border-slate-800/70 flex items-center justify-center sm:justify-end gap-3">
+        <div className="hidden sm:block w-px h-10 bg-gradient-to-b from-transparent via-amber-400/70 to-transparent" />
+        <div className="text-left">
+          <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-600 mb-1">
+            Designed &amp; engineered by
+          </p>
+          <a
+            href="https://www.milanoutlook.com/"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Visit Milan Dhore's portfolio"
+            className="group inline-flex items-center gap-2 text-sm font-heading font-extrabold text-slate-700 dark:text-slate-300 hover:text-amber-600 dark:hover:text-amber-400 transition-colors"
+          >
+            Milan Dhore
+            <span className="rounded-full border border-slate-300 dark:border-slate-700 px-2 py-0.5 text-[9px] font-bold uppercase tracking-widest text-slate-500 group-hover:border-amber-500/50 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
+              View portfolio
+            </span>
+            <ArrowUpRight size={13} className="text-amber-500 dark:text-amber-400" />
+          </a>
+        </div>
       </div>
 
       <InlineSubscribe />

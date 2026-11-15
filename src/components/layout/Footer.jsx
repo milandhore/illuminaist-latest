@@ -16,7 +16,6 @@ const LINKS = {
     { label: 'Emerging Tech', to: '/articles?topic=Emerging+Tech' },
   ],
   Resources: [
-    { label: 'Free eBooks',         to: '/ebooks' },
     { label: 'Newsletter Archive',  to: '/articles' },
     { label: 'News Feed',           to: '/news' },
   ],

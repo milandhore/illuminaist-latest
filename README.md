@@ -63,7 +63,7 @@ The production site is a static Vite build. Editorial content is stored in the r
 - Reproducible Node.js 20 installs with `npm ci --ignore-scripts` in CI.
 - Pull-request and push validation through GitHub Actions.
 - GitHub Pages deployment from `main`.
-- Scheduled news workflow every six hours, plus manual dispatch.
+- Scheduled news workflow every six hours and article workflow daily, both with manual dispatch.
 - Dependabot configuration and repository ownership metadata.
 - Static output that does not expose the local CMS or subscriber records.
 
@@ -108,7 +108,8 @@ Use links such as `/#/news` for a deployed GitHub Pages URL. The helper in `src/
 │   ├── workflows/
 │   │   ├── ci.yml              # Tests, build, and audit on pushes/PRs
 │   │   ├── deploy.yml          # GitHub Pages deployment from main
-│   │   └── update-news.yml     # Scheduled RSS/Gemini news publishing
+│   │   ├── update-news.yml     # Scheduled RSS/Gemini news publishing
+│   │   └── update-articles.yml # Scheduled topic/RSS/Gemini article publishing
 │   └── dependabot.yml
 ├── docs/                       # Product, architecture, API, security, and QA docs
 ├── public/
@@ -129,6 +130,7 @@ Use links such as `/#/news` for a deployed GitHub Pages URL. The helper in `src/
 │   ├── cms-server.cjs          # Local editorial CMS on port 3333
 │   ├── news-api.cjs            # Optional read-only News API on port 8787
 │   ├── update-news.cjs         # RSS/Gemini ingestion worker
+│   ├── update-articles.cjs     # Topic RSS/Gemini article publisher
 │   ├── rebuild-news.cjs        # Re-index existing news HTML files
 │   └── list-models.cjs         # Gemini API preflight used by Actions
 ├── index.html
@@ -175,6 +177,7 @@ The generated `dist/` directory is ignored by Git and should not be committed.
 | `npm run cms` | Start the local CMS at `http://localhost:3333` |
 | `npm run news:update` | Fetch RSS news, optionally rewrite with Gemini, and update files |
 | `npm run news:rebuild` | Rebuild `src/data/news.js` from existing news HTML files |
+| `npm run articles:update` | Fetch current AI topics and publish one article |
 | `npm run news:api` | Start the read-only News API at `http://localhost:8787` |
 | `node tools/generate-ebook-pdfs.cjs` | Generate configured eBook PDF assets |
 
@@ -224,9 +227,10 @@ The news worker in `tools/update-news.cjs` follows this pipeline:
 2. Examine the top feed items.
 3. Rewrite up to two stories with Gemini when `GEMINI_API_KEY` is available.
 4. Fall back to concise RSS snippets if the updater is run without a Gemini key.
-5. Write standalone HTML files to `public/articles/news/`.
-6. Merge new metadata with the existing index and re-index `src/data/news.js`.
-7. Sort stories by publication date and assign lead/latest badges.
+5. Preserve the feed item's source URL in `news.js` and append a source attribution link to the generated article.
+6. Write standalone HTML files to `public/articles/news/`.
+7. Merge new metadata with the existing index and re-index `src/data/news.js`.
+8. Sort stories by publication date and assign lead/latest badges.
 
 Run it locally with:
 
@@ -234,7 +238,23 @@ Run it locally with:
 GEMINI_API_KEY="your-key" npm run news:update
 ```
 
-The key is optional for the updater itself, but the GitHub Actions workflow currently runs `tools/list-models.cjs` first. That preflight expects a valid `GEMINI_API_KEY`; an absent or invalid secret can fail the job before the updater starts.
+The key is optional. When it is absent, the updater publishes the RSS fallback content and logs that Gemini rewriting was skipped. When it is present, the workflow runs a model preflight before using Gemini; an invalid configured key fails the job rather than silently publishing without rewriting.
+
+### Automated article publishing
+
+The article worker in `tools/update-articles.cjs` runs through `.github/workflows/update-articles.yml` once per day at 03:30 UTC, with manual dispatch available. It searches four topic lanes:
+
+- AI engineering, LLM systems, RAG, MLOps, evaluation, and inference;
+- Agentic AI, tool use, multi-agent orchestration, and MCP;
+- enterprise AI strategy, transformation, governance, and operating models;
+- emerging technology including robotics, quantum, and edge intelligence.
+
+The worker selects the newest non-duplicate source item, with reference discovery across The Agentic Digest, AI Weekly, Agentic.ai News, VKTR Agentic AI, and the Agentic AI Library. It uses Gemini to produce a structured 700–1200 word article when the key is configured, validates the generated HTML, adds an original inline editorial diagram, appends a source attribution link, and writes:
+
+- metadata to `src/data/articles.js`;
+- the article body to `public/articles/{topicSlug}/{slug}.html`.
+
+Without `GEMINI_API_KEY`, the workflow skips publication rather than creating a low-context fallback article. Generated content must pass minimum quality gates for length, headings, and paragraph structure. Each run publishes at most one article to keep the library deliberate and reduce duplicate or low-signal content.
 
 ### GitHub Actions news workflow
 
@@ -244,7 +264,7 @@ The key is optional for the updater itself, but the GitHub Actions workflow curr
 - can be started manually with **Actions → Update News Feed → Run workflow**;
 - checks out `main`;
 - installs dependencies;
-- uses the repository secret `GEMINI_API_KEY`;
+- uses the repository secret `GEMINI_API_KEY` when configured, otherwise uses the RSS fallback;
 - commits changed `src/data/news.js` and `public/articles/news/` files.
 
 Updating the secret does not run the workflow automatically. Run it manually once after changing the secret, then inspect the job logs if it fails.

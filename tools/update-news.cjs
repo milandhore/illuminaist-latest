@@ -39,13 +39,27 @@ function shortExcerpt(text) {
   return `${clean.slice(0, 80).replace(/\s+\S*$/, '').trim()}…`;
 }
 
+function escapeHtml(value) {
+  return String(value == null ? '' : value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function validSourceUrl(value) {
+  return /^https?:\/\//i.test(String(value || '')) ? String(value) : '';
+}
+
 async function rewriteArticle(title, originalSnippet, originalUrl) {
   if (!GEMINI_API_KEY) {
     console.warn("No GEMINI_API_KEY found, returning fallback snippet.");
     return {
       title: conciseTitle(title),
-      html: `<h2>${title}</h2><p>${originalSnippet}</p><p>Original article: <a href="${originalUrl}">${originalUrl}</a></p>`,
-      excerpt: shortExcerpt(originalSnippet)
+      html: `<h2>${escapeHtml(title)}</h2><p>${escapeHtml(originalSnippet)}</p>`,
+      excerpt: shortExcerpt(originalSnippet),
+      sourceUrl: validSourceUrl(originalUrl)
     };
   }
 
@@ -93,7 +107,7 @@ Context: ${originalSnippet}
     const excerptMatch = htmlContent.match(/<p>(.*?)<\/p>/);
     const excerpt = excerptMatch ? shortExcerpt(excerptMatch[1]) : shortExcerpt(originalSnippet);
 
-    return { title: newTitle, html: htmlContent, excerpt };
+    return { title: newTitle, html: htmlContent, excerpt, sourceUrl: validSourceUrl(originalUrl) };
   } catch (error) {
     console.error("Error calling Gemini API:", error);
     return null; // Return null on failure to trigger skip
@@ -132,17 +146,22 @@ async function updateNews() {
       const finalTitle = rewritten.title;
       const slug = slugify(finalTitle);
       const articleFilePath = path.join(ARTICLES_DIR, `${slug}.html`);
+      const sourceUrl = rewritten.sourceUrl || validSourceUrl(item.link);
+      const sourceAttribution = sourceUrl
+        ? `<p><strong>Source:</strong> <a href="${escapeHtml(sourceUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(source)}</a></p>`
+        : '';
       
       const htmlFull = `
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>${finalTitle} | IlluminAIst</title>
-  <meta name="description" content="${rewritten.excerpt}">
+  <title>${escapeHtml(finalTitle)} | IlluminAIst</title>
+  <meta name="description" content="${escapeHtml(rewritten.excerpt)}">
 </head>
 <body>
   ${rewritten.html}
+  ${sourceAttribution}
 </body>
 </html>
       `.trim();
@@ -153,6 +172,7 @@ async function updateNews() {
         title: finalTitle,
         excerpt: rewritten.excerpt,
         source: source, // Reverted from 'IlluminAIst AI Editor' to actual publisher
+        sourceUrl: sourceUrl || undefined,
         slug: slug,
         htmlPath: `/articles/news/${slug}.html`,
         publishedAt: item.isoDate ? new Date(item.isoDate).toISOString().split('T')[0] : new Date().toISOString().split('T')[0],

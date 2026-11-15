@@ -5,9 +5,7 @@ function getInitialTheme() {
   // 1. Check localStorage
   const saved = localStorage.getItem('illuminaist_theme')
   if (saved === 'light' || saved === 'dark') return saved
-  // 2. Respect OS preference
-  if (window.matchMedia('(prefers-color-scheme: light)').matches) return 'light'
-  // 3. Default to dark
+  // Default to dark for first-time visitors, regardless of OS preference.
   return 'dark'
 }
 

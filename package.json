@@ -11,6 +11,7 @@
     "news:api": "node tools/news-api.cjs",
     "news:update": "node tools/update-news.cjs",
     "news:rebuild": "node tools/rebuild-news.cjs",
+    "articles:update": "node tools/update-articles.cjs",
     "test": "node --test tests/*.test.cjs",
     "check": "npm test && npm run build"
   },

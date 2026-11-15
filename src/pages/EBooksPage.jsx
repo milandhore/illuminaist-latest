@@ -37,7 +37,7 @@ export default function EBooksPage() {
         {!isCompanySubscribed && (
           <div className="mt-4 flex justify-center">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-400 text-xs font-semibold">
-              <Lock size={13} className="text-amber-500" /> Downloads strictly gated behind valid corporate email IDs
+              <Lock size={13} className="text-amber-500" />
             </div>
           </div>
         )}

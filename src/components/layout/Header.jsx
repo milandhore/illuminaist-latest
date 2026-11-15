@@ -161,10 +161,7 @@ export default function Header({ onSubscribeClick }) {
                       ))}
                     </div>
 
-                    <div className="border-t border-slate-100 dark:border-white/5 px-4 py-3 flex items-center justify-between bg-slate-50/70 dark:bg-black/25">
-                      <Link to="/ebooks" onClick={closeMenus} className="text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-400 flex items-center gap-1.5 transition-colors">
-                        📚 Free eBooks &amp; Guides
-                      </Link>
+                    <div className="border-t border-slate-100 dark:border-white/5 px-4 py-3 flex items-center justify-end bg-slate-50/70 dark:bg-black/25">
                       <Link to="/articles" onClick={closeMenus} className="text-xs font-bold text-amber-600 dark:text-amber-400 hover:text-amber-700 dark:hover:text-amber-300 transition-colors">
                         All Articles →
                       </Link>
@@ -175,7 +172,6 @@ export default function Header({ onSubscribeClick }) {
             </div>
 
             <NavLink to="/articles" className={navCls}>Articles</NavLink>
-            <NavLink to="/ebooks" className={navCls}>Ebook</NavLink>
             <NavLink to="/about" className={navCls}>About</NavLink>
           </nav>
 
@@ -257,20 +253,11 @@ export default function Header({ onSubscribeClick }) {
                         <span>{topic.label}</span>
                       </Link>
                     ))}
-                    <Link
-                      to="/ebooks"
-                      onClick={closeMenus}
-                      className="flex items-center gap-2 px-3 py-2 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-amber-600 dark:hover:text-amber-400 hover:bg-white dark:hover:bg-white/5 rounded-lg border-t border-slate-200/60 dark:border-white/5 mt-1 pt-2 transition-colors"
-                    >
-                      <span className="text-sm">📚</span>
-                      <span>Free eBooks &amp; Guides</span>
-                    </Link>
                   </div>
                 )}
               </div>
 
               <NavLink to="/articles" onClick={closeMenus} className={mobileCls}>Articles</NavLink>
-              <NavLink to="/ebooks" onClick={closeMenus} className={mobileCls}>Ebook</NavLink>
               <NavLink to="/about" onClick={closeMenus} className={mobileCls}>About</NavLink>
 
               <button
