@@ -1,5 +1,30 @@
 export const articles = [
   {
+    "slug": "india_stock_market_rebounds_as_ai_trade_unwinds_foreign_funds_return",
+    "topicSlug": "opinion",
+    "category": "Opinion",
+    "difficulty": "Intermediate",
+    "title": "Unwinding the 'AI Trade': What Market Re-calibration Means for AI Engineering and Strategy",
+    "excerpt": "A shift in global investment flows signals a recalibration of capital allocation within the AI sector. The 'unwinding' of the 'AI trade' suggests a more discerning financial landscape for AI engineers and strategic leaders, urging a…",
+    "avatar": "AI",
+    "author": "IlluminAIst",
+    "readingTime": 4,
+    "publishedAt": "2026-11-15",
+    "htmlFile": true,
+    "featured": false,
+    "trending": false,
+    "status": "published",
+    "tags": [
+      "AI Strategy",
+      "Investment",
+      "Market Dynamics",
+      "Funding",
+      "Tech Leadership",
+      "Emerging Technology"
+    ],
+    "sourceUrl": "https://www.bloomberg.com/news/articles/2026-11-15/india-stock-market-rebounds-as-ai-trade-unwinds-foreign-funds-return"
+  },
+  {
     "slug": "my_personal_finance_ai_assistant_in_hour_with_openclaw_macbook",
     "topicSlug": "ai-llms",
     "category": "AI & LLMs",
