@@ -13,7 +13,7 @@ import { useEffect, useRef } from 'react'
  * because AdSense only serves ads on live domains.
  */
 
-const PUB_ID = 'ca-pub-XXXXXXXXXXXXXXXX' // ← Replace with your publisher ID
+const PUB_ID = 'ca-pub-3405606438497611'
 
 const SLOT_CONFIG = {
   // Leaderboard below the sticky nav (728×90 desktop / 320×50 mobile)
