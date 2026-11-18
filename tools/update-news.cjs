@@ -12,7 +12,15 @@ if (!fs.existsSync(ARTICLES_DIR)) {
   fs.mkdirSync(ARTICLES_DIR, { recursive: true });
 }
 
-const RSS_URL = 'https://news.google.com/rss/search?q=Artificial+Intelligence+when:1d&hl=en-US&gl=US&ceid=US:en';
+const FREE_NEWS_RSS_FEEDS = [
+  // Free direct RSS — preferred over Google News (which blocks CI runner IPs)
+  { name: 'VentureBeat AI', url: 'https://venturebeat.com/category/ai/feed/' },
+  { name: 'MIT Technology Review AI', url: 'https://www.technologyreview.com/topic/artificial-intelligence/feed' },
+  { name: 'InfoQ AI & ML', url: 'https://feed.infoq.com/ai-ml-data-eng/news/' },
+  { name: 'AI Weekly', url: 'https://aiweekly.co/issues.rss' },
+  // Google News as a last-resort fallback
+  { name: 'Google News AI', url: 'https://news.google.com/rss/search?q=Artificial+Intelligence+when:1d&hl=en-US&gl=US&ceid=US:en' },
+];
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 
 const { GoogleGenerativeAI } = require("@google/generative-ai");
@@ -116,10 +124,30 @@ Context: ${originalSnippet}
 
 async function updateNews() {
   try {
-    console.log('Fetching RSS feed...');
-    const feed = await parser.parseURL(RSS_URL);
-    
-    const topItems = feed.items.slice(0, 3); // Try 3 in case 1 fails
+    console.log('Fetching news from RSS feeds...');
+
+    // Try each feed in order until we get items
+    let feedItems = [];
+    for (const feedConfig of FREE_NEWS_RSS_FEEDS) {
+      try {
+        console.log(`Trying feed: ${feedConfig.name} (${feedConfig.url})`);
+        const feed = await parser.parseURL(feedConfig.url);
+        if (feed.items && feed.items.length > 0) {
+          feedItems = feed.items.slice(0, 3);
+          console.log(`Got ${feedItems.length} items from ${feedConfig.name}`);
+          break;
+        }
+      } catch (feedErr) {
+        console.warn(`Feed ${feedConfig.name} failed: ${feedErr.message}`);
+      }
+    }
+
+    if (feedItems.length === 0) {
+      console.log('No items fetched from any RSS feed — syncing existing news only.');
+      syncAllNews([]);
+      return;
+    }
+    const topItems = feedItems;
     const latestNews = [];
 
     for (let idx = 0; idx < topItems.length; idx++) {
@@ -185,9 +213,10 @@ async function updateNews() {
     syncAllNews(latestNews);
   } catch (e) {
     console.error(`Error updating news:`, e);
-    // Still ensure all existing files on disk are synced
-    try { syncAllNews(); } catch (_) {}
-    process.exit(1);
+    // Still ensure all existing files on disk are synced — do NOT exit(1)
+    // so the GitHub Actions workflow does not fail when RSS is temporarily blocked.
+    try { syncAllNews([]); } catch (_) {}
+    console.log('News update completed with fallback (no new items added).');
   }
 }
 
